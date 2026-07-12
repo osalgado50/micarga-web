@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Genera tus documentos de control de transporte (DeCA / Carta de Porte / ADR) en formato digital. Cumple la ley española a partir de octubre 2026. ¡10 envíos de prueba gratis!">
+  <meta name="theme-color" content="#0b0f19">
+  <title>Mi Carga - Documento de Control de Transporte Digital ROTT & ADR</title>
+  
+  <!-- Google Fonts: Outfit (headings) & Space Grotesk (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern UI look -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="logo">
+        <i class="fa-solid fa-truck-ramp-box logo-icon"></i>
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#ley">La Ley 2026</a>
+        <a href="#caracteristicas">Características</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto" class="nav-btn">Probar Gratis</a>
+      </nav>
+      
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg">
+      <img src="images/highway_truck.jpg" alt="Camión en carretera al atardecer" class="hero-bg-image">
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <div class="container hero-content reveal-on-scroll">
+      <span class="badge">NUEVA NORMATIVA OBLIGATORIA 2026</span>
+      <h1>El papel ya no viaja.<br>Pásate al <mark class="glow-text">porte digital</mark>.</h1>
+      <p class="hero-lead">Genera tus documentos de control de transporte (DeCA) y cartas de porte desde el móvil. Rápido, legal y sin complicaciones en carretera.</p>
+      
+      <!-- Offer Hook Card -->
+      <div class="offer-hook-card">
+        <div class="hook-icon-wrap">
+          <i class="fa-solid fa-gift pulse-icon"></i>
+        </div>
+        <div class="hook-text">
+          <h3>¡Empieza sin pagar nada!</h3>
+          <p>Te regalamos <strong>10 transportes de prueba sin coste</strong>. Sin tarjetas ni compromisos.</p>
+        </div>
+      </div>
+      
+      <div class="hero-buttons">
+        <a href="#contacto" class="btn btn-primary btn-large">
+          <i class="fa-solid fa-circle-play"></i> Probar 10 Envíos Gratis
+        </a>
+        <a href="#descarga" class="btn btn-secondary btn-large">
+          <i class="fa-solid fa-download"></i> Descargar la App
+        </a>
+      </div>
+      
+      <div class="store-badges-preview">
+        <span>Disponible en:</span>
+        <div class="badges-row">
+          <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
+          <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-apple"></i> iOS / iPhone</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ley 2026 Section -->
+  <section id="ley" class="ley-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="ley-image-wrapper reveal-on-scroll">
+          <img src="images/officer_check.jpg" alt="Guardia Civil inspeccionando documento digital en móvil" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge">
+            <i class="fa-solid fa-shield-halved"></i> 100% Legal
+          </div>
+        </div>
+        
+        <div class="ley-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Normativa Española</span>
+          <h2>A partir del 5 de octubre de 2026, el papel ya no es válido</h2>
+          <p>La <strong>Ley 9/2025 de Movilidad Sostenible</strong> y la actualización del <strong>ROTT</strong> establecen la obligatoriedad del documento de control administrativo digital en España. Las inspecciones de la Guardia Civil y técnicos de transporte se realizarán de manera digital.</p>
+          
+          <ul class="ley-list">
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Código QR Obligatorio:</strong> Cada viaje genera un código QR y una URL única de validación en tiempo real para el inspector.
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Trazabilidad Legal:</strong> Registro inmutable de fecha, hora de creación y modificaciones del porte.
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Custodia de 12 Meses:</strong> La ley exige conservar todos los documentos durante al menos un año en un servidor seguro.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="caracteristicas" class="features-section scroll-padding">
+    <div class="container">
+      <div class="section-header text-center reveal-on-scroll">
+        <span class="section-subtitle">Diseñada para Conductores</span>
+        <h2>¿Por qué los transportistas eligen Mi Carga?</h2>
+        <p class="section-desc">Desarrollamos la herramienta más sencilla del mercado. Pensada por y para chóferes, autónomos y flotas que necesitan agilidad en su día a día.</p>
+      </div>
+      
+      <div class="grid grid-3-col features-grid">
+        <!-- Feature 1: QR & Inspecciones -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <h3>Código QR de Inspección</h3>
+          <p>Muestra el QR en la pantalla de tu móvil. El agente de la ley lo escanea con su tablet y valida la integridad de la Carta de Porte en 3 segundos.</p>
+        </div>
+        
+        <!-- Feature 2: Modo Offline -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-square-rss"></i>
+          </div>
+          <h3>Soporte Sin Cobertura</h3>
+          <p>¿Cargando en sótanos o zonas rurales? Rellena los datos sin conexión. La app los guarda en el móvil y se sincronizan solos en cuanto recuperes señal.</p>
+        </div>
+        
+        <!-- Feature 3: Especialistas ADR -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <h3>Validador de Carga ADR</h3>
+          <p>Respaldado por el motor de validación de <strong>Ecosmep</strong>. Detecta incompatibilidades entre mercancías peligrosas automáticamente en el formulario.</p>
+        </div>
+        
+        <!-- Feature 4: Custodia en la Nube -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3>Nube Serverless Segura</h3>
+          <p>Tus portes y PDFs legales almacenados automáticamente con backups diarios. Accede al historial legal de 12 meses cuando lo necesites, sin fallos ni caídas.</p>
+        </div>
+        
+        <!-- Feature 5: Rapidez Extrema -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3>Plantillas y Favoritos</h3>
+          <p>Guarda tus matrículas, cargadores, destinatarios y rutas recurrentes. Rellena tu próximo documento de control digital en menos de 30 segundos.</p>
+        </div>
+        
+        <!-- Feature 6: Formato PDF Nativo -->
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-icon-box">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <h3>Envío PDF Automático</h3>
+          <p>Genera el PDF nativo electrónico y envíalo automáticamente al correo del cliente o cárgalo en su sistema de manera inmediata.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="galeria" class="gallery-section scroll-padding">
+    <div class="container">
+      <div class="section-header text-center reveal-on-scroll">
+        <span class="section-subtitle">Vida a bordo</span>
+        <h2>La app que va contigo en cabina</h2>
+        <p class="section-desc">Adaptada al ritmo real de los cargadores y chóferes profesionales en carretera y centros logísticos.</p>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item reveal-on-scroll">
+          <div class="gallery-img-container">
+            <img src="images/truck_cabin.jpg" alt="Interior de la cabina de un camión en ruta">
+          </div>
+          <div class="gallery-caption">
+            <h4>Control desde la cabina</h4>
+            <p>Todo el papeleo gestionado directamente desde tu teléfono móvil o tablet, anclado al salpicadero.</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item reveal-on-scroll">
+          <div class="gallery-img-container">
+            <img src="images/truck_loading.jpg" alt="Carga de mercancías en el camión">
+          </div>
+          <div class="gallery-caption">
+            <h4>Operación ágil de carga</h4>
+            <p>Firma y confirma los datos en el mismo muelle de carga, antes de iniciar la marcha y sin demoras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Download Section -->
+  <section id="descarga" class="download-section scroll-padding">
+    <div class="container text-center reveal-on-scroll">
+      <div class="download-card">
+        <span class="badge badge-accent">DISPONIBILIDAD INMEDIATA</span>
+        <h2>Instala Mi Carga hoy mismo</h2>
+        <p>Lleva la app nativa en tu móvil para trabajar a la máxima velocidad y con absoluta seguridad jurídica.</p>
+        
+        <div class="store-buttons-grid">
+          <!-- Google Play -->
+          <a href="https://play.google.com/store" target="_blank" rel="noopener" class="store-btn">
+            <div class="store-icon"><i class="fa-brands fa-google-play"></i></div>
+            <div class="store-text">
+              <span>DISPONIBLE EN</span>
+              <strong>Google Play</strong>
+            </div>
+          </a>
+          
+          <!-- App Store -->
+          <a href="https://www.apple.com/app-store" target="_blank" rel="noopener" class="store-btn">
+            <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
+            <div class="store-text">
+              <span>DESCARGAR EN LA</span>
+              <strong>App Store</strong>
+            </div>
+          </a>
+        </div>
+        
+        <div class="web-alternative">
+          <p>¿Prefieres no instalar nada? Usa nuestra <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">Versión Web PWA</a> directamente desde el navegador de tu móvil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contacto" class="contact-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col">
+        <div class="contact-info reveal-on-scroll">
+          <span class="section-subtitle">¿Hablamos?</span>
+          <h2>Consigue tus 10 transportes gratis</h2>
+          <p>Rellena este formulario rápido. Te enviaremos tus credenciales de acceso directamente para que puedas empezar a generar portes sin coste hoy mismo.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <h4>Correo electrónico</h4>
+                <a href="mailto:info@micarga.es">info@micarga.es</a>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <h4>WhatsApp de Soporte</h4>
+                <a href="https://wa.me/34640216351" target="_blank" rel="noopener">+34 640 216 351</a>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-truck-moving"></i>
+              <div>
+                <h4>Plan Especial de Pruebas</h4>
+                <p>10 transportes incluidos, soporte de configuración inicial gratuito.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Form card -->
+        <div class="contact-form-wrapper reveal-on-scroll">
+          <div class="form-card">
+            <h3>Solicitar Alta Gratuita</h3>
+            <p class="form-lead">Recibe tu acceso a los 10 envíos de prueba</p>
+            
+            <form id="whatsapp-lead-form">
+              <div class="form-group">
+                <label for="form-name">Nombre / Empresa</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-user"></i>
+                  <input type="text" id="form-name" placeholder="Ej. Transportes Martínez o Juan López" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="form-phone">Teléfono Móvil (para recibir acceso)</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-phone"></i>
+                  <input type="tel" id="form-phone" placeholder="Ej. 600 000 000" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="form-trucks">Número de Camiones / Flota</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-truck"></i>
+                  <select id="form-trucks">
+                    <option value="1 (Autónomo)">1 (Autónomo)</option>
+                    <option value="2 a 5 camiones">2 a 5 camiones</option>
+                    <option value="6 a 20 camiones">6 a 20 camiones</option>
+                    <option value="Más de 20 camiones">Más de 20 camiones</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="form-message">¿Algún comentario o tipo de mercancía especial?</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-comment-dots"></i>
+                  <textarea id="form-message" rows="3" placeholder="Ej. Hago transporte nacional y algo de ADR..."></textarea>
+                </div>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp
+              </button>
+              
+              <span class="form-privacy-note">Al hacer clic, se abrirá tu WhatsApp con los datos para enviarnos la solicitud al instante.</span>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="#" class="logo">
+          <i class="fa-solid fa-truck-ramp-box logo-icon"></i>
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solución digital de generación de documentos de control y cartas de porte. Con el respaldo de Ecosmep para validaciones ADR.</p>
+      </div>
+      
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacto</h4>
+          <p>Email: <a href="mailto:info@micarga.es">info@micarga.es</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34640216351" target="_blank" rel="noopener">+34 640 216 351</a></p>
+        </div>
+        
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="#">Aviso Legal</a></p>
+          <p><a href="#">Política de Privacidad</a></p>
+          <p><a href="#">Términos de Uso</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Mi Carga (micarga.es). Todos los derechos reservados. Desarrollado en conformidad con la Ley 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/34640216351?text=Hola,%20quiero%20más%20información%20sobre%20la%20app%20Mi%20Carga%20y%20activar%20los%2010%20transportes%20de%20prueba%20gratis." 
+     class="whatsapp-floating" 
+     target="_blank" 
+     rel="noopener" 
+     aria-label="Contactar por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-floating-tooltip">¿Dudas? Escríbenos</span>
+  </a>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

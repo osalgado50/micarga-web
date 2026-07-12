@@ -1,0 +1,5 @@
+# Audios privados del cliente — nunca publicar
+*.opus
+*.wav
+*.m4a
+.DS_Store
