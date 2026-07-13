@@ -347,7 +347,7 @@ mark {
   height: 100%;
   object-fit: cover;
   transform: scale(1.05);
-  opacity: 0.6;
+  opacity: 0.25;
 }
 
 .hero-overlay {
