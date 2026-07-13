@@ -29,9 +29,10 @@
       </a>
       
       <nav class="nav-links">
+        <a href="#intro">Inicio</a>
         <a href="#ley">La Ley 2026</a>
-        <a href="#caracteristicas">Características</a>
-        <a href="#galeria">Galería</a>
+        <a href="#funciones">¿Qué Hace?</a>
+        <a href="#tarifas">Precios</a>
         <a href="#contacto" class="nav-btn">Probar Gratis</a>
       </nav>
       
@@ -83,39 +84,67 @@
     </div>
   </section>
 
-  <!-- Ley 2026 Section -->
+  <!-- Section 1: Intro (Text-Image) -->
+  <section id="intro" class="intro-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="intro-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Digitalización de Documentos</span>
+          <h2>El documento de control digital más rápido, en cualquier lugar y al mejor precio</h2>
+          <p class="lead-paragraph">¿Realizas transporte de mercancías en territorio español o internacional?</p>
+          <p>A partir de ahora, la documentación se hace en segundos y <strong>se acabó el papel</strong>. Nosotros te damos la solución definitiva que necesitas en cabina: genera tanto el documento de control como la carta de porte (si es ADR) en PDF en pocos minutos con nuestra APP.</p>
+          <div class="highlights-box">
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> Carga en cualquier lugar</div>
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> A cualquier hora</div>
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> Cualquier día de la semana</div>
+          </div>
+          <p class="tagline">No importa dónde estés. Hazlo tú mismo al instante.</p>
+          <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Comenzar Ahora Mismo</a>
+        </div>
+        
+        <div class="intro-image-wrapper reveal-on-scroll">
+          <img src="images/control_digital.webp" alt="Digitalización de documentos de control de transporte" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge badge-accent">
+            <i class="fa-solid fa-bolt"></i> Rápido y Simple
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Ley 2026 (Image-Text) -->
   <section id="ley" class="ley-section scroll-padding">
     <div class="container">
       <div class="grid grid-2-col align-center">
         <div class="ley-image-wrapper reveal-on-scroll">
-          <img src="images/officer_check.jpg" alt="Guardia Civil inspeccionando documento digital en móvil" class="side-img rounded-lg shadow-card">
+          <img src="images/documentos.jpg" alt="Documentos de transporte impresos y digitales" class="side-img rounded-lg shadow-card">
           <div class="floating-badge">
-            <i class="fa-solid fa-shield-halved"></i> 100% Legal
+            <i class="fa-solid fa-shield-halved"></i> 100% Homologado
           </div>
         </div>
         
         <div class="ley-text-wrapper reveal-on-scroll">
-          <span class="section-subtitle">Normativa Española</span>
+          <span class="section-subtitle">Normativa Española Obligatoria</span>
           <h2>A partir del 5 de octubre de 2026, el papel ya no es válido</h2>
-          <p>La <strong>Ley 9/2025 de Movilidad Sostenible</strong> y la actualización del <strong>ROTT</strong> establecen la obligatoriedad del documento de control administrativo digital en España. Las inspecciones de la Guardia Civil y técnicos de transporte se realizarán de manera digital.</p>
+          <p>La <strong>Ley 9/2025 de Movilidad Sostenible</strong> y la actualización del <strong>ROTT</strong> establecen que los documentos de control administrativo digital en España serán obligatorios. Evita sanciones en carretera adaptándote al cambio hoy mismo.</p>
           
           <ul class="ley-list">
             <li>
-              <i class="fa-solid fa-circle-check"></i>
+              <i class="fa-solid fa-qrcode"></i>
               <div>
-                <strong>Código QR Obligatorio:</strong> Cada viaje genera un código QR y una URL única de validación en tiempo real para el inspector.
+                <strong>Código QR de Inspección:</strong> Muestra el QR en tu móvil. El agente (Guardia Civil) lo escanea y valida el documento de control digital al instante.
               </div>
             </li>
             <li>
-              <i class="fa-solid fa-circle-check"></i>
+              <i class="fa-solid fa-history"></i>
               <div>
-                <strong>Trazabilidad Legal:</strong> Registro inmutable de fecha, hora de creación y modificaciones del porte.
+                <strong>Trazabilidad Legal:</strong> La aplicación registra de forma inmutable la fecha y hora de creación del porte, así como cualquier modificación.
               </div>
             </li>
             <li>
-              <i class="fa-solid fa-circle-check"></i>
+              <i class="fa-solid fa-server"></i>
               <div>
-                <strong>Custodia de 12 Meses:</strong> La ley exige conservar todos los documentos durante al menos un año en un servidor seguro.
+                <strong>Custodia Obligatoria por 12 Meses:</strong> Todos tus PDFs se guardan de forma segura en la nube cumpliendo con la legislación vigente.
               </div>
             </li>
           </ul>
@@ -124,100 +153,102 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="caracteristicas" class="features-section scroll-padding">
+  <!-- Section 3: Features / What the App does (Text-Image) -->
+  <section id="funciones" class="features-section scroll-padding">
     <div class="container">
-      <div class="section-header text-center reveal-on-scroll">
-        <span class="section-subtitle">Diseñada para Conductores</span>
-        <h2>¿Por qué los transportistas eligen Mi Carga?</h2>
-        <p class="section-desc">Desarrollamos la herramienta más sencilla del mercado. Pensada por y para chóferes, autónomos y flotas que necesitan agilidad en su día a día.</p>
-      </div>
-      
-      <div class="grid grid-3-col features-grid">
-        <!-- Feature 1: QR & Inspecciones -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-qrcode"></i>
-          </div>
-          <h3>Código QR de Inspección</h3>
-          <p>Muestra el QR en la pantalla de tu móvil. El agente de la ley lo escanea con su tablet y valida la integridad de la Carta de Porte en 3 segundos.</p>
+      <div class="grid grid-2-col align-center">
+        <div class="features-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">¿Qué hace nuestra APP por ti?</span>
+          <h2>La APP más sencilla y completa para el transporte</h2>
+          <p>Diseñada específicamente para facilitar el trabajo diario del conductor y de las flotas de mercancías:</p>
+          
+          <ul class="features-custom-list">
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-file-pdf"></i></div>
+              <div>
+                <h4>Generación PDF instantánea</h4>
+                <p>Crea el documento de control o la carta de porte digital en PDF rellenando unos datos muy sencillos.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-route"></i></div>
+              <div>
+                <h4>Ruta óptima y obligatoria ADR</h4>
+                <p>Te calcula la ruta más óptima para tu camión y la obligatoria en caso de transportar mercancías peligrosas (ADR) para evitar multas de tráfico.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-bed"></i></div>
+              <div>
+                <h4>Zonas de parada y descanso</h4>
+                <p>Te indica los mejores lugares para hacer tus paradas obligatorias para comer y dormir en la ruta calculada.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-square-parking"></i></div>
+              <div>
+                <h4>Aparcamientos y estaciones de servicio</h4>
+                <p>Detalla en qué lugares puedes estacionar con seguridad: gasolineras con parking de camiones y aparcamientos vigilados de pago.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-cloud"></i></div>
+              <div>
+                <h4>Archivo automático en la nube</h4>
+                <p>Archiva todos tus PDFs generados en la nube para que no los pierdas y estén listos ante cualquier control o inspección.</p>
+              </div>
+            </li>
+          </ul>
         </div>
         
-        <!-- Feature 2: Modo Offline -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-square-rss"></i>
+        <div class="features-image-wrapper reveal-on-scroll">
+          <img src="images/conductora.webp" alt="Profesional del transporte conduciendo camión" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge badge-accent">
+            <i class="fa-solid fa-truck-moving"></i> Rutas & ADR
           </div>
-          <h3>Soporte Sin Cobertura</h3>
-          <p>¿Cargando en sótanos o zonas rurales? Rellena los datos sin conexión. La app los guarda en el móvil y se sincronizan solos en cuanto recuperes señal.</p>
-        </div>
-        
-        <!-- Feature 3: Especialistas ADR -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-          </div>
-          <h3>Validador de Carga ADR</h3>
-          <p>Respaldado por el motor de validación de <strong>Ecosmep</strong>. Detecta incompatibilidades entre mercancías peligrosas automáticamente en el formulario.</p>
-        </div>
-        
-        <!-- Feature 4: Custodia en la Nube -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-          </div>
-          <h3>Nube Serverless Segura</h3>
-          <p>Tus portes y PDFs legales almacenados automáticamente con backups diarios. Accede al historial legal de 12 meses cuando lo necesites, sin fallos ni caídas.</p>
-        </div>
-        
-        <!-- Feature 5: Rapidez Extrema -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-bolt"></i>
-          </div>
-          <h3>Plantillas y Favoritos</h3>
-          <p>Guarda tus matrículas, cargadores, destinatarios y rutas recurrentes. Rellena tu próximo documento de control digital en menos de 30 segundos.</p>
-        </div>
-        
-        <!-- Feature 6: Formato PDF Nativo -->
-        <div class="feature-card reveal-on-scroll">
-          <div class="feature-icon-box">
-            <i class="fa-solid fa-file-pdf"></i>
-          </div>
-          <h3>Envío PDF Automático</h3>
-          <p>Genera el PDF nativo electrónico y envíalo automáticamente al correo del cliente o cárgalo en su sistema de manera inmediata.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Gallery Section -->
-  <section id="galeria" class="gallery-section scroll-padding">
+  <!-- Section 4: Pricing (Image-Text) -->
+  <section id="tarifas" class="pricing-section scroll-padding">
     <div class="container">
-      <div class="section-header text-center reveal-on-scroll">
-        <span class="section-subtitle">Vida a bordo</span>
-        <h2>La app que va contigo en cabina</h2>
-        <p class="section-desc">Adaptada al ritmo real de los cargadores y chóferes profesionales en carretera y centros logísticos.</p>
-      </div>
-      
-      <div class="gallery-grid">
-        <div class="gallery-item reveal-on-scroll">
-          <div class="gallery-img-container">
-            <img src="images/truck_cabin.jpg" alt="Interior de la cabina de un camión en ruta">
-          </div>
-          <div class="gallery-caption">
-            <h4>Control desde la cabina</h4>
-            <p>Todo el papeleo gestionado directamente desde tu teléfono móvil o tablet, anclado al salpicadero.</p>
+      <div class="grid grid-2-col align-center">
+        <div class="pricing-image-wrapper reveal-on-scroll">
+          <img src="images/descargar.webp" alt="Descargar aplicación de transporte Mi Carga" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge">
+            <i class="fa-solid fa-piggy-bank"></i> El Mejor Precio
           </div>
         </div>
         
-        <div class="gallery-item reveal-on-scroll">
-          <div class="gallery-img-container">
-            <img src="images/truck_loading.jpg" alt="Carga de mercancías en el camión">
+        <div class="pricing-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Tarifas Transparentes</span>
+          <h2>Genera cuantos documentos necesites, sin costes ocultos</h2>
+          <p>Una herramienta profesional al precio más competitivo del mercado en España. Elige la suscripción que mejor se adapte a tu ritmo de trabajo:</p>
+          
+          <!-- Pricing grid -->
+          <div class="pricing-grid">
+            <div class="price-card">
+              <h3>Plan Mensual</h3>
+              <div class="price">10€<span>/mes</span></div>
+              <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Sin compromisos de permanencia.</p>
+            </div>
+            
+            <div class="price-card popular">
+              <h3>Plan Anual</h3>
+              <div class="price">90€<span>/año</span></div>
+              <p>Pago único. Te ahorras 2 meses (Equivale a 7,50€ al mes). Recomendado para transportistas fijos.</p>
+            </div>
           </div>
-          <div class="gallery-caption">
-            <h4>Operación ágil de carga</h4>
-            <p>Firma y confirma los datos en el mismo muelle de carga, antes de iniciar la marcha y sin demoras.</p>
+          
+          <!-- Offer Hook Badge -->
+          <div class="pricing-hook-card" style="margin-top: 2rem;">
+            <div class="pricing-hook-icon"><i class="fa-solid fa-gift"></i></div>
+            <div>
+              <h4>¡Prueba Gratuita Garantizada!</h4>
+              <p><strong>10 primeros documentos gratis</strong>. Genera tus 10 primeros viajes de prueba sin pagar nada para ver lo sencillo que es.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -253,7 +284,7 @@
         </div>
         
         <div class="web-alternative">
-          <p>¿Prefieres no instalar nada? Usa nuestra <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">Versión Web PWA</a> directamente desde el navegador de tu móvil.</p>
+          <p>¿Prefieres no instalar nada? Usa nuestra <a href="https://micarga.es/" target="_blank" rel="noopener" class="text-link">Versión Web PWA</a> directamente desde el navegador de tu móvil.</p>
         </div>
       </div>
     </div>
