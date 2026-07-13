@@ -1120,6 +1120,13 @@ mark {
     gap: 2.5rem;
   }
   
+  /* Mantener flujo alternativo (imagen, texto) en versión móvil */
+  #intro .grid-2-col,
+  #funciones .grid-2-col {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
   .grid-3-col {
     grid-template-columns: 1fr;
     gap: 1.5rem;
