@@ -2,9 +2,29 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <!-- CRÍTICO: los PDF emitidos antes del split de dominios llevan códigos QR
+       que apuntan a micarga.es/?token=... (hoy, esta web). La Resolución de
+       5/6/2026 exige que ese QR descargue el documento: se redirige a la app,
+       que es quien lo sirve. NO QUITAR. -->
+  <script>
+    if (location.search.indexOf('token=') !== -1) {
+      location.replace('https://app.micarga.es/' + location.search);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Genera tus documentos de control de transporte (DeCA / Carta de Porte / ADR) en formato digital. Cumple la ley española a partir de octubre 2026. ¡10 envíos de prueba gratis!">
   <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
+  <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp
+       (el canal principal de captación de esta web) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://micarga.es/">
+  <meta property="og:title" content="Mi Carga — El documento de control de transporte, digital">
+  <meta property="og:description" content="Genera el DeCA y la carta de porte (ADR incluido) desde el móvil. Obligatorio desde el 5 de octubre de 2026. 10 envíos de prueba gratis.">
+  <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Mi Carga - Documento de Control de Transporte Digital ROTT & ADR</title>
   
   <!-- Google Fonts: Outfit (headings) & Space Grotesk (body) -->
@@ -261,30 +281,30 @@
       <div class="download-card">
         <span class="badge badge-accent">DISPONIBILIDAD INMEDIATA</span>
         <h2>Instala Mi Carga hoy mismo</h2>
-        <p>Lleva la app nativa en tu móvil para trabajar a la máxima velocidad y con absoluta seguridad jurídica.</p>
-        
+        <p>Se instala en tu móvil directamente desde el navegador, sin pasar por ninguna tienda: ábrela y pulsa «Añadir a pantalla de inicio».</p>
+
         <div class="store-buttons-grid">
-          <!-- Google Play -->
-          <a href="https://play.google.com/store" target="_blank" rel="noopener" class="store-btn">
-            <div class="store-icon"><i class="fa-brands fa-google-play"></i></div>
+          <!-- Android (PWA: la app se instala desde el navegador, no hay ficha en la tienda) -->
+          <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="store-btn">
+            <div class="store-icon"><i class="fa-brands fa-android"></i></div>
             <div class="store-text">
-              <span>DISPONIBLE EN</span>
-              <strong>Google Play</strong>
+              <span>INSTALAR EN</span>
+              <strong>Android</strong>
             </div>
           </a>
-          
-          <!-- App Store -->
-          <a href="https://www.apple.com/app-store" target="_blank" rel="noopener" class="store-btn">
+
+          <!-- iPhone / iPad -->
+          <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="store-btn">
             <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="store-text">
-              <span>DESCARGAR EN LA</span>
-              <strong>App Store</strong>
+              <span>INSTALAR EN</span>
+              <strong>iPhone / iPad</strong>
             </div>
           </a>
         </div>
-        
+
         <div class="web-alternative">
-          <p>¿Prefieres no instalar nada? Usa nuestra <a href="https://micarga.es/" target="_blank" rel="noopener" class="text-link">Versión Web PWA</a> directamente desde el navegador de tu móvil.</p>
+          <p>¿Prefieres no instalar nada? Usa la app directamente desde el navegador: <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
         </div>
       </div>
     </div>
