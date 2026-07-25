@@ -1463,3 +1463,48 @@ mark {
 }
 
 
+
+/* ── Conformidad con la Resolución de 5/6/2026 (sección «La Ley») ───────── */
+.conformidad-box {
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 16px;
+  background: rgba(249, 115, 22, 0.05);
+}
+.conformidad-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+.conformidad-box h3 i { color: var(--primary, #f97316); margin-right: 0.5rem; }
+.conformidad-intro { margin-bottom: 1.25rem; opacity: 0.85; }
+.conformidad-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.85rem 1.75rem;
+}
+.conformidad-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.conformidad-list li::before {
+  content: "\f00c"; /* check */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #16a34a;
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+}
+.conformidad-nota {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
