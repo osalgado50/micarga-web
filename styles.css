@@ -1508,3 +1508,187 @@ mark {
   font-size: 0.9rem;
   opacity: 0.75;
 }
+
+/* ── Cartel «PDF ilimitados» (gancho de venta, va antes de las tarifas) ──────
+   Las secciones de esta web no tienen padding vertical propio (el aire lo dan
+   los márgenes internos), así que el cartel se lo pone él mismo: es lo que le
+   da el aislamiento visual de «cartel» frente a las secciones vecinas. */
+.unlimited-banner {
+  position: relative;
+  padding: 5rem 0;
+}
+
+.unlimited-card {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 3rem 2.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), 0.18) 0%, transparent 60%),
+    rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Franja de acento superior: corta el ritmo alternado texto-imagen del resto
+   de la página, que es lo que hace que el ojo se pare aquí. */
+.unlimited-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.unlimited-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 100px;
+  background: rgba(var(--primary-rgb), 0.15);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.unlimited-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  margin: 1.2rem 0 0.9rem;
+  line-height: 1.1;
+}
+
+.unlimited-lead {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.unlimited-lead strong {
+  color: var(--text-heading);
+}
+
+.unlimited-compare {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2.5rem 0 2rem;
+  text-align: left;
+}
+
+.compare-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.3rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+}
+
+.compare-ours {
+  background: rgba(var(--primary-rgb), 0.1);
+  border-color: rgba(var(--primary-rgb), 0.45);
+  box-shadow: 0 0 25px rgba(var(--primary-rgb), 0.12);
+}
+
+.compare-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  min-height: 2.2em;
+}
+
+.compare-ours .compare-label {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.compare-value {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.15;
+}
+
+.compare-value small {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.compare-detail {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.compare-detail i {
+  color: var(--text-muted);
+}
+
+.compare-ours .compare-detail {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+.compare-ours .compare-detail i {
+  color: var(--primary);
+}
+
+.unlimited-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.unlimited-note {
+  margin-top: 1.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.unlimited-note i {
+  color: var(--primary);
+  margin-right: 0.35rem;
+}
+
+@media (max-width: 768px) {
+  .unlimited-banner {
+    padding: 3.5rem 0;
+  }
+
+  .unlimited-card {
+    padding: 2.2rem 1.3rem;
+  }
+
+  .unlimited-compare {
+    grid-template-columns: 1fr;
+    margin: 2rem 0 1.8rem;
+  }
+
+  /* En móvil el bloque propio va primero y los rivales debajo: el orden del
+     DOM ya es ese, así que basta con dejar de estirar las etiquetas. */
+  .compare-label {
+    min-height: 0;
+  }
+
+  .unlimited-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

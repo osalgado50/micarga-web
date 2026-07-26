@@ -254,6 +254,75 @@
     </div>
   </section>
 
+  <!-- Cartel «PDF ilimitados» — gancho de venta principal. Va justo ANTES de
+       las tarifas a propósito: cuando el visitante ve el precio de 10 € ya sabe
+       que no hay tope, que es lo que lo hace parecer barato.
+       Las cifras de la comparativa salen de docs/COMPETENCIA.md (apps por
+       crédito: 0,30–0,75 €/documento; apps con tope: 9,90 €/mes y 75
+       expediciones). Decisión deliberada: NO se nombra a ningún competidor —
+       se describe su modelo de cobro. Si se actualizan sus precios, actualizar
+       también COMPETENCIA.md.
+       ⚠️ Lo ilimitado es la SUSCRIPCIÓN, no la prueba: el límite de 10
+       documentos de la prueba está aplicado en RLS (`can_create_document()`).
+       No prometer nunca ilimitado en la prueba gratuita. -->
+  <section id="ilimitado" class="unlimited-banner scroll-padding">
+    <div class="container">
+      <div class="unlimited-card reveal-on-scroll">
+        <span class="unlimited-tag">
+          <i class="fa-solid fa-infinity"></i> SIN LÍMITE DE DOCUMENTOS
+        </span>
+
+        <h2 class="unlimited-title">Descarga <mark class="glow-text">PDF ilimitados</mark></h2>
+
+        <p class="unlimited-lead">
+          Ni créditos, ni bolsas de expediciones, ni pagar por cada porte que emites.
+          Da igual que hagas <strong>20 portes al mes o 400</strong>: pagas lo mismo.
+        </p>
+
+        <div class="unlimited-compare">
+          <div class="compare-col compare-ours">
+            <span class="compare-label">Mi Carga</span>
+            <span class="compare-value">10&nbsp;€<small>/mes</small></span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-infinity"></i> Documentos ilimitados
+            </span>
+          </div>
+
+          <div class="compare-col">
+            <span class="compare-label">Apps que cobran por crédito</span>
+            <span class="compare-value">0,30&nbsp;–&nbsp;0,75&nbsp;€<small>/documento</small></span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-xmark"></i> Pagas cada porte que emites
+            </span>
+          </div>
+
+          <div class="compare-col">
+            <span class="compare-label">Apps con tope de expediciones</span>
+            <span class="compare-value">9,90&nbsp;€<small>/mes</small></span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-xmark"></i> Se corta a las 75 expediciones
+            </span>
+          </div>
+        </div>
+
+        <div class="unlimited-actions">
+          <a href="#contacto" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-circle-play"></i> Empezar con 10 portes gratis
+          </a>
+          <a href="#tarifas" class="btn btn-secondary btn-large">
+            <i class="fa-solid fa-tags"></i> Ver los planes
+          </a>
+        </div>
+
+        <p class="unlimited-note">
+          <i class="fa-solid fa-circle-info"></i>
+          La prueba gratuita incluye 10 documentos. Los PDF ilimitados entran con la
+          suscripción de 10&nbsp;€/mes o 90&nbsp;€/año.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 4: Pricing (Image-Text) -->
   <section id="tarifas" class="pricing-section scroll-padding">
     <div class="container">
