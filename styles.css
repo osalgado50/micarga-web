@@ -271,12 +271,22 @@ mark {
   font-weight: 900;
   color: var(--text-heading);
   text-decoration: none;
+  /* El camión de la marca es más ancho que el icono de fuente que había antes,
+     y en la barra de navegación estrecha partía «Mi Carga» en dos líneas. */
+  white-space: nowrap;
 }
 
-.logo-icon {
-  color: var(--primary);
-  font-size: 1.8rem;
-  filter: drop-shadow(0 0 10px rgba(var(--primary-rgb), 0.4));
+/* Camión de la marca en la cabecera y el pie.
+   Se usa el símbolo solo, sin la palabra «MICARGA» del logo completo: al lado
+   ya está el texto del logotipo, y el logo entero es un bloque vertical
+   (camión encima, texto debajo) que aquí quedaría diminuto.
+   Esta web tiene fondo oscuro fijo (--bg-app: #0b0f19), así que se usa siempre
+   la variante de contenido claro. Si algún día tiene tema día, hará falta
+   también camion-tema-claro.png, que ya está en images/. */
+.logo-camion {
+  height: 1.75rem;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .nav-links {
