@@ -375,7 +375,28 @@
             haber gastado la prueba. Los 10 portes de prueba no caducan y no se pierden
             si te suscribes después.
           </p>
-          
+
+          <!-- ⚠️⚠️⚠️ ATENCIÓN ANTES DE PUBLICAR ⚠️⚠️⚠️
+               La URL de abajo es la del PORTAL DE CLIENTE DE STRIPE EN MODO DE
+               PRUEBA: se reconoce por el segmento «/test_» en la ruta, justo
+               después de «/p/login/». NO es la URL definitiva.
+               HAY QUE SUSTITUIRLA por la del modo real antes de publicar esta
+               web. La URL real NO es la misma con «test_» quitado: se genera
+               aparte, en Stripe → Configuración → Facturación → Portal de
+               clientes, con el modo de prueba DESACTIVADO en el panel (el
+               interruptor arriba a la derecha), y Stripe entrega una URL
+               distinta para ese modo.
+               Si esta URL de prueba llega a producción tal cual, un cliente
+               real que la abra verá un portal vacío —sin su suscripción, sin
+               sus facturas— y pensará que le hemos perdido el pago. -->
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">
+            ¿Ya eres cliente?
+            <a href="https://billing.stripe.com/p/login/test_aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
+              Gestiona tu suscripción
+            </a>
+            — cambia de plan, actualiza la tarjeta o descarga tus facturas.
+          </p>
+
           <!-- Offer Hook Badge -->
           <div class="pricing-hook-card" style="margin-top: 2rem;">
             <div class="pricing-hook-icon"><i class="fa-solid fa-gift"></i></div>
