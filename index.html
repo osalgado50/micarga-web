@@ -15,7 +15,16 @@
   <meta name="description" content="Genera tus documentos de control de transporte (DeCA / Carta de Porte / ADR) en formato digital. Cumple la ley española a partir de octubre 2026. ¡10 envíos de prueba gratis!">
   <meta name="theme-color" content="#0b0f19">
   <link rel="canonical" href="https://micarga.es/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
+  <!-- Camión de la marca. Sustituye al emoji 🚚 que iba incrustado como SVG.
+       El .ico lleva 16, 32, 48 y 64 px porque cada navegador escoge uno
+       distinto (pestaña, marcador, acceso directo del escritorio); dejar solo
+       uno obliga al navegador a reescalar y el camión sale sucio.
+       Va sobre el azul de marca a propósito: un favicon transparente
+       desaparece en la barra de pestañas cuando el navegador está en tema
+       oscuro. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp
        (el canal principal de captación de esta web) -->
   <meta property="og:type" content="website">
@@ -44,7 +53,7 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#hero" class="logo">
-        <i class="fa-solid fa-truck-ramp-box logo-icon"></i>
+        <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
         <span>Mi <mark class="accent-text">Carga</mark></span>
       </a>
       
@@ -345,15 +354,58 @@
               <h3>Plan Mensual</h3>
               <div class="price">10€<span>/mes</span></div>
               <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Sin compromisos de permanencia.</p>
+              <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+                Empezar con este plan
+              </a>
             </div>
-            
+
             <div class="price-card popular">
               <h3>Plan Anual</h3>
               <div class="price">90€<span>/año</span></div>
               <p>Pago único. Te ahorras 2 meses (Equivale a 7,50€ al mes). Recomendado para transportistas fijos.</p>
+              <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+                Empezar con este plan
+              </a>
             </div>
           </div>
-          
+
+          <!-- Nota sobre el proceso de suscripción.
+               ⚠️ Decía «activa el plan que quieras desde dentro», y desde dentro
+               no se podía: el enlace de pago solo se ofrecía al agotar los 10
+               portes, así que quien se registraba para pagar el plan anual no
+               encontraba dónde. Ya hay un bloque «Tu suscripción» en los Ajustes
+               de la app que manda los enlaces por correo sin esperar al límite,
+               pero el texto se ajusta al flujo REAL: dentro de la app no se paga
+               (Apple y Google exigirían su compra integrada), se pide el enlace.
+               Si algún día cambia el flujo, cambiar también este párrafo. -->
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.75rem;">
+            Crea tu cuenta gratis y, cuando quieras suscribirte, pídenos el enlace de pago
+            desde los Ajustes de la app: te llega al correo al instante y no hace falta
+            haber gastado la prueba. Los 10 portes de prueba no caducan y no se pierden
+            si te suscribes después.
+          </p>
+
+          <!-- ⚠️⚠️⚠️ ATENCIÓN ANTES DE PUBLICAR ⚠️⚠️⚠️
+               La URL de abajo es la del PORTAL DE CLIENTE DE STRIPE EN MODO DE
+               PRUEBA: se reconoce por el segmento «/test_» en la ruta, justo
+               después de «/p/login/». NO es la URL definitiva.
+               HAY QUE SUSTITUIRLA por la del modo real antes de publicar esta
+               web. La URL real NO es la misma con «test_» quitado: se genera
+               aparte, en Stripe → Configuración → Facturación → Portal de
+               clientes, con el modo de prueba DESACTIVADO en el panel (el
+               interruptor arriba a la derecha), y Stripe entrega una URL
+               distinta para ese modo.
+               Si esta URL de prueba llega a producción tal cual, un cliente
+               real que la abra verá un portal vacío —sin su suscripción, sin
+               sus facturas— y pensará que le hemos perdido el pago. -->
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">
+            ¿Ya eres cliente?
+            <a href="https://billing.stripe.com/p/login/test_aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
+              Gestiona tu suscripción
+            </a>
+            — cambia de plan, actualiza la tarjeta o descarga tus facturas.
+          </p>
+
           <!-- Offer Hook Badge -->
           <div class="pricing-hook-card" style="margin-top: 2rem;">
             <div class="pricing-hook-icon"><i class="fa-solid fa-gift"></i></div>
@@ -499,7 +551,7 @@
     <div class="container footer-content">
       <div class="footer-left">
         <a href="#" class="logo">
-          <i class="fa-solid fa-truck-ramp-box logo-icon"></i>
+          <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
           <span>Mi <mark class="accent-text">Carga</mark></span>
         </a>
         <p>Solución digital de generación de documentos de control y cartas de porte. Con el respaldo de Ecosmep para validaciones ADR.</p>
