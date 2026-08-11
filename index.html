@@ -15,7 +15,16 @@
   <meta name="description" content="Genera tus documentos de control de transporte (DeCA / Carta de Porte / ADR) en formato digital. Cumple la ley española a partir de octubre 2026. ¡10 envíos de prueba gratis!">
   <meta name="theme-color" content="#0b0f19">
   <link rel="canonical" href="https://micarga.es/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚚</text></svg>">
+  <!-- Camión de la marca. Sustituye al emoji 🚚 que iba incrustado como SVG.
+       El .ico lleva 16, 32, 48 y 64 px porque cada navegador escoge uno
+       distinto (pestaña, marcador, acceso directo del escritorio); dejar solo
+       uno obliga al navegador a reescalar y el camión sale sucio.
+       Va sobre el azul de marca a propósito: un favicon transparente
+       desaparece en la barra de pestañas cuando el navegador está en tema
+       oscuro. -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp
        (el canal principal de captación de esta web) -->
   <meta property="og:type" content="website">
