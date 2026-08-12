@@ -1423,6 +1423,22 @@ mark {
   -webkit-text-fill-color: var(--text-muted);
 }
 
+/* «IVA incluido», pegado al precio. El .price de arriba lleva 1rem de margen
+   inferior pensando en que le sigue el párrafo descriptivo; aquí se recorta para
+   que la aclaración del impuesto quede junto a la cifra y no suelta a media
+   tarjeta, que es donde se lee como si fuera otra cosa. */
+.price-card .price {
+  margin-bottom: 0.35rem;
+}
+
+.price-card .price-tax {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
 .price-card p {
   font-size: 0.95rem;
   color: var(--text-muted);

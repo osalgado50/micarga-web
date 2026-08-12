@@ -291,7 +291,13 @@
         <div class="unlimited-compare">
           <div class="compare-col compare-ours">
             <span class="compare-label">Mi Carga</span>
+            <!-- «IVA incluido» va en todos los precios de cara al cliente: el
+                 titular de esta sección promete «sin costes ocultos», y un
+                 precio sin decir si lleva impuestos es justamente un coste
+                 oculto. Los 10 € son el total que se cobra; el ingreso neto es
+                 8,26 €. -->
             <span class="compare-value">10&nbsp;€<small>/mes</small></span>
+            <span class="compare-detail" style="opacity:.75">IVA incluido</span>
             <span class="compare-detail">
               <i class="fa-solid fa-infinity"></i> Documentos ilimitados
             </span>
@@ -326,7 +332,7 @@
         <p class="unlimited-note">
           <i class="fa-solid fa-circle-info"></i>
           La prueba gratuita incluye 10 documentos. Los PDF ilimitados entran con la
-          suscripción de 10&nbsp;€/mes o 90&nbsp;€/año.
+          suscripción de 10&nbsp;€/mes o 90&nbsp;€/año, IVA incluido.
         </p>
       </div>
     </div>
@@ -353,7 +359,8 @@
             <div class="price-card">
               <h3>Plan Mensual</h3>
               <div class="price">10€<span>/mes</span></div>
-              <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Sin compromisos de permanencia.</p>
+              <p class="price-tax">IVA incluido</p>
+              <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Se renueva cada mes y puedes cancelarla cuando quieras, sin compromiso de permanencia.</p>
               <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Empezar con este plan
               </a>
@@ -362,7 +369,16 @@
             <div class="price-card popular">
               <h3>Plan Anual</h3>
               <div class="price">90€<span>/año</span></div>
-              <p>Pago único. Te ahorras 2 meses (Equivale a 7,50€ al mes). Recomendado para transportistas fijos.</p>
+              <p class="price-tax">IVA incluido</p>
+              <!-- Decía «Pago único», y no lo es: es una suscripción que se
+                   renueva sola cada doce meses. Un cliente que leyera «pago
+                   único» y se encontrara el segundo cargo al año siguiente
+                   tendría razón al reclamar al banco, y la disputa se perdería
+                   con esa frase escrita aquí.
+                   Y decía «te ahorras 2 meses», que se quedaba corto: 12 × 10 €
+                   son 120 €, frente a 90 € son 30 € de ahorro, o sea TRES
+                   meses. -->
+              <p>Te ahorras 3 meses: equivale a 7,50€ al mes. Recomendado para transportistas fijos. Es una suscripción anual que se renueva automáticamente cada año; puedes cancelarla cuando quieras desde tu cuenta.</p>
               <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Empezar con este plan
               </a>
