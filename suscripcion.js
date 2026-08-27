@@ -36,14 +36,16 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
 
-// ⚠️⚠️⚠️ ATENCIÓN ANTES DE COBRAR DE VERDAD ⚠️⚠️⚠️
-// Esta es la URL del PORTAL DE CLIENTE DE STRIPE EN MODO DE PRUEBA: se reconoce
-// por el segmento «/test_» justo después de «/p/login/». Un cliente que pague de
-// verdad y entre aquí encuentra un portal donde su suscripción no existe.
-// La URL real NO es esta sin el «test_»: se genera aparte, en Stripe →
-// Configuración → Facturación → Portal de cliente, en modo real.
+// Portal de cliente de Stripe, en MODO REAL (activado el 27-08-2026). Es donde
+// se manda a quien ya tiene suscripción: cambiar de plan, actualizar la tarjeta,
+// cancelar o descargar facturas. Nunca un enlace de pago, que crearía una
+// suscripción NUEVA y cobraría dos.
+//
+// Se distingue de la de pruebas en que NO lleva el segmento «/test_» después de
+// «/p/login/». Aquí estuvo la de pruebas hasta el 27-08-2026.
+//
 // ⚠️ La MISMA URL está también en index.html. Si se cambia una, cambiar las dos.
-const PORTAL_CLIENTE = 'https://billing.stripe.com/p/login/test_aFa9AT6nqetc4L7a6teME00';
+const PORTAL_CLIENTE = 'https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00';
 
 const CAMPOS_FACTURACION = [
   'razon_social', 'nif', 'direccion', 'codigo_postal', 'poblacion', 'provincia', 'pais',

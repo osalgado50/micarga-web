@@ -447,25 +447,20 @@
             —los 10 portes no caducan y no se pierden si te suscribes después—.
           </p>
 
-          <!-- ⚠️⚠️⚠️ ATENCIÓN ANTES DE PUBLICAR ⚠️⚠️⚠️
-               La URL de abajo es la del PORTAL DE CLIENTE DE STRIPE EN MODO DE
-               PRUEBA: se reconoce por el segmento «/test_» en la ruta, justo
-               después de «/p/login/». NO es la URL definitiva.
-               HAY QUE SUSTITUIRLA por la del modo real antes de publicar esta
-               web. La URL real NO es la misma con «test_» quitado: se genera
-               aparte, en Stripe → Configuración → Facturación → Portal de
-               clientes, con el modo de prueba DESACTIVADO en el panel (el
-               interruptor arriba a la derecha), y Stripe entrega una URL
-               distinta para ese modo.
-               Si esta URL de prueba llega a producción tal cual, un cliente
-               real que la abra verá un portal vacío —sin su suscripción, sin
-               sus facturas— y pensará que le hemos perdido el pago.
+          <!-- Portal de cliente de Stripe, en MODO REAL desde el 27-08-2026.
+               Hasta esa fecha aquí estaba la URL de PRUEBAS, que se reconocía
+               por el segmento «/test_» después de «/p/login/»; un cliente que
+               hubiera pagado de verdad y la abriera habría visto un portal
+               vacío —sin su suscripción y sin sus facturas— y habría pensado
+               que le perdimos el pago. Nunca llegó a pasar: no había cobros.
+               Dato para la próxima vez: resultó que la URL real SÍ es la misma
+               sin el «test_», al contrario de lo que decía este aviso.
                ⚠️ La MISMA URL está también en suscripcion.js (constante
                PORTAL_CLIENTE), que es adonde se manda a quien ya tiene
                suscripción. Si se cambia una, HAY QUE CAMBIAR LAS DOS. -->
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">
             ¿Ya eres cliente?
-            <a href="https://billing.stripe.com/p/login/test_aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
+            <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Gestiona tu suscripción
             </a>
             — cambia de plan, actualiza la tarjeta o descarga tus facturas.
