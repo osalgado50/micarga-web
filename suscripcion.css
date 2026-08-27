@@ -1,0 +1,238 @@
+/* Página de activación de la suscripción.
+   Fichero aparte y no dentro de styles.css: es la única página transaccional
+   del sitio y no comparte nada con las de venta, así que mezclarlo obligaría a
+   cargar en la portada estilos que solo usa esta pantalla.
+   Los colores, tipos y radios salen de las variables de :root de styles.css. */
+
+.sus-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: calc(var(--navbar-height) + 40px) 20px 80px;
+}
+
+.sus-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sus-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  color: var(--text-heading);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.sus-subtitulo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-heading);
+  margin: 0 0 6px;
+}
+
+.sus-lead { color: var(--text-main); margin: 0; line-height: 1.6; }
+
+/* Los enlaces dentro de la tarjeta, en el naranja de la marca. Sin esto salen
+   en el azul por defecto del navegador, que en este fondo oscuro se lee mal y
+   desentona con el resto del sitio. */
+.sus-card a { color: var(--primary); text-decoration: underline; }
+.sus-card a:hover { color: var(--primary-hover); }
+/* Salvo los que ya son botones o tarjetas de plan, que llevan su propio color. */
+.sus-card a.sus-btn { color: #fff; text-decoration: none; }
+.sus-card a.sus-plan { color: var(--text-main); text-decoration: none; }
+.sus-ayuda { color: var(--text-muted); font-size: 0.85rem; line-height: 1.55; margin: 0; }
+.sus-opcional { color: var(--text-muted); font-weight: 400; }
+.sus-pie {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* La banda de aviso cambia de color según el tono, no solo de texto: un error
+   y una confirmación con el mismo aspecto se confunden de un vistazo. */
+.sus-aviso {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  border: 1.5px solid;
+}
+.sus-aviso[data-tono="error"] {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+.sus-aviso[data-tono="ok"] {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+}
+.sus-aviso[data-tono="info"] {
+  background: rgba(var(--primary-rgb), 0.08);
+  border-color: rgba(var(--primary-rgb), 0.35);
+  color: var(--text-main);
+}
+
+.sus-paso { display: flex; flex-direction: column; gap: 14px; }
+/* Sin esto se ven TODOS los pasos a la vez. `display:flex` de arriba es una
+   regla de autor y gana al `[hidden] { display: none }` de la hoja del
+   navegador, que es de agente de usuario: poner `hidden` desde JavaScript no
+   ocultaba nada. Vale para cualquier elemento de la página, no solo los pasos. */
+[hidden] { display: none !important; }
+.sus-paso form { display: flex; flex-direction: column; gap: 12px; }
+
+.sus-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.sus-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-heading);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  padding: 13px 14px;
+  min-height: 48px;
+}
+.sus-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.18);
+}
+/* Un campo que el servidor ha señalado como incompleto o mal escrito. */
+.sus-input[data-mal="si"] {
+  border-color: rgba(239, 68, 68, 0.7);
+}
+
+.sus-input-codigo {
+  font-size: 1.7rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding-left: 0.5em; /* compensa el letter-spacing del último dígito */
+}
+
+.sus-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+.sus-campo { display: block; min-width: 0; }
+.sus-campo-ancho { grid-column: 1 / -1; }
+
+.sus-btn {
+  display: block;
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 15px 20px;
+  min-height: 52px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--shadow-btn);
+}
+.sus-btn:hover { background: var(--primary-hover); }
+.sus-btn[disabled] { opacity: 0.55; cursor: progress; box-shadow: none; }
+
+.sus-btn-plano {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px;
+}
+.sus-btn-plano:hover { color: var(--text-main); }
+
+.sus-alerta {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 158, 11, 0.1);
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.sus-planes { display: flex; flex-direction: column; gap: 12px; }
+
+.sus-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 18px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  text-decoration: none;
+  color: var(--text-main);
+}
+.sus-plan:hover { border-color: rgba(var(--primary-rgb), 0.55); }
+.sus-plan-destacado {
+  border-color: rgba(var(--primary-rgb), 0.5);
+  background: rgba(var(--primary-rgb), 0.06);
+}
+.sus-plan-etiqueta {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.sus-plan-precio {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: var(--text-heading);
+  line-height: 1.1;
+}
+.sus-plan-precio small { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
+.sus-plan-nota { font-size: 0.82rem; color: var(--text-muted); }
+.sus-plan-cta {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+@media (max-width: 480px) {
+  .sus-card { padding: 24px 18px; border-radius: var(--radius-md); }
+  .sus-campos { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

@@ -406,7 +406,7 @@
               <div class="price">10€<span>/mes</span></div>
               <p class="price-tax">IVA incluido</p>
               <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Se renueva cada mes y puedes cancelarla cuando quieras, sin compromiso de permanencia.</p>
-              <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+              <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Empezar con este plan
               </a>
             </div>
@@ -424,26 +424,27 @@
                    son 120 €, frente a 90 € son 30 € de ahorro, o sea TRES
                    meses. -->
               <p>Te ahorras 3 meses: equivale a 7,50€ al mes. Recomendado para transportistas fijos. Es una suscripción anual que se renueva automáticamente cada año; puedes cancelarla cuando quieras desde tu cuenta.</p>
-              <a href="https://app.micarga.es/" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+              <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Empezar con este plan
               </a>
             </div>
           </div>
 
           <!-- Nota sobre el proceso de suscripción.
-               ⚠️ Decía «activa el plan que quieras desde dentro», y desde dentro
-               no se podía: el enlace de pago solo se ofrecía al agotar los 10
-               portes, así que quien se registraba para pagar el plan anual no
-               encontraba dónde. Ya hay un bloque «Tu suscripción» en los Ajustes
-               de la app que manda los enlaces por correo sin esperar al límite,
-               pero el texto se ajusta al flujo REAL: dentro de la app no se paga
-               (Apple y Google exigirían su compra integrada), se pide el enlace.
+               El pago se hace AQUÍ, en la web (suscripcion.html): se entra con
+               la cuenta que ya existe en la app y se contrata. Dentro de la app
+               NO se puede pagar —Apple y Google exigirían su compra integrada,
+               con comisión del 15-30%—, así que la web es la única vía.
+               Hace falta cuenta antes de pagar porque el enlace de Stripe debe
+               llevar el client_reference_id del usuario: sin él el webhook no
+               puede casar el pago con ninguna cuenta y el cliente paga y se
+               queda bloqueado igual.
                Si algún día cambia el flujo, cambiar también este párrafo. -->
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.75rem;">
-            Crea tu cuenta gratis y, cuando quieras suscribirte, pídenos el enlace de pago
-            desde los Ajustes de la app: te llega al correo al instante y no hace falta
-            haber gastado la prueba. Los 10 portes de prueba no caducan y no se pierden
-            si te suscribes después.
+            Crea tu cuenta gratis en <a href="https://app.micarga.es/" class="text-link">la app</a>
+            y luego <a href="suscripcion" class="text-link">contrata tu plan aquí</a>: entras con
+            ese mismo correo y eliges mensual o anual. No hace falta haber gastado la prueba
+            —los 10 portes no caducan y no se pierden si te suscribes después—.
           </p>
 
           <!-- ⚠️⚠️⚠️ ATENCIÓN ANTES DE PUBLICAR ⚠️⚠️⚠️
@@ -458,7 +459,10 @@
                distinta para ese modo.
                Si esta URL de prueba llega a producción tal cual, un cliente
                real que la abra verá un portal vacío —sin su suscripción, sin
-               sus facturas— y pensará que le hemos perdido el pago. -->
+               sus facturas— y pensará que le hemos perdido el pago.
+               ⚠️ La MISMA URL está también en suscripcion.js (constante
+               PORTAL_CLIENTE), que es adonde se manda a quien ya tiene
+               suscripción. Si se cambia una, HAY QUE CAMBIAR LAS DOS. -->
           <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">
             ¿Ya eres cliente?
             <a href="https://billing.stripe.com/p/login/test_aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">

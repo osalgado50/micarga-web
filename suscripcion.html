@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Activa tu suscripción de Mi Carga. Entra con la cuenta que ya tienes en la app y contrata el plan mensual o anual.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/suscripcion">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- noindex: es una página transaccional que exige sesión. Indexarla solo
+       llevaría a gente sin cuenta a una pantalla que no puede usar. -->
+  <meta name="robots" content="noindex, follow">
+  <title>Activar suscripción - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="suscripcion.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/#tarifas">Precios</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Abrir la app</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <h1 class="sus-title">Activa tu suscripción</h1>
+      <p class="sus-lead">
+        Entra con la cuenta que ya tienes en Mi Carga. Si todavía no tienes
+        cuenta, créala gratis en <a href="https://app.micarga.es/">la app</a>:
+        los 10 portes de prueba no caducan y no se pierden si te suscribes
+        después.
+      </p>
+
+      <!-- Banda de aviso reutilizada por todos los pasos. Un único sitio donde
+           se dicen las cosas, para que un error no aparezca dos veces ni se
+           quede uno viejo colgado al cambiar de paso. -->
+      <p class="sus-aviso" id="aviso" hidden role="status"></p>
+
+      <!-- PASO 1 · correo ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-correo">
+        <form id="form-correo" novalidate>
+          <label class="sus-label" for="correo">Tu correo electrónico</label>
+          <input class="sus-input" type="email" id="correo" name="correo"
+                 autocomplete="email" inputmode="email" required
+                 placeholder="el que usas en la app">
+          <p class="sus-ayuda">
+            Te escribimos con un código de 6 dígitos. No hace falta que recuerdes
+            la contraseña.
+          </p>
+          <button class="sus-btn" type="submit" id="btn-correo">
+            Enviarme el código
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 2 · código ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-codigo" hidden>
+        <form id="form-codigo" novalidate>
+          <label class="sus-label" for="codigo">Código de 6 dígitos</label>
+          <input class="sus-input sus-input-codigo" type="text" id="codigo"
+                 name="codigo" inputmode="numeric" autocomplete="one-time-code"
+                 maxlength="6" pattern="[0-9]{6}" required placeholder="······">
+          <p class="sus-ayuda" id="ayuda-codigo"></p>
+          <button class="sus-btn" type="submit" id="btn-codigo">Entrar</button>
+          <button class="sus-btn-plano" type="button" id="btn-otro-correo">
+            Usar otro correo
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 3 · datos de facturación ---------------------------------- -->
+      <section class="sus-paso" id="paso-facturacion" hidden>
+        <h2 class="sus-subtitulo">Datos de facturación</h2>
+        <p class="sus-ayuda">
+          Hacen falta para poder emitirte la factura del cobro. Se guardan en tu
+          cuenta: solo te los pedimos una vez.
+        </p>
+        <form id="form-facturacion" novalidate>
+          <div class="sus-campos">
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Razón social o nombre completo</span>
+              <input class="sus-input" name="razon_social" autocomplete="organization" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">NIF / CIF</span>
+              <input class="sus-input" name="nif" autocomplete="off" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Código postal</span>
+              <input class="sus-input" name="codigo_postal" inputmode="numeric"
+                     maxlength="5" autocomplete="postal-code" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Dirección</span>
+              <input class="sus-input" name="direccion" autocomplete="street-address" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Población</span>
+              <input class="sus-input" name="poblacion" autocomplete="address-level2" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Provincia</span>
+              <input class="sus-input" name="provincia" autocomplete="address-level1" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">País</span>
+              <!-- Una sola opción, y no un campo de texto, porque el servidor
+                   solo acepta ES: la factura lleva IVA español. Un desplegable
+                   con una opción es honesto; un campo libre invita a escribir
+                   «FR» y a chocar contra un error que no se puede arreglar. -->
+              <select class="sus-input" name="pais" required>
+                <option value="ES">España</option>
+              </select>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Correo para las facturas <span class="sus-opcional">(opcional)</span></span>
+              <input class="sus-input" type="email" name="email_facturacion" autocomplete="email">
+              <span class="sus-ayuda">Si lo dejas vacío, se usa el de tu cuenta.</span>
+            </label>
+          </div>
+          <button class="sus-btn" type="submit" id="btn-facturacion">
+            Guardar y continuar
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 4 · planes ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-planes" hidden>
+        <h2 class="sus-subtitulo">Elige tu plan</h2>
+
+        <!-- Este aviso no es cortesía: cada enlace de pago de Stripe contrata
+             una suscripción INDEPENDIENTE. Quien pulse los dos «por ver qué es
+             cada uno» acaba pagando 10 € y 90 € a la vez. -->
+        <p class="sus-alerta">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Elige solo uno. Cada plan contrata una suscripción independiente, así
+          que si contratas los dos se te cobrarán los dos. Después puedes
+          cambiar de plan cuando quieras desde tu cuenta.
+        </p>
+
+        <div class="sus-planes">
+          <a class="sus-plan sus-plan-destacado" id="plan-anual" href="#">
+            <span class="sus-plan-etiqueta">Te ahorras 3 meses</span>
+            <span class="sus-plan-precio">90 €<small> / año</small></span>
+            <span class="sus-plan-nota">equivale a 7,50 € al mes</span>
+            <span class="sus-plan-cta">Contratar el plan anual</span>
+          </a>
+          <a class="sus-plan" id="plan-mensual" href="#">
+            <span class="sus-plan-precio">10 €<small> / mes</small></span>
+            <span class="sus-plan-nota">sin permanencia</span>
+            <span class="sus-plan-cta">Contratar el plan mensual</span>
+          </a>
+        </div>
+
+        <p class="sus-ayuda">
+          Precios <strong>totales, IVA incluido</strong>. Las dos suscripciones
+          se renuevan automáticamente —la mensual cada mes y la anual cada
+          año— y puedes cancelarlas cuando quieras desde tu cuenta, sin
+          penalización. Portes ilimitados, modo sin conexión y trazabilidad
+          ROTT en los dos planes.
+        </p>
+        <p class="sus-ayuda">
+          El pago lo procesa <strong>Stripe</strong>. Mi Carga no ve ni guarda
+          los datos de tu tarjeta.
+        </p>
+      </section>
+
+      <!-- PASO 5 · ya tiene suscripción ---------------------------------- -->
+      <section class="sus-paso" id="paso-ya-suscrito" hidden>
+        <h2 class="sus-subtitulo">Ya tienes una suscripción activa</h2>
+        <p class="sus-ayuda">
+          No hace falta que contrates otra: cada plan crea una suscripción
+          independiente y acabarías pagando dos veces. Para cambiar de plan,
+          actualizar la tarjeta o cancelar, entra en tu área de cliente.
+        </p>
+        <a class="sus-btn" id="btn-portal" href="#" target="_blank" rel="noopener">
+          Gestionar mi suscripción
+        </a>
+      </section>
+
+      <p class="sus-pie">
+        ¿Algún problema? Escríbenos a
+        <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> o por WhatsApp
+        al <a href="https://wa.me/34640216351" target="_blank" rel="noopener">+34 640 216 351</a>.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solución digital de generación de documentos de control y cartas de porte. Con el respaldo de Ecosmep para validaciones ADR.</p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacto</h4>
+          <p>Email: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34640216351" target="_blank" rel="noopener">+34 640 216 351</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="aviso-legal">Aviso Legal</a></p>
+          <p><a href="privacidad">Política de Privacidad</a></p>
+          <p><a href="terminos">Términos de Uso</a></p>
+          <p><a href="cookies">Política de Cookies</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="suscripcion.js"></script>
+</body>
+</html>
