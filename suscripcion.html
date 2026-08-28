@@ -45,10 +45,10 @@
 
       <h1 class="sus-title">Activa tu suscripción</h1>
       <p class="sus-lead">
-        Entra con la cuenta que ya tienes en Mi Carga. Si todavía no tienes
-        cuenta, créala gratis en <a href="https://app.micarga.es/">la app</a>:
-        los 10 portes de prueba no caducan y no se pierden si te suscribes
-        después.
+        Todo el proceso se hace aquí. Si ya tienes cuenta en Mi Carga entras con
+        ella y solo te pedimos lo que falte; si no la tienes, la creas de paso.
+        Los 10 portes de prueba no caducan y no se pierden si te suscribes antes
+        de gastarlos.
       </p>
 
       <!-- Banda de aviso reutilizada por todos los pasos. Un único sitio donde
@@ -64,11 +64,64 @@
                  autocomplete="email" inputmode="email" required
                  placeholder="el que usas en la app">
           <p class="sus-ayuda">
-            Te escribimos con un código de 6 dígitos. No hace falta que recuerdes
-            la contraseña.
+            Miramos si ya tienes cuenta con ese correo. Si la tienes, entras con
+            un código de 6 dígitos y no hace falta que recuerdes la contraseña.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">
-            Enviarme el código
+            Continuar
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 1 bis · alta, solo si el correo no tiene cuenta ------------- -->
+      <section class="sus-paso" id="paso-alta" hidden>
+        <h2 class="sus-subtitulo">Crea tu cuenta</h2>
+        <p class="sus-ayuda">
+          No hay ninguna cuenta con <strong id="alta-correo"></strong>. La creamos
+          ahora: es la misma cuenta con la que después entrarás en la app.
+        </p>
+        <form id="form-alta" novalidate>
+          <div class="sus-campos">
+            <label class="sus-campo">
+              <span class="sus-label">Nombre</span>
+              <input class="sus-input" name="first_name" autocomplete="given-name" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Apellidos</span>
+              <input class="sus-input" name="last_name" autocomplete="family-name" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">NIF / CIF</span>
+              <input class="sus-input" name="nif_cif" autocomplete="off" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Teléfono móvil</span>
+              <input class="sus-input" name="phone" type="tel" inputmode="tel"
+                     autocomplete="tel" placeholder="600 11 22 33" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Empresa</span>
+              <input class="sus-input" name="company_name" autocomplete="organization" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Contraseña para la app</span>
+              <input class="sus-input" name="password" type="password"
+                     autocomplete="new-password" minlength="6" required>
+              <span class="sus-ayuda">
+                Mínimo 6 caracteres. La necesitarás para entrar en la app desde el móvil.
+              </span>
+            </label>
+          </div>
+          <label class="sus-acepto">
+            <input type="checkbox" name="acepto" required>
+            <span>
+              He leído y acepto los <a href="terminos" target="_blank" rel="noopener">términos de uso</a>
+              y la <a href="privacidad" target="_blank" rel="noopener">política de privacidad</a>.
+            </span>
+          </label>
+          <button class="sus-btn" type="submit" id="btn-alta">Crear cuenta y continuar</button>
+          <button class="sus-btn-plano" type="button" id="btn-alta-otro-correo">
+            Me he equivocado de correo
           </button>
         </form>
       </section>

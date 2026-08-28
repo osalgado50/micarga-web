@@ -132,6 +132,25 @@
   padding-left: 0.5em; /* compensa el letter-spacing del último dígito */
 }
 
+/* Casilla de aceptación de términos. El cuadro no se encoge junto al texto:
+   con `flex` a secas, un texto de dos líneas aplasta la casilla a un rectángulo
+   fino y deja de parecer una casilla. */
+.sus-acepto {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.sus-acepto input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+}
+
 .sus-campos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
