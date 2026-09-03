@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const notes = document.getElementById('form-message').value.trim();
       
       // WhatsApp Business Number (Provisional)
-      const targetPhone = '34640216351'; 
+      const targetPhone = '34744716449'; 
       
       // Message template in Spanish
       let whatsappMessage = `Hola! Vengo de la web *micarga.es* y me gustaría activar los *10 transportes de prueba gratis*.\n\n`;

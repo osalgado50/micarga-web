@@ -511,7 +511,7 @@ const pedirEnlaces = async () => {
       return;
     }
 
-    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es o por WhatsApp al +34 640 216 351 y lo activamos nosotros.');
+    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es o por WhatsApp al +34 744 716 449 y lo activamos nosotros.');
     mostrarPaso('paso-correo');
     return;
   }
