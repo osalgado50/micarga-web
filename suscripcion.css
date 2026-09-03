@@ -255,3 +255,25 @@
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* --- Página de borrado de cuenta ------------------------------------------
+   Comparte hoja con la de suscripción porque son la misma tarjeta y los mismos
+   pasos; solo cambian dos cosas: el botón destructivo y el bloque que explica
+   qué se borra y qué se conserva. */
+
+.sus-btn-peligro {
+  background: #ef4444;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.25);
+}
+.sus-btn-peligro:hover { background: #dc2626; }
+/* Deshabilitado hasta que el correo escrito coincide: el botón tiene que
+   PARECER apagado, no solo estarlo. */
+.sus-btn-peligro[disabled] { background: #7f1d1d; box-shadow: none; }
+
+.sus-que-pasa {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 18px 20px;
+}
+.sus-que-pasa .sus-subtitulo { margin-bottom: 6px; }
