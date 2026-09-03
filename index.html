@@ -485,19 +485,27 @@
       <div class="download-card">
         <span class="badge badge-accent">DISPONIBILIDAD INMEDIATA</span>
         <h2>Instala Mi Carga hoy mismo</h2>
-        <p>Se instala en tu móvil directamente desde el navegador, sin pasar por ninguna tienda: ábrela y pulsa «Añadir a pantalla de inicio».</p>
+        <p>En Android, descárgala desde Google Play. En iPhone y iPad, se instala directamente desde el navegador: ábrela y pulsa «Añadir a pantalla de inicio».</p>
 
         <div class="store-buttons-grid">
-          <!-- Android (PWA: la app se instala desde el navegador, no hay ficha en la tienda) -->
-          <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="store-btn">
-            <div class="store-icon"><i class="fa-brands fa-android"></i></div>
+          <!-- Android: YA HAY FICHA EN GOOGLE PLAY (publicada el 27-08-2026).
+               Antes este botón mandaba a la PWA porque no existía la ficha; se
+               comprobó el 03-09-2026 que play.google.com/store/apps/details?id=es.micarga.app
+               responde 200. Mandar a la tienda es mejor: instalación de verdad,
+               actualizaciones automáticas y reseñas. -->
+          <a href="https://play.google.com/store/apps/details?id=es.micarga.app" target="_blank" rel="noopener" class="store-btn">
+            <div class="store-icon"><i class="fa-brands fa-google-play"></i></div>
             <div class="store-text">
-              <span>INSTALAR EN</span>
-              <strong>Android</strong>
+              <span>DESCARGAR EN</span>
+              <strong>Google Play</strong>
             </div>
           </a>
 
-          <!-- iPhone / iPad -->
+          <!-- iPhone / iPad: sigue apuntando a la PWA a propósito. La ficha de
+               la App Store NO existe todavía (apps.apple.com/es/app/id6795932951
+               devuelve 404 el 03-09-2026: la 1.3 está en revisión). Cuando Apple
+               apruebe, cambiar este href por esa URL y el rótulo por
+               «DESCARGAR EN / App Store». -->
           <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="store-btn">
             <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="store-text">

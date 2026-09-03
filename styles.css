@@ -115,6 +115,45 @@ mark {
   padding: 0 2rem;
 }
 
+/* ---------------------------------------------------------------------------
+   RITMO VERTICAL
+
+   Antes no existía. El `* { margin: 0; padding: 0 }` de arriba dejaba TODAS las
+   secciones a `padding: 0`, así que las siete fronteras entre secciones medían
+   exactamente 0 px y el contenido pasaba de un bloque al siguiente sin
+   respirar. Medido en el navegador el 03-09-2026, no supuesto.
+
+   Se define una escala aquí, en un solo sitio, en vez de repartir valores
+   sueltos por el fichero —que es como estaba el resto—: así el aire de toda la
+   web se ajusta cambiando dos números.
+
+   `clamp()` para que el espacio se encoja en móvil: 6,5 rem de aire arriba y
+   abajo en una pantalla de teléfono se comen la pantalla entera.
+   --------------------------------------------------------------------------- */
+:root {
+  /* 5vw y no 7vw: con 7 el aire salía a 89 px por lado en una pantalla de
+     1280, o sea 179 px entre el contenido de una sección y el de la siguiente,
+     y eso obliga a hacer scroll por el vacío. Con 5vw quedan 64 px por lado
+     —128 px entre contenidos—, que es el ritmo habitual de una página así. */
+  --space-section: clamp(3rem, 5vw, 5rem);
+  --space-block: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+/* Se apunta a `body > section` y no a `section` a secas a propósito: dentro del
+   blog y de los textos legales las <section> son apartados de un artículo, y
+   con este aire quedarían desparramadas. Esas tienen su propio ritmo más abajo. */
+body > section:not(.hero-section) {
+  padding-block: var(--space-section);
+}
+
+/* Separación entre la cabecera de una sección (antetítulo + título + entradilla)
+   y su contenido. Sin esto el título queda pegado a la primera tarjeta. */
+body > section:not(.hero-section) .section-desc,
+body > section:not(.hero-section) > .container > h2 {
+  margin-bottom: var(--space-block);
+}
+
+
 .grid {
   display: grid;
   gap: 3rem;
@@ -1346,7 +1385,8 @@ mark {
 .pricing-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  /* Iba a 1,5 rem, más apretado que el resto de rejillas del sitio (2,5 rem). */
+  gap: var(--space-block);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
