@@ -1,0 +1,27 @@
+# Cabeceras de Cloudflare Pages.
+#
+# POR QUÉ EXISTE ESTE FICHERO
+# El 7-09-2026 se corrigió un fallo que impedía cobrar (la página exigía un
+# código de 6 dígitos y Supabase manda 8). El arreglo se desplegó, el servidor
+# sirvió el fichero nuevo... y los navegadores siguieron ejecutando el viejo:
+# los .js y .css salían con `max-age=14400`, o sea CUATRO HORAS de caché.
+#
+# Para una web estática sin compilación —sin nombres de fichero con hash— eso
+# significa que cada arreglo tarda hasta cuatro horas en llegarle a quien ya
+# había visitado la página. En una página de pago eso no vale: el que no puede
+# comprar no vuelve dentro de cuatro horas, no vuelve nunca.
+#
+# Un minuto de caché con revalidación deja el coste en una petición
+# condicional que casi siempre responde 304, que para el tamaño de este sitio
+# no es nada, y garantiza que un arreglo llega enseguida.
+
+/*.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=60, must-revalidate
+
+# El HTML nunca se cachea: es lo que enlaza al resto y lo que decide qué
+# versión de cada cosa se pide.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
