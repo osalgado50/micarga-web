@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tu suscripción de Mi Carga ya está activa.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/gracias">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- noindex: solo se llega aquí desde Stripe, después de pagar. -->
+  <meta name="robots" content="noindex, follow">
+  <title>Suscripción activada - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="suscripcion.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/#tarifas">Precios</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Abrir la app</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <div class="gracias-marca" id="marca" data-estado="comprobando" aria-hidden="true"></div>
+
+      <h1 class="sus-title" id="titulo">Pago recibido</h1>
+
+      <!-- ESTADO 1 · comprobando ------------------------------------------
+           No se dice «ya eres premium» hasta que consta en la base de datos.
+           Entre que Stripe cobra y nos avisa pasan unos segundos, y afirmarlo
+           antes de tiempo es lo que hace que alguien abra la app, la vea
+           bloqueada y piense que le hemos cobrado sin darle nada. -->
+      <section class="sus-paso" id="paso-comprobando">
+        <p class="sus-lead">
+          Gracias. Stripe nos ha confirmado el cobro y estamos activando tu
+          cuenta. Tarda unos segundos: no cierres esta página.
+        </p>
+      </section>
+
+      <!-- ESTADO 2 · activada --------------------------------------------- -->
+      <section class="sus-paso" id="paso-activa" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Tu suscripción está activa. Ya puedes emitir documentos de control
+          sin límite.
+        </p>
+
+        <div class="sus-que-pasa">
+          <p class="sus-subtitulo">Lo que tienes que hacer ahora</p>
+          <p class="sus-ayuda">
+            Entra en la app con <strong id="correo-cuenta">tu correo</strong>, el
+            mismo con el que acabas de pagar. Si ya la tenías abierta en el
+            móvil, cierra sesión y vuelve a entrar para que se actualice.
+          </p>
+        </div>
+
+        <a class="sus-btn" href="https://app.micarga.es/">Abrir la app</a>
+
+        <p class="sus-ayuda">
+          La factura te llega sola al correo en unos minutos, con los datos
+          fiscales que nos diste. También la tienes siempre en
+          <strong>Ajustes → Mis facturas</strong>.
+        </p>
+      </section>
+
+      <!-- ESTADO 3 · tarda más de lo normal --------------------------------
+           No es un error: el cobro está hecho y el aviso de Stripe puede
+           tardar. Lo que NO se puede hacer es dejar a alguien que acaba de
+           pagar mirando una rueda para siempre. -->
+      <section class="sus-paso" id="paso-tarda" hidden>
+        <p class="sus-aviso" data-tono="info">
+          Tu pago está hecho y guardado. La activación está tardando un poco más
+          de lo normal, pero se completa sola: no vuelvas a pagar.
+        </p>
+        <p class="sus-ayuda">
+          Prueba a entrar en la app dentro de unos minutos. Si sigue sin
+          activarse, escríbenos y lo resolvemos en el momento — ten a mano el
+          correo con el que has pagado.
+        </p>
+        <a class="sus-btn" href="https://wa.me/34744716449?text=Hola,%20he%20pagado%20la%20suscripci%C3%B3n%20de%20Mi%20Carga%20y%20la%20cuenta%20sigue%20sin%20activarse.">
+          Escribirnos por WhatsApp
+        </a>
+        <p class="sus-ayuda">
+          O por correo a <a href="mailto:soporte@micarga.es">soporte@micarga.es</a>.
+        </p>
+      </section>
+
+      <!-- ESTADO 4 · sin sesión en este navegador --------------------------
+           Pasa si paga en un navegador y vuelve en otro, o si borró los datos
+           del sitio. No podemos comprobar nada, pero el pago está hecho. -->
+      <section class="sus-paso" id="paso-sin-sesion" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Hemos recibido tu pago. Tu cuenta se activa sola en unos segundos.
+        </p>
+        <p class="sus-ayuda">
+          Desde este navegador no podemos comprobarlo —has vuelto sin la sesión
+          abierta—, pero no tienes que hacer nada más: entra en la app con el
+          correo con el que has pagado.
+        </p>
+        <a class="sus-btn" href="https://app.micarga.es/">Abrir la app</a>
+        <p class="sus-ayuda">
+          Si al entrar te sigue pidiendo suscripción, escríbenos a
+          <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> y lo miramos.
+        </p>
+      </section>
+
+      <p class="sus-pie">
+        Mi Carga es un servicio de RESITECH 2021 SLU. Puedes cancelar cuando
+        quieras desde el portal de cliente, sin permanencia.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </div>
+        <p>El documento de control digital para transportistas.</p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacto</h4>
+          <p>Email: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="aviso-legal">Aviso Legal</a></p>
+          <p><a href="privacidad">Política de Privacidad</a></p>
+          <p><a href="terminos">Términos de Uso</a></p>
+          <p><a href="borrar-cuenta">Eliminar mi cuenta</a></p>
+          <p><a href="cookies">Política de Cookies</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="gracias.js"></script>
+</body>
+</html>

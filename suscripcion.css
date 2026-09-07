@@ -277,3 +277,60 @@
   padding: 18px 20px;
 }
 .sus-que-pasa .sus-subtitulo { margin-bottom: 6px; }
+
+/* --- Página de vuelta de Stripe (gracias) ---------------------------------
+   Comparte hoja con la de suscripción porque es la misma tarjeta y el mismo
+   recorrido: es la última pantalla de ese proceso, no una página aparte.
+   Lo único propio es la marca de estado de la cabecera. */
+
+.gracias-marca {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+/* Comprobando: un aro que gira. No es adorno — es lo que dice que la página
+   está esperando al webhook de Stripe y no se ha quedado colgada. */
+.gracias-marca[data-estado="comprobando"] {
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  animation: gracias-giro 0.9s linear infinite;
+}
+
+@keyframes gracias-giro { to { transform: rotate(360deg); } }
+
+/* Activada. El check se dibuja con CSS en vez de meter un icono: esta página
+   la ve alguien que acaba de pagar y puede estar en una gasolinera con mala
+   cobertura, así que no depende de que cargue la tipografía de iconos. */
+.gracias-marca[data-estado="ok"] {
+  background: rgba(16, 185, 129, 0.12);
+  border: 2px solid rgba(16, 185, 129, 0.5);
+}
+.gracias-marca[data-estado="ok"]::after {
+  content: "";
+  width: 18px;
+  height: 30px;
+  border: solid #10b981;
+  border-width: 0 3.5px 3.5px 0;
+  transform: rotate(45deg) translate(-2px, -3px);
+}
+
+.gracias-marca[data-estado="espera"] {
+  background: rgba(245, 158, 11, 0.12);
+  border: 2px solid rgba(245, 158, 11, 0.5);
+}
+.gracias-marca[data-estado="espera"]::after {
+  content: "!";
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: #f59e0b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gracias-marca[data-estado="comprobando"] { animation: none; }
+}

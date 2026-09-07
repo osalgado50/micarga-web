@@ -204,9 +204,33 @@ const pedirCodigo = (email, crear, metadatos) =>
     },
   });
 
-/** ¿El error de Supabase significa «ese correo no tiene cuenta»? */
-const esCuentaInexistente = (error) =>
-  /signups? not allowed|user not found/i.test(error?.message || '');
+/**
+ * ¿El error de Supabase significa «ese correo no tiene cuenta»?
+ *
+ * Se mira el CÓDIGO, no el mensaje. Leer el texto del mensaje es exactamente el
+ * fallo que este proyecto ya documentó como APP-429: una rama que dejó de
+ * ejecutarse en silencio porque cambió una cadena de texto. Y aquí sería peor,
+ * porque esta rama es la que da de alta a los clientes nuevos: si dejara de
+ * reconocerse, a TODO visitante que no tenga cuenta se le diría «no hemos
+ * podido enviarte el código» y el alta desaparecería sin que saltara nada.
+ *
+ * Comprobado contra el servidor el 07-09-2026: la respuesta real es
+ *   HTTP 422 · {"code":422,"error_code":"otp_disabled","msg":"Signups not allowed for otp"}
+ *
+ * Se leen los tres sitios donde puede acabar ese código porque depende de la
+ * versión de supabase-js: las nuevas lo exponen como `error.code`, las
+ * anteriores no lo mapean y solo dejan `status`. El texto se conserva como
+ * último recurso, ya solo de red de seguridad.
+ */
+const esCuentaInexistente = (error) => {
+  if (!error) return false;
+  const codigo = error.code || error.error_code;
+  if (codigo === 'otp_disabled') return true;
+  // 422 en esta llamada solo se da por este motivo: un correo mal escrito es
+  // 400, y la falta de permisos, 401.
+  if (error.status === 422) return true;
+  return /signups? not allowed|user not found/i.test(error.message || '');
+};
 
 const irAPasoCodigo = (email) => {
   $('ayuda-codigo').textContent =
