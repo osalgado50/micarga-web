@@ -4,24 +4,40 @@
 # El 7-09-2026 se corrigió un fallo que impedía cobrar (la página exigía un
 # código de 6 dígitos y Supabase manda 8). El arreglo se desplegó, el servidor
 # sirvió el fichero nuevo... y los navegadores siguieron ejecutando el viejo:
-# los .js y .css salían con `max-age=14400`, o sea CUATRO HORAS de caché.
+# los .js y .css salían con `max-age=14400`, o sea CUATRO HORAS de caché. Se vio
+# probando: el campo aceptaba los 8 dígitos (HTML nuevo) y el mensaje seguía
+# diciendo «El código son 6 dígitos» (JavaScript viejo).
 #
-# Para una web estática sin compilación —sin nombres de fichero con hash— eso
-# significa que cada arreglo tarda hasta cuatro horas en llegarle a quien ya
-# había visitado la página. En una página de pago eso no vale: el que no puede
-# comprar no vuelve dentro de cuatro horas, no vuelve nunca.
+# En una página de pago eso no vale: el que hoy no puede comprar no vuelve
+# dentro de cuatro horas, no vuelve nunca.
 #
-# Un minuto de caché con revalidación deja el coste en una petición
-# condicional que casi siempre responde 304, que para el tamaño de este sitio
-# no es nada, y garantiza que un arreglo llega enseguida.
+# ⚠️ RUTAS EXPLÍCITAS, NO COMODINES. Un primer intento con `/*.js` y `/*.css` se
+# desplegó sin dar ningún error y NO se aplicó: la cabecera seguía siendo la de
+# cuatro horas. Cloudflare no avisa de un patrón que no reconoce, simplemente lo
+# ignora, así que aquí se listan los ficheros uno a uno.
+#
+# ⚠️ AL AÑADIR UN .js O UN .css NUEVO, AÑADIRLO TAMBIÉN AQUÍ. Si no, nace con
+# cuatro horas de caché y el siguiente arreglo tarda eso en llegar.
+#
+# La segunda red de seguridad es el `?v=` de las referencias en el HTML: cambia
+# la URL y por tanto la entrada de caché. Las dos cosas se cubren mutuamente —
+# esta protege de olvidarse de subir el `?v=`, y el `?v=` protege de olvidarse
+# de añadir un fichero aquí.
 
-/*.js
+/suscripcion.js
   Cache-Control: public, max-age=60, must-revalidate
 
-/*.css
+/gracias.js
   Cache-Control: public, max-age=60, must-revalidate
 
-# El HTML nunca se cachea: es lo que enlaza al resto y lo que decide qué
-# versión de cada cosa se pide.
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
+/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/script.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/styles.css
+  Cache-Control: public, max-age=60, must-revalidate
+
+/suscripcion.css
+  Cache-Control: public, max-age=60, must-revalidate
