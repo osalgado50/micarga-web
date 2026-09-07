@@ -11,7 +11,7 @@
 //   1. correo   → se mira si ese correo ya tiene cuenta
 //   2a. alta    → si NO la tiene: se crea aquí mismo (nombre, NIF, teléfono,
 //                 empresa, contraseña). Es la misma cuenta de la app.
-//   2b. código  → si SÍ la tiene: entra con un código de 6 dígitos, sin
+//   2b. código  → si SÍ la tiene: entra con un código de un solo uso, sin
 //                 tener que recordar la contraseña
 //   3. facturación → solo lo que falte; lo que ya esté en su perfil viene puesto
 //   4. planes   → a Stripe, con su identificador pegado al enlace
@@ -188,7 +188,7 @@ let datosAlta = null;
  * existe (Supabase responde error si no), y `true` para crearla en el alta,
  * llevándose los metadatos que el trigger `handle_new_user` convierte en perfil.
  *
- * `emailRedirectTo`: el correo de Supabase puede traer un CÓDIGO de 6 dígitos,
+ * `emailRedirectTo`: el correo de Supabase puede traer un CÓDIGO,
  * un ENLACE, o los dos, según la plantilla del panel: el código solo existe si
  * la plantilla incluye `{{ .Token }}`. Como no se puede dar por hecho, se cubren
  * las dos vías. ⚠️ Esta URL tiene que estar en la lista de redirecciones
@@ -234,7 +234,7 @@ const esCuentaInexistente = (error) => {
 
 const irAPasoCodigo = (email) => {
   $('ayuda-codigo').textContent =
-    `Te hemos escrito a ${email}. Copia aquí el código de 6 dígitos; si el ` +
+    `Te hemos escrito a ${email}. Copia aquí el código; si el ` +
     `correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.`;
   mostrarPaso('paso-codigo');
   $('codigo').focus();
@@ -357,8 +357,15 @@ $('form-codigo').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
   const token = $('codigo').value.replace(/\D/g, '');
-  if (token.length !== 6) {
-    avisar('El código son 6 dígitos.');
+  // La longitud NO se fija aquí: la decide Supabase en su configuración
+  // (Authentication → Sign In / Providers → longitud del OTP), y puede ir de 6
+  // a 10 dígitos. Estaba clavada en 6 y el servidor manda 8, así que el código
+  // bueno se rechazaba con «El código son 6 dígitos» — y el `maxlength` del
+  // formulario ni siquiera dejaba teclear el octavo. Comprobado con un correo
+  // real el 07-09-2026. Quien decide de verdad si el código vale es
+  // verifyOtp(); esto solo evita mandar al servidor algo obviamente corto.
+  if (token.length < 6 || token.length > 10) {
+    avisar('Copia el código entero, tal y como viene en el correo.');
     return;
   }
 

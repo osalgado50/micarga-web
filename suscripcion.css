@@ -125,11 +125,15 @@
 }
 
 .sus-input-codigo {
-  font-size: 1.7rem;
-  letter-spacing: 0.5em;
+  /* El tamaño se adapta al ancho: con 8 dígitos —los que manda Supabase— el
+     1,7rem fijo con medio em de separación se salía de la caja en un móvil
+     estrecho, y el último dígito quedaba fuera de la vista mientras se
+     escribía. */
+  font-size: clamp(1.15rem, 6.5vw, 1.7rem);
+  letter-spacing: 0.34em;
   text-align: center;
   font-variant-numeric: tabular-nums;
-  padding-left: 0.5em; /* compensa el letter-spacing del último dígito */
+  padding-left: 0.34em; /* compensa el letter-spacing del último dígito */
 }
 
 /* Casilla de aceptación de términos. El cuadro no se encoge junto al texto:

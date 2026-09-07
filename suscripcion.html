@@ -65,7 +65,7 @@
                  placeholder="el que usas en la app">
           <p class="sus-ayuda">
             Miramos si ya tienes cuenta con ese correo. Si la tienes, entras con
-            un código de 6 dígitos y no hace falta que recuerdes la contraseña.
+            un código y no hace falta que recuerdes la contraseña.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">
             Continuar
@@ -129,10 +129,15 @@
       <!-- PASO 2 · código ------------------------------------------------ -->
       <section class="sus-paso" id="paso-codigo" hidden>
         <form id="form-codigo" novalidate>
-          <label class="sus-label" for="codigo">Código de 6 dígitos</label>
+          <label class="sus-label" for="codigo">Código de acceso</label>
+          <!-- Ni `maxlength="6"` ni `pattern="[0-9]{6}"`: la longitud del código
+               la decide Supabase en su configuración, no nosotros. Estaba fijada
+               en 6 y el servidor manda 8, así que el octavo dígito no se podía
+               ni teclear y el código correcto se rechazaba. Se admite el rango
+               que Supabase permite configurar (de 6 a 10). -->
           <input class="sus-input sus-input-codigo" type="text" id="codigo"
                  name="codigo" inputmode="numeric" autocomplete="one-time-code"
-                 maxlength="6" pattern="[0-9]{6}" required placeholder="······">
+                 maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">
           <p class="sus-ayuda" id="ayuda-codigo"></p>
           <button class="sus-btn" type="submit" id="btn-codigo">Entrar</button>
           <button class="sus-btn-plano" type="button" id="btn-otro-correo">
