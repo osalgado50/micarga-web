@@ -511,6 +511,47 @@ const enlaceUsable = (url) => {
   try { return new URL(url).protocol === 'https:'; } catch { return false; }
 };
 
+/**
+ * Decide qué se le enseña a quien ya tiene suscripción.
+ *
+ * El portal de cliente de Stripe SOLO sirve a quien pagó por Stripe. Una
+ * cuenta activada a mano desde el panel de administración no existe como
+ * cliente allí: el portal le pide el correo, no encuentra a nadie y no le
+ * manda ningún enlace. El usuario se queda esperando un correo que no va a
+ * llegar y cree que algo se ha roto. Pasó de verdad el 07-09-2026.
+ *
+ * Se mira `stripe_customer_id`, que es lo que escribe el webhook al cobrar: si
+ * está, hubo un pago de verdad y el portal funcionará.
+ *
+ * Ante la duda —un fallo al leer el perfil— NO se enseña el portal: es mejor
+ * quedarse corto que mandar a alguien a una puerta que no abre.
+ */
+const prepararYaSuscrito = async () => {
+  let clienteStripe = null;
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data } = await supabase
+        .from('profiles')
+        .select('stripe_customer_id')
+        .eq('id', user.id)
+        .maybeSingle();
+      clienteStripe = data?.stripe_customer_id ?? null;
+    }
+  } catch {
+    clienteStripe = null;
+  }
+
+  if (clienteStripe) {
+    $('btn-portal').href = PORTAL_CLIENTE;
+    $('bloque-portal').hidden = false;
+    $('nota-sin-portal').hidden = true;
+  } else {
+    $('bloque-portal').hidden = true;
+    $('nota-sin-portal').hidden = false;
+  }
+};
+
 const pedirEnlaces = async () => {
   limpiarAviso();
 
@@ -522,7 +563,9 @@ const pedirEnlaces = async () => {
     const status = estadoDe(error);
 
     if (status === 409) {
-      $('btn-portal').href = PORTAL_CLIENTE;
+      // Ya paga: esto es el final del recorrido, no una escala. Lo único que
+      // queda por decidir es si tiene sentido ofrecerle el portal de Stripe.
+      await prepararYaSuscrito();
       mostrarPaso('paso-ya-suscrito');
       return;
     }

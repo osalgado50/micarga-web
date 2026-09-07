@@ -17,8 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260907b">
-  <link rel="stylesheet" href="suscripcion.css?v=20260907b">
+  <link rel="stylesheet" href="styles.css?v=20260907d">
+  <link rel="stylesheet" href="suscripcion.css?v=20260907d">
 </head>
 <body>
 
@@ -243,17 +243,44 @@
         </p>
       </section>
 
-      <!-- PASO 5 · ya tiene suscripción ---------------------------------- -->
+      <!-- PASO 5 · ya tiene suscripción ------------------------------------
+           Es un FINAL, no una escala. Antes lo único que había aquí era el
+           botón del portal de Stripe, así que a quien ya pagaba se le
+           contestaba con otra gestión más —y encima con otro correo, porque el
+           portal manda un enlace de acceso—. Lo que necesita es que le digan
+           que está todo bien y poder entrar en la app. -->
       <section class="sus-paso" id="paso-ya-suscrito" hidden>
-        <h2 class="sus-subtitulo">Ya tienes una suscripción activa</h2>
-        <p class="sus-ayuda">
-          No hace falta que contrates otra: cada plan crea una suscripción
-          independiente y acabarías pagando dos veces. Para cambiar de plan,
-          actualizar la tarjeta o cancelar, entra en tu área de cliente.
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Tu suscripción ya está activa. No tienes que hacer nada más.
         </p>
-        <a class="sus-btn" id="btn-portal" href="#" target="_blank" rel="noopener">
-          Gestionar mi suscripción
-        </a>
+        <p class="sus-ayuda">
+          Entra en la app con este mismo correo y sigue emitiendo documentos sin
+          límite.
+        </p>
+        <a class="sus-btn" href="https://app.micarga.es/">Abrir la app</a>
+
+        <!-- El portal de Stripe SOLO sirve a quien pagó por Stripe. Una cuenta
+             activada a mano desde el panel no existe como cliente allí: el
+             portal le pide el correo, no encuentra a nadie y no le manda nada,
+             y el usuario se queda esperando un correo que no va a llegar. Pasó
+             de verdad el 07-09-2026. Por eso este bloque se enseña solo si
+             consta un cliente de Stripe en la ficha. -->
+        <div id="bloque-portal" hidden>
+          <p class="sus-ayuda">
+            ¿Quieres cambiar de plan, actualizar la tarjeta o darte de baja?
+            Hazlo en tu área de cliente. Stripe te mandará un correo con un
+            enlace para entrar.
+          </p>
+          <a class="sus-btn-plano" id="btn-portal" href="#" target="_blank" rel="noopener">
+            Gestionar el pago de mi suscripción
+          </a>
+        </div>
+
+        <!-- Cuenta activada por nosotros: no hay nada que gestionar en Stripe. -->
+        <p class="sus-ayuda" id="nota-sin-portal" hidden>
+          Tu suscripción está activada directamente por nosotros, así que no hay
+          ningún pago que gestionar. Si necesitas cambiar algo, escríbenos.
+        </p>
       </section>
 
       <p class="sus-pie">
@@ -292,6 +319,6 @@
     </div>
   </footer>
 
-  <script type="module" src="suscripcion.js?v=20260907b"></script>
+  <script type="module" src="suscripcion.js?v=20260907d"></script>
 </body>
 </html>
