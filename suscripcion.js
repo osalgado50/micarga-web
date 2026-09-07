@@ -606,6 +606,18 @@ const pedirEnlaces = async () => {
 // ---------------------------------------------------------------------------
 
 (async () => {
+  // El correo puede venir puesto en la dirección: la app manda aquí al
+  // conductor con `?correo=…` para que no tenga que teclear su dirección en un
+  // móvil dentro de una cabina. Solo se RELLENA, nunca se envía solo: enviarlo
+  // al cargar la página dispararía un correo con un código a cualquiera que
+  // abriese el enlace, incluido un buscador siguiéndolo.
+  try {
+    const correoEnLaUrl = new URL(location.href).searchParams.get('correo');
+    if (correoEnLaUrl) $('correo').value = correoEnLaUrl.trim();
+  } catch {
+    // Dirección rara: se ignora y se pide el correo como siempre.
+  }
+
   const { data: { session } } = await supabase.auth.getSession();
   if (session) await pedirEnlaces();
 })();
