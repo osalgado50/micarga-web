@@ -2095,3 +2095,45 @@ body > section:not(.hero-section) > .container > h2 {
   padding-top: 1.2rem;
   margin-top: 2.6rem;
 }
+
+/* --- «Próximamente» -------------------------------------------------------
+   Estado de una plataforma anunciada pero todavía no disponible. Se usó por
+   primera vez el 07-09-2026 con iPhone/iPad, al aparcarse el trabajo de la
+   App Store tras el rechazo de Apple.
+
+   La regla es que NO parezca pulsable: se apaga el contraste y se quita el
+   puntero de mano. Un botón que invita a pulsarse y no hace nada genera más
+   desconfianza que decir claramente que aún no está. */
+
+.store-btn-pronto {
+  background: rgba(255, 255, 255, 0.04);
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  cursor: default;
+}
+
+/* Sin :hover: el .store-btn de arriba lo levanta y lo ilumina, y eso es
+   exactamente la señal de «esto se puede pulsar» que aquí sobra. */
+.store-btn-pronto:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.store-btn-pronto .store-icon,
+.store-btn-pronto .store-text strong {
+  color: var(--text-muted);
+}
+
+.store-btn-pronto .store-text span {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.store-badge-pronto {
+  color: var(--text-muted);
+  border-style: dashed;
+  cursor: default;
+}

@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260907b">
+  <link rel="stylesheet" href="styles.css?v=20260907c">
 
   <script type="application/ld+json">
   {
@@ -139,12 +139,17 @@
         </div>
       </div>
       
+      <!-- Los dos botones llevan a los dos caminos reales, y no al formulario
+           de contacto: quien quiere probar necesita la app, y quien quiere
+           pagar necesita los planes. Antes «Probar 10 Envíos Gratis» mandaba a
+           #contacto, o sea a rellenar un formulario y esperar a que alguien
+           contestara, cuando la prueba se coge sola descargando la app. -->
       <div class="hero-buttons">
-        <a href="#contacto" class="btn btn-primary btn-large">
+        <a href="#descarga" class="btn btn-primary btn-large">
           <i class="fa-solid fa-circle-play"></i> Probar 10 Envíos Gratis
         </a>
-        <a href="#descarga" class="btn btn-secondary btn-large">
-          <i class="fa-solid fa-download"></i> Descargar la App
+        <a href="#tarifas" class="btn btn-secondary btn-large">
+          <i class="fa-solid fa-cart-shopping"></i> Quiero comprar
         </a>
       </div>
       
@@ -152,7 +157,10 @@
         <span>Disponible en:</span>
         <div class="badges-row">
           <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
-          <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-apple"></i> iOS / iPhone</a>
+          <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
+               al bloque de descarga, lleva a un botón que tampoco se puede
+               pulsar, y eso es peor que no ofrecerlo. -->
+          <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · próximamente</span>
         </div>
       </div>
     </div>
@@ -485,7 +493,7 @@
       <div class="download-card">
         <span class="badge badge-accent">DISPONIBILIDAD INMEDIATA</span>
         <h2>Instala Mi Carga hoy mismo</h2>
-        <p>En Android, descárgala desde Google Play. En iPhone y iPad, se instala directamente desde el navegador: ábrela y pulsa «Añadir a pantalla de inicio».</p>
+        <p>En Android, descárgala desde Google Play. La versión para iPhone y iPad está en camino; mientras tanto, desde un iPhone puedes usarla en el navegador.</p>
 
         <div class="store-buttons-grid">
           <!-- Android: YA HAY FICHA EN GOOGLE PLAY (publicada el 27-08-2026).
@@ -501,22 +509,30 @@
             </div>
           </a>
 
-          <!-- iPhone / iPad: sigue apuntando a la PWA a propósito. La ficha de
-               la App Store NO existe todavía (apps.apple.com/es/app/id6795932951
-               devuelve 404 el 03-09-2026: la 1.3 está en revisión). Cuando Apple
-               apruebe, cambiar este href por esa URL y el rótulo por
+          <!-- iPhone / iPad: EN PRÓXIMAMENTE desde el 07-09-2026, por decisión
+               del propietario. Apple rechazó la 1.3 (guidelines 3.1.1 y 3.1.3(c),
+               compra integrada obligatoria) y el trabajo para resolverlo está
+               aparcado, así que anunciar una instalación en iPhone sería
+               prometer algo que no se puede cumplir.
+
+               NO es un enlace: un botón que parece pulsable y no lleva a ningún
+               sitio molesta más que un rótulo honesto. El iPhone no se queda sin
+               salida — abajo sigue estando la app en el navegador, que funciona.
+
+               Para reactivarlo: volver a poner un <a> con la ficha de la App
+               Store (apps.apple.com/es/app/id6795932951) y el rótulo
                «DESCARGAR EN / App Store». -->
-          <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="store-btn">
+          <div class="store-btn store-btn-pronto" aria-disabled="true">
             <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="store-text">
-              <span>INSTALAR EN</span>
+              <span>PRÓXIMAMENTE EN</span>
               <strong>iPhone / iPad</strong>
             </div>
-          </a>
+          </div>
         </div>
 
         <div class="web-alternative">
-          <p>¿Prefieres no instalar nada? Usa la app directamente desde el navegador: <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
+          <p>¿Tienes un iPhone, o prefieres no instalar nada? Usa la app directamente desde el navegador, con todas sus funciones: <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
         </div>
       </div>
     </div>
@@ -671,6 +687,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="script.js?v=20260907b"></script>
+  <script src="script.js?v=20260907c"></script>
 </body>
 </html>
