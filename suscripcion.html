@@ -17,8 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260910a">
-  <link rel="stylesheet" href="suscripcion.css?v=20260910a">
+  <link rel="stylesheet" href="styles.css?v=20260910b">
+  <link rel="stylesheet" href="suscripcion.css?v=20260910b">
 </head>
 <body>
 
@@ -140,9 +140,24 @@
                  maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">
           <p class="sus-ayuda" id="ayuda-codigo"></p>
           <button class="sus-btn" type="submit" id="btn-codigo">Entrar</button>
+          <button class="sus-btn-plano" type="button" id="btn-usar-contrasena">
+            Prefiero entrar con mi contraseña
+          </button>
           <button class="sus-btn-plano" type="button" id="btn-otro-correo">
             Usar otro correo
           </button>
+        </form>
+
+        <!-- Alternativa al código para quien ya tiene cuenta y se acuerda de su
+             contraseña. Fuera del <form> del código: son dos envíos distintos y
+             los formularios no se anidan. -->
+        <form id="form-contrasena" novalidate>
+          <div id="bloque-contrasena" hidden>
+            <label class="sus-label" for="contrasena">Tu contraseña de Mi Carga</label>
+            <input class="sus-input" type="password" id="contrasena" name="contrasena"
+                   autocomplete="current-password" placeholder="La misma que usas en la app">
+            <button class="sus-btn" type="submit" id="btn-contrasena">Entrar</button>
+          </div>
         </form>
       </section>
 
@@ -335,6 +350,6 @@
     </div>
   </footer>
 
-  <script type="module" src="suscripcion.js?v=20260910a"></script>
+  <script type="module" src="suscripcion.js?v=20260910b"></script>
 </body>
 </html>

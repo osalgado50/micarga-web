@@ -233,6 +233,11 @@ const esCuentaInexistente = (error) => {
 };
 
 const irAPasoCodigo = (email) => {
+  // Plegado otra vez: si alguien probó la contraseña, falló y volvió a pedir
+  // código, el campo se quedaba abierto con la contraseña equivocada dentro.
+  $('bloque-contrasena').hidden = true;
+  $('btn-usar-contrasena').hidden = false;
+  $('contrasena').value = '';
   $('ayuda-codigo').textContent =
     `Te hemos escrito a ${email}. Copia aquí el código; si el ` +
     `correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.`;
@@ -322,7 +327,23 @@ $('form-alta').addEventListener('submit', async (e) => {
       phone: telefono,
     };
 
-    const { error } = await pedirCodigo(correoEnCurso, true, metadatos);
+    // `signUp` y no `signInWithOtp`: crea la cuenta CON la contraseña de una
+    // vez y, si Supabase no exige confirmar el correo, devuelve sesión al
+    // instante. Antes esto mandaba un código de 6-8 dígitos y obligaba a
+    // teclearlo — a alguien que acababa de escribir su propio correo y elegir
+    // su propia contraseña, y justo en el momento de pagar. El cliente de un
+    // socio se atascó ahí el 10-09-2026 y esa fue la razón del cambio.
+    //
+    // Se cubren LAS DOS configuraciones a propósito: si «Confirm email» sigue
+    // activado en Supabase, `signUp` no devuelve sesión y se cae al paso del
+    // código como antes. Así el cambio no depende de que el ajuste del panel se
+    // toque a la vez que se despliega esto. Es el mismo patrón que ya usa la
+    // app en src/App.tsx.
+    const { data, error } = await supabase.auth.signUp({
+      email: correoEnCurso,
+      password: val('password'),
+      options: { data: metadatos, emailRedirectTo: 'https://micarga.es/suscripcion' },
+    });
     if (error) {
       // El teléfono es UNIQUE en `profiles`: si ya está usado, el trigger falla
       // y GoTrue lo devuelve como un error genérico de base de datos. Es el
@@ -334,9 +355,13 @@ $('form-alta').addEventListener('submit', async (e) => {
       return;
     }
 
-    // Se guarda para ponerla en cuanto haya sesión: updateUser necesita estar
-    // dentro, y aquí todavía no lo estamos.
-    datosAlta = { password: val('password') };
+    datosAlta = null;
+    if (data?.session) {
+      // Cuenta creada y dentro: directo a facturación o a los planes.
+      await pedirEnlaces();
+      return;
+    }
+    // Supabase exige confirmar el correo: no queda otra que el código.
     irAPasoCodigo(correoEnCurso);
   });
 });
@@ -351,6 +376,38 @@ $('btn-otro-correo').addEventListener('click', () => {
   datosAlta = null;
   mostrarPaso('paso-correo');
   $('correo').focus();
+});
+
+// Quien ya tiene cuenta puede entrar con su contraseña en vez de esperar al
+// código. El código NO se quita aquí: es lo que impide que cualquiera teclee
+// el correo de un cliente y se lleve su razón social, su NIF y su dirección,
+// que es lo que la página precarga en cuanto reconoce la cuenta. Lo que se
+// quita es la OBLIGACIÓN de usarlo: quien se acuerda de su contraseña entra
+// directo, y quien no, sigue teniendo el código.
+$('btn-usar-contrasena').addEventListener('click', () => {
+  limpiarAviso();
+  $('bloque-contrasena').hidden = false;
+  $('btn-usar-contrasena').hidden = true;
+  $('contrasena').focus();
+});
+
+$('form-contrasena').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  limpiarAviso();
+  const password = $('contrasena').value;
+  if (!password) return;
+
+  await ocupado($('btn-contrasena'), 'Entrando…', async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: correoEnCurso, password,
+    });
+    if (error) {
+      avisar('Esa contraseña no es correcta. Prueba otra vez o usa el código que te hemos enviado por correo.');
+      return;
+    }
+    datosAlta = null;
+    await pedirEnlaces();
+  });
 });
 
 $('form-codigo').addEventListener('submit', async (e) => {
