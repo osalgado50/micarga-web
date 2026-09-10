@@ -2137,3 +2137,41 @@ body > section:not(.hero-section) > .container > h2 {
   border-style: dashed;
   cursor: default;
 }
+
+/* --- Redes sociales del pie ------------------------------------------------
+   Van bajo la descripción de la marca, no como una cuarta columna: el pie ya
+   tiene tres grupos a la derecha (Contacto, Recursos, Legal) y una cuarta los
+   estrecha hasta partir «Política de Privacidad» en dos líneas.
+
+   El icono es lo único que se ve, así que el nombre de la red viaja en
+   aria-label: sin él, un lector de pantalla anuncia dos enlaces sin texto. */
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 40 px: el mínimo cómodo para el dedo. Son los únicos enlaces del pie que
+     no tienen texto alrededor que ayude a acertar. */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  background: rgba(var(--primary-rgb), 0.14);
+  border-color: rgba(var(--primary-rgb), 0.5);
+  color: var(--primary);
+}
