@@ -410,3 +410,11 @@
   border-color: var(--primary);
   background: rgba(var(--primary-rgb), 0.16);
 }
+
+/* El widget de Turnstile. Centrado y con aire por arriba: queda entre el
+   formulario y el pie, y pegado a uno de los dos parece parte de él. */
+.sus-turnstile {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}

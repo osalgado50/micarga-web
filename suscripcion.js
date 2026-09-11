@@ -37,6 +37,7 @@
 //         sin poder emitir una factura válida. Se piden aquí mismo.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
+import { montarTurnstile } from './turnstile.js';
 
 // La clave publicable es pública por diseño: va ya dentro del paquete de la app
 // y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
@@ -122,6 +123,26 @@ const nifValido = (nif) => {
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// El escudo de los envíos que hacen que Supabase mande un correo. Mientras no
+// haya clave configurada, `vale()` devuelve `undefined` y todo va como antes.
+// Se monta una sola vez y sirve a los dos formularios que mandan correo: el del
+// código y el del alta. Son pasos distintos de la misma página y nunca están
+// los dos a la vez en pantalla, así que un widget basta.
+let vale = async () => undefined;
+(() => {
+  const escudo = document.getElementById('turnstile');
+  // Visible ANTES de pintarlo: Turnstile no se dibuja bien dentro de un
+  // `display:none`. La página arranca en el paso del correo, que es uno de los
+  // que lo llevan; si no lo fuera, el `mostrarPaso` de después lo recoloca.
+  escudo.hidden = false;
+  montarTurnstile(escudo).then((f) => {
+    if (!f) { escudo.hidden = true; return; }
+    vale = f;
+    escudo.dataset.montado = 'si';
+    mostrarPaso(pasoActual);
+  });
+})();
+
 const $ = (id) => document.getElementById(id);
 
 const PASOS = [
@@ -129,9 +150,20 @@ const PASOS = [
   'paso-facturacion', 'paso-planes', 'paso-ya-suscrito',
 ];
 
+/** En qué pasos tiene sentido enseñar el widget de Turnstile. */
+const PASOS_CON_ESCUDO = new Set(['paso-correo', 'paso-alta', 'paso-codigo']);
+
 /** Enseña un paso y esconde los demás. Un solo sitio que toca `hidden`. */
+let pasoActual = PASOS[0];
+
 const mostrarPaso = (id) => {
   for (const p of PASOS) $(p).hidden = p !== id;
+  pasoActual = id;
+  // El widget vive fuera de los pasos —es uno solo para los tres formularios
+  // que llaman a Auth— así que se esconde a mano cuando ya no pinta nada. Solo
+  // se enseña si está montado: sin clave configurada no hay nada que enseñar.
+  const escudo = $('turnstile');
+  if (escudo?.dataset.montado === 'si') escudo.hidden = !PASOS_CON_ESCUDO.has(id);
 };
 
 const avisar = (texto, tono = 'error') => {
@@ -194,12 +226,13 @@ let datosAlta = null;
  * las dos vías. ⚠️ Esta URL tiene que estar en la lista de redirecciones
  * permitidas de Supabase (Authentication → URL Configuration).
  */
-const pedirCodigo = (email, crear, metadatos) =>
+const pedirCodigo = async (email, crear, metadatos) =>
   supabase.auth.signInWithOtp({
     email,
     options: {
       shouldCreateUser: crear,
       emailRedirectTo: 'https://micarga.es/suscripcion',
+      captchaToken: await vale(),
       ...(metadatos ? { data: metadatos } : {}),
     },
   });
@@ -342,7 +375,11 @@ $('form-alta').addEventListener('submit', async (e) => {
     const { data, error } = await supabase.auth.signUp({
       email: correoEnCurso,
       password: val('password'),
-      options: { data: metadatos, emailRedirectTo: 'https://micarga.es/suscripcion' },
+      options: {
+        data: metadatos,
+        emailRedirectTo: 'https://micarga.es/suscripcion',
+        captchaToken: await vale(),
+      },
     });
     if (error) {
       // El teléfono es UNIQUE en `profiles`: si ya está usado, el trigger falla
@@ -400,6 +437,10 @@ $('form-contrasena').addEventListener('submit', async (e) => {
   await ocupado($('btn-contrasena'), 'Entrando…', async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: correoEnCurso, password,
+      // Entrar con contraseña no manda ningún correo, pero Turnstile en
+      // Supabase se activa para TODO Auth, no por formulario: si este envío
+      // fuera sin vale, dejaría de funcionar el día que se ponga la clave.
+      options: { captchaToken: await vale() },
     });
     if (error) {
       avisar('Esa contraseña no es correcta. Prueba otra vez o usa el código que te hemos enviado por correo.');

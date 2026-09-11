@@ -44,3 +44,8 @@
 
 /suscripcion.css
   Cache-Control: public, max-age=60, must-revalidate
+
+# turnstile.js no lleva `?v=` en su referencia: no lo carga el HTML, lo importa
+# suscripcion.js con una ruta relativa. Aquí la caché corta es la ÚNICA red.
+/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate

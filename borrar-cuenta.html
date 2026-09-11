@@ -132,6 +132,16 @@
         <a class="sus-btn" href="/">Volver al inicio</a>
       </section>
 
+      <!-- Turnstile ------------------------------------------------------
+           El escudo de los envíos que hacen que Supabase mande un correo. Está
+           FUERA de los pasos a propósito: es uno solo para los formularios de
+           esta página, y moverlo de sitio al cambiar de paso obligaría a
+           volver a pintarlo cada vez. Lo esconde y lo enseña `mostrarPaso`.
+
+           Empieza oculto y solo aparece si hay clave configurada; mientras no
+           la haya, esta página funciona exactamente como hasta ahora. -->
+      <div class="sus-turnstile" id="turnstile" hidden></div>
+
       <p class="sus-pie">
         ¿Prefieres que lo hagamos nosotros, o tienes dudas? Escríbenos a
         <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> o por WhatsApp

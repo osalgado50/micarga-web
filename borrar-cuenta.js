@@ -18,6 +18,7 @@
 // dónde entrar a pararlo) y exige que el correo escrito coincida.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
+import { montarTurnstile } from './turnstile.js';
 
 // Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
 // que protege los datos es RLS, no esconderla.
@@ -25,10 +26,33 @@ const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Ver turnstile.js: sin clave configurada esto no pinta nada y `vale()`
+// devuelve `undefined`, que es como iba hasta ahora.
+let vale = async () => undefined;
+(() => {
+  const escudo = document.getElementById('turnstile');
+  // Visible antes de pintarlo: dentro de un `display:none` no se dibuja bien.
+  escudo.hidden = false;
+  montarTurnstile(escudo).then((f) => {
+    if (!f) { escudo.hidden = true; return; }
+    vale = f;
+    escudo.dataset.montado = 'si';
+    mostrarPaso(pasoActual);
+  });
+})();
 const $ = (id) => document.getElementById(id);
 
 const PASOS = ['paso-correo', 'paso-codigo', 'paso-confirmar', 'paso-hecho'];
-const mostrarPaso = (id) => { for (const p of PASOS) $(p).hidden = p !== id; };
+let pasoActual = PASOS[0];
+
+const mostrarPaso = (id) => {
+  for (const p of PASOS) $(p).hidden = p !== id;
+  pasoActual = id;
+  // El widget está fuera de los pasos: se esconde cuando ya no hace falta.
+  const escudo = $('turnstile');
+  if (escudo?.dataset.montado === 'si') escudo.hidden = (id === 'paso-hecho');
+};
 
 const avisar = (texto, tono = 'error') => {
   const el = $('aviso');
@@ -76,7 +100,11 @@ $('form-correo').addEventListener('submit', async (e) => {
     // peor: cualquiera podría comprobar correos ajenos creando cuentas sueltas.
     const { error } = await supabase.auth.signInWithOtp({
       email: correo,
-      options: { shouldCreateUser: false, emailRedirectTo: 'https://micarga.es/borrar-cuenta' },
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: 'https://micarga.es/borrar-cuenta',
+        captchaToken: await vale(),
+      },
     });
     if (error) {
       const noExiste = /signups? not allowed|user not found/i.test(error.message || '');
