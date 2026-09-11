@@ -62,6 +62,10 @@ IGUAL_EN_TODOS = {
     "Mi", "Carga", "Mi Carga", "ADR", "DeCA", "CMR", "ROTT", "PDF", "QR", "PayPal",
     "WhatsApp", "Instagram", "Facebook", "Android", "iPhone", "Blog", "Stripe",
     "RESITECH 2021, S.L.U.", "micarga.es", "soporte@micarga.es",
+    # Las etiquetas del propio selector de idioma. El nombre de un idioma se
+    # escribe en ese idioma, en las tres versiones: quien busca el catalán
+    # busca «Català», no «Catalán» ni «Catalan».
+    "ES", "CA", "EN", "Castellano", "Català", "English",
 }
 SIN_LETRAS = re.compile(r"^[^\wáéíóúàèìòùïüçñÁÉÍÓÚÀÈÌÒÙÏÜÇÑ]*$")
 
@@ -254,16 +258,17 @@ def _entre_marcas(texto: str, marca: str, contenido: str) -> str:
 # Rutas de archivos que, desde /ca/ o /en/, hay que dejar absolutas. Un
 # `src="images/x.webp"` dentro de /ca/index.html pide /ca/images/x.webp, que no
 # existe: la imagen desaparece sin dar ningún error en pantalla.
+# Ojo con el `?v=`: los .css y .js de esta web llevan el número de versión en
+# la URL para saltarse la caché. Sin contemplarlo aquí, la hoja de estilos se
+# quedaba relativa y /ca/ pedía /ca/styles.css, que no existe: la página salía
+# sin un solo estilo y sin dar ningún error visible.
 ARCHIVOS = re.compile(
-    r'(src|href|poster)="((?:\.\./)*)((?:images|videos|blog)/[^"]+|[\w.-]+\.(?:css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt))"'
+    r'(src|href|poster)="(?:\.\./)*((?:images|videos)/[^"]+|[\w.-]+\.(?:css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt)(?:\?[^"]*)?)"'
 )
 
 
 def _rutas_absolutas(texto: str) -> str:
-    def arreglar(m):
-        attr, subidas, resto = m.groups()
-        return f'{attr}="/{resto}"'
-    return ARCHIVOS.sub(arreglar, texto)
+    return ARCHIVOS.sub(lambda m: f'{m.group(1)}="/{m.group(2)}"', texto)
 
 
 

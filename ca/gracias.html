@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tu suscripción de Mi Carga ya está activa.">
+  <meta name="description" content="La teva subscripció de Mi Carga ja està activa.">
   <meta name="theme-color" content="#0b0f19">
   <link rel="canonical" href="https://micarga.es/ca/gracias">
   <!-- ALTERNATIVAS:inicio -->
@@ -17,13 +17,13 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- noindex: solo se llega aquí desde Stripe, después de pagar. -->
   <meta name="robots" content="noindex, follow">
-  <title>Suscripción activada - Mi Carga</title>
+  <title>Subscripció activada - Mi Carga</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260911g">
-  <link rel="stylesheet" href="suscripcion.css?v=20260911g">
+  <link rel="stylesheet" href="/styles.css?v=20260911g">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260911g">
 </head>
 <body>
 
@@ -34,10 +34,10 @@
         <span>Mi <mark class="accent-text">Carga</mark></span>
       </a>
       <nav class="nav-links">
-        <a href="/ca/">Inicio</a>
-        <a href="/ca/#tarifas">Precios</a>
+        <a href="/ca/">Inici</a>
+        <a href="/ca/#tarifas">Preus</a>
         <a href="blog/">Blog</a>
-        <a href="https://app.micarga.es/" class="nav-btn">Abrir la app</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Obrir l'app</a>
       </nav>
       <!-- IDIOMAS:inicio -->
       <div class="selector-idioma" role="group" aria-label="Idioma">
@@ -46,7 +46,7 @@
           <a href="https://micarga.es/en/gracias" hreflang="en" lang="en" title="English">EN</a>
       </div>
       <!-- IDIOMAS:fin -->
-      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+      <button class="mobile-menu-toggle" aria-label="Obrir menú">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
@@ -57,7 +57,7 @@
 
       <div class="gracias-marca" id="marca" data-estado="comprobando" aria-hidden="true"></div>
 
-      <h1 class="sus-title" id="titulo">Pago recibido</h1>
+      <h1 class="sus-title" id="titulo">Pagament rebut</h1>
 
       <!-- ESTADO 1 · comprobando ------------------------------------------
            No se dice «ya eres premium» hasta que consta en la base de datos.
@@ -66,35 +66,35 @@
            bloqueada y piense que le hemos cobrado sin darle nada. -->
       <section class="sus-paso" id="paso-comprobando">
         <p class="sus-lead">
-          Gracias. Stripe nos ha confirmado el cobro y estamos activando tu
-          cuenta. Tarda unos segundos: no cierres esta página.
+          Gràcies. Stripe ens ha confirmat el cobrament i estem activant el teu
+          compte. Triga uns segons: no tanquis aquesta pàgina.
         </p>
       </section>
 
       <!-- ESTADO 2 · activada --------------------------------------------- -->
       <section class="sus-paso" id="paso-activa" hidden>
         <p class="sus-aviso" data-tono="ok">
-          ✓ Tu suscripción está activa. Ya puedes emitir documentos de control
-          sin límite.
+          ✓ La teva subscripció està activa. Ja pots emetre documents de control
+          sense límit.
         </p>
 
         <div class="sus-que-pasa">
-          <p class="sus-subtitulo">Lo que tienes que hacer ahora</p>
+          <p class="sus-subtitulo">Què has de fer ara</p>
           <p class="sus-ayuda">
-            Entra en la app con <strong id="correo-cuenta">tu correo</strong>, el
-            mismo con el que acabas de pagar. Si ya la tenías abierta en el
-            móvil, cierra sesión y vuelve a entrar para que se actualice.
+            Entra a l'app amb <strong id="correo-cuenta">el teu correu</strong>, el
+            mateix amb què acabes de pagar. Si ja la tenies oberta al
+            mòbil, tanca la sessió i torna a entrar perquè s'actualitzi.
           </p>
         </div>
 
-        <a class="sus-btn" href="https://app.micarga.es/">Abrir la app</a>
+        <a class="sus-btn" href="https://app.micarga.es/">Obrir l'app</a>
 
         <!-- Desde el 10-09-2026 la factura la emite el propietario en el
              sistema de facturación de su empresa, no el servidor. Aquí NO se
              puede seguir prometiendo «en unos minutos»: la hace una persona. -->
         <p class="sus-ayuda">
-          Te enviaremos la factura por correo en los próximos días, con los
-          datos fiscales que nos has dado.
+          T'enviarem la factura per correu els pròxims dies, amb les
+          dades fiscals que ens has donat.
         </p>
       </section>
 
@@ -104,19 +104,19 @@
            pagar mirando una rueda para siempre. -->
       <section class="sus-paso" id="paso-tarda" hidden>
         <p class="sus-aviso" data-tono="info">
-          Tu pago está hecho y guardado. La activación está tardando un poco más
-          de lo normal, pero se completa sola: no vuelvas a pagar.
+          El teu pagament està fet i guardat. L'activació està trigant una mica més
+          del normal, però es completa sola: no tornis a pagar.
         </p>
         <p class="sus-ayuda">
-          Prueba a entrar en la app dentro de unos minutos. Si sigue sin
-          activarse, escríbenos y lo resolvemos en el momento — ten a mano el
-          correo con el que has pagado.
+          Prova d'entrar a l'app d'aquí a uns minuts. Si continua sense
+          activar-se, escriu-nos i ho resolem al moment — tingues a mà el
+          correu amb què has pagat.
         </p>
         <a class="sus-btn" href="https://wa.me/34744716449?text=Hola,%20he%20pagado%20la%20suscripci%C3%B3n%20de%20Mi%20Carga%20y%20la%20cuenta%20sigue%20sin%20activarse.">
-          Escribirnos por WhatsApp
+          Escriure'ns per WhatsApp
         </a>
         <p class="sus-ayuda">
-          O por correo a <a href="mailto:soporte@micarga.es">soporte@micarga.es</a>.
+          O per correu a <a href="mailto:soporte@micarga.es">soporte@micarga.es</a>.
         </p>
       </section>
 
@@ -125,23 +125,23 @@
            del sitio. No podemos comprobar nada, pero el pago está hecho. -->
       <section class="sus-paso" id="paso-sin-sesion" hidden>
         <p class="sus-aviso" data-tono="ok">
-          ✓ Hemos recibido tu pago. Tu cuenta se activa sola en unos segundos.
+          ✓ Hem rebut el teu pagament. El teu compte s'activa sol en uns segons.
         </p>
         <p class="sus-ayuda">
-          Desde este navegador no podemos comprobarlo —has vuelto sin la sesión
-          abierta—, pero no tienes que hacer nada más: entra en la app con el
-          correo con el que has pagado.
+          Des d'aquest navegador no ho podem comprovar —has tornat sense la sessió
+          oberta—, però no has de fer res més: entra a l'app amb el
+          correu amb què has pagat.
         </p>
-        <a class="sus-btn" href="https://app.micarga.es/">Abrir la app</a>
+        <a class="sus-btn" href="https://app.micarga.es/">Obrir l'app</a>
         <p class="sus-ayuda">
-          Si al entrar te sigue pidiendo suscripción, escríbenos a
-          <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> y lo miramos.
+          Si en entrar et continua demanant subscripció, escriu-nos a
+          <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> i ho mirem.
         </p>
       </section>
 
       <p class="sus-pie">
-        Mi Carga es un servicio de RESITECH 2021 SLU. Puedes cancelar cuando
-        quieras desde el portal de cliente, sin permanencia.
+        Mi Carga és un servei de RESITECH 2021 SLU. Pots cancel·lar quan
+        vulguis des del portal de client, sense permanència.
       </p>
 
     </div>
@@ -154,7 +154,7 @@
           <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
           <span>Mi <mark class="accent-text">Carga</mark></span>
         </div>
-        <p>El documento de control digital para transportistas.</p>
+        <p>El document de control digital per a transportistes.</p>
         <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
              comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
              Facebook): esos identifican a QUIÉN compartió el perfil, no al
@@ -163,33 +163,33 @@
              para no depender de un atajo que puede caducar. -->
         <div class="footer-social">
           <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
-             aria-label="Mi Carga en Instagram" title="Instagram">
+             aria-label="Mi Carga a Instagram" title="Instagram">
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
           </a>
           <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
-             aria-label="Mi Carga en Facebook" title="Facebook">
+             aria-label="Mi Carga a Facebook" title="Facebook">
             <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
           </a>
         </div>
       </div>
       <div class="footer-right">
         <div class="footer-links-group">
-          <h4>Contacto</h4>
-          <p>Email: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
+          <h4>Contacte</h4>
+          <p>Correu: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
           <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
         </div>
         <div class="footer-links-group">
           <h4>Legal</h4>
-          <p><a href="aviso-legal">Aviso Legal</a></p>
-          <p><a href="privacidad">Política de Privacidad</a></p>
-          <p><a href="terminos">Términos de Uso</a></p>
-          <p><a href="borrar-cuenta">Eliminar mi cuenta</a></p>
-          <p><a href="cookies">Política de Cookies</a></p>
+          <p><a href="aviso-legal">Avís legal</a></p>
+          <p><a href="privacidad">Política de privacitat</a></p>
+          <p><a href="terminos">Termes d'ús</a></p>
+          <p><a href="borrar-cuenta">Eliminar el meu compte</a></p>
+          <p><a href="cookies">Política de galetes</a></p>
         </div>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="gracias.js?v=20260911g"></script>
+  <script type="module" src="/gracias.js?v=20260911g"></script>
 </body>
 </html>
