@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="¿Varios conductores? Pide un presupuesto de Mi Carga para tu empresa: cuentas para toda la flota y precio cerrado al año.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/presupuesto">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>Presupuesto para empresas - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css?v=20260911a">
+  <link rel="stylesheet" href="suscripcion.css?v=20260911a">
+</head>
+<body>
+
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/#tarifas">Precios</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Abrir la app</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <h1 class="sus-title">Presupuesto para tu empresa</h1>
+      <p class="sus-lead">
+        Si en tu empresa conduce más de una persona, cada conductor necesita su
+        propia cuenta para firmar sus portes. Cuéntanos cuántos sois y te
+        pasamos un precio cerrado al año, con todas las cuentas incluidas.
+      </p>
+
+      <p class="sus-aviso" id="aviso" hidden role="status"></p>
+
+      <!-- PASO 1 · el formulario ------------------------------------------ -->
+      <section class="sus-paso" id="paso-formulario">
+        <form id="form-presupuesto" novalidate>
+
+          <div class="sus-campos">
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Empresa *</span>
+              <input class="sus-input" name="empresa" autocomplete="organization"
+                     placeholder="Transportes Pérez S.L." required>
+            </label>
+
+            <label class="sus-campo">
+              <span class="sus-label">Tu nombre *</span>
+              <input class="sus-input" name="contacto" autocomplete="name"
+                     placeholder="Ana Pérez" required>
+            </label>
+
+            <label class="sus-campo">
+              <span class="sus-label">Teléfono <span class="sus-opcional">(opcional)</span></span>
+              <input class="sus-input" type="tel" name="telefono" autocomplete="tel"
+                     placeholder="600 111 222">
+            </label>
+
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Correo *</span>
+              <input class="sus-input" type="email" name="email" autocomplete="email"
+                     placeholder="ana@transportesperez.es" required>
+              <span class="sus-ayuda">Es donde te enviaremos el presupuesto.</span>
+            </label>
+
+            <label class="sus-campo">
+              <span class="sus-label">Personas en la empresa <span class="sus-opcional">(opcional)</span></span>
+              <input class="sus-input" name="conductores" inputmode="numeric"
+                     placeholder="12">
+            </label>
+
+            <label class="sus-campo">
+              <span class="sus-label">Cuentas que necesitáis *</span>
+              <input class="sus-input" name="cuentas" inputmode="numeric"
+                     placeholder="8" required>
+              <span class="sus-ayuda">Una por conductor que vaya a firmar portes.</span>
+            </label>
+
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Cuéntanos <span class="sus-opcional">(opcional)</span></span>
+              <textarea class="sus-input" name="mensaje" rows="4"
+                        placeholder="Qué transporte hacéis, si lleváis ADR, cuándo querríais empezar…"></textarea>
+            </label>
+          </div>
+
+          <!-- Campo trampa para robots: escondido por CSS, una persona no lo
+               ve nunca. Si llega relleno, el servidor descarta la petición en
+               silencio. `tabindex="-1"` para que el tabulador tampoco lo pise. -->
+          <div class="sus-trampa" aria-hidden="true">
+            <label>No rellenes esto
+              <input name="web" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
+
+          <button class="sus-btn" type="submit" id="btn-enviar">Pedir presupuesto</button>
+
+          <p class="sus-ayuda">
+            Al enviarlo tratamos tus datos para responderte, tal y como se
+            explica en la <a href="privacidad">política de privacidad</a>.
+          </p>
+        </form>
+      </section>
+
+      <!-- PASO 2 · enviado ------------------------------------------------- -->
+      <section class="sus-paso" id="paso-enviado" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Hemos recibido tu petición. Te escribimos con el presupuesto en cuanto
+          la veamos.
+        </p>
+        <p class="sus-ayuda">
+          Si tienes prisa, escríbenos por WhatsApp al
+          <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a>
+          y lo vemos al momento.
+        </p>
+        <a class="sus-btn" href="/">Volver al inicio</a>
+      </section>
+
+      <p class="sus-pie">
+        ¿Eres autónomo y conduces tú solo? No necesitas presupuesto:
+        <a href="suscripcion">contrata tu plan aquí</a> por 10 €/mes o 90 €/año.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solución digital de generación de documentos de control y cartas de porte. Con el respaldo de Ecosmep para validaciones ADR.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga en Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga en Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacto</h4>
+          <p>Email: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="aviso-legal">Aviso Legal</a></p>
+          <p><a href="privacidad">Política de Privacidad</a></p>
+          <p><a href="terminos">Términos de Uso</a></p>
+          <p><a href="borrar-cuenta">Eliminar mi cuenta</a></p>
+          <p><a href="cookies">Política de Cookies</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="presupuesto.js?v=20260911a"></script>
+</body>
+</html>

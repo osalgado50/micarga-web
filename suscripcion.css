@@ -338,3 +338,21 @@
 @media (prefers-reduced-motion: reduce) {
   .gracias-marca[data-estado="comprobando"] { animation: none; }
 }
+
+/* --- Campo trampa para robots ---------------------------------------------
+   Un campo que una persona no ve y por tanto no rellena nunca; un robot que
+   rellena todos los campos del formulario sí. Si llega con algo, el servidor
+   descarta la petición en silencio.
+
+   NO se usa `display:none` ni `hidden`: algunos robots los detectan y saltan
+   justo esos campos. Se saca de la pantalla y se le quita el foco del
+   tabulador, que engaña a más y además evita que alguien navegando con el
+   teclado caiga dentro sin enterarse. */
+
+.sus-trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

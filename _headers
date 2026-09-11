@@ -33,6 +33,9 @@
 /borrar-cuenta.js
   Cache-Control: public, max-age=60, must-revalidate
 
+/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+
 /script.js
   Cache-Control: public, max-age=60, must-revalidate
 
