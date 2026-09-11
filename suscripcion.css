@@ -356,3 +356,57 @@
   height: 1px;
   overflow: hidden;
 }
+
+/* --- Reto anti-robots ------------------------------------------------------
+   Cuatro emoji grandes y una instrucción de cinco palabras. Se acierta de un
+   vistazo y con el pulgar, que es como se rellena esto: desde el móvil, a
+   menudo con prisa. Nada de letras deformadas — las resuelven mejor los robots
+   que las personas desde hace años, y aquí se juega con perder la petición de
+   una empresa, no con un registro más o menos. */
+
+.sus-reto {
+  grid-column: 1 / -1;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sus-reto[data-mal="si"] { border-color: rgba(239, 68, 68, 0.7); }
+
+.sus-reto-opciones {
+  display: grid;
+  /* Cuatro en fila mientras quepan a 64px; en un móvil estrecho pasan a dos
+     filas de dos solas, sin media query. */
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: 10px;
+}
+
+.sus-reto-opcion {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1.9rem;
+  line-height: 1;
+  /* 64px de alto: el mínimo cómodo para el pulgar, con margen. */
+  min-height: 64px;
+  cursor: pointer;
+  /* El emoji, centrado de verdad: algunos traen su propio hueco arriba. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sus-reto-opcion:hover { border-color: var(--border-focus); }
+.sus-reto-opcion:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.18);
+}
+/* La elegida. Se marca con el borde Y con el fondo: solo con color no se
+   distingue si la pantalla está al sol, que es donde se va a usar esto. */
+.sus-reto-opcion[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.16);
+}

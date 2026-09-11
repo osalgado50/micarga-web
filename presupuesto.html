@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260911b">
-  <link rel="stylesheet" href="suscripcion.css?v=20260911b">
+  <link rel="stylesheet" href="styles.css?v=20260911c">
+  <link rel="stylesheet" href="suscripcion.css?v=20260911c">
 </head>
 <body>
 
@@ -109,6 +109,23 @@
             </label>
           </div>
 
+          <!-- Reto anti-robots ------------------------------------------
+               La trampa de arriba solo pilla al robot que rellena todos los
+               campos. Esto además obliga a pedir el reto al servidor y a
+               contestarlo, y quien no ejecute el JavaScript de la página no
+               llega ni a verlo. La respuesta correcta no está en el HTML: la
+               deduce el servidor de la ficha firmada
+               (supabase/functions/_compartido/reto.ts).
+
+               Se pinta desde JavaScript, no aquí: si la petición del reto
+               falla, el formulario tiene que seguir enviándose igual. Antes
+               perder un poco de defensa que perder una empresa. -->
+          <div class="sus-reto" id="reto" hidden>
+            <span class="sus-label" id="reto-pregunta"></span>
+            <div class="sus-reto-opciones" id="reto-opciones" role="group"
+                 aria-labelledby="reto-pregunta"></div>
+          </div>
+
           <button class="sus-btn" type="submit" id="btn-enviar">Pedir presupuesto</button>
 
           <p class="sus-ayuda">
@@ -183,6 +200,6 @@
     </div>
   </footer>
 
-  <script type="module" src="presupuesto.js?v=20260911b"></script>
+  <script type="module" src="presupuesto.js?v=20260911c"></script>
 </body>
 </html>
