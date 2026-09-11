@@ -56,49 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Form submission handler -> Redirect to WhatsApp
-  const leadForm = document.getElementById('whatsapp-lead-form');
-  if (leadForm) {
-    leadForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('form-name').value.trim();
-      const phone = document.getElementById('form-phone').value.trim();
-      const trucks = document.getElementById('form-trucks').value;
-      const notes = document.getElementById('form-message').value.trim();
-      
-      // WhatsApp Business Number (Provisional)
-      const targetPhone = '34744716449'; 
-      
-      // Message template in Spanish
-      let whatsappMessage = `Hola! Vengo de la web *micarga.es* y me gustaría activar los *10 transportes de prueba gratis*.\n\n`;
-      whatsappMessage += `*Mis datos de contacto:*\n`;
-      whatsappMessage += `• *Nombre/Empresa:* ${name}\n`;
-      whatsappMessage += `• *Teléfono:* ${phone}\n`;
-      whatsappMessage += `• *Flota actual:* ${trucks}\n`;
-      
-      if (notes) {
-        whatsappMessage += `• *Comentarios:* ${notes}\n`;
-      }
-      
-      whatsappMessage += `\nQuedo a la espera de recibir mis credenciales de acceso para probar la app. ¡Gracias!`;
-      
-      // Open WhatsApp in a new tab
-      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`;
-      window.open(whatsappUrl, '_blank');
-      
-      // Optional: show a small success message on screen
-      const originalButtonText = leadForm.querySelector('button[type="submit"]').innerHTML;
-      leadForm.querySelector('button[type="submit"]').innerHTML = '<i class="fa-solid fa-check"></i> ¡Solicitud enviada!';
-      leadForm.querySelector('button[type="submit"]').style.background = '#22c55e';
-      
-      setTimeout(() => {
-        leadForm.reset();
-        leadForm.querySelector('button[type="submit"]').innerHTML = originalButtonText;
-        leadForm.querySelector('button[type="submit"]').style.background = '';
-      }, 5000);
-    });
-  }
+  // Aquí vivía el manejador del formulario «Solicitar Alta Gratuita», que
+  // componía un mensaje y abría WhatsApp para que alguien mandara credenciales
+  // a mano. Se retiró el 11-09-2026 junto con el formulario: los 10 portes de
+  // prueba NO son una promoción que haya que solicitar —los trae cualquier
+  // cuenta nueva— y la contraseña la elige el propio conductor al registrarse.
+  // Ahora los botones de «probar gratis» llevan a app.micarga.es/?registro.
 
   // Back to Top Button Interaction
   const backToTopBtn = document.getElementById('back-to-top');

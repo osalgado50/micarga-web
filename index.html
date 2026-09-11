@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260911a">
+  <link rel="stylesheet" href="styles.css?v=20260911b">
 
   <script type="application/ld+json">
   {
@@ -111,7 +111,7 @@
         <a href="#funciones">¿Qué Hace?</a>
         <a href="#tarifas">Precios</a>
         <a href="blog/">Blog</a>
-        <a href="#contacto" class="nav-btn">Probar Gratis</a>
+        <a href="https://app.micarga.es/?registro" class="nav-btn">Probar Gratis</a>
       </nav>
       
       <button class="mobile-menu-toggle" aria-label="Abrir menú">
@@ -149,7 +149,7 @@
            #contacto, o sea a rellenar un formulario y esperar a que alguien
            contestara, cuando la prueba se coge sola descargando la app. -->
       <div class="hero-buttons">
-        <a href="#descarga" class="btn btn-primary btn-large">
+        <a href="https://app.micarga.es/?registro" class="btn btn-primary btn-large">
           <i class="fa-solid fa-circle-play"></i> Probar 10 Envíos Gratis
         </a>
         <a href="#tarifas" class="btn btn-secondary btn-large">
@@ -185,7 +185,7 @@
             <div class="highlight-item"><i class="fa-solid fa-check"></i> Cualquier día de la semana</div>
           </div>
           <p class="tagline">No importa dónde estés. Hazlo tú mismo al instante.</p>
-          <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Comenzar Ahora Mismo</a>
+          <a href="https://app.micarga.es/?registro" class="btn btn-primary" style="margin-top: 1.5rem;">Comenzar Ahora Mismo</a>
         </div>
         
         <div class="intro-image-wrapper reveal-on-scroll">
@@ -378,7 +378,7 @@
         </div>
 
         <div class="unlimited-actions">
-          <a href="#contacto" class="btn btn-primary btn-large">
+          <a href="https://app.micarga.es/?registro" class="btn btn-primary btn-large">
             <i class="fa-solid fa-circle-play"></i> Empezar con 10 portes gratis
           </a>
           <a href="#tarifas" class="btn btn-secondary btn-large">
@@ -574,7 +574,7 @@
         <div class="contact-info reveal-on-scroll">
           <span class="section-subtitle">¿Hablamos?</span>
           <h2>Consigue tus 10 transportes gratis</h2>
-          <p>Rellena este formulario rápido. Te enviaremos tus credenciales de acceso directamente para que puedas empezar a generar portes sin coste hoy mismo.</p>
+          <p>Créate la cuenta y ya los tienes. No hay que solicitar nada ni esperar a que te contestemos: entras y empiezas a emitir portes.</p>
           
           <div class="contact-details">
             <div class="contact-detail-item">
@@ -597,62 +597,45 @@
               <i class="fa-solid fa-truck-moving"></i>
               <div>
                 <h4>Plan Especial de Pruebas</h4>
-                <p>10 transportes incluidos, soporte de configuración inicial gratuito.</p>
+                <p>10 transportes incluidos en cualquier cuenta nueva, y te ayudamos con la configuración inicial si lo necesitas.</p>
               </div>
             </div>
           </div>
         </div>
         
-        <!-- Form card -->
+        <!-- El camino real de la prueba gratuita ------------------------
+             Aquí había un formulario «Solicitar Alta Gratuita» que pedía
+             nombre, teléfono y flota y abría WhatsApp para que alguien mandara
+             credenciales a mano. No era cierto: los 10 portes NO son una
+             promoción que haya que solicitar —los trae cualquier cuenta por el
+             hecho de existir— y la contraseña la elige el propio conductor al
+             registrarse. El formulario solo metía una espera y una persona en
+             medio de algo que ya es automático. -->
         <div class="contact-form-wrapper reveal-on-scroll">
           <div class="form-card">
-            <h3>Solicitar Alta Gratuita</h3>
-            <p class="form-lead">Recibe tu acceso a los 10 envíos de prueba</p>
-            
-            <form id="whatsapp-lead-form">
-              <div class="form-group">
-                <label for="form-name">Nombre / Empresa</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" id="form-name" placeholder="Ej. Transportes Martínez o Juan López" required>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label for="form-phone">Teléfono Móvil (para recibir acceso)</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-phone"></i>
-                  <input type="tel" id="form-phone" placeholder="Ej. 600 000 000" required>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label for="form-trucks">Número de Camiones / Flota</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-truck"></i>
-                  <select id="form-trucks">
-                    <option value="1 (Autónomo)">1 (Autónomo)</option>
-                    <option value="2 a 5 camiones">2 a 5 camiones</option>
-                    <option value="6 a 20 camiones">6 a 20 camiones</option>
-                    <option value="Más de 20 camiones">Más de 20 camiones</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label for="form-message">¿Algún comentario o tipo de mercancía especial?</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-comment-dots"></i>
-                  <textarea id="form-message" rows="3" placeholder="Ej. Hago transporte nacional y algo de ADR..."></textarea>
-                </div>
-              </div>
-              
-              <button type="submit" class="btn btn-primary btn-block">
-                <i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp
-              </button>
-              
-              <span class="form-privacy-note">Al hacer clic, se abrirá tu WhatsApp con los datos para enviarnos la solicitud al instante.</span>
-            </form>
+            <h3>Empieza en un minuto</h3>
+            <p class="form-lead">Sin tarjeta, sin llamadas y sin esperar a que nadie te dé de alta</p>
+
+            <ol class="pasos-prueba">
+              <li>
+                <strong>Crea tu cuenta</strong>
+                <span>Correo, contraseña y tus datos de transportista.</span>
+              </li>
+              <li>
+                <strong>Emite tus 10 primeros portes</strong>
+                <span>Con validez legal desde el primero, firmados y con su código QR.</span>
+              </li>
+              <li>
+                <strong>Sigue cuando quieras</strong>
+                <span>Al gastarlos, la app te lleva a contratar el plan. Los que no uses no caducan.</span>
+              </li>
+            </ol>
+
+            <a href="https://app.micarga.es/?registro" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-circle-play"></i> Crear mi cuenta gratis
+            </a>
+
+            <span class="form-privacy-note">Los 10 portes van incluidos en la cuenta. No hace falta pedirlos.</span>
           </div>
         </div>
       </div>
@@ -732,6 +715,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="script.js?v=20260911a"></script>
+  <script src="script.js?v=20260911b"></script>
 </body>
 </html>
