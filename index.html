@@ -15,6 +15,12 @@
   <meta name="description" content="Genera tus documentos de control de transporte (DeCA / Carta de Porte / ADR) en formato digital. Cumple la ley española a partir de octubre 2026. ¡10 envíos de prueba gratis!">
   <meta name="theme-color" content="#0b0f19">
   <link rel="canonical" href="https://micarga.es/">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/">
+  <!-- ALTERNATIVAS:fin -->
   <!-- Camión de la marca. Sustituye al emoji 🚚 que iba incrustado como SVG.
        El .ico lleva 16, 32, 48 y 64 px porque cada navegador escoge uno
        distinto (pestaña, marcador, acceso directo del escritorio); dejar solo
@@ -52,9 +58,18 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Mi Carga",
+    "legalName": "RESITECH 2021, S.L.U.",
+    "vatID": "ESB67419168",
     "url": "https://micarga.es/",
     "logo": "https://micarga.es/apple-touch-icon.png",
     "email": "soporte@micarga.es",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Gran Via de Carles III, 98, planta 10",
+      "postalCode": "08028",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    },
     "sameAs": [
       "https://wa.me/34744716449",
       "https://www.instagram.com/mi_carga_app",
@@ -113,6 +128,13 @@
         <a href="blog/">Blog</a>
         <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="nav-btn">Probar Gratis</a>
       </nav>
+      <!-- IDIOMAS:inicio -->
+      <div class="selector-idioma" role="group" aria-label="Idioma">
+          <a href="https://micarga.es/" hreflang="es" lang="es" title="Castellano" aria-current="page">ES</a>
+          <a href="https://micarga.es/ca/" hreflang="ca" lang="ca" title="Català">CA</a>
+          <a href="https://micarga.es/en/" hreflang="en" lang="en" title="English">EN</a>
+      </div>
+      <!-- IDIOMAS:fin -->
       
       <button class="mobile-menu-toggle" aria-label="Abrir menú">
         <i class="fa-solid fa-bars"></i>

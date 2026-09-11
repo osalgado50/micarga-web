@@ -2499,3 +2499,50 @@ body > section:not(.hero-section) > .container > h2 {
   line-height: 1.6;
   color: var(--text-muted);
 }
+
+/* --- Selector de idioma ----------------------------------------------------
+   Tres enlaces de verdad, no un desplegable: los sigue Google, funcionan con
+   el teclado y con el botón central del ratón, y no dependen de JavaScript.
+
+   Va FUERA de `.nav-links`, que en móvil se esconde detrás del botón de menú.
+   El idioma tiene que verse siempre: quien entra en catalán y ve la web en
+   castellano no va a abrir un menú a buscar; se va. */
+
+.selector-idioma {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.selector-idioma a {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 100px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  line-height: 1;
+}
+.selector-idioma a:hover { color: var(--text-heading); }
+
+/* El idioma en el que se está mirando la página. `aria-current` en vez de una
+   clase: es el atributo que ya dice eso, y así lo anuncia también un lector de
+   pantalla en vez de solo pintarlo. */
+.selector-idioma a[aria-current="page"] {
+  background: var(--primary);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  /* Pegado al botón de menú, sin empujar el logo fuera de la pantalla. */
+  .selector-idioma { margin-left: auto; margin-right: 0.6rem; }
+  /* En móvil el menú desplegable ya no cuenta para el reparto horizontal, así
+     que el selector es quien tiene que empujar al botón de menú al borde. */
+  .selector-idioma a { padding: 5px 8px; font-size: 0.72rem; }
+}
