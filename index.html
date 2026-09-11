@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260911e">
+  <link rel="stylesheet" href="styles.css?v=20260911f">
 
   <script type="application/ld+json">
   {
@@ -550,6 +550,62 @@
     </div>
   </section>
 
+  <!-- Consejero de seguridad ADR ----------------------------------------
+       Servicio aparte de la app: aquí no se vende software, se vende que una
+       persona firme como consejero de seguridad de la empresa.
+
+       NO lleva formulario. Un formulario más en la página significa otro
+       endpoint público que mantener y otra bandeja que vigilar, y para una
+       consulta que llega una vez cada mucho no compensa: el `mailto:` abre el
+       correo del cliente con las preguntas ya escritas y la respuesta aterriza
+       en soporte como cualquier otro correo. -->
+  <section id="adr" class="adr-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="adr-card">
+        <div class="adr-cinta" aria-hidden="true"></div>
+
+        <div class="adr-cuerpo">
+          <div class="adr-imagen">
+            <img src="images/adr-placas.webp" width="578" height="529" loading="lazy"
+                 alt="Placas de peligro ADR: panel naranja, inflamable clase 3, corrosivo clase 8 y comburente clase 5.1">
+          </div>
+
+          <div class="adr-texto">
+            <span class="section-subtitle">Mercancías peligrosas</span>
+            <h2>Tu consejero de seguridad ADR, sin tenerlo en plantilla</h2>
+            <p>
+              Si tu empresa expide, carga, descarga o transporta mercancías
+              peligrosas, el ADR te obliga a tener un consejero de seguridad
+              designado. Lo ejercemos nosotros: tú sigues conduciendo.
+            </p>
+
+            <ul class="adr-lista">
+              <li><i class="fa-solid fa-user-shield" aria-hidden="true"></i> Designación y alta del consejero ante la administración</li>
+              <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i> El informe anual obligatorio, redactado y presentado</li>
+              <li><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Revisión de cartas de porte, etiquetado y documentación</li>
+              <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Plan de formación del personal que toca la mercancía</li>
+              <li><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Informe de accidente o incidente si llega el caso</li>
+            </ul>
+
+            <div class="adr-botones">
+              <a href="mailto:soporte@micarga.es?subject=Consejero%20de%20seguridad%20ADR&body=Hola%2C%20nos%20interesa%20el%20servicio%20de%20consejero%20de%20seguridad%20ADR.%0A%0AEmpresa%3A%0ACIF%3A%0APersona%20de%20contacto%3A%0ATel%C3%A9fono%3A%0AQu%C3%A9%20hacemos%20con%20la%20mercanc%C3%ADa%20peligrosa%20%28expedir%20/%20cargar%20/%20descargar%20/%20transportar%29%3A%0AClases%20ADR%20que%20movemos%3A%0AN%C2%BA%20de%20veh%C3%ADculos%3A%0A%0AGracias." class="btn btn-primary btn-large">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i> Escríbenos por correo
+              </a>
+              <a href="https://wa.me/34744716449?text=Hola%2C%20nos%20interesa%20el%20servicio%20de%20consejero%20de%20seguridad%20ADR.%20Os%20cuento%3A%20" target="_blank" rel="noopener" class="btn btn-secondary">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Prefiero WhatsApp
+              </a>
+            </div>
+
+            <p class="adr-pie">
+              El correo se abre con las preguntas ya escritas: solo tienes que
+              rellenarlas y enviar. Te contestamos con un precio cerrado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- App Download Section -->
   <section id="descarga" class="download-section scroll-padding">
     <div class="container text-center reveal-on-scroll">
@@ -749,6 +805,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="script.js?v=20260911e"></script>
+  <script src="script.js?v=20260911f"></script>
 </body>
 </html>

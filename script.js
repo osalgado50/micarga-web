@@ -113,14 +113,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Al terminar vuelve al principio con su botón: se ve una vez, y quien
-    // quiera repetirlo lo pide otra vez. `load()` es lo que devuelve el
-    // fotograma del póster a la pantalla; con `currentTime = 0` se quedaría
-    // congelado el último cuadro, que es el logo sobre blanco.
+    // Al terminar se ve una vez, y quien quiera repetirlo lo pide otra vez.
+    //
+    // Los tres segundos de espera son a propósito: el vídeo acaba con el logo
+    // de Mi Carga en pantalla, y volver al fotograma inicial en el mismo
+    // instante en que aparece se lleva por delante justo el cierre de la
+    // pieza. Se deja respirar y luego se vuelve al principio.
+    //
+    // `load()` es lo que devuelve el póster a la pantalla; con
+    // `currentTime = 0` se quedaría congelado el último cuadro.
+    const ESPERA_FINAL_MS = 3000;
     video.addEventListener('ended', () => {
       video.controls = false;
-      video.load();
-      botonPlay.hidden = false;
+      setTimeout(() => {
+        video.load();
+        botonPlay.hidden = false;
+      }, ESPERA_FINAL_MS);
     });
   }
 });

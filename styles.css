@@ -2326,6 +2326,10 @@ body > section:not(.hero-section) > .container > h2 {
   transition: background 0.2s ease;
 }
 .video-play:hover { background: rgba(11, 15, 25, 0.15); }
+/* `hidden` a secas NO basta: el `display:none` del navegador para [hidden] lo
+   pisa el `display:flex` de arriba, que es más específico, y el botón se queda
+   encima del vídeo mientras se reproduce. */
+.video-play[hidden] { display: none; }
 .video-play:focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: -3px;
@@ -2359,4 +2363,131 @@ body > section:not(.hero-section) > .container > h2 {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-align: center;
+}
+
+/* --- Consejero de seguridad ADR --------------------------------------------
+   Esta sección no vende la app, vende un servicio de otra naturaleza: que una
+   persona firme como consejero de seguridad de la empresa. Por eso se sale del
+   lenguaje del resto de la página y coge el suyo propio, el de la señalización
+   de mercancías peligrosas: la cinta de peligro en diagonal y el naranja del
+   panel ADR, que es —casualmente— el mismo naranja de la marca.
+
+   La imagen lleva fondo transparente y su propia sombra incorporada, así que
+   NO va dentro de una caja: flota sobre el fondo de la sección. Meterla en una
+   tarjeta con borde sería enmarcar algo que ya viene recortado. */
+
+.adr-card {
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(var(--primary-rgb), 0.16) 0%, transparent 55%),
+    var(--bg-card);
+  border: 1px solid rgba(var(--primary-rgb), 0.28);
+  border-radius: 20px;
+  /* La cinta de peligro se dibuja dentro del redondeo, no por encima de él. */
+  overflow: hidden;
+}
+
+/* La cinta de peligro: naranja y negro en diagonal, como el balizamiento de
+   verdad. Es lo que hace reconocible la sección de un vistazo, antes de leer
+   una sola palabra. */
+.adr-cinta {
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--primary) 0 18px,
+    #0b0f19 18px 36px
+  );
+}
+
+.adr-cuerpo {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .adr-cuerpo {
+    /* La imagen primero: es lo que identifica el tema al instante, y en
+       escritorio se lee de izquierda a derecha. */
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    padding: 3rem;
+  }
+}
+
+.adr-imagen { display: flex; justify-content: center; }
+
+.adr-imagen img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  /* Un resplandor naranja por detrás, no una sombra negra: la imagen ya trae
+     la suya y dos sombras encima se ven sucias. */
+  filter: drop-shadow(0 18px 34px rgba(var(--primary-rgb), 0.28));
+}
+
+.adr-texto h2 {
+  margin: 0.35rem 0 0.9rem;
+  /* Reparte las líneas en vez de dejar «ADR,» solo en una. */
+  text-wrap: balance;
+}
+.adr-texto > p { margin: 0 0 1.5rem; max-width: 54ch; }
+
+.adr-lista {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.adr-lista li {
+  display: flex;
+  /* `flex-start` y no `center`: cuando el texto ocupa dos líneas en un móvil,
+     un icono centrado queda flotando a media altura y se despega de su línea. */
+  align-items: flex-start;
+  gap: 0.85rem;
+  line-height: 1.5;
+}
+
+.adr-lista i {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(var(--primary-rgb), 0.14);
+  color: var(--primary);
+  font-size: 0.95rem;
+  /* Alinea el cuadrado con la primera línea del texto, no con el bloque. */
+  margin-top: 1px;
+}
+
+.adr-botones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* El de WhatsApp no es `btn-large`: el correo es la vía principal —lleva las
+   preguntas escritas y deja rastro en la bandeja— y dos botones del mismo
+   tamaño obligan a elegir entre dos cosas que no valen lo mismo. Además, dos
+   grandes no caben en una línea de esta columna y apilados se ven como una
+   escalera torcida. */
+.adr-botones .btn { text-decoration: none; }
+
+.adr-pie {
+  margin: 1.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+@media (max-width: 640px) {
+  .adr-cuerpo { padding: 1.75rem; gap: 2rem; }
+  .adr-imagen img { max-width: 240px; }
+  .adr-botones .btn { width: 100%; justify-content: center; }
 }
