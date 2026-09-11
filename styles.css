@@ -2491,3 +2491,11 @@ body > section:not(.hero-section) > .container > h2 {
   .adr-imagen img { max-width: 240px; }
   .adr-botones .btn { width: 100%; justify-content: center; }
 }
+
+/* La dirección en el pie: el mismo tamaño que los enlaces de al lado pero sin
+   pinta de enlace, que no lo es. */
+.footer-direccion {
+  margin-top: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
