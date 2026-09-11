@@ -51,7 +51,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260911g">
+  <link rel="stylesheet" href="styles.css?v=20260911h">
 
   <script type="application/ld+json">
   {
@@ -95,15 +95,27 @@
       {
         "@type": "Offer",
         "name": "Plan mensual",
-        "price": "10",
+        "price": "12.10",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "12.10",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
         "priceValidUntil": "2027-12-31"
       },
       {
         "@type": "Offer",
         "name": "Plan anual",
-        "price": "90",
+        "price": "108.90",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "108.90",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
         "priceValidUntil": "2027-12-31"
       }
     ]
@@ -404,13 +416,15 @@
         <div class="unlimited-compare">
           <div class="compare-col compare-ours">
             <span class="compare-label">Mi Carga</span>
-            <!-- «IVA incluido» va en todos los precios de cara al cliente: el
-                 titular de esta sección promete «sin costes ocultos», y un
-                 precio sin decir si lleva impuestos es justamente un coste
-                 oculto. Los 10 € son el total que se cobra; el ingreso neto es
-                 8,26 €. -->
+            <!-- El precio va SIEMPRE con su aviso de impuestos: el titular de
+                 esta sección promete «sin costes ocultos», y un precio sin
+                 decir si lleva IVA es justamente un coste oculto.
+                 11-09-2026: los precios pasan a ser SIN IVA. Se cobran 12,10 €
+                 al mes y 108,90 € al año; los 10 € y los 90 € son la base. El
+                 número redondo se queda como titular porque es el que se
+                 compara con la competencia, pero nunca va solo. -->
             <span class="compare-value">10&nbsp;€<small>/mes</small></span>
-            <span class="compare-detail" style="opacity:.75">IVA incluido</span>
+            <span class="compare-detail" style="opacity:.75">IVA no incluido</span>
             <span class="compare-detail">
               <i class="fa-solid fa-infinity"></i> Documentos ilimitados
             </span>
@@ -445,7 +459,7 @@
         <p class="unlimited-note">
           <i class="fa-solid fa-circle-info"></i>
           La prueba gratuita incluye 10 documentos. Los PDF ilimitados entran con la
-          suscripción de 10&nbsp;€/mes o 90&nbsp;€/año, IVA incluido.
+          suscripción de 10&nbsp;€/mes o 90&nbsp;€/año, IVA no incluido.
         </p>
       </div>
     </div>
@@ -472,7 +486,7 @@
             <div class="price-card">
               <h3>Plan Mensual</h3>
               <div class="price">10€<span>/mes</span></div>
-              <p class="price-tax">IVA incluido</p>
+              <p class="price-tax">+ IVA · 12,10 € al mes en total</p>
               <p>Ideal para autónomos o flotas que prefieren ir mes a mes. Se renueva cada mes y puedes cancelarla cuando quieras, sin compromiso de permanencia.</p>
               <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Empezar con este plan
@@ -482,7 +496,7 @@
             <div class="price-card popular">
               <h3>Plan Anual</h3>
               <div class="price">90€<span>/año</span></div>
-              <p class="price-tax">IVA incluido</p>
+              <p class="price-tax">+ IVA · 108,90 € al año en total</p>
               <!-- Decía «Pago único», y no lo es: es una suscripción que se
                    renueva sola cada doce meses. Un cliente que leyera «pago
                    único» y se encontrara el segundo cargo al año siguiente
@@ -852,6 +866,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="script.js?v=20260911g"></script>
+  <script src="script.js?v=20260911h"></script>
 </body>
 </html>
