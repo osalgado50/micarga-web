@@ -49,3 +49,9 @@
 # suscripcion.js con una ruta relativa. Aquí la caché corta es la ÚNICA red.
 /turnstile.js
   Cache-Control: public, max-age=60, must-revalidate
+
+# El vídeo del hero: no cambia, así que caché larga. Si algún día se sustituye,
+# se sube con OTRO NOMBRE de archivo, que es la única forma fiable de que un
+# fichero con un año de caché deje de servirse.
+/videos/micarga-hero.mp4
+  Cache-Control: public, max-age=31536000, immutable

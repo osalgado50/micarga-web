@@ -81,4 +81,46 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- Vídeo del hero ------------------------------------------------------
+  //
+  // No arranca solo. Se enseña el fotograma con el botón de play encima y no
+  // pasa nada hasta que alguien lo pulsa: el vídeo lleva voz, y sonar sin que
+  // nadie lo haya pedido —en una cabina, en una oficina— es la forma más
+  // rápida de que cierren la pestaña.
+  //
+  // Los controles aparecen AL EMPEZAR, no antes: con la barra de controles
+  // encima del fotograma, el botón de play grande compite con el pequeño de la
+  // barra y no se sabe cuál es el bueno. Una vez en marcha sí hacen falta, para
+  // poder pararlo o quitarle el sonido.
+  const video = document.getElementById('video-hero');
+  const botonPlay = document.getElementById('video-play');
+
+  if (video && botonPlay) {
+    botonPlay.addEventListener('click', () => {
+      botonPlay.hidden = true;
+      video.controls = true;
+      // `play()` devuelve una promesa que el navegador puede rechazar (una
+      // política de reproducción, un fallo de red). Si pasa, se deja el
+      // fotograma y el botón como estaban en vez de quedarse en una pantalla
+      // negra sin explicación.
+      const arrancando = video.play();
+      if (arrancando) {
+        arrancando.catch(() => {
+          botonPlay.hidden = false;
+          video.controls = false;
+        });
+      }
+    });
+
+    // Al terminar vuelve al principio con su botón: se ve una vez, y quien
+    // quiera repetirlo lo pide otra vez. `load()` es lo que devuelve el
+    // fotograma del póster a la pantalla; con `currentTime = 0` se quedaría
+    // congelado el último cuadro, que es el logo sobre blanco.
+    video.addEventListener('ended', () => {
+      video.controls = false;
+      video.load();
+      botonPlay.hidden = false;
+    });
+  }
 });

@@ -2256,3 +2256,107 @@ body > section:not(.hero-section) > .container > h2 {
 
 .pasos-prueba strong { color: var(--text-heading, #fff); font-size: 0.98rem; }
 .pasos-prueba span { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
+
+/* --- Vídeo del hero --------------------------------------------------------
+   El vídeo es vertical (9:16, grabado con el móvil, como se ve en carretera),
+   así que en una pantalla de escritorio no puede ir debajo del texto: ocuparía
+   media página él solo y empujaría los botones fuera de la vista. Va al lado,
+   en una columna estrecha, con la forma de la pantalla de un móvil. En cuanto
+   la pantalla se estrecha, vuelve a apilarse debajo. */
+
+.hero-content { max-width: 1180px; }
+
+@media (min-width: 1024px) {
+  .hero-content {
+    display: grid;
+    /* `minmax(0, 1fr)` y no `1fr`: con `1fr` a secas, un título largo empuja la
+       columna y se come el ancho del vídeo. */
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 3rem;
+    align-items: center;
+  }
+}
+
+.hero-video {
+  position: relative;
+  z-index: 10;
+  /* En móvil no se pega al ancho de la pantalla: un 9:16 a pantalla completa
+     mide más de alto que la propia pantalla. */
+  max-width: 300px;
+  margin: 2.5rem auto 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-video { margin: 0; }
+}
+
+.video-marco {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  /* El hueco se reserva ANTES de que cargue nada: sin esto, la caja mide cero
+     hasta que llega el fotograma y el hero pega un salto al aparecer. */
+  aspect-ratio: 9 / 16;
+  background: #0b0f19;
+}
+
+.video-pieza {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* El botón de play, encima del fotograma. Ocupa TODO el marco: en un móvil, en
+   movimiento, se acierta a un círculo de 72px con dificultad y a la pantalla
+   entera siempre. El círculo es solo lo que se ve. */
+.video-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 15, 25, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+.video-play:hover { background: rgba(11, 15, 25, 0.15); }
+.video-play:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: -3px;
+}
+
+.video-play i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.6rem;
+  /* El triángulo de «play» tiene el peso a la izquierda: centrado de verdad
+     dentro del círculo se ve descolocado, así que se empuja un pelín. */
+  padding-left: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease;
+}
+.video-play:hover i { transform: scale(1.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .video-play, .video-play i { transition: none; }
+  .video-play:hover i { transform: none; }
+}
+
+.video-pie {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}

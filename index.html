@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260911d">
+  <link rel="stylesheet" href="styles.css?v=20260911e">
 
   <script type="application/ld+json">
   {
@@ -128,44 +128,78 @@
     </div>
     
     <div class="container hero-content reveal-on-scroll">
-      <span class="badge">NUEVA NORMATIVA OBLIGATORIA 2026</span>
-      <h1>El papel ya no viaja.<br>Pásate al <mark class="glow-text">porte digital</mark>.</h1>
-      <p class="hero-lead">Genera tus documentos de control de transporte (DeCA) y cartas de porte desde el móvil. Rápido, legal y sin complicaciones en carretera.</p>
+      <div class="hero-texto">
+        <span class="badge">NUEVA NORMATIVA OBLIGATORIA 2026</span>
+        <h1>El papel ya no viaja.<br>Pásate al <mark class="glow-text">porte digital</mark>.</h1>
+        <p class="hero-lead">Genera tus documentos de control de transporte (DeCA) y cartas de porte desde el móvil. Rápido, legal y sin complicaciones en carretera.</p>
       
-      <!-- Offer Hook Card -->
-      <div class="offer-hook-card">
-        <div class="hook-icon-wrap">
-          <i class="fa-solid fa-gift pulse-icon"></i>
+        <!-- Offer Hook Card -->
+        <div class="offer-hook-card">
+          <div class="hook-icon-wrap">
+            <i class="fa-solid fa-gift pulse-icon"></i>
+          </div>
+          <div class="hook-text">
+            <h3>¡Empieza sin pagar nada!</h3>
+            <p>Te regalamos <strong>10 transportes de prueba sin coste</strong>. Sin tarjetas ni compromisos.</p>
+          </div>
         </div>
-        <div class="hook-text">
-          <h3>¡Empieza sin pagar nada!</h3>
-          <p>Te regalamos <strong>10 transportes de prueba sin coste</strong>. Sin tarjetas ni compromisos.</p>
+      
+        <!-- Los dos botones llevan a los dos caminos reales, y no al formulario
+             de contacto: quien quiere probar necesita la app, y quien quiere
+             pagar necesita los planes. Antes «Probar 10 Envíos Gratis» mandaba a
+             #contacto, o sea a rellenar un formulario y esperar a que alguien
+             contestara, cuando la prueba se coge sola descargando la app. -->
+        <div class="hero-buttons">
+          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-circle-play"></i> Probar 10 Envíos Gratis
+          </a>
+          <a href="#tarifas" class="btn btn-secondary btn-large">
+            <i class="fa-solid fa-cart-shopping"></i> Quiero comprar
+          </a>
+        </div>
+      
+        <div class="store-badges-preview">
+          <span>Disponible en:</span>
+          <div class="badges-row">
+            <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
+            <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
+                 al bloque de descarga, lleva a un botón que tampoco se puede
+                 pulsar, y eso es peor que no ofrecerlo. -->
+            <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · próximamente</span>
+          </div>
         </div>
       </div>
-      
-      <!-- Los dos botones llevan a los dos caminos reales, y no al formulario
-           de contacto: quien quiere probar necesita la app, y quien quiere
-           pagar necesita los planes. Antes «Probar 10 Envíos Gratis» mandaba a
-           #contacto, o sea a rellenar un formulario y esperar a que alguien
-           contestara, cuando la prueba se coge sola descargando la app. -->
-      <div class="hero-buttons">
-        <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large">
-          <i class="fa-solid fa-circle-play"></i> Probar 10 Envíos Gratis
-        </a>
-        <a href="#tarifas" class="btn btn-secondary btn-large">
-          <i class="fa-solid fa-cart-shopping"></i> Quiero comprar
-        </a>
-      </div>
-      
-      <div class="store-badges-preview">
-        <span>Disponible en:</span>
-        <div class="badges-row">
-          <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
-          <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
-               al bloque de descarga, lleva a un botón que tampoco se puede
-               pulsar, y eso es peor que no ofrecerlo. -->
-          <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · próximamente</span>
+
+      <!-- El vídeo ---------------------------------------------------------
+           NO se reproduce solo: se enseña el fotograma del albarán con un
+           botón de play encima y no pasa nada hasta que alguien lo pulsa. Un
+           vídeo que arranca por su cuenta encima de la página se cierra antes
+           de verlo, y este lleva voz: sonar sin que nadie lo haya pedido, en
+           mitad de una cabina o de una oficina, es la forma más rápida de que
+           cierren la pestaña.
+
+           `preload="none"`: sin pulsar el play no se descarga ni un byte del
+           vídeo, solo el fotograma. La portada la abre gente con datos
+           contados desde la carretera.
+
+           `playsinline` para que en el iPhone se vea dentro de la página en
+           vez de saltar al reproductor a pantalla completa. Se reproduce una
+           vez: sin `loop` y sin `autoplay`. -->
+      <div class="hero-video">
+        <div class="video-marco">
+          <video id="video-hero" class="video-pieza"
+                 poster="images/video-hero-poster.jpg"
+                 preload="none" playsinline
+                 aria-label="Vídeo: un control de la Guardia Civil con el DeCA en el móvil">
+            <source src="videos/micarga-hero.mp4" type="video/mp4">
+            Tu navegador no puede reproducir el vídeo.
+          </video>
+          <button type="button" class="video-play" id="video-play"
+                  aria-controls="video-hero" aria-label="Reproducir el vídeo, 13 segundos">
+            <i class="fa-solid fa-play" aria-hidden="true"></i>
+          </button>
         </div>
+        <p class="video-pie">13 segundos: así se pasa un control con el DeCA en el móvil.</p>
       </div>
     </div>
   </section>
@@ -715,6 +749,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="script.js?v=20260911d"></script>
+  <script src="script.js?v=20260911e"></script>
 </body>
 </html>
