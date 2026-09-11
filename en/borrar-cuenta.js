@@ -1,0 +1,185 @@
+// Borrado de cuenta desde la web.
+//
+// POR QUÉ EXISTE, ADEMÁS DE LA OPCIÓN DENTRO DE LA APP
+// Google Play exige DOS cosas a las apps que dejan crear cuenta: poder borrarla
+// desde dentro de la app, y una URL pública donde pedir el borrado sin tener la
+// app instalada. Esta página es la segunda. Apple lo exige en la guideline
+// 5.1.1(v). Y por RGPD, el derecho de supresión no puede depender de que
+// conserves un móvil concreto.
+//
+// Se optó por que la página BORRE de verdad, en vez de ser un formulario que
+// manda un correo a soporte: quien ya desinstaló la app puede terminar aquí sin
+// esperar a que alguien le conteste, y no queda una bandeja de solicitudes
+// pendientes que atender a mano dentro del plazo de 30 días.
+//
+// Quien decide es la Edge Function `borrar-cuenta`, la misma que usa la app:
+// aquí no se replica ninguna regla. Rechaza si hay suscripción viva (borrar el
+// perfil no cancela nada en Stripe: seguiría cobrando sin que el cliente tenga
+// dónde entrar a pararlo) y exige que el correo escrito coincida.
+
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
+import { montarTurnstile } from './turnstile.js';
+
+// Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
+// que protege los datos es RLS, no esconderla.
+const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Ver turnstile.js: sin clave configurada esto no pinta nada y `vale()`
+// devuelve `undefined`, que es como iba hasta ahora.
+let vale = async () => undefined;
+(() => {
+  const escudo = document.getElementById('turnstile');
+  // Visible antes de pintarlo: dentro de un `display:none` no se dibuja bien.
+  escudo.hidden = false;
+  montarTurnstile(escudo).then((f) => {
+    if (!f) { escudo.hidden = true; return; }
+    vale = f;
+    escudo.dataset.montado = 'si';
+    mostrarPaso(pasoActual);
+  });
+})();
+const $ = (id) => document.getElementById(id);
+
+const PASOS = ['paso-correo', 'paso-codigo', 'paso-confirmar', 'paso-hecho'];
+let pasoActual = PASOS[0];
+
+const mostrarPaso = (id) => {
+  for (const p of PASOS) $(p).hidden = p !== id;
+  pasoActual = id;
+  // El widget está fuera de los pasos: se esconde cuando ya no hace falta.
+  const escudo = $('turnstile');
+  if (escudo?.dataset.montado === 'si') escudo.hidden = (id === 'paso-hecho');
+};
+
+const avisar = (texto, tono = 'error') => {
+  const el = $('aviso');
+  el.textContent = texto;
+  el.dataset.tono = tono;
+  el.hidden = false;
+};
+const limpiarAviso = () => { $('aviso').hidden = true; };
+
+const ocupado = async (boton, textoMientras, tarea) => {
+  const original = boton.textContent;
+  boton.disabled = true;
+  boton.textContent = textoMientras;
+  try { return await tarea(); }
+  finally { boton.disabled = false; boton.textContent = original; }
+};
+
+/**
+ * El motivo real de un error de la función.
+ *
+ * Se lee del CUERPO de la respuesta, no del mensaje: @supabase/functions-js
+ * manda siempre el mismo texto fijo pase lo que pase. Leer el mensaje es lo que
+ * dejó muerta la rama del 429 en el pago (hallazgo APP-429).
+ */
+const motivoDelError = async (error) => {
+  try {
+    const cuerpo = await error?.context?.json?.();
+    if (cuerpo?.error) return cuerpo.error;
+  } catch { /* nos quedamos con el genérico */ }
+  return 'We couldn\'t delete the account. Write to us at soporte@micarga.es and we\'ll do it for you.';
+};
+
+let correoEnCurso = '';
+
+// --- Paso 1: el correo -----------------------------------------------------
+
+$('form-correo').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  limpiarAviso();
+  const correo = $('correo').value.trim();
+  if (!correo) return;
+
+  await ocupado($('btn-correo'), 'Enviando…', async () => {
+    // shouldCreateUser: false — sería absurdo crear una cuenta para borrarla, y
+    // peor: cualquiera podría comprobar correos ajenos creando cuentas sueltas.
+    const { error } = await supabase.auth.signInWithOtp({
+      email: correo,
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: 'https://micarga.es/borrar-cuenta',
+        captchaToken: await vale(),
+      },
+    });
+    if (error) {
+      const noExiste = /signups? not allowed|user not found/i.test(error.message || '');
+      avisar(noExiste
+        ? 'There\'s no Mi Carga account with that email address. Check it\'s the one you were using, or write to us at soporte@micarga.es.'
+        : 'We couldn\'t send you the code. Try again in a minute.');
+      return;
+    }
+    correoEnCurso = correo;
+    $('ayuda-codigo').textContent =
+      `We've written to ${correo}. Copy the 6-digit code in here; if the ` +
+      `email has a link, tapping it works too. If you can't see it, check your spam folder.`;
+    mostrarPaso('paso-codigo');
+    $('codigo').focus();
+  });
+});
+
+$('btn-otro-correo').addEventListener('click', () => {
+  limpiarAviso();
+  $('codigo').value = '';
+  mostrarPaso('paso-correo');
+  $('correo').focus();
+});
+
+// --- Paso 2: el código -----------------------------------------------------
+
+$('form-codigo').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  limpiarAviso();
+  const token = $('codigo').value.replace(/\D/g, '');
+  if (token.length !== 6) { avisar('The code is 6 digits.'); return; }
+
+  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+    const { error } = await supabase.auth.verifyOtp({ email: correoEnCurso, token, type: 'email' });
+    if (error) { avisar('That code is wrong or has expired. Ask for a new one.'); return; }
+    $('correo-confirmado').textContent = correoEnCurso;
+    mostrarPaso('paso-confirmar');
+    $('confirmacion').focus();
+  });
+});
+
+// --- Paso 3: confirmar y borrar -------------------------------------------
+
+// El botón no se habilita hasta que el correo escrito coincide. Se perdonan
+// mayúsculas y espacios porque el teclado del móvil pone mayúscula automática;
+// cualquier otra cosa, no. Es irreversible: conviene algo entre el impulso y el
+// botón.
+$('confirmacion').addEventListener('input', () => {
+  const escrito = $('confirmacion').value.trim().toLowerCase();
+  $('btn-borrar').disabled = escrito === '' || escrito !== correoEnCurso.trim().toLowerCase();
+});
+
+$('btn-cancelar').addEventListener('click', async () => {
+  limpiarAviso();
+  await supabase.auth.signOut();
+  $('confirmacion').value = '';
+  $('btn-borrar').disabled = true;
+  mostrarPaso('paso-correo');
+});
+
+$('form-confirmar').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  limpiarAviso();
+
+  await ocupado($('btn-borrar'), 'Borrando…', async () => {
+    const { error } = await supabase.functions.invoke('borrar-cuenta', {
+      body: { confirmacion: $('confirmacion').value },
+    });
+    if (error) {
+      avisar(await motivoDelError(error));
+      return;
+    }
+    // La cuenta ya no existe: la sesión que queda en este navegador es un
+    // cascarón. Se cierra para no dejar un token de un usuario borrado.
+    await supabase.auth.signOut();
+    mostrarPaso('paso-hecho');
+  });
+});

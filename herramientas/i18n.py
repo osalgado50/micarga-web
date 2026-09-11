@@ -295,7 +295,12 @@ def traducir_html(crudo: str, dicc: dict, faltan: set) -> str:
     cuerpo, guardados = _trozos_intocables(crudo)
 
     def cambia(t: str) -> str:
-        clave = t.strip()
+        # `html.unescape` porque las claves del diccionario se extraen ya
+        # desescapadas: en el HTML pone «10&nbsp;€» y en el diccionario está
+        # «10 €» con el espacio duro de verdad. Sin esto, ni el símbolo del
+        # copyright ni ninguna frase con un espacio duro casaban con su
+        # traducción, y se quedaban en castellano sin avisar.
+        clave = html.unescape(t).strip()
         if not _traducible(clave):
             return t
         traducida = dicc.get(clave)
@@ -358,6 +363,105 @@ def _aviso_de_traduccion(texto: str, idioma: str) -> str:
             + texto[corte:])
 
 
+
+# ---------------------------------------------------------------------------
+# Los mensajes que viven dentro del JavaScript
+# ---------------------------------------------------------------------------
+#
+# Las páginas de suscripción, presupuesto y borrado hablan con quien las usa
+# desde el JavaScript: «ese correo no parece válido», «no hemos podido enviar
+# el código». Si solo se tradujera el HTML, una persona que entra en inglés
+# vería la página en inglés hasta el primer error, y a partir de ahí en
+# castellano — justo en el momento en que algo va mal y más necesita entender
+# qué le están diciendo.
+#
+# Se traducen SOLO las cadenas que aparecen tal cual en el diccionario de cada
+# idioma. Todo lo demás del archivo —selectores, nombres de campo, códigos de
+# error de Supabase— se queda intacto, que es justo lo que tiene que pasar: un
+# `id` traducido rompería la página en silencio.
+
+SCRIPTS = ("suscripcion.js", "presupuesto.js", "borrar-cuenta.js", "gracias.js", "turnstile.js")
+
+# Una cadena entre comillas simples, dobles o invertidas, sin escapes dentro.
+# Los escapes se dejan fuera a propósito: una cadena con \' o \n partida a
+# trozos por el regex se reconstruiría mal, y es preferible no tocarla.
+LITERAL_JS = re.compile(r"""(['"`])([^'"`\\\n]{4,})\1""")
+
+
+def diccionario_js(idioma: str) -> dict:
+    f = RAIZ / "traducciones" / f"{idioma}.js.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+
+
+def cadenas_js(nombre: str) -> list:
+    """Las cadenas candidatas de un script, sin comentarios."""
+    s = (RAIZ / nombre).read_text(encoding="utf-8")
+    s = re.sub(r"/\*.*?\*/", "", s, flags=re.S)
+    s = re.sub(r"^\s*//.*$", "", s, flags=re.M)
+    vistas, salida = set(), []
+    for _, texto in LITERAL_JS.findall(s):
+        t = texto.strip()
+        if len(t) < 12 or t in vistas:
+            continue
+        # Solo lo que parece una frase para una persona.
+        if not re.search(r"[áéíóúñ¿¡]|\b(el|la|los|las|tu|te|no|se|que|con|para|sin|una|hemos)\b", t, re.I):
+            continue
+        vistas.add(t)
+        salida.append(t)
+    return salida
+
+
+def _lineas_de_codigo(crudo: str):
+    """Recorre el archivo diciendo, por cada línea, si es código o comentario.
+
+    Hace falta porque la búsqueda de cadenas se hace con una expresión regular
+    que empareja comillas, y un apóstrofo suelto dentro de un comentario
+    —«l'app», «d'aquí», «¿qué pasa si...»— abre una comilla que se cierra
+    muchísimo más abajo. Eso descoloca todos los emparejamientos posteriores:
+    unas cadenas se traducen y otras no, sin ningún patrón aparente. Es
+    exactamente lo que pasó la primera vez.
+    """
+    en_bloque = False
+    for linea in crudo.split("\n"):
+        recortada = linea.strip()
+        if en_bloque:
+            if "*/" in linea:
+                en_bloque = False
+            yield linea, False
+            continue
+        if recortada.startswith("/*"):
+            en_bloque = "*/" not in linea
+            yield linea, False
+            continue
+        if recortada.startswith("//") or recortada.startswith("*"):
+            yield linea, False
+            continue
+        yield linea, True
+
+
+def traducir_js(crudo: str, dicc: dict) -> str:
+    def cambia(m):
+        comilla, texto = m.group(1), m.group(2)
+        traducida = dicc.get(texto.strip())
+        if not traducida:
+            return m.group(0)
+        # En inglés casi toda frase lleva apóstrofo —«we couldn't», «you're»—,
+        # y el apóstrofo es justo la comilla que delimita la cadena. Se escapa
+        # en vez de descartar la traducción: descartarla dejaba media página en
+        # castellano y, lo peor, sin decir nada.
+        traducida = traducida.replace("\\", "\\\\").replace(comilla, "\\" + comilla)
+        # Se respeta el espacio de los extremos: alguna cadena se concatena con
+        # la de al lado y sin él se pegarían las palabras.
+        izq = texto[:len(texto) - len(texto.lstrip())]
+        der = texto[len(texto.rstrip()):]
+        return f"{comilla}{izq}{traducida}{der}{comilla}"
+
+    salida = []
+    for linea, es_codigo in _lineas_de_codigo(crudo):
+        salida.append(LITERAL_JS.sub(cambia, linea) if es_codigo else linea)
+    return "\n".join(salida)
+
+
 def cmd_generar():
     faltan_por_idioma = {}
 
@@ -372,12 +476,24 @@ def cmd_generar():
 
     for idioma in IDIOMAS:
         dicc = diccionario(idioma)
+        dicc_js = diccionario_js(idioma)
         faltan = set()
+
+        for nombre in SCRIPTS:
+            destino = RAIZ / idioma / nombre
+            destino.parent.mkdir(parents=True, exist_ok=True)
+            destino.write_text(
+                traducir_js((RAIZ / nombre).read_text(encoding="utf-8"), dicc_js),
+                encoding="utf-8",
+            )
         for pagina in PAGINAS:
             crudo = (RAIZ / pagina).read_text(encoding="utf-8")
             s = traducir_html(crudo, dicc, faltan)
             s = _rutas_absolutas(s)
             s = _enlaces_con_idioma(s, idioma)
+            # Los scripts traducidos viven junto a las páginas traducidas.
+            for nombre in SCRIPTS:
+                s = s.replace(f'"/{nombre}', f'"/{idioma}/{nombre}')
             s = s.replace('<html lang="es">', f'<html lang="{idioma}">', 1)
             s = s.replace('content="es_ES"', f'content="{LOCALE_OG[idioma]}"')
             # El canónico de cada idioma apunta a SÍ MISMO. Si apuntara al
