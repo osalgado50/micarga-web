@@ -2546,3 +2546,15 @@ body > section:not(.hero-section) > .container > h2 {
      que el selector es quien tiene que empujar al botón de menú al borde. */
   .selector-idioma a { padding: 5px 8px; font-size: 0.72rem; }
 }
+
+/* El aviso de que un texto legal es una traducción y de cuál manda. Se ve,
+   porque tiene que verse, pero no compite con el título. */
+.legal-traduccion {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--primary);
+  background: rgba(var(--primary-rgb), 0.07);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}

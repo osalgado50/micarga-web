@@ -328,6 +328,36 @@ def traducir_html(crudo: str, dicc: dict, faltan: set) -> str:
     return _devolver_intocables(cuerpo, guardados)
 
 
+
+# Los cuatro textos legales. Se traducen porque quien firma un contrato tiene
+# derecho a leerlo en su idioma, pero la traducción no puede convertirse en una
+# segunda versión del contrato: si un día alguien discute una cláusula, tiene
+# que haber UN texto que mande, y es el original.
+PAGINAS_LEGALES = ("aviso-legal.html", "privacidad.html", "terminos.html", "cookies.html")
+
+AVISO_IDIOMA = {
+    "ca": ("Aquesta és una traducció de cortesia. En cas de discrepància entre "
+           "versions, preval el text en castellà, que és l'original i el que "
+           "té efectes legals."),
+    "en": ("This is a courtesy translation. In the event of any discrepancy "
+           "between versions, the Spanish text prevails: it is the original and "
+           "the one with legal effect."),
+}
+
+
+def _aviso_de_traduccion(texto: str, idioma: str) -> str:
+    """Mete el aviso justo debajo del título, donde se lee antes de nada."""
+    aviso = AVISO_IDIOMA.get(idioma)
+    if not aviso:
+        return texto
+    m = re.search(r"</h1>\n", texto)
+    assert m, "no encuentro el <h1> de la página legal"
+    corte = m.end()
+    return (texto[:corte]
+            + f'      <p class="legal-traduccion">{html.escape(aviso, quote=False)}</p>\n'
+            + texto[corte:])
+
+
 def cmd_generar():
     faltan_por_idioma = {}
 
@@ -358,6 +388,8 @@ def cmd_generar():
             s = re.sub(r'<meta property="og:url" content="[^"]*">',
                        f'<meta property="og:url" content="{url_de(pagina, idioma)}">', s, count=1)
             s = _entre_marcas(s, "IDIOMAS", bloque_idiomas(pagina, idioma))
+            if pagina in PAGINAS_LEGALES:
+                s = _aviso_de_traduccion(s, idioma)
 
             destino = RAIZ / idioma / pagina
             destino.parent.mkdir(parents=True, exist_ok=True)
