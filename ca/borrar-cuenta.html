@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elimina el teu compte de Mi Carga i les dades associades. Ho pots fer des d&#x27;aquí, sense necessitat de tenir l&#x27;app instal·lada.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/ca/borrar-cuenta">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/borrar-cuenta">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta">
+  <!-- ALTERNATIVAS:fin -->
+  <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp,
+       que es por donde llega la gente a esta web. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mi Carga">
+  <meta property="og:url" content="https://micarga.es/ca/borrar-cuenta">
+  <meta property="og:title" content="Eliminar el meu compte - Mi Carga">
+  <meta property="og:description" content="Elimina el teu compte de Mi Carga i les dades associades. Ho pots fer des d&#x27;aquí, sense necessitat de tenir l&#x27;app instal·lada.">
+  <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
+  <meta property="og:locale" content="ca_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Esta página SÍ se indexa, al revés que la de suscripción: Google Play
+       exige una URL de borrado de cuenta públicamente accesible y localizable,
+       y los usuarios la buscan. -->
+  <title>Eliminar el meu compte - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css?v=20260911g">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260911g">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/ca/" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/ca/">Inici</a>
+        <a href="/ca/#tarifas">Preus</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Obrir l'app</a>
+      </nav>
+      <!-- IDIOMAS:inicio -->
+      <div class="selector-idioma" role="group" aria-label="Idioma">
+          <a href="https://micarga.es/borrar-cuenta" hreflang="es" lang="es" title="Castellano">ES</a>
+          <a href="https://micarga.es/ca/borrar-cuenta" hreflang="ca" lang="ca" title="Català" aria-current="page">CA</a>
+          <a href="https://micarga.es/en/borrar-cuenta" hreflang="en" lang="en" title="English">EN</a>
+      </div>
+      <!-- IDIOMAS:fin -->
+      <button class="mobile-menu-toggle" aria-label="Obrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <h1 class="sus-title">Eliminar el meu compte</h1>
+      <p class="sus-lead">
+        Pots esborrar el teu compte de Mi Carga des d'aquí, encara que ja no tinguis
+        l'app instal·lada. També ho pots fer dins de l'app, a
+        <strong>Ajustos → Eliminar el meu compte</strong>.
+      </p>
+
+      <!-- Qué se borra y qué no. Va ARRIBA, antes de pedir nada: la persona
+           tiene que poder decidir con la información delante, no después de
+           haber empezado un proceso (RGPD, art. 13 y 17). -->
+      <div class="sus-que-pasa">
+        <h2 class="sus-subtitulo">Què s'esborra</h2>
+        <p class="sus-ayuda">
+          El teu perfil i les teves dades d'accés, les teves dades de facturació, i les
+          empreses, remitents i remolcs que tinguis desats. És definitiu:
+          no hi ha manera de recuperar el compte.
+        </p>
+
+        <h2 class="sus-subtitulo" style="margin-top:1.25rem">Què es conserva, i per què</h2>
+        <p class="sus-ayuda">
+          Els <strong>ports que ja vas emetre</strong> i les <strong>factures</strong>
+          es conserven sense quedar vinculats a cap compte. No és una decisió
+          nostra: la Llei General Tributària i el Codi de Comerç obliguen a
+          guardar les factures entre 4 i 6 anys, i els documents de control de
+          transport tenen el seu propi termini de conservació. El Reglament
+          General de Protecció de Dades preveu expressament aquest cas
+          (article 17.3.b). <strong>Després d'esborrar el compte ja no els podràs
+          descarregar</strong>, així que desa'ls abans si els necessites.
+        </p>
+      </div>
+
+      <p class="sus-aviso" id="aviso" hidden role="status"></p>
+
+      <!-- PASO 1 · correo -->
+      <section class="sus-paso" id="paso-correo">
+        <form id="form-correo" novalidate>
+          <label class="sus-label" for="correo">El teu correu electrònic</label>
+          <input class="sus-input" type="email" id="correo" name="correo"
+                 autocomplete="email" inputmode="email" required
+                 placeholder="el del teu compte de Mi Carga">
+          <p class="sus-ayuda">
+            T'enviem un codi de 6 dígits per comprovar que el compte és
+            teu. Sense això no esborrem res.
+          </p>
+          <button class="sus-btn" type="submit" id="btn-correo">Enviar-me el codi</button>
+        </form>
+      </section>
+
+      <!-- PASO 2 · código -->
+      <section class="sus-paso" id="paso-codigo" hidden>
+        <form id="form-codigo" novalidate>
+          <label class="sus-label" for="codigo">Codi de 6 dígits</label>
+          <input class="sus-input sus-input-codigo" type="text" id="codigo"
+                 name="codigo" inputmode="numeric" autocomplete="one-time-code"
+                 maxlength="6" pattern="[0-9]{6}" required placeholder="······">
+          <p class="sus-ayuda" id="ayuda-codigo"></p>
+          <button class="sus-btn" type="submit" id="btn-codigo">Continuar</button>
+          <button class="sus-btn-plano" type="button" id="btn-otro-correo">Fer servir un altre correu</button>
+        </form>
+      </section>
+
+      <!-- PASO 3 · confirmación -->
+      <section class="sus-paso" id="paso-confirmar" hidden>
+        <h2 class="sus-subtitulo">Confirma l'esborrat</h2>
+        <p class="sus-ayuda">
+          Vas a eliminar el compte <strong id="correo-confirmado"></strong>.
+          Escriu aquest mateix correu a sota per confirmar-ho.
+        </p>
+        <form id="form-confirmar" novalidate>
+          <label class="sus-label" for="confirmacion">Escriu el teu correu</label>
+          <input class="sus-input" type="email" id="confirmacion" name="confirmacion"
+                 autocomplete="off" autocapitalize="none" spellcheck="false" required>
+          <button class="sus-btn sus-btn-peligro" type="submit" id="btn-borrar" disabled>
+            Esborrar el meu compte definitivament
+          </button>
+          <button class="sus-btn-plano" type="button" id="btn-cancelar">Cancel·lar</button>
+        </form>
+      </section>
+
+      <!-- PASO 4 · hecho -->
+      <section class="sus-paso" id="paso-hecho" hidden>
+        <h2 class="sus-subtitulo">Compte eliminat</h2>
+        <p class="sus-ayuda">
+          El teu compte i les teves dades personals s'han esborrat. Si tornes a
+          necessitar Mi Carga, hauràs de crear un compte nou des de zero.
+        </p>
+        <a class="sus-btn" href="/ca/">Tornar a l'inici</a>
+      </section>
+
+      <!-- Turnstile ------------------------------------------------------
+           El escudo de los envíos que hacen que Supabase mande un correo. Está
+           FUERA de los pasos a propósito: es uno solo para los formularios de
+           esta página, y moverlo de sitio al cambiar de paso obligaría a
+           volver a pintarlo cada vez. Lo esconde y lo enseña `mostrarPaso`.
+
+           Empieza oculto y solo aparece si hay clave configurada; mientras no
+           la haya, esta página funciona exactamente como hasta ahora. -->
+      <div class="sus-turnstile" id="turnstile" hidden></div>
+
+      <p class="sus-pie">
+        Prefereixes que ho fem nosaltres, o tens dubtes? Escriu-nos a
+        <a href="mailto:soporte@micarga.es">soporte@micarga.es</a> o per WhatsApp
+        al <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a>.
+        Atenem les sol·licituds d'esborrat en un màxim de 30 dies, com marca el RGPD.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="/ca/" class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solució digital de generació de documents de control i cartes de port.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga a Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga a Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacte</h4>
+          <p>Correu: <a href="mailto:soporte@micarga.es">soporte@micarga.es</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="aviso-legal">Avís legal</a></p>
+          <p><a href="privacidad">Política de privacitat</a></p>
+          <p><a href="terminos">Termes d'ús</a></p>
+          <p><a href="borrar-cuenta">Eliminar el meu compte</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/ca/borrar-cuenta.js?v=20260911g"></script>
+</body>
+</html>

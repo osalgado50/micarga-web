@@ -55,3 +55,27 @@
 # fichero con un año de caché deje de servirse.
 /videos/micarga-hero.mp4
   Cache-Control: public, max-age=31536000, immutable
+
+# Las versiones traducidas de los scripts. Mismo motivo que los originales: caché
+# corta para que un arreglo llegue el mismo día, y rutas una a una porque
+# Cloudflare ignora los comodines sin avisar.
+/ca/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ca/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ca/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ca/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ca/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/en/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/en/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/en/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/en/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/en/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
