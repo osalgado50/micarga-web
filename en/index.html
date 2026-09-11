@@ -51,7 +51,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260911g">
+  <link rel="stylesheet" href="/styles.css?v=20260911h">
 
   <script type="application/ld+json">
   {
@@ -95,15 +95,27 @@
       {
         "@type": "Offer",
         "name": "Plan mensual",
-        "price": "10",
+        "price": "12.10",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "12.10",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
         "priceValidUntil": "2027-12-31"
       },
       {
         "@type": "Offer",
         "name": "Plan anual",
-        "price": "90",
+        "price": "108.90",
         "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "108.90",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
         "priceValidUntil": "2027-12-31"
       }
     ]
@@ -404,13 +416,15 @@
         <div class="unlimited-compare">
           <div class="compare-col compare-ours">
             <span class="compare-label">Mi Carga</span>
-            <!-- «IVA incluido» va en todos los precios de cara al cliente: el
-                 titular de esta sección promete «sin costes ocultos», y un
-                 precio sin decir si lleva impuestos es justamente un coste
-                 oculto. Los 10 € son el total que se cobra; el ingreso neto es
-                 8,26 €. -->
+            <!-- El precio va SIEMPRE con su aviso de impuestos: el titular de
+                 esta sección promete «sin costes ocultos», y un precio sin
+                 decir si lleva IVA es justamente un coste oculto.
+                 11-09-2026: los precios pasan a ser SIN IVA. Se cobran 12,10 €
+                 al mes y 108,90 € al año; los 10 € y los 90 € son la base. El
+                 número redondo se queda como titular porque es el que se
+                 compara con la competencia, pero nunca va solo. -->
             <span class="compare-value">10&nbsp;€<small>/month</small></span>
-            <span class="compare-detail" style="opacity:.75">VAT included</span>
+            <span class="compare-detail" style="opacity:.75">VAT not included</span>
             <span class="compare-detail">
               <i class="fa-solid fa-infinity"></i> Unlimited documents
             </span>
@@ -445,7 +459,7 @@
         <p class="unlimited-note">
           <i class="fa-solid fa-circle-info"></i>
           The free trial includes 10 documents. Unlimited PDFs come with the
-          subscription: €10/month or €90/year, VAT included.
+          subscription: €10/month or €90/year, VAT not included.
         </p>
       </div>
     </div>
@@ -472,7 +486,7 @@
             <div class="price-card">
               <h3>Monthly plan</h3>
               <div class="price">10€<span>/month</span></div>
-              <p class="price-tax">VAT included</p>
+              <p class="price-tax">+ VAT · €12.10 a month in total</p>
               <p>Right for owner-drivers or fleets who prefer to go month by month. It renews every month and you can cancel whenever you like, with no minimum term.</p>
               <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
                 Start on this plan
@@ -482,7 +496,7 @@
             <div class="price-card popular">
               <h3>Annual plan</h3>
               <div class="price">90€<span>/year</span></div>
-              <p class="price-tax">VAT included</p>
+              <p class="price-tax">+ VAT · €108.90 a year in total</p>
               <!-- Decía «Pago único», y no lo es: es una suscripción que se
                    renueva sola cada doce meses. Un cliente que leyera «pago
                    único» y se encontrara el segundo cargo al año siguiente
@@ -852,6 +866,6 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260911g"></script>
+  <script src="/script.js?v=20260911h"></script>
 </body>
 </html>
