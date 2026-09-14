@@ -131,4 +131,89 @@ document.addEventListener('DOMContentLoaded', () => {
       }, ESPERA_FINAL_MS);
     });
   }
+
+  // --- Los cuatro vídeos de «cómo funciona» ---------------------------------
+  //
+  // Una sola ventana para los cuatro: al pulsar una tarjeta se le cambia el
+  // origen al <video> y se abre. Así no hay cuatro reproductores en la página
+  // compitiendo por la memoria del móvil.
+  //
+  // El <source> se pone con `src` directo sobre el <video>, no con una etiqueta
+  // <source> hija: cambiar un <source> hijo no hace nada si no se llama a
+  // `load()`, y esto es menos código y menos sitios donde equivocarse.
+  const ventana = document.getElementById('video-ventana');
+  const reproductor = document.getElementById('video-ventana-pieza');
+  const tituloVentana = document.getElementById('video-ventana-titulo');
+  const finalVentana = document.getElementById('video-ventana-final');
+  const repetir = document.getElementById('video-ventana-repetir');
+  const tarjetas = document.querySelectorAll('.video-tarjeta');
+
+  if (ventana && reproductor && tarjetas.length) {
+    const arrancar = () => {
+      finalVentana.hidden = true;
+      const enMarcha = reproductor.play();
+      // El navegador puede negarse a arrancar (una política de reproducción, un
+      // fallo de red). No se hace nada: quedan los controles del reproductor a
+      // la vista y se le puede dar al play a mano.
+      if (enMarcha) { enMarcha.catch(() => {}); }
+    };
+
+    tarjetas.forEach((tarjeta) => {
+      tarjeta.addEventListener('click', () => {
+        const fuente = tarjeta.dataset.video;
+        if (!fuente) { return; }
+        // El título se saca del <strong> de la propia tarjeta y no de un
+        // atributo aparte: el generador de /ca y /en traduce el texto que se
+        // ve, no los `data-*`, y con un `data-titulo` la ventana salía en
+        // castellano encima de una página en catalán.
+        const rotulo = tarjeta.querySelector('.video-tarjeta-pie strong');
+        tituloVentana.textContent = rotulo ? rotulo.textContent.trim() : '';
+        reproductor.src = fuente;
+        reproductor.currentTime = 0;
+        finalVentana.hidden = true;
+        // `showModal` en vez de `show`: deja el resto de la página inerte, mete
+        // el foco dentro y hace que Escape cierre, todo sin escribirlo.
+        if (typeof ventana.showModal === 'function') {
+          ventana.showModal();
+        } else {
+          ventana.setAttribute('open', '');
+        }
+        arrancar();
+      });
+    });
+
+    reproductor.addEventListener('ended', () => { finalVentana.hidden = false; });
+    if (repetir) { repetir.addEventListener('click', arrancar); }
+
+    const cerrar = () => {
+      if (typeof ventana.close === 'function') {
+        ventana.close();
+      } else {
+        ventana.removeAttribute('open');
+      }
+    };
+
+    ventana.querySelectorAll('[data-cerrar-video]').forEach((boton) => {
+      boton.addEventListener('click', cerrar);
+    });
+
+    // Pulsar el fondo oscuro también cierra. El <dialog> recibe el clic del
+    // ::backdrop como si fuese suyo, así que basta con mirar si el clic cayó
+    // fuera de la caja de dentro.
+    ventana.addEventListener('click', (evento) => {
+      if (evento.target === ventana) { cerrar(); }
+    });
+
+    // Se limpia SIEMPRE al cerrar, venga el cierre de donde venga —la X, el
+    // fondo o la tecla Escape—. Vaciar el `src` es lo que corta de verdad la
+    // descarga y el sonido; con `pause()` a secas el vídeo sigue bajando por
+    // detrás.
+    ventana.addEventListener('close', () => {
+      reproductor.pause();
+      reproductor.removeAttribute('src');
+      reproductor.load();
+      finalVentana.hidden = true;
+    });
+  }
+
 });

@@ -262,8 +262,12 @@ def _entre_marcas(texto: str, marca: str, contenido: str) -> str:
 # la URL para saltarse la caché. Sin contemplarlo aquí, la hoja de estilos se
 # quedaba relativa y /ca/ pedía /ca/styles.css, que no existe: la página salía
 # sin un solo estilo y sin dar ningún error visible.
+# `data-video` va en la lista por lo mismo: es el atributo con el que las
+# tarjetas de la sección de vídeos le dicen al reproductor qué archivo abrir, y
+# dejarlo relativo hace que desde /ca/ se pida /ca/videos/… y el vídeo no
+# arranque.
 ARCHIVOS = re.compile(
-    r'(src|href|poster)="(?:\.\./)*((?:images|videos)/[^"]+|[\w.-]+\.(?:css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt)(?:\?[^"]*)?)"'
+    r'(src|href|poster|data-video)="(?:\.\./)*((?:images|videos)/[^"]+|[\w.-]+\.(?:css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt)(?:\?[^"]*)?)"'
 )
 
 

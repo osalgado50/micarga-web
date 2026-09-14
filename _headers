@@ -56,6 +56,17 @@
 /videos/micarga-hero.mp4
   Cache-Control: public, max-age=31536000, immutable
 
+# Los cuatro vídeos de «cómo funciona». Misma regla: no cambian, caché de un
+# año, y si algún día se regraba uno se sube con OTRO NOMBRE.
+/videos/micarga-envio-completo.mp4
+  Cache-Control: public, max-age=31536000, immutable
+/videos/micarga-albaran.mp4
+  Cache-Control: public, max-age=31536000, immutable
+/videos/micarga-tareas.mp4
+  Cache-Control: public, max-age=31536000, immutable
+/videos/micarga-ruta.mp4
+  Cache-Control: public, max-age=31536000, immutable
+
 # Las versiones traducidas de los scripts. Mismo motivo que los originales: caché
 # corta para que un arreglo llegue el mismo día, y rutas una a una porque
 # Cloudflare ignora los comodines sin avisar.
