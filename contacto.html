@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="¿Varios conductores? Pide un presupuesto de Mi Carga para tu empresa: cuentas para toda la flota y precio cerrado al año.">
+  <meta name="description" content="Escríbenos y te contestamos. Dinos tu nombre, correo y teléfono, cuéntanos qué necesitas y te respondemos en horas.">
   <meta name="theme-color" content="#0b0f19">
-  <link rel="canonical" href="https://micarga.es/presupuesto">
+  <link rel="canonical" href="https://micarga.es/contacto">
   <!-- ALTERNATIVAS:inicio -->
-  <link rel="alternate" hreflang="es" href="https://micarga.es/presupuesto">
-  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto">
-  <link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto">
-  <link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto">
+  <link rel="alternate" hreflang="es" href="https://micarga.es/contacto">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto">
   <!-- ALTERNATIVAS:fin -->
   <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp,
        que es por donde llega la gente a esta web. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mi Carga">
-  <meta property="og:url" content="https://micarga.es/presupuesto">
-  <meta property="og:title" content="Presupuesto para empresas - Mi Carga">
-  <meta property="og:description" content="¿Varios conductores? Pide un presupuesto de Mi Carga para tu empresa: cuentas para toda la flota y precio cerrado al año.">
+  <meta property="og:url" content="https://micarga.es/contacto">
+  <meta property="og:title" content="Contacto - Mi Carga">
+  <meta property="og:description" content="Escríbenos y te contestamos. Dinos tu nombre, correo y teléfono, cuéntanos qué necesitas y te respondemos en horas.">
   <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <title>Presupuesto para empresas - Mi Carga</title>
+  <title>Contacto - Mi Carga</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -50,9 +50,9 @@
       </nav>
       <!-- IDIOMAS:inicio -->
       <div class="selector-idioma" role="group" aria-label="Idioma">
-          <a href="https://micarga.es/presupuesto" hreflang="es" lang="es" title="Castellano" aria-current="page">ES</a>
-          <a href="https://micarga.es/ca/presupuesto" hreflang="ca" lang="ca" title="Català">CA</a>
-          <a href="https://micarga.es/en/presupuesto" hreflang="en" lang="en" title="English">EN</a>
+          <a href="https://micarga.es/contacto" hreflang="es" lang="es" title="Castellano" aria-current="page">ES</a>
+          <a href="https://micarga.es/ca/contacto" hreflang="ca" lang="ca" title="Català">CA</a>
+          <a href="https://micarga.es/en/contacto" hreflang="en" lang="en" title="English">EN</a>
       </div>
       <!-- IDIOMAS:fin -->
       <button class="mobile-menu-toggle" aria-label="Abrir menú">
@@ -64,68 +64,61 @@
   <main class="sus-page">
     <div class="sus-card">
 
-      <h1 class="sus-title">Presupuesto para tu empresa</h1>
+      <h1 class="sus-title">Escríbenos</h1>
       <p class="sus-lead">
-        Si en tu empresa conduce más de una persona, cada conductor necesita su
-        propia cuenta para firmar sus portes. Cuéntanos cuántos sois y te
-        pasamos un precio cerrado al año, con todas las cuentas incluidas.
+        Cuéntanos qué necesitas y te contestamos. Si nos dejas el teléfono,
+        para muchas cosas es más rápido que te llamemos.
       </p>
 
       <p class="sus-aviso" id="aviso" hidden role="status"></p>
 
       <!-- PASO 1 · el formulario ------------------------------------------ -->
       <section class="sus-paso" id="paso-formulario">
-        <form id="form-presupuesto" novalidate>
+        <form id="form-contacto" novalidate>
 
           <div class="sus-campos">
-            <label class="sus-campo sus-campo-ancho">
-              <span class="sus-label">Empresa *</span>
-              <input class="sus-input" name="empresa" autocomplete="organization"
-                     placeholder="Transportes Pérez S.L." required>
-            </label>
-
             <label class="sus-campo">
               <span class="sus-label">Tu nombre *</span>
-              <input class="sus-input" name="contacto" autocomplete="name"
+              <input class="sus-input" name="nombre" autocomplete="name"
                      placeholder="Ana Pérez" required>
             </label>
 
             <label class="sus-campo">
-              <span class="sus-label">Teléfono <span class="sus-opcional">(opcional)</span></span>
+              <span class="sus-label">Teléfono *</span>
               <input class="sus-input" type="tel" name="telefono" autocomplete="tel"
-                     placeholder="600 111 222">
+                     placeholder="600 11 22 33" required>
             </label>
 
             <label class="sus-campo sus-campo-ancho">
               <span class="sus-label">Correo *</span>
               <input class="sus-input" type="email" name="email" autocomplete="email"
                      placeholder="ana@transportesperez.es" required>
-              <span class="sus-ayuda">Es donde te enviaremos el presupuesto.</span>
-            </label>
-
-            <label class="sus-campo">
-              <span class="sus-label">Personas en la empresa <span class="sus-opcional">(opcional)</span></span>
-              <input class="sus-input" name="conductores" inputmode="numeric"
-                     placeholder="12">
-            </label>
-
-            <label class="sus-campo">
-              <span class="sus-label">Cuentas que necesitáis *</span>
-              <input class="sus-input" name="cuentas" inputmode="numeric"
-                     placeholder="8" required>
-              <span class="sus-ayuda">Una por conductor que vaya a firmar portes.</span>
+              <span class="sus-ayuda">Es donde te contestamos.</span>
             </label>
 
             <label class="sus-campo sus-campo-ancho">
-              <span class="sus-label">Cuéntanos <span class="sus-opcional">(opcional)</span></span>
-              <textarea class="sus-input" name="mensaje" rows="4"
-                        placeholder="Qué transporte hacéis, si lleváis ADR, cuándo querríais empezar…"></textarea>
+              <span class="sus-label">¿De qué se trata?</span>
+              <select class="sus-input" name="motivo">
+                <option>Consulta general</option>
+                <option>Dudas sobre la app</option>
+                <option>Problema con un documento</option>
+                <option>Facturación o suscripción</option>
+                <option>Presupuesto para empresa</option>
+                <option>Protección de datos</option>
+              </select>
+            </label>
+
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Cuéntanos *</span>
+              <textarea class="sus-input" name="mensaje" rows="6" required
+                        placeholder="Explícanos qué te pasa o qué necesitas. Cuanto más concreto, antes te lo resolvemos."></textarea>
             </label>
           </div>
 
           <!-- Campo trampa para robots: escondido por CSS, una persona no lo
-               ve nunca. Si llega relleno, el servidor descarta la petición en
-               silencio. `tabindex="-1"` para que el tabulador tampoco lo pise. -->
+               ve nunca. Si llega relleno, el servidor contesta «enviado» y no
+               manda nada. Decirle que se le ha pillado solo le enseñaría a
+               esquivarla. `tabindex="-1"` para que el tabulador no lo pise. -->
           <div class="sus-trampa" aria-hidden="true">
             <label>No rellenes esto
               <input name="web" tabindex="-1" autocomplete="off">
@@ -136,20 +129,21 @@
                La trampa de arriba solo pilla al robot que rellena todos los
                campos. Esto además obliga a pedir el reto al servidor y a
                contestarlo, y quien no ejecute el JavaScript de la página no
-               llega ni a verlo. La respuesta correcta no está en el HTML: la
+               llega ni a verlo. La respuesta correcta NO está en este HTML: la
                deduce el servidor de la ficha firmada
-               (supabase/functions/_compartido/reto.ts).
+               (supabase/functions/_compartido/reto.ts). Desde el 16-09-2026
+               cada ficha vale UN intento: antes se podían probar las cuatro
+               opciones con la misma.
 
                Se pinta desde JavaScript, no aquí: si la petición del reto
-               falla, el formulario tiene que seguir enviándose igual. Antes
-               perder un poco de defensa que perder una empresa. -->
+               falla, el formulario tiene que seguir enviándose igual. -->
           <div class="sus-reto" id="reto" hidden>
             <span class="sus-label" id="reto-pregunta"></span>
             <div class="sus-reto-opciones" id="reto-opciones" role="group"
                  aria-labelledby="reto-pregunta"></div>
           </div>
 
-          <button class="sus-btn" type="submit" id="btn-enviar">Pedir presupuesto</button>
+          <button class="sus-btn" type="submit" id="btn-enviar">Enviar mensaje</button>
 
           <p class="sus-ayuda">
             Al enviarlo tratamos tus datos para responderte, tal y como se
@@ -161,8 +155,7 @@
       <!-- PASO 2 · enviado ------------------------------------------------- -->
       <section class="sus-paso" id="paso-enviado" hidden>
         <p class="sus-aviso" data-tono="ok">
-          ✓ Hemos recibido tu petición. Te escribimos con el presupuesto en cuanto
-          la veamos.
+          ✓ Mensaje recibido. Te contestamos al correo que nos has dejado.
         </p>
         <p class="sus-ayuda">
           Si tienes prisa, escríbenos por WhatsApp al
@@ -173,8 +166,9 @@
       </section>
 
       <p class="sus-pie">
-        ¿Eres autónomo y conduces tú solo? No necesitas presupuesto:
-        <a href="suscripcion">contrata tu plan aquí</a> por 10 €/mes o 90 €/año, más IVA.
+        ¿Tienes varios conductores? Pide un
+        <a href="presupuesto">presupuesto para tu empresa</a>, con todas las
+        cuentas incluidas.
       </p>
 
     </div>
@@ -223,6 +217,6 @@
     </div>
   </footer>
 
-  <script type="module" src="presupuesto.js?v=20260911h"></script>
+  <script type="module" src="contacto.js?v=20260916a"></script>
 </body>
 </html>

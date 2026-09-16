@@ -38,7 +38,8 @@ IDIOMAS = ("ca", "en")
 
 # Las páginas del sitio, relativas a la raíz. El orden manda en el sitemap.
 PAGINAS = [
-    "index.html", "suscripcion.html", "presupuesto.html", "gracias.html",
+    "index.html", "suscripcion.html", "presupuesto.html", "contacto.html",
+    "gracias.html",
     "borrar-cuenta.html", "aviso-legal.html", "privacidad.html",
     "terminos.html", "cookies.html", "404.html",
     "blog/index.html",

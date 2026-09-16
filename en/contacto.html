@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sou més d&#x27;un conductor? Demana un pressupost de Mi Carga per a la teva empresa: comptes per a tota la flota i preu tancat a l&#x27;any.">
+  <meta name="description" content="Write to us and we&#x27;ll reply. Give us your name, email and phone, tell us what you need and we&#x27;ll answer within hours.">
   <meta name="theme-color" content="#0b0f19">
-  <link rel="canonical" href="https://micarga.es/ca/presupuesto">
+  <link rel="canonical" href="https://micarga.es/en/contacto">
   <!-- ALTERNATIVAS:inicio -->
-  <link rel="alternate" hreflang="es" href="https://micarga.es/presupuesto">
-  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto">
-  <link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto">
-  <link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto">
+  <link rel="alternate" hreflang="es" href="https://micarga.es/contacto">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto">
   <!-- ALTERNATIVAS:fin -->
   <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp,
        que es por donde llega la gente a esta web. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mi Carga">
-  <meta property="og:url" content="https://micarga.es/ca/presupuesto">
-  <meta property="og:title" content="Pressupost per a empreses - Mi Carga">
-  <meta property="og:description" content="Sou més d&#x27;un conductor? Demana un pressupost de Mi Carga per a la teva empresa: comptes per a tota la flota i preu tancat a l&#x27;any.">
+  <meta property="og:url" content="https://micarga.es/en/contacto">
+  <meta property="og:title" content="Contact - Mi Carga">
+  <meta property="og:description" content="Write to us and we&#x27;ll reply. Give us your name, email and phone, tell us what you need and we&#x27;ll answer within hours.">
   <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
-  <meta property="og:locale" content="ca_ES">
+  <meta property="og:locale" content="en_GB">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <title>Pressupost per a empreses - Mi Carga</title>
+  <title>Contact - Mi Carga</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,24 +38,24 @@
 
   <header class="navbar">
     <div class="nav-container">
-      <a href="/ca/" class="logo">
+      <a href="/en/" class="logo">
         <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
         <span>Mi <mark class="accent-text">Carga</mark></span>
       </a>
       <nav class="nav-links">
-        <a href="/ca/">Inici</a>
-        <a href="/ca/#tarifas">Preus</a>
+        <a href="/en/">Home</a>
+        <a href="/en/#tarifas">Pricing</a>
         <a href="blog/">Blog</a>
-        <a href="https://app.micarga.es/" class="nav-btn">Obrir l'app</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Open the app</a>
       </nav>
       <!-- IDIOMAS:inicio -->
       <div class="selector-idioma" role="group" aria-label="Idioma">
-          <a href="https://micarga.es/presupuesto" hreflang="es" lang="es" title="Castellano">ES</a>
-          <a href="https://micarga.es/ca/presupuesto" hreflang="ca" lang="ca" title="Català" aria-current="page">CA</a>
-          <a href="https://micarga.es/en/presupuesto" hreflang="en" lang="en" title="English">EN</a>
+          <a href="https://micarga.es/contacto" hreflang="es" lang="es" title="Castellano">ES</a>
+          <a href="https://micarga.es/ca/contacto" hreflang="ca" lang="ca" title="Català">CA</a>
+          <a href="https://micarga.es/en/contacto" hreflang="en" lang="en" title="English" aria-current="page">EN</a>
       </div>
       <!-- IDIOMAS:fin -->
-      <button class="mobile-menu-toggle" aria-label="Obrir menú">
+      <button class="mobile-menu-toggle" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
@@ -64,70 +64,62 @@
   <main class="sus-page">
     <div class="sus-card">
 
-      <h1 class="sus-title">Pressupost per a la teva empresa</h1>
+      <h1 class="sus-title">Write to us</h1>
       <p class="sus-lead">
-        Si a la teva empresa condueix més d'una persona, cada conductor necessita el
-        seu propi compte per signar els seus ports. Explica'ns quants sou i et
-        passem un preu tancat a l'any, amb tots els comptes inclosos.
+        Tell us what you need and we'll get back to you. If you leave a phone number, for many things it's quicker if we call you.
       </p>
 
       <p class="sus-aviso" id="aviso" hidden role="status"></p>
 
       <!-- PASO 1 · el formulario ------------------------------------------ -->
       <section class="sus-paso" id="paso-formulario">
-        <form id="form-presupuesto" novalidate>
+        <form id="form-contacto" novalidate>
 
           <div class="sus-campos">
-            <label class="sus-campo sus-campo-ancho">
-              <span class="sus-label">Empresa *</span>
-              <input class="sus-input" name="empresa" autocomplete="organization"
-                     placeholder="Transports Pérez S.L." required>
+            <label class="sus-campo">
+              <span class="sus-label">Your name *</span>
+              <input class="sus-input" name="nombre" autocomplete="name"
+                     placeholder="Ana Pérez" required>
             </label>
 
             <label class="sus-campo">
-              <span class="sus-label">El teu nom *</span>
-              <input class="sus-input" name="contacto" autocomplete="name"
-                     placeholder="Anna Pérez" required>
-            </label>
-
-            <label class="sus-campo">
-              <span class="sus-label">Telèfon <span class="sus-opcional">(opcional)</span></span>
+              <span class="sus-label">Phone *</span>
               <input class="sus-input" type="tel" name="telefono" autocomplete="tel"
-                     placeholder="600 111 222">
+                     placeholder="600 11 22 33" required>
             </label>
 
             <label class="sus-campo sus-campo-ancho">
-              <span class="sus-label">Correu *</span>
+              <span class="sus-label">Email *</span>
               <input class="sus-input" type="email" name="email" autocomplete="email"
-                     placeholder="anna@transportsperez.cat" required>
-              <span class="sus-ayuda">És on t'enviarem el pressupost.</span>
-            </label>
-
-            <label class="sus-campo">
-              <span class="sus-label">Persones a l'empresa <span class="sus-opcional">(opcional)</span></span>
-              <input class="sus-input" name="conductores" inputmode="numeric"
-                     placeholder="12">
-            </label>
-
-            <label class="sus-campo">
-              <span class="sus-label">Comptes que necessiteu *</span>
-              <input class="sus-input" name="cuentas" inputmode="numeric"
-                     placeholder="8" required>
-              <span class="sus-ayuda">Un per cada conductor que hagi de signar ports.</span>
+                     placeholder="ana@transportesperez.es" required>
+              <span class="sus-ayuda">That's where we'll reply.</span>
             </label>
 
             <label class="sus-campo sus-campo-ancho">
-              <span class="sus-label">Explica'ns <span class="sus-opcional">(opcional)</span></span>
-              <textarea class="sus-input" name="mensaje" rows="4"
-                        placeholder="Quin transport feu, si porteu ADR, quan voldríeu començar…"></textarea>
+              <span class="sus-label">What is it about?</span>
+              <select class="sus-input" name="motivo">
+                <option>General enquiry</option>
+                <option>Questions about the app</option>
+                <option>Problem with a document</option>
+                <option>Billing or subscription</option>
+                <option>Quote for a company</option>
+                <option>Data protection</option>
+              </select>
+            </label>
+
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Tell us *</span>
+              <textarea class="sus-input" name="mensaje" rows="6" required
+                        placeholder="Tell us what&#x27;s happening or what you need. The more specific, the sooner we can sort it out."></textarea>
             </label>
           </div>
 
           <!-- Campo trampa para robots: escondido por CSS, una persona no lo
-               ve nunca. Si llega relleno, el servidor descarta la petición en
-               silencio. `tabindex="-1"` para que el tabulador tampoco lo pise. -->
+               ve nunca. Si llega relleno, el servidor contesta «enviado» y no
+               manda nada. Decirle que se le ha pillado solo le enseñaría a
+               esquivarla. `tabindex="-1"` para que el tabulador no lo pise. -->
           <div class="sus-trampa" aria-hidden="true">
-            <label>No omplis això
+            <label>Don't fill this in
               <input name="web" tabindex="-1" autocomplete="off">
             </label>
           </div>
@@ -136,24 +128,25 @@
                La trampa de arriba solo pilla al robot que rellena todos los
                campos. Esto además obliga a pedir el reto al servidor y a
                contestarlo, y quien no ejecute el JavaScript de la página no
-               llega ni a verlo. La respuesta correcta no está en el HTML: la
+               llega ni a verlo. La respuesta correcta NO está en este HTML: la
                deduce el servidor de la ficha firmada
-               (supabase/functions/_compartido/reto.ts).
+               (supabase/functions/_compartido/reto.ts). Desde el 16-09-2026
+               cada ficha vale UN intento: antes se podían probar las cuatro
+               opciones con la misma.
 
                Se pinta desde JavaScript, no aquí: si la petición del reto
-               falla, el formulario tiene que seguir enviándose igual. Antes
-               perder un poco de defensa que perder una empresa. -->
+               falla, el formulario tiene que seguir enviándose igual. -->
           <div class="sus-reto" id="reto" hidden>
             <span class="sus-label" id="reto-pregunta"></span>
             <div class="sus-reto-opciones" id="reto-opciones" role="group"
                  aria-labelledby="reto-pregunta"></div>
           </div>
 
-          <button class="sus-btn" type="submit" id="btn-enviar">Demanar pressupost</button>
+          <button class="sus-btn" type="submit" id="btn-enviar">Send message</button>
 
           <p class="sus-ayuda">
-            En enviar-ho tractem les teves dades per respondre't, tal com
-            s'explica a la <a href="privacidad">política de privacitat</a>.
+            By sending this you agree to us handling your details in order to reply, as
+            set out in the <a href="privacidad">privacy policy</a>.
           </p>
         </form>
       </section>
@@ -161,20 +154,19 @@
       <!-- PASO 2 · enviado ------------------------------------------------- -->
       <section class="sus-paso" id="paso-enviado" hidden>
         <p class="sus-aviso" data-tono="ok">
-          ✓ Hem rebut la teva petició. T'escrivim amb el pressupost tan bon punt
-          la vegem.
+          ✓ Message received. We'll reply to the email you left us.
         </p>
         <p class="sus-ayuda">
-          Si tens pressa, escriu-nos per WhatsApp al
+          In a hurry? Message us on WhatsApp at
           <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a>
-          i ho mirem al moment.
+          and we'll look at it right away.
         </p>
-        <a class="sus-btn" href="/ca/">Tornar a l'inici</a>
+        <a class="sus-btn" href="/en/">Back to the home page</a>
       </section>
 
       <p class="sus-pie">
-        Ets autònom i condueixes tu sol? No necessites pressupost:
-        <a href="suscripcion">contracta el teu pla aquí</a> per 10 €/mes o 90 €/any, més IVA.
+        Several drivers? Ask for a
+        <a href="presupuesto">quote for your company</a>, with every account included.
       </p>
 
     </div>
@@ -183,11 +175,11 @@
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
-        <a href="/ca/" class="logo">
+        <a href="/en/" class="logo">
           <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
           <span>Mi <mark class="accent-text">Carga</mark></span>
         </a>
-        <p>Solució digital de generació de documents de control i cartes de port. Amb el suport d'Ecosmep per a validacions ADR.</p>
+        <p>Digital issuing of transport control documents and consignment notes. Backed by Ecosmep for ADR validation.</p>
         <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
              comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
              Facebook): esos identifican a QUIÉN compartió el perfil, no al
@@ -196,33 +188,33 @@
              para no depender de un atajo que puede caducar. -->
         <div class="footer-social">
           <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
-             aria-label="Mi Carga a Instagram" title="Instagram">
+             aria-label="Mi Carga on Instagram" title="Instagram">
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
           </a>
           <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
-             aria-label="Mi Carga a Facebook" title="Facebook">
+             aria-label="Mi Carga on Facebook" title="Facebook">
             <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
           </a>
         </div>
       </div>
       <div class="footer-right">
         <div class="footer-links-group">
-          <h4>Contacte</h4>
-          <p><a href="contacto">Escriu-nos</a></p>
+          <h4>Contact</h4>
+          <p><a href="contacto">Write to us</a></p>
           <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
         </div>
         <div class="footer-links-group">
           <h4>Legal</h4>
-          <p><a href="aviso-legal">Avís legal</a></p>
-          <p><a href="privacidad">Política de privacitat</a></p>
-          <p><a href="terminos">Termes d'ús</a></p>
-          <p><a href="borrar-cuenta">Eliminar el meu compte</a></p>
-          <p><a href="cookies">Política de galetes</a></p>
+          <p><a href="aviso-legal">Legal notice</a></p>
+          <p><a href="privacidad">Privacy policy</a></p>
+          <p><a href="terminos">Terms of use</a></p>
+          <p><a href="borrar-cuenta">Delete my account</a></p>
+          <p><a href="cookies">Cookie policy</a></p>
         </div>
       </div>
     </div>
   </footer>
 
-  <script type="module" src="/ca/presupuesto.js?v=20260911h"></script>
+  <script type="module" src="/contacto.js?v=20260916a"></script>
 </body>
 </html>
