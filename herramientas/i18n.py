@@ -47,7 +47,7 @@ IDIOMAS = ("ca", "en", "pt", "fr", "de", "it", "pl", "ro")
 # se pierde.
 #
 # Un idioma se añade aquí cuando `comprobar` dice 0 frases sin traducir.
-IDIOMAS_PUBLICADOS = ("ca", "en", "pt", "fr", "de")
+IDIOMAS_PUBLICADOS = ("ca", "en", "pt", "fr", "de", "it")
 
 # Las páginas del sitio, relativas a la raíz. El orden manda en el sitemap.
 PAGINAS = [
