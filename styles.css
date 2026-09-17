@@ -2521,35 +2521,98 @@ body > section:not(.hero-section) > .container > h2 {
    El idioma tiene que verse siempre: quien entra en catalán y ve la web en
    castellano no va a abrir un menú a buscar; se va. */
 
+/* Selector de idioma: un <details> nativo.
+   Con tres idiomas cabían en fila; con nueve, no. Se usa <details> y no un menú
+   de JavaScript porque dentro van enlaces de verdad: Google los sigue, el
+   teclado los recorre y siguen funcionando con los scripts caídos. Un menú
+   hecho a mano habría dejado ocho idiomas invisibles para el buscador, que es
+   justo lo contrario de para lo que se traduce una web. */
 .selector-idioma {
+  position: relative;
+  flex: none;
+}
+
+.selector-idioma > summary {
   display: flex;
   align-items: center;
-  gap: 2px;
-  padding: 3px;
+  gap: 6px;
+  padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.04);
-}
-
-.selector-idioma a {
-  display: block;
-  padding: 5px 10px;
-  border-radius: 100px;
   color: var(--text-muted);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.03em;
+  line-height: 1;
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+/* Safari pinta su propio triángulo y no atiende a `list-style`. */
+.selector-idioma > summary::-webkit-details-marker { display: none; }
+.selector-idioma > summary::after {
+  content: "";
+  width: 5px; height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.selector-idioma[open] > summary { color: var(--text-heading); border-color: var(--primary); }
+.selector-idioma > summary:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+.selector-idioma-lista {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 200;
+  min-width: 190px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+
+.selector-idioma-lista a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
+}
+.selector-idioma-lista a:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-heading); }
+
+/* La bandera. Ancho FIJO para que los nombres queden alineados aunque Windows
+   pinte las dos letras del país en vez del emoji, que es lo que hace. */
+.bandera {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  flex: none;
+  font-size: 1.05em;
   line-height: 1;
 }
-.selector-idioma a:hover { color: var(--text-heading); }
+/* La senyera del catalán va en SVG: no existe emoji de bandera para un idioma
+   que no es un país. */
+.bandera-svg {
+  width: 1.2em;
+  height: auto;
+  border-radius: 2px;
+  display: block;
+}
 
-/* El idioma en el que se está mirando la página. `aria-current` en vez de una
-   clase: es el atributo que ya dice eso, y así lo anuncia también un lector de
-   pantalla en vez de solo pintarlo. */
-.selector-idioma a[aria-current="page"] {
-  background: var(--primary);
-  color: #fff;
+@media (max-width: 480px) {
+  .selector-idioma-codigo { display: none; }
+  .selector-idioma-lista { min-width: 170px; }
 }
 
 @media (max-width: 900px) {

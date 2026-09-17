@@ -48,11 +48,13 @@
         <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="nav-btn">Try it free</a>
       </nav>
       <!-- IDIOMAS:inicio -->
-      <div class="selector-idioma" role="group" aria-label="Idioma">
-          <a href="https://micarga.es/aviso-legal" hreflang="es" lang="es" title="Castellano">ES</a>
-          <a href="https://micarga.es/ca/aviso-legal" hreflang="ca" lang="ca" title="Català">CA</a>
-          <a href="https://micarga.es/en/aviso-legal" hreflang="en" lang="en" title="English" aria-current="page">EN</a>
-      </div>
+      <details class="selector-idioma">
+        <summary aria-label="English" title="English"><span class="bandera">🇬🇧</span><span class="selector-idioma-codigo">EN</span></summary>
+        <div class="selector-idioma-lista">
+            <a href="https://micarga.es/aviso-legal" hreflang="es" lang="es"><span class="bandera">🇪🇸</span>Castellano</a>
+            <a href="https://micarga.es/ca/aviso-legal" hreflang="ca" lang="ca"><span class="bandera"><svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#FCDD09"/><path stroke="#DA121A" stroke-width=".67" d="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/></svg></span>Català</a>
+        </div>
+      </details>
       <!-- IDIOMAS:fin -->
       <button class="mobile-menu-toggle" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>

@@ -34,7 +34,20 @@ import sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-IDIOMAS = ("ca", "en")
+# Los idiomas que EXISTEN como diccionario y se pueden ir rellenando.
+IDIOMAS = ("ca", "en", "pt", "fr", "de", "it", "pl", "ro")
+
+# Los que SALEN A LA WEB.
+#
+# ⚠️ UN IDIOMA NO SE PUBLICA HASTA QUE ESTÁ TRADUCIDO, y no es una manía: el
+# generador cae al castellano en cada frase que falte, así que publicar un
+# idioma a medias pone 22 páginas de texto castellano bajo `hreflang="pt"`.
+# Para Google eso es contenido duplicado a gran escala y una señal de baja
+# calidad sobre TODO el dominio, no solo sobre esas páginas. Se gana menos que
+# se pierde.
+#
+# Un idioma se añade aquí cuando `comprobar` dice 0 frases sin traducir.
+IDIOMAS_PUBLICADOS = ("ca", "en")
 
 # Las páginas del sitio, relativas a la raíz. El orden manda en el sitemap.
 PAGINAS = [
@@ -63,6 +76,12 @@ IGUAL_EN_TODOS = {
     "Mi", "Carga", "Mi Carga", "ADR", "DeCA", "CMR", "ROTT", "PDF", "QR", "PayPal",
     "WhatsApp", "Instagram", "Facebook", "Android", "iPhone", "Blog", "Stripe",
     "RESITECH 2021, S.L.U.", "micarga.es", "soporte@micarga.es",
+    # El nombre de cada idioma en su propio idioma. Idéntico en las nueve
+    # versiones a propósito —«Português» es «Português» también en la página
+    # polaca—, así que no pasa por el diccionario. Va como literal y no como
+    # `NOMBRE_IDIOMA.values()` porque ese diccionario se define más abajo.
+    "Castellano", "Català", "English", "Português", "Français", "Deutsch",
+    "Italiano", "Polski", "Română",
     # Las etiquetas del propio selector de idioma. El nombre de un idioma se
     # escribe en ese idioma, en las tres versiones: quien busca el catalán
     # busca «Català», no «Catalán» ni «Catalan».
@@ -193,9 +212,54 @@ def cmd_comprobar():
 
 DOMINIO = "https://micarga.es"
 
-NOMBRE_IDIOMA = {"es": "Castellano", "ca": "Català", "en": "English"}
-ETIQUETA_IDIOMA = {"es": "ES", "ca": "CA", "en": "EN"}
-LOCALE_OG = {"es": "es_ES", "ca": "ca_ES", "en": "en_GB"}
+# El nombre de cada idioma EN SU PROPIO IDIOMA. Quien busca el suyo en una
+# lista lo reconoce por cómo se escribe, no por cómo lo llamemos nosotros.
+NOMBRE_IDIOMA = {
+    "es": "Castellano", "ca": "Català", "en": "English", "pt": "Português",
+    "fr": "Français", "de": "Deutsch", "it": "Italiano", "pl": "Polski",
+    "ro": "Română",
+}
+ETIQUETA_IDIOMA = {
+    "es": "ES", "ca": "CA", "en": "EN", "pt": "PT", "fr": "FR",
+    "de": "DE", "it": "IT", "pl": "PL", "ro": "RO",
+}
+
+# La bandera de cada idioma.
+#
+# ⚠️ DOS TRAMPAS, y las dos se ven en cuanto se prueba en otro ordenador:
+#   1. EL CATALÁN NO TIENE BANDERA EN UNICODE. Los emoji de bandera son pares
+#      de letras de país (ES, PT…) y Cataluña no tiene código ISO de país. Por
+#      eso el catalán lleva una senyera dibujada en SVG: ponerle la de España
+#      sería decir que catalán = España.
+#   2. WINDOWS NO PINTA LOS EMOJI DE BANDERA. Chrome en Windows enseña las dos
+#      letras dentro de una cajita. Por eso al lado va SIEMPRE el nombre del
+#      idioma escrito: si el emoji no sale, la lista se sigue leyendo igual.
+#
+# Y el aviso de fondo: una bandera NO es un idioma. El portugués no es solo de
+# Portugal ni el alemán solo de Alemania. Se usan porque se reconocen de un
+# vistazo, pero lo que manda es el nombre escrito al lado.
+SENYERA = (
+    '<svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true">'
+    '<rect width="9" height="6" fill="#FCDD09"/>'
+    '<path stroke="#DA121A" stroke-width=".67" '
+    'd="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/>'
+    '</svg>'
+)
+BANDERA = {
+    "es": "\U0001F1EA\U0001F1F8", "ca": SENYERA, "en": "\U0001F1EC\U0001F1E7",
+    "pt": "\U0001F1F5\U0001F1F9", "fr": "\U0001F1EB\U0001F1F7",
+    "de": "\U0001F1E9\U0001F1EA", "it": "\U0001F1EE\U0001F1F9",
+    "pl": "\U0001F1F5\U0001F1F1", "ro": "\U0001F1F7\U0001F1F4",
+}
+
+LOCALE_OG = {
+    "es": "es_ES", "ca": "ca_ES", "en": "en_GB", "pt": "pt_PT",
+    "fr": "fr_FR", "de": "de_DE", "it": "it_IT", "pl": "pl_PL",
+    "ro": "ro_RO",
+}
+
+# Todos, con el castellano delante: es el original del que salen los demás.
+TODOS_LOS_IDIOMAS = ("es",) + IDIOMAS_PUBLICADOS
 
 # Las URL NO se traducen: /ca/suscripcion, no /ca/subscripcio. Traducir los
 # slugs daría una miaja de SEO más, pero a cambio cada enlace interno, cada
@@ -218,13 +282,13 @@ def url_de(pagina: str, idioma: str) -> str:
 def bloque_alternativas(pagina: str) -> str:
     """Las etiquetas hreflang: «esta misma página, en los otros idiomas».
 
-    Sin esto, Google trata las tres versiones como páginas distintas que dicen
-    lo mismo y se las come entre ellas. Con esto sabe que son la misma y le
-    enseña a cada uno la suya. `x-default` apunta al castellano: es el idioma
-    del mercado y el original del que salen los otros dos.
+    Sin esto, Google trata las versiones como páginas distintas que dicen lo
+    mismo y se las come entre ellas. Con esto sabe que son la misma y le enseña
+    a cada uno la suya. `x-default` apunta al castellano: es el idioma del
+    mercado y el original del que salen los demás.
     """
     lineas = [f'  <link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}">'
-              for i in ("es", "ca", "en")]
+              for i in TODOS_LOS_IDIOMAS]
     lineas.append(f'  <link rel="alternate" hreflang="x-default" href="{url_de(pagina, "es")}">')
     return "\n".join(lineas)
 
@@ -232,19 +296,34 @@ def bloque_alternativas(pagina: str) -> str:
 def bloque_idiomas(pagina: str, actual: str) -> str:
     """El selector de idioma de la barra de navegación.
 
-    Son enlaces de verdad, no un desplegable con JavaScript: así los sigue
-    Google y funcionan con el botón del medio, con el teclado y sin scripts.
+    ES UN `<details>`, NO UN MENÚ DE JAVASCRIPT, y eso es deliberado: dentro
+    van enlaces de verdad, así que Google los sigue, funcionan con el botón del
+    medio, con el teclado y con el JavaScript caído. Un desplegable hecho a
+    mano con scripts habría dejado ocho idiomas invisibles para el buscador,
+    que es justo lo contrario de para lo que se traduce una web.
+
+    Con tres idiomas cabían en fila. Con nueve, no: de ahí el desplegable.
     """
     enlaces = []
-    for i in ("es", "ca", "en"):
-        activo = ' aria-current="page"' if i == actual else ""
+    for i in TODOS_LOS_IDIOMAS:
+        if i == actual:
+            continue
         enlaces.append(
-            f'          <a href="{url_de(pagina, i)}" hreflang="{i}" lang="{i}"'
-            f' title="{NOMBRE_IDIOMA[i]}"{activo}>{ETIQUETA_IDIOMA[i]}</a>'
+            f'            <a href="{url_de(pagina, i)}" hreflang="{i}" lang="{i}">'
+            f'<span class="bandera">{BANDERA[i]}</span>{NOMBRE_IDIOMA[i]}</a>'
         )
     dentro = "\n".join(enlaces)
-    return (f'      <div class="selector-idioma" role="group" aria-label="Idioma">\n'
-            f'{dentro}\n      </div>')
+    return (
+        '      <details class="selector-idioma">\n'
+        f'        <summary aria-label="{NOMBRE_IDIOMA[actual]}" '
+        f'title="{NOMBRE_IDIOMA[actual]}">'
+        f'<span class="bandera">{BANDERA[actual]}</span>'
+        f'<span class="selector-idioma-codigo">{ETIQUETA_IDIOMA[actual]}</span></summary>\n'
+        '        <div class="selector-idioma-lista">\n'
+        f'{dentro}\n'
+        '        </div>\n'
+        '      </details>'
+    )
 
 
 def _entre_marcas(texto: str, marca: str, contenido: str) -> str:
@@ -352,6 +431,24 @@ AVISO_IDIOMA = {
     "en": ("This is a courtesy translation. In the event of any discrepancy "
            "between versions, the Spanish text prevails: it is the original and "
            "the one with legal effect."),
+    "pt": ("Esta é uma tradução de cortesia. Em caso de divergência entre as "
+           "versões, prevalece o texto em espanhol, que é o original e o que "
+           "tem efeitos legais."),
+    "fr": ("Ceci est une traduction de courtoisie. En cas de divergence entre "
+           "les versions, le texte espagnol prévaut : il s'agit de l'original "
+           "et de la version ayant valeur juridique."),
+    "de": ("Dies ist eine unverbindliche Übersetzung. Bei Abweichungen zwischen "
+           "den Fassungen ist der spanische Text maßgeblich: Er ist das "
+           "Original und die rechtlich verbindliche Fassung."),
+    "it": ("Questa è una traduzione di cortesia. In caso di discrepanza tra le "
+           "versioni, prevale il testo in spagnolo, che è l'originale e quello "
+           "con effetti legali."),
+    "pl": ("To tłumaczenie ma charakter informacyjny. W razie rozbieżności "
+           "między wersjami rozstrzygający jest tekst hiszpański, który jest "
+           "oryginałem i ma moc prawną."),
+    "ro": ("Aceasta este o traducere de curtoazie. În caz de neconcordanță "
+           "între versiuni, prevalează textul în spaniolă, care este originalul "
+           "și cel cu efecte juridice."),
 }
 
 
@@ -479,7 +576,10 @@ def cmd_generar():
         s = _entre_marcas(s, "IDIOMAS", bloque_idiomas(pagina, "es"))
         ruta.write_text(s, encoding="utf-8")
 
-    for idioma in IDIOMAS:
+    # Solo los PUBLICADOS. Un idioma a medias no se escribe en disco siquiera:
+    # si la carpeta existe, Cloudflare la sirve, y Google acaba encontrándola
+    # aunque no esté ni en el sitemap ni en los hreflang.
+    for idioma in IDIOMAS_PUBLICADOS:
         dicc = diccionario(idioma)
         dicc_js = diccionario_js(idioma)
         faltan = set()
@@ -551,10 +651,12 @@ def cmd_sitemap():
         frecuencia = "weekly" if pagina in ("index.html", "blog/index.html") else "monthly"
         alternativas = "\n".join(
             f'    <xhtml:link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}"/>'
-            for i in ("es", "ca", "en")
+            for i in TODOS_LOS_IDIOMAS
         )
         alternativas += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{url_de(pagina, "es")}"/>'
-        for idioma in ("es",) + IDIOMAS:
+        # Solo los publicados: meter en el sitemap un idioma sin traducir es
+        # invitar a Google a indexar 22 páginas de castellano con otra etiqueta.
+        for idioma in TODOS_LOS_IDIOMAS:
             filas.append(
                 f"  <url>\n"
                 f"    <loc>{url_de(pagina, idioma)}</loc>\n"
