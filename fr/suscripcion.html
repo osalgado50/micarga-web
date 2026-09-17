@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Activez votre abonnement Mi Carga. Entrez avec le compte que vous avez déjà dans l&#x27;appli et souscrivez la formule mensuelle ou annuelle.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/fr/suscripcion">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/suscripcion">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion">
+  <link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion">
+  <link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion">
+  <!-- ALTERNATIVAS:fin -->
+  <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp,
+       que es por donde llega la gente a esta web. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mi Carga">
+  <meta property="og:url" content="https://micarga.es/fr/suscripcion">
+  <meta property="og:title" content="Activer l&#x27;abonnement - Mi Carga">
+  <meta property="og:description" content="Activez votre abonnement Mi Carga. Entrez avec le compte que vous avez déjà dans l&#x27;appli et souscrivez la formule mensuelle ou annuelle.">
+  <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- noindex: es una página transaccional que exige sesión. Indexarla solo
+       llevaría a gente sin cuenta a una pantalla que no puede usar. -->
+  <meta name="robots" content="noindex, follow">
+  <title>Activer l'abonnement - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css?v=20260911h">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/fr/" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/#tarifas">Tarifs</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Ouvrir l'appli</a>
+      </nav>
+      <!-- IDIOMAS:inicio -->
+      <details class="selector-idioma">
+        <summary aria-label="Français" title="Français"><span class="bandera">🇫🇷</span><span class="selector-idioma-codigo">FR</span></summary>
+        <div class="selector-idioma-lista">
+            <a href="https://micarga.es/suscripcion" hreflang="es" lang="es"><span class="bandera">🇪🇸</span>Castellano</a>
+            <a href="https://micarga.es/ca/suscripcion" hreflang="ca" lang="ca"><span class="bandera"><svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#FCDD09"/><path stroke="#DA121A" stroke-width=".67" d="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/></svg></span>Català</a>
+            <a href="https://micarga.es/en/suscripcion" hreflang="en" lang="en"><span class="bandera">🇬🇧</span>English</a>
+            <a href="https://micarga.es/pt/suscripcion" hreflang="pt" lang="pt"><span class="bandera">🇵🇹</span>Português</a>
+        </div>
+      </details>
+      <!-- IDIOMAS:fin -->
+      <button class="mobile-menu-toggle" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <h1 class="sus-title">Activez votre abonnement</h1>
+      <p class="sus-lead">
+        Tout le processus se fait ici. Si vous avez déjà un compte Mi Carga, vous entrez avec
+        celui-ci et nous ne vous demandons que ce qui manque ; sinon, vous le créez au passage.
+        Les 10 transports d'essai n'expirent pas et ne sont pas perdus si vous vous abonnez avant
+        de les épuiser.
+      </p>
+
+      <!-- Banda de aviso reutilizada por todos los pasos. Un único sitio donde
+           se dicen las cosas, para que un error no aparezca dos veces ni se
+           quede uno viejo colgado al cambiar de paso. -->
+      <p class="sus-aviso" id="aviso" hidden role="status"></p>
+
+      <!-- PASO 1 · correo ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-correo">
+        <form id="form-correo" novalidate>
+          <label class="sus-label" for="correo">Votre adresse e-mail</label>
+          <input class="sus-input" type="email" id="correo" name="correo"
+                 autocomplete="email" inputmode="email" required
+                 placeholder="celle que vous utilisez dans l&#x27;appli">
+          <p class="sus-ayuda">
+            Nous vérifions si vous avez déjà un compte avec cette adresse. Si c'est le cas, vous entrez avec
+            un code et vous n'avez pas besoin de vous souvenir du mot de passe.
+          </p>
+          <button class="sus-btn" type="submit" id="btn-correo">
+            Continuer
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 1 bis · alta, solo si el correo no tiene cuenta ------------- -->
+      <section class="sus-paso" id="paso-alta" hidden>
+        <h2 class="sus-subtitulo">Créez votre compte</h2>
+        <p class="sus-ayuda">
+          Il n'existe aucun compte avec <strong id="alta-correo"></strong>. Nous le créons
+          maintenant : c'est le même compte avec lequel vous entrerez ensuite dans l'appli.
+        </p>
+        <form id="form-alta" novalidate>
+          <div class="sus-campos">
+            <label class="sus-campo">
+              <span class="sus-label">Prénom</span>
+              <input class="sus-input" name="first_name" autocomplete="given-name" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Nom</span>
+              <input class="sus-input" name="last_name" autocomplete="family-name" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">NIF / CIF</span>
+              <input class="sus-input" name="nif_cif" autocomplete="off" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Téléphone portable</span>
+              <input class="sus-input" name="phone" type="tel" inputmode="tel"
+                     autocomplete="tel" placeholder="600 11 22 33" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Entreprise</span>
+              <input class="sus-input" name="company_name" autocomplete="organization" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Mot de passe pour l'appli</span>
+              <input class="sus-input" name="password" type="password"
+                     autocomplete="new-password" minlength="6" required>
+              <span class="sus-ayuda">
+                6 caractères minimum. Il vous servira à entrer dans l'appli depuis le téléphone.
+              </span>
+            </label>
+          </div>
+          <label class="sus-acepto">
+            <input type="checkbox" name="acepto" required>
+            <span>
+              J'ai lu et j'accepte les <a href="terminos" target="_blank" rel="noopener">conditions d'utilisation</a>
+              et la <a href="privacidad" target="_blank" rel="noopener">politique de confidentialité</a>.
+            </span>
+          </label>
+          <button class="sus-btn" type="submit" id="btn-alta">Créer le compte et continuer</button>
+          <button class="sus-btn-plano" type="button" id="btn-alta-otro-correo">
+            Je me suis trompé d'adresse
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 2 · código ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-codigo" hidden>
+        <form id="form-codigo" novalidate>
+          <label class="sus-label" for="codigo">Code d'accès</label>
+          <!-- Ni `maxlength="6"` ni `pattern="[0-9]{6}"`: la longitud del código
+               la decide Supabase en su configuración, no nosotros. Estaba fijada
+               en 6 y el servidor manda 8, así que el octavo dígito no se podía
+               ni teclear y el código correcto se rechazaba. Se admite el rango
+               que Supabase permite configurar (de 6 a 10). -->
+          <input class="sus-input sus-input-codigo" type="text" id="codigo"
+                 name="codigo" inputmode="numeric" autocomplete="one-time-code"
+                 maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">
+          <p class="sus-ayuda" id="ayuda-codigo"></p>
+          <button class="sus-btn" type="submit" id="btn-codigo">Entrer</button>
+          <button class="sus-btn-plano" type="button" id="btn-usar-contrasena">
+            Je préfère entrer avec mon mot de passe
+          </button>
+          <button class="sus-btn-plano" type="button" id="btn-otro-correo">
+            Utiliser une autre adresse
+          </button>
+        </form>
+
+        <!-- Alternativa al código para quien ya tiene cuenta y se acuerda de su
+             contraseña. Fuera del <form> del código: son dos envíos distintos y
+             los formularios no se anidan. -->
+        <form id="form-contrasena" novalidate>
+          <div id="bloque-contrasena" hidden>
+            <label class="sus-label" for="contrasena">Votre mot de passe Mi Carga</label>
+            <input class="sus-input" type="password" id="contrasena" name="contrasena"
+                   autocomplete="current-password" placeholder="Le même que dans l&#x27;appli">
+            <button class="sus-btn" type="submit" id="btn-contrasena">Entrer</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- PASO 3 · datos de facturación ---------------------------------- -->
+      <section class="sus-paso" id="paso-facturacion" hidden>
+        <h2 class="sus-subtitulo">Données de facturation</h2>
+        <p class="sus-ayuda">
+          Elles sont nécessaires pour pouvoir vous établir la facture. Elles sont enregistrées dans votre
+          compte : nous ne vous les demandons qu'une fois.
+        </p>
+        <form id="form-facturacion" novalidate>
+          <div class="sus-campos">
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Raison sociale ou nom complet</span>
+              <input class="sus-input" name="razon_social" autocomplete="organization" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">NIF / CIF</span>
+              <input class="sus-input" name="nif" autocomplete="off" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Code postal</span>
+              <input class="sus-input" name="codigo_postal" inputmode="numeric"
+                     maxlength="5" autocomplete="postal-code" required>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">Adresse</span>
+              <input class="sus-input" name="direccion" autocomplete="street-address" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Ville</span>
+              <input class="sus-input" name="poblacion" autocomplete="address-level2" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Province</span>
+              <input class="sus-input" name="provincia" autocomplete="address-level1" required>
+            </label>
+            <label class="sus-campo">
+              <span class="sus-label">Pays</span>
+              <!-- Una sola opción, y no un campo de texto, porque el servidor
+                   solo acepta ES: la factura lleva IVA español. Un desplegable
+                   con una opción es honesto; un campo libre invita a escribir
+                   «FR» y a chocar contra un error que no se puede arreglar. -->
+              <select class="sus-input" name="pais" required>
+                <option value="ES">Espagne</option>
+              </select>
+            </label>
+            <label class="sus-campo sus-campo-ancho">
+              <span class="sus-label">E-mail pour les factures <span class="sus-opcional">(facultatif)</span></span>
+              <input class="sus-input" type="email" name="email_facturacion" autocomplete="email">
+              <span class="sus-ayuda">Si vous le laissez vide, celui de votre compte est utilisé.</span>
+            </label>
+          </div>
+          <button class="sus-btn" type="submit" id="btn-facturacion">
+            Enregistrer et continuer
+          </button>
+        </form>
+      </section>
+
+      <!-- PASO 4 · planes ------------------------------------------------ -->
+      <section class="sus-paso" id="paso-planes" hidden>
+        <h2 class="sus-subtitulo">Choisissez votre formule</h2>
+
+        <!-- Este aviso no es cortesía: cada enlace de pago de Stripe contrata
+             una suscripción INDEPENDIENTE. Quien pulse los dos «por ver qué es
+             cada uno» acaba pagando 10 € y 90 € a la vez. -->
+        <p class="sus-alerta">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          N'en choisissez qu'une. Chaque formule souscrit un abonnement indépendant, donc
+          si vous souscrivez les deux, les deux vous seront facturés. Vous pourrez ensuite
+          changer de formule quand vous voudrez depuis votre compte.
+        </p>
+
+        <div class="sus-planes">
+          <a class="sus-plan sus-plan-destacado" id="plan-anual" href="#">
+            <span class="sus-plan-etiqueta">Vous économisez 3 mois</span>
+            <span class="sus-plan-precio">90 €<small> / an</small></span>
+            <span class="sus-plan-nota">+ TVA · 108,90 € facturés</span>
+            <span class="sus-plan-cta">Souscrire la formule annuelle</span>
+          </a>
+          <a class="sus-plan" id="plan-mensual" href="#">
+            <span class="sus-plan-precio">10 €<small> / mois</small></span>
+            <span class="sus-plan-nota">+ TVA · 12,10 € facturés</span>
+            <span class="sus-plan-cta">Souscrire la formule mensuelle</span>
+          </a>
+        </div>
+
+        <p class="sus-ayuda">
+          Tarifs <strong>hors TVA</strong>: au moment du paiement s'ajoutent 21 %,
+          soit 12,10 € par mois ou 108,90 € par an. Les deux abonnements
+          se renouvellent automatiquement —le mensuel chaque mois et l'annuel chaque
+          année— et vous pouvez les annuler quand vous voulez depuis votre compte, sans
+          pénalité. Transports illimités, mode hors connexion et traçabilité
+          ROTT dans les deux formules.
+        </p>
+        <p class="sus-ayuda">
+          Le paiement est traité par <strong>Stripe</strong>. Mi Carga ne voit ni ne conserve
+          les données de votre carte.
+        </p>
+      </section>
+
+      <!-- PASO 5 · ya tiene suscripción ------------------------------------
+           Es un FINAL, no una escala. Antes lo único que había aquí era el
+           botón del portal de Stripe, así que a quien ya pagaba se le
+           contestaba con otra gestión más —y encima con otro correo, porque el
+           portal manda un enlace de acceso—. Lo que necesita es que le digan
+           que está todo bien y poder entrar en la app. -->
+      <section class="sus-paso" id="paso-ya-suscrito" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Votre abonnement est déjà actif. Vous n'avez rien d'autre à faire.
+        </p>
+        <p class="sus-ayuda">
+          Entrez dans l'appli avec cette même adresse e-mail et continuez à émettre des documents sans
+          limite.
+        </p>
+        <a class="sus-btn" href="https://app.micarga.es/">Ouvrir l'appli</a>
+
+        <!-- El portal de Stripe SOLO sirve a quien pagó por Stripe. Una cuenta
+             activada a mano desde el panel no existe como cliente allí: el
+             portal le pide el correo, no encuentra a nadie y no le manda nada,
+             y el usuario se queda esperando un correo que no va a llegar. Pasó
+             de verdad el 07-09-2026. Por eso este bloque se enseña solo si
+             consta un cliente de Stripe en la ficha. -->
+        <div id="bloque-portal" hidden>
+          <p class="sus-ayuda">
+            Vous voulez changer de formule, mettre à jour votre carte ou résilier ?
+            Faites-le dans votre espace client. Stripe vous enverra un e-mail avec un
+            lien pour y accéder.
+          </p>
+          <a class="sus-btn-plano" id="btn-portal" href="#" target="_blank" rel="noopener">
+            Gérer le paiement de mon abonnement
+          </a>
+        </div>
+
+        <!-- Cuenta activada por nosotros: no hay nada que gestionar en Stripe. -->
+        <p class="sus-ayuda" id="nota-sin-portal" hidden>
+          Votre abonnement est activé directement par nos soins, il n'y a donc
+          aucun paiement à gérer. Si vous avez besoin de changer quelque chose, écrivez-nous.
+        </p>
+      </section>
+
+      <!-- Turnstile ------------------------------------------------------
+           El escudo de los envíos que hacen que Supabase mande un correo. Está
+           FUERA de los pasos a propósito: es uno solo para los formularios de
+           esta página, y moverlo de sitio al cambiar de paso obligaría a
+           volver a pintarlo cada vez. Lo esconde y lo enseña `mostrarPaso`.
+
+           Empieza oculto y solo aparece si hay clave configurada; mientras no
+           la haya, esta página funciona exactamente como hasta ahora. -->
+      <div class="sus-turnstile" id="turnstile" hidden></div>
+
+      <p class="sus-pie">
+        Un problème ? <a href="contacto">Écrivez-nous par ici</a>
+        ou par WhatsApp
+        au <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a>.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="/fr/" class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solution numérique de génération de documents de contrôle et de lettres de voiture. Avec le soutien d'Ecosmep pour les validations ADR.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga sur Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga sur Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contact</h4>
+          <p><a href="contacto">Écrivez-nous</a></p>
+          <p>WhatsApp : <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Mentions légales</h4>
+          <p><a href="aviso-legal">Mentions légales</a></p>
+          <p><a href="privacidad">Politique de confidentialité</a></p>
+          <p><a href="terminos">Conditions d'utilisation</a></p>
+          <p><a href="borrar-cuenta">Supprimer mon compte</a></p>
+          <p><a href="cookies">Politique de cookies</a></p>
+          <p><a href="#" data-cookies>Configurer les cookies</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-empresa">
+          Mi Carga est un service de <strong>RESITECH 2021, S.L.U.</strong>
+          · NIF B67419168
+          · <a href="https://www.resitech.es" target="_blank" rel="noopener">resitech.es</a>
+        </p>
+        <p class="footer-empresa">Entreprise inscrite au RELI, au ROLECE et à FACe.</p>
+        <p>© 2026 Mi Carga (micarga.es). Tous droits réservés. Développé conformément à la Loi 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/fr/suscripcion.js?v=20260911h"></script>
+  <script src="/consentimiento.js?v=20260917a" defer></script>
+</body>
+</html>

@@ -7,8 +7,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -18,8 +19,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -29,8 +31,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,8 +43,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -51,8 +67,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -62,8 +79,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,8 +91,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -84,8 +103,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/suscripcion</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/suscripcion"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/suscripcion"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -95,8 +127,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -106,8 +139,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -117,8 +151,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -128,8 +163,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/presupuesto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/presupuesto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/presupuesto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/presupuesto"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -139,8 +187,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/contacto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -150,8 +199,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/contacto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -161,8 +211,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/contacto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -172,8 +223,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/contacto"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/contacto"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/contacto"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -183,8 +247,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -194,8 +259,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -205,8 +271,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -216,8 +283,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/borrar-cuenta"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/borrar-cuenta</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/borrar-cuenta"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/borrar-cuenta"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -227,8 +307,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/aviso-legal"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -238,8 +319,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/aviso-legal"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -249,8 +331,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/aviso-legal"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -260,8 +343,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/aviso-legal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/aviso-legal"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/aviso-legal</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/aviso-legal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/aviso-legal"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -271,8 +367,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/privacidad"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/privacidad"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/privacidad"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -282,8 +379,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/privacidad"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/privacidad"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/privacidad"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -293,8 +391,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/privacidad"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/privacidad"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/privacidad"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -304,8 +403,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/privacidad"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/privacidad"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/privacidad"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/privacidad"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/privacidad</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/privacidad"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -315,8 +427,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/terminos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/terminos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/terminos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/terminos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/terminos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -326,8 +439,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/terminos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/terminos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/terminos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/terminos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/terminos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -337,8 +451,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/terminos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/terminos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/terminos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/terminos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/terminos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -348,8 +463,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/terminos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/terminos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/terminos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/terminos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/terminos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/terminos</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/terminos"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/terminos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/terminos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/terminos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/terminos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/terminos"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -359,8 +487,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/cookies"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/cookies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/cookies"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/cookies"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -370,8 +499,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/cookies"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/cookies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/cookies"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/cookies"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -381,8 +511,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/cookies"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/cookies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/cookies"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/cookies"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -392,8 +523,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/cookies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/cookies"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/cookies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/cookies"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/cookies"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/cookies</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/cookies"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/cookies"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/cookies"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/cookies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/cookies"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/cookies"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -403,8 +547,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -414,8 +559,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -425,8 +571,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -436,8 +583,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -447,8 +607,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -458,8 +619,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -469,8 +631,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -480,8 +643,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-digital-obligatorio-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/deca-digital-obligatorio-2026</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-digital-obligatorio-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-digital-obligatorio-2026"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -491,8 +667,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -502,8 +679,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -513,8 +691,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -524,8 +703,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-vs-carta-de-porte"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/deca-vs-carta-de-porte</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/deca-vs-carta-de-porte"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/deca-vs-carta-de-porte"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -535,8 +727,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -546,8 +739,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -557,8 +751,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -568,8 +763,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentacion-adr-guardia-civil-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentacion-adr-guardia-civil-2026"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -579,8 +787,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -590,8 +799,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -601,8 +811,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -612,8 +823,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/documentos-guardia-civil-transporte-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/documentos-guardia-civil-transporte-2026"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -623,8 +847,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -634,8 +859,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -645,8 +871,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -656,8 +883,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/errores-documentacion-camion-multas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/errores-documentacion-camion-multas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/errores-documentacion-camion-multas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/errores-documentacion-camion-multas"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -667,8 +907,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -678,8 +919,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -689,8 +931,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -700,8 +943,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/estiba-carga-camion-normativa-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/estiba-carga-camion-normativa-2026"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -711,8 +967,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -722,8 +979,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -733,8 +991,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -744,8 +1003,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-mas-frecuentes-controles-adr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-mas-frecuentes-controles-adr"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -755,8 +1027,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -766,8 +1039,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -777,8 +1051,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -788,8 +1063,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-tacografo-7-fallos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/multas-tacografo-7-fallos</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/multas-tacografo-7-fallos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/multas-tacografo-7-fallos"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -799,8 +1087,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -810,8 +1099,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -821,8 +1111,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -832,8 +1123,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/tiempos-conduccion-descanso-tacografo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/tiempos-conduccion-descanso-tacografo"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -843,8 +1147,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -854,8 +1159,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -865,8 +1171,9 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -876,8 +1183,21 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://micarga.es/ca/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://micarga.es/en/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://micarga.es/pt/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://micarga.es/fr/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://micarga.es/blog/vehiculo-senalizacion-rutas-adr-2026"/>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

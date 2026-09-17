@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Votre abonnement Mi Carga est désormais actif.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/fr/gracias">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/gracias">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/gracias">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/gracias">
+  <link rel="alternate" hreflang="pt" href="https://micarga.es/pt/gracias">
+  <link rel="alternate" hreflang="fr" href="https://micarga.es/fr/gracias">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/gracias">
+  <!-- ALTERNATIVAS:fin -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- noindex: solo se llega aquí desde Stripe, después de pagar. -->
+  <meta name="robots" content="noindex, follow">
+  <title>Abonnement activé - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css?v=20260911h">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/fr/" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/#tarifas">Tarifs</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Ouvrir l'appli</a>
+      </nav>
+      <!-- IDIOMAS:inicio -->
+      <details class="selector-idioma">
+        <summary aria-label="Français" title="Français"><span class="bandera">🇫🇷</span><span class="selector-idioma-codigo">FR</span></summary>
+        <div class="selector-idioma-lista">
+            <a href="https://micarga.es/gracias" hreflang="es" lang="es"><span class="bandera">🇪🇸</span>Castellano</a>
+            <a href="https://micarga.es/ca/gracias" hreflang="ca" lang="ca"><span class="bandera"><svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#FCDD09"/><path stroke="#DA121A" stroke-width=".67" d="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/></svg></span>Català</a>
+            <a href="https://micarga.es/en/gracias" hreflang="en" lang="en"><span class="bandera">🇬🇧</span>English</a>
+            <a href="https://micarga.es/pt/gracias" hreflang="pt" lang="pt"><span class="bandera">🇵🇹</span>Português</a>
+        </div>
+      </details>
+      <!-- IDIOMAS:fin -->
+      <button class="mobile-menu-toggle" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <div class="gracias-marca" id="marca" data-estado="comprobando" aria-hidden="true"></div>
+
+      <h1 class="sus-title" id="titulo">Paiement reçu</h1>
+
+      <!-- ESTADO 1 · comprobando ------------------------------------------
+           No se dice «ya eres premium» hasta que consta en la base de datos.
+           Entre que Stripe cobra y nos avisa pasan unos segundos, y afirmarlo
+           antes de tiempo es lo que hace que alguien abra la app, la vea
+           bloqueada y piense que le hemos cobrado sin darle nada. -->
+      <section class="sus-paso" id="paso-comprobando">
+        <p class="sus-lead">
+          Merci. Stripe nous a confirmé le paiement et nous activons votre
+          compte. Cela prend quelques secondes : ne fermez pas cette page.
+        </p>
+      </section>
+
+      <!-- ESTADO 2 · activada --------------------------------------------- -->
+      <section class="sus-paso" id="paso-activa" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Votre abonnement est actif. Vous pouvez désormais émettre des documents de contrôle
+          sans limite.
+        </p>
+
+        <div class="sus-que-pasa">
+          <p class="sus-subtitulo">Ce que vous devez faire maintenant</p>
+          <p class="sus-ayuda">
+            Entrez dans l'appli avec <strong id="correo-cuenta">votre e-mail</strong>, le
+            même que celui avec lequel vous venez de payer. Si elle était déjà ouverte sur le
+            téléphone, déconnectez-vous et reconnectez-vous pour qu'elle se mette à jour.
+          </p>
+        </div>
+
+        <a class="sus-btn" href="https://app.micarga.es/">Ouvrir l'appli</a>
+
+        <!-- Desde el 10-09-2026 la factura la emite el propietario en el
+             sistema de facturación de su empresa, no el servidor. Aquí NO se
+             puede seguir prometiendo «en unos minutos»: la hace una persona. -->
+        <p class="sus-ayuda">
+          Nous vous enverrons la facture par e-mail dans les prochains jours, avec les
+          données fiscales que vous nous avez communiquées.
+        </p>
+      </section>
+
+      <!-- ESTADO 3 · tarda más de lo normal --------------------------------
+           No es un error: el cobro está hecho y el aviso de Stripe puede
+           tardar. Lo que NO se puede hacer es dejar a alguien que acaba de
+           pagar mirando una rueda para siempre. -->
+      <section class="sus-paso" id="paso-tarda" hidden>
+        <p class="sus-aviso" data-tono="info">
+          Votre paiement est effectué et enregistré. L'activation prend un peu plus
+          de temps que d'habitude, mais elle se termine toute seule : ne payez pas à nouveau.
+        </p>
+        <p class="sus-ayuda">
+          Essayez d'entrer dans l'appli dans quelques minutes. Si elle ne s'active
+          toujours pas, écrivez-nous et nous le résolvons sur-le-champ — ayez sous la main
+          l'adresse avec laquelle vous avez payé.
+        </p>
+        <a class="sus-btn" href="https://wa.me/34744716449?text=Hola,%20he%20pagado%20la%20suscripci%C3%B3n%20de%20Mi%20Carga%20y%20la%20cuenta%20sigue%20sin%20activarse.">
+          Nous écrire sur WhatsApp
+        </a>
+        <p class="sus-ayuda">
+          O <a href="contacto">écrivez-nous par ici</a>.
+        </p>
+      </section>
+
+      <!-- ESTADO 4 · sin sesión en este navegador --------------------------
+           Pasa si paga en un navegador y vuelve en otro, o si borró los datos
+           del sitio. No podemos comprobar nada, pero el pago está hecho. -->
+      <section class="sus-paso" id="paso-sin-sesion" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Nous avons reçu votre paiement. Votre compte s'active tout seul en quelques secondes.
+        </p>
+        <p class="sus-ayuda">
+          Depuis ce navigateur nous ne pouvons pas le vérifier —vous êtes revenu sans session
+          ouverte—, mais vous n'avez rien d'autre à faire : entrez dans l'appli avec
+          l'adresse avec laquelle vous avez payé.
+        </p>
+        <a class="sus-btn" href="https://app.micarga.es/">Ouvrir l'appli</a>
+        <p class="sus-ayuda">
+          Si en entrant l'abonnement vous est toujours demandé,
+          <a href="contacto">écrivez-nous</a> et nous regardons cela.
+        </p>
+      </section>
+
+      <p class="sus-pie">
+        Mi Carga est un service de RESITECH 2021 SLU. Vous pouvez résilier quand
+        vous voulez depuis l'espace client, sans engagement.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </div>
+        <p>Le document de contrôle numérique pour les transporteurs.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga sur Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga sur Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contact</h4>
+          <p><a href="contacto">Écrivez-nous</a></p>
+          <p>WhatsApp : <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Mentions légales</h4>
+          <p><a href="aviso-legal">Mentions légales</a></p>
+          <p><a href="privacidad">Politique de confidentialité</a></p>
+          <p><a href="terminos">Conditions d'utilisation</a></p>
+          <p><a href="borrar-cuenta">Supprimer mon compte</a></p>
+          <p><a href="cookies">Politique de cookies</a></p>
+          <p><a href="#" data-cookies>Configurer les cookies</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-empresa">
+          Mi Carga est un service de <strong>RESITECH 2021, S.L.U.</strong>
+          · NIF B67419168
+          · <a href="https://www.resitech.es" target="_blank" rel="noopener">resitech.es</a>
+        </p>
+        <p class="footer-empresa">Entreprise inscrite au RELI, au ROLECE et à FACe.</p>
+        <p>© 2026 Mi Carga (micarga.es). Tous droits réservés. Développé conformément à la Loi 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/fr/gracias.js?v=20260911h"></script>
+  <script src="/consentimiento.js?v=20260917a" defer></script>
+</body>
+</html>
