@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abonamentul dumneavoastră Mi Carga este acum activ.">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/ro/gracias">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/gracias">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/gracias">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/gracias">
+  <link rel="alternate" hreflang="pt" href="https://micarga.es/pt/gracias">
+  <link rel="alternate" hreflang="fr" href="https://micarga.es/fr/gracias">
+  <link rel="alternate" hreflang="de" href="https://micarga.es/de/gracias">
+  <link rel="alternate" hreflang="it" href="https://micarga.es/it/gracias">
+  <link rel="alternate" hreflang="pl" href="https://micarga.es/pl/gracias">
+  <link rel="alternate" hreflang="ro" href="https://micarga.es/ro/gracias">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/gracias">
+  <!-- ALTERNATIVAS:fin -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- noindex: solo se llega aquí desde Stripe, después de pagar. -->
+  <meta name="robots" content="noindex, follow">
+  <title>Abonament activat - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css?v=20260911h">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/ro/" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/ro/">Acasă</a>
+        <a href="/ro/#tarifas">Prețuri</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Deschideți aplicația</a>
+      </nav>
+      <!-- IDIOMAS:inicio -->
+      <details class="selector-idioma">
+        <summary aria-label="Română" title="Română"><span class="bandera">🇷🇴</span><span class="selector-idioma-codigo">RO</span></summary>
+        <div class="selector-idioma-lista">
+            <a href="https://micarga.es/gracias" hreflang="es" lang="es"><span class="bandera">🇪🇸</span>Castellano</a>
+            <a href="https://micarga.es/ca/gracias" hreflang="ca" lang="ca"><span class="bandera"><svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#FCDD09"/><path stroke="#DA121A" stroke-width=".67" d="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/></svg></span>Català</a>
+            <a href="https://micarga.es/en/gracias" hreflang="en" lang="en"><span class="bandera">🇬🇧</span>English</a>
+            <a href="https://micarga.es/pt/gracias" hreflang="pt" lang="pt"><span class="bandera">🇵🇹</span>Português</a>
+            <a href="https://micarga.es/fr/gracias" hreflang="fr" lang="fr"><span class="bandera">🇫🇷</span>Français</a>
+            <a href="https://micarga.es/de/gracias" hreflang="de" lang="de"><span class="bandera">🇩🇪</span>Deutsch</a>
+            <a href="https://micarga.es/it/gracias" hreflang="it" lang="it"><span class="bandera">🇮🇹</span>Italiano</a>
+            <a href="https://micarga.es/pl/gracias" hreflang="pl" lang="pl"><span class="bandera">🇵🇱</span>Polski</a>
+        </div>
+      </details>
+      <!-- IDIOMAS:fin -->
+      <button class="mobile-menu-toggle" aria-label="Deschideți meniul">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+
+      <div class="gracias-marca" id="marca" data-estado="comprobando" aria-hidden="true"></div>
+
+      <h1 class="sus-title" id="titulo">Plată primită</h1>
+
+      <!-- ESTADO 1 · comprobando ------------------------------------------
+           No se dice «ya eres premium» hasta que consta en la base de datos.
+           Entre que Stripe cobra y nos avisa pasan unos segundos, y afirmarlo
+           antes de tiempo es lo que hace que alguien abra la app, la vea
+           bloqueada y piense que le hemos cobrado sin darle nada. -->
+      <section class="sus-paso" id="paso-comprobando">
+        <p class="sus-lead">
+          Mulțumim. Stripe ne-a confirmat plata și vă activăm
+          contul. Durează câteva secunde: nu închideți această pagină.
+        </p>
+      </section>
+
+      <!-- ESTADO 2 · activada --------------------------------------------- -->
+      <section class="sus-paso" id="paso-activa" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Abonamentul dumneavoastră este activ. Puteți emite documente de control
+          fără limită.
+        </p>
+
+        <div class="sus-que-pasa">
+          <p class="sus-subtitulo">Ce trebuie să faceți acum</p>
+          <p class="sus-ayuda">
+            Intrați în aplicație cu <strong id="correo-cuenta">adresa dumneavoastră de e-mail</strong>, aceeași
+            cu care tocmai ați plătit. Dacă o aveați deja deschisă pe
+            telefon, deconectați-vă și intrați din nou, ca să se actualizeze.
+          </p>
+        </div>
+
+        <a class="sus-btn" href="https://app.micarga.es/">Deschideți aplicația</a>
+
+        <!-- Desde el 10-09-2026 la factura la emite el propietario en el
+             sistema de facturación de su empresa, no el servidor. Aquí NO se
+             puede seguir prometiendo «en unos minutos»: la hace una persona. -->
+        <p class="sus-ayuda">
+          Vă vom trimite factura prin e-mail în zilele următoare, cu
+          datele fiscale pe care ni le-ați dat.
+        </p>
+      </section>
+
+      <!-- ESTADO 3 · tarda más de lo normal --------------------------------
+           No es un error: el cobro está hecho y el aviso de Stripe puede
+           tardar. Lo que NO se puede hacer es dejar a alguien que acaba de
+           pagar mirando una rueda para siempre. -->
+      <section class="sus-paso" id="paso-tarda" hidden>
+        <p class="sus-aviso" data-tono="info">
+          Plata dumneavoastră este efectuată și înregistrată. Activarea durează puțin mai mult
+          decât de obicei, dar se finalizează singură: nu plătiți din nou.
+        </p>
+        <p class="sus-ayuda">
+          Încercați să intrați în aplicație peste câteva minute. Dacă tot nu se
+          activează, scrieți-ne și rezolvăm pe loc — aveți la îndemână
+          adresa de e-mail cu care ați plătit.
+        </p>
+        <a class="sus-btn" href="https://wa.me/34744716449?text=Hola,%20he%20pagado%20la%20suscripci%C3%B3n%20de%20Mi%20Carga%20y%20la%20cuenta%20sigue%20sin%20activarse.">
+          Scrieți-ne pe WhatsApp
+        </a>
+        <p class="sus-ayuda">
+          O <a href="contacto">scrieți-ne aici</a>.
+        </p>
+      </section>
+
+      <!-- ESTADO 4 · sin sesión en este navegador --------------------------
+           Pasa si paga en un navegador y vuelve en otro, o si borró los datos
+           del sitio. No podemos comprobar nada, pero el pago está hecho. -->
+      <section class="sus-paso" id="paso-sin-sesion" hidden>
+        <p class="sus-aviso" data-tono="ok">
+          ✓ Am primit plata dumneavoastră. Contul se activează singur în câteva secunde.
+        </p>
+        <p class="sus-ayuda">
+          Din acest browser nu putem verifica —v-ați întors fără sesiunea
+          deschisă—, dar nu mai trebuie să faceți nimic: intrați în aplicație cu
+          adresa de e-mail cu care ați plătit.
+        </p>
+        <a class="sus-btn" href="https://app.micarga.es/">Deschideți aplicația</a>
+        <p class="sus-ayuda">
+          Dacă la intrare vi se cere în continuare abonament,
+          <a href="contacto">scrieți-ne</a> și ne uităm.
+        </p>
+      </section>
+
+      <p class="sus-pie">
+        Mi Carga este un serviciu al RESITECH 2021 SLU. Puteți renunța oricând
+        din portalul de client, fără perioadă minimă.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </div>
+        <p>Documentul de control digital pentru transportatori.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga pe Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga pe Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contact</h4>
+          <p><a href="contacto">Scrieți-ne</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Informații juridice</h4>
+          <p><a href="aviso-legal">Mențiuni legale</a></p>
+          <p><a href="privacidad">Politica de confidențialitate</a></p>
+          <p><a href="terminos">Condiții de utilizare</a></p>
+          <p><a href="borrar-cuenta">Ștergeți-mi contul</a></p>
+          <p><a href="cookies">Politica de cookie-uri</a></p>
+          <p><a href="#" data-cookies>Setări cookie-uri</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-empresa">
+          Mi Carga este un serviciu al <strong>RESITECH 2021, S.L.U.</strong>
+          · CIF B67419168
+          · <a href="https://www.resitech.es" target="_blank" rel="noopener">resitech.es</a>
+        </p>
+        <p class="footer-empresa">Firmă înscrisă în RELI, ROLECE și FACe.</p>
+        <p>© 2026 Mi Carga (micarga.es). Toate drepturile rezervate. Dezvoltat în conformitate cu Legea 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/ro/gracias.js?v=20260911h"></script>
+  <script src="/consentimiento.js?v=20260917a" defer></script>
+</body>
+</html>
