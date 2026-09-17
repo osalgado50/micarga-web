@@ -1052,6 +1052,19 @@ body > section:not(.hero-section) > .container > h2 {
   color: var(--text-muted);
 }
 
+/* Las credenciales de la sociedad, encima del copyright.
+   Un punto más pequeñas y con la razón social en blanco: es el dato que se
+   busca cuando alguien mira el pie para saber con quién está tratando. */
+.footer-empresa {
+  font-size: 0.82rem !important;
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+}
+.footer-empresa strong { color: var(--text-heading); font-weight: 700; }
+.footer-empresa a { color: var(--text-muted); text-decoration: underline; }
+.footer-empresa a:hover { color: var(--primary); }
+.footer-bottom .footer-empresa + p:not(.footer-empresa) { margin-top: 0.9rem; }
+
 /* Floating WhatsApp Button */
 .whatsapp-floating {
   position: fixed;
