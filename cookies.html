@@ -94,8 +94,18 @@
 
       <section>
         <h2>3. Cookies utilizadas en micarga.es</h2>
-        <p>El sitio web <strong>https://micarga.es/</strong> no instala cookies propias. No utiliza cookies de analítica, publicidad ni seguimiento de ningún tipo.</p>
-        <p>El sitio carga únicamente dos recursos externos, necesarios para mostrar correctamente la página, que no instalan cookies de seguimiento:</p>
+        <p>El sitio web <strong>https://micarga.es/</strong> no instala ninguna cookie de analítica, publicidad ni seguimiento <strong>hasta que la persona usuaria lo acepta</strong> en el panel de cookies. Si lo rechaza, no se carga ningún recurso de Google Analytics ni se envía ningún dato a Google.</p>
+        <p>Si se acepta la analítica, se instalan estas cookies de <strong>Google Analytics 4</strong> (proveedor: Google Ireland Limited):</p>
+        <table class="tabla-legal">
+          <thead><tr><th>Cookie</th><th>Finalidad</th><th>Duración</th></tr></thead>
+          <tbody>
+            <tr><td><code>_ga</code></td><td>Distinguir visitantes entre sí para poder contar cuántas personas distintas visitan la web.</td><td>2 años</td></tr>
+            <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Mantener el estado de la sesión de medición.</td><td>2 años</td></tr>
+          </tbody>
+        </table>
+        <p>Si además se acepta la publicidad, Google Analytics activa las señales de medición de campañas de Google Ads, que permiten saber si un anuncio ha acabado en una visita o en un alta. Si se rechaza, esas señales quedan desactivadas.</p>
+        <p>Para recordar la elección se guarda en el propio navegador, en el almacenamiento local y no en una cookie, el dato <code>micarga-cookies</code>, con lo aceptado y la fecha. Caduca a los <strong>12 meses</strong>, y al caducar se vuelve a preguntar. Es almacenamiento técnico necesario para cumplir con la propia elección, y no se envía a nadie.</p>
+        <p>El sitio carga además dos recursos externos, necesarios para mostrar correctamente la página, que no instalan cookies de seguimiento:</p>
         <ul>
           <li><strong>Google Fonts</strong> (tipografías Outfit y Space Grotesk), servido desde fonts.googleapis.com.</li>
           <li><strong>Font Awesome</strong> (iconos), servido desde cdnjs.cloudflare.com.</li>
@@ -104,7 +114,7 @@
       </section>
 
       <section>
-        <h2>4. Tipos de cookies (si se incorporan en el futuro)</h2>
+        <h2>4. Tipos de cookies</h2>
         <h3>4.1. Cookies técnicas o necesarias</h3>
         <p>Necesarias para que la web o la aplicación funcionen correctamente: mantener la sesión iniciada, autenticar al usuario, proteger la plataforma frente a accesos no autorizados, recordar preferencias esenciales o gestionar la seguridad. No requieren consentimiento.</p>
 
@@ -117,12 +127,14 @@
         <h3>4.4. Cookies publicitarias o de marketing</h3>
         <p>Permiten medir campañas o mostrar publicidad personalizada. Mi Carga no instalará estas cookies sin consentimiento previo, informado, específico y revocable.</p>
 
-        <p>Si en el futuro se incorporan cookies analíticas o publicitarias, esta página se actualizará con el detalle de cada cookie (proveedor, finalidad, duración) y se mostrará un panel de consentimiento antes de instalarlas.</p>
+        <p>El detalle de cada cookie que se instala —proveedor, finalidad y duración— está en el apartado 3 de esta misma página.</p>
       </section>
 
       <section>
         <h2>5. Consentimiento</h2>
-        <p>Mientras el sitio no utilice cookies no necesarias, no se requiere un panel de consentimiento. Si en el futuro se incorporan cookies de preferencias, analíticas o publicitarias, se mostrará un sistema de gestión de cookies que permitirá aceptarlas, rechazarlas o configurarlas por categorías antes de instalarlas.</p>
+        <p>La primera vez que se entra en la web se muestra un panel que permite <strong>aceptar todas</strong>, <strong>rechazar todas</strong> o <strong>elegir por categorías</strong>. Rechazar cuesta exactamente lo mismo que aceptar: un solo clic, en un botón igual de visible.</p>
+        <p>Hasta que se responde no se instala ninguna cookie que no sea necesaria, y no se carga ningún recurso de Google.</p>
+        <p>La elección se puede cambiar o retirar en cualquier momento desde el enlace <strong>«Configurar cookies»</strong> que hay en el pie de todas las páginas. Retirar el consentimiento es tan sencillo como darlo y no tiene ninguna consecuencia sobre el uso de la web.</p>
       </section>
 
       <section>
@@ -193,6 +205,7 @@
           <p><a href="terminos">Términos de Uso</a></p>
           <p><a href="borrar-cuenta">Eliminar mi cuenta</a></p>
           <p><a href="cookies">Política de Cookies</a></p>
+          <p><a href="#" data-cookies>Configurar cookies</a></p>
         </div>
       </div>
     </div>
@@ -203,5 +216,6 @@
     </div>
   </footer>
 
+  <script src="consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

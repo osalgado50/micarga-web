@@ -95,8 +95,18 @@
 
       <section>
         <h2>3. Galetes utilitzades a micarga.es</h2>
-        <p>El lloc web <strong>https://micarga.es/</strong> no instal·la galetes pròpies. No fa servir galetes d'analítica, publicitat ni seguiment de cap mena.</p>
-        <p>El lloc carrega únicament dos recursos externs, necessaris per mostrar correctament la pàgina, que no instal·len galetes de seguiment:</p>
+        <p>El lloc web <strong>https://micarga.es/</strong> no instal·la cap galeta d'analítica, publicitat ni seguiment <strong>fins que la persona usuària ho accepta</strong> al tauler de galetes. Si ho rebutja, no es carrega cap recurs de Google Analytics ni s'envia cap dada a Google.</p>
+        <p>Si s'accepta l'analítica, s'instal·len aquestes galetes de <strong>Google Analytics 4</strong> (proveïdor: Google Ireland Limited):</p>
+        <table class="tabla-legal">
+          <thead><tr><th>Galeta</th><th>Finalitat</th><th>Durada</th></tr></thead>
+          <tbody>
+            <tr><td><code>_ga</code></td><td>Distingir visitants entre si per poder comptar quantes persones diferents visiten el web.</td><td>2 anys</td></tr>
+            <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Mantenir l'estat de la sessió de mesurament.</td><td>2 anys</td></tr>
+          </tbody>
+        </table>
+        <p>Si a més s'accepta la publicitat, Google Analytics activa els senyals de mesurament de campanyes de Google Ads, que permeten saber si un anunci ha acabat en una visita o en un alta. Si es rebutja, aquests senyals queden desactivats.</p>
+        <p>Per recordar l'elecció es desa al mateix navegador, a l'emmagatzematge local i no en una galeta, la dada <code>micarga-cookies</code>, amb allò acceptat i la data. Caduca als <strong>12 mesos</strong>, i en caducar es torna a preguntar. És emmagatzematge tècnic necessari per complir amb la mateixa elecció, i no s'envia a ningú.</p>
+        <p>El lloc carrega a més dos recursos externs, necessaris per mostrar correctament la pàgina, que no instal·len galetes de seguiment:</p>
         <ul>
           <li><strong>Google Fonts</strong> (tipografies Outfit i Space Grotesk), servit des de fonts.googleapis.com.</li>
           <li><strong>Font Awesome</strong> (icones), servit des de cdnjs.cloudflare.com.</li>
@@ -105,7 +115,7 @@
       </section>
 
       <section>
-        <h2>4. Tipus de galetes (si se n'incorporen en el futur)</h2>
+        <h2>4. Tipus de galetes</h2>
         <h3>4.1. Galetes tècniques o necessàries</h3>
         <p>Necessàries perquè el web o l'aplicació funcionin correctament: mantenir la sessió iniciada, autenticar l'usuari, protegir la plataforma davant d'accessos no autoritzats, recordar preferències essencials o gestionar la seguretat. No requereixen consentiment.</p>
 
@@ -118,12 +128,14 @@
         <h3>4.4. Galetes publicitàries o de màrqueting</h3>
         <p>Permeten mesurar campanyes o mostrar publicitat personalitzada. Mi Carga no instal·larà aquestes galetes sense consentiment previ, informat, específic i revocable.</p>
 
-        <p>Si en el futur s'incorporen galetes analítiques o publicitàries, aquesta pàgina s'actualitzarà amb el detall de cada galeta (proveïdor, finalitat, durada) i es mostrarà un plafó de consentiment abans d'instal·lar-les.</p>
+        <p>El detall de cada galeta que s'instal·la —proveïdor, finalitat i durada— és a l'apartat 3 d'aquesta mateixa pàgina.</p>
       </section>
 
       <section>
         <h2>5. Consentiment</h2>
-        <p>Mentre el lloc no faci servir galetes no necessàries, no cal cap plafó de consentiment. Si en el futur s'incorporen galetes de preferències, analítiques o publicitàries, es mostrarà un sistema de gestió de galetes que permetrà acceptar-les, rebutjar-les o configurar-les per categories abans d'instal·lar-les.</p>
+        <p>La primera vegada que s'entra al web es mostra un tauler que permet <strong>acceptar-les totes</strong>, <strong>rebutjar-les totes</strong> o <strong>triar per categories</strong>. Rebutjar costa exactament el mateix que acceptar: un sol clic, en un botó igual de visible.</p>
+        <p>Fins que no es respon no s'instal·la cap galeta que no sigui necessària, i no es carrega cap recurs de Google.</p>
+        <p>L'elecció es pot canviar o retirar en qualsevol moment des de l'enllaç <strong>«Configurar galetes»</strong> que hi ha al peu de totes les pàgines. Retirar el consentiment és tan senzill com donar-lo i no té cap conseqüència sobre l'ús del web.</p>
       </section>
 
       <section>
@@ -194,6 +206,7 @@
           <p><a href="terminos">Termes d'ús</a></p>
           <p><a href="borrar-cuenta">Eliminar el meu compte</a></p>
           <p><a href="cookies">Política de galetes</a></p>
+          <p><a href="#" data-cookies>Configurar galetes</a></p>
         </div>
       </div>
     </div>
@@ -204,5 +217,6 @@
     </div>
   </footer>
 
+  <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

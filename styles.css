@@ -2841,3 +2841,129 @@ body > section:not(.hero-section) > .container > h2 {
   .nav-links a { font-size: 0.86rem; }
   .nav-links .nav-btn { padding: 0.45rem 0.7rem; }
 }
+
+/* ===========================================================================
+   PANEL DE COOKIES
+   Lo pinta consentimiento.js, no está en el HTML: si estuviera, lo vería un
+   instante quien ya ha contestado, y el generador de /ca y /en traduciría unos
+   textos que además tienen que existir en JavaScript para el panel reabierto.
+
+   Abajo y a lo ancho, no un cuadro centrado que tape la página: esto lo lee
+   gente desde el móvil en una carretera y lo primero que quiere es la web.
+   =========================================================================== */
+.ck {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  padding: 0 12px 12px;
+  /* Sin fondo oscuro sobre la página: no es una decisión que haya que forzar
+     ahora mismo, y bloquear la web entera para pedir permiso es lo que hace
+     que la gente pulse «aceptar» sin leer. */
+  pointer-events: none;
+}
+
+.ck-caja {
+  pointer-events: auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.ck-texto { flex: 1 1 320px; min-width: 0; }
+.ck-texto strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+.ck-texto p {
+  margin: 0 0 6px;
+  font-size: .86rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.ck-texto a { font-size: .82rem; color: var(--primary); }
+
+.ck-botones { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.ck-btn {
+  font-family: var(--font-sans);
+  font-size: .86rem;
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-main);
+}
+/* Aceptar y rechazar, con el MISMO peso visual. Que el «no» cueste más que el
+   «sí» es justo lo que la AEPD sanciona, así que esto no es estética. */
+.ck-btn-si { background: var(--primary); border-color: var(--primary); color: #fff; }
+.ck-btn-no { background: var(--bg-input); }
+.ck-btn-mas { background: none; border-color: transparent; color: var(--text-muted); }
+.ck-btn:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+.ck-detalle { flex: 1 1 100%; display: flex; flex-direction: column; gap: 4px; }
+/* Un `display` puesto en una clase GANA al estilo por defecto de `hidden`, así
+   que sin esto el detalle por categorías sale abierto desde el principio. Pasó
+   la primera vez que se probó el panel. Lo mismo para la fila de botones. */
+.ck-detalle[hidden],
+.ck-botones[hidden] { display: none; }
+.ck-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+.ck-fila span { display: flex; flex-direction: column; gap: 2px; }
+.ck-fila strong { font-size: .88rem; color: var(--text-heading); }
+.ck-fila small { font-size: .78rem; line-height: 1.45; color: var(--text-muted); }
+.ck-fila input { width: 20px; height: 20px; accent-color: var(--primary); flex: none; }
+.ck-fila-fija { cursor: default; }
+.ck-fila-fija em { font-size: .78rem; font-style: normal; color: var(--text-muted); }
+.ck-detalle .ck-btn { align-self: flex-start; margin-top: 12px; }
+
+@media (max-width: 600px) {
+  .ck-caja { padding: 16px; gap: 14px; }
+  .ck-botones { width: 100%; }
+  /* A pantalla completa los tres botones, para que nadie acabe aceptando por
+     darle al que pillaba más a mano. */
+  .ck-botones .ck-btn { flex: 1 1 100%; }
+}
+
+/* Tabla dentro de un texto legal (el detalle de cookies). Con scroll propio:
+   en un móvil una tabla de tres columnas desborda, y lo que NO puede pasar es
+   que desborde la página entera. */
+.tabla-legal {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .88rem;
+  display: block;
+  overflow-x: auto;
+}
+.tabla-legal th,
+.tabla-legal td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.tabla-legal th { color: var(--text-heading); font-weight: 700; white-space: nowrap; }
+.tabla-legal td { color: var(--text-main); }
+.tabla-legal code { font-size: .92em; color: var(--primary); }

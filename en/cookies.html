@@ -95,8 +95,18 @@
 
       <section>
         <h2>3. Cookies used on micarga.es</h2>
-        <p>The website <strong>https://micarga.es/</strong> sets no cookies of its own. It uses no analytics, advertising or tracking cookies of any kind.</p>
-        <p>The site loads only two external resources, needed to display the page properly, and neither sets tracking cookies:</p>
+        <p>The website <strong>https://micarga.es/</strong> installs no analytics, advertising or tracking cookie <strong>until the user accepts it</strong> in the cookie panel. If they decline, no Google Analytics resource is loaded and no data is sent to Google.</p>
+        <p>If analytics is accepted, these cookies from <strong>Google Analytics 4</strong> (provider: Google Ireland Limited) are installed:</p>
+        <table class="tabla-legal">
+          <thead><tr><th>Cookie</th><th>Purpose</th><th>Duration</th></tr></thead>
+          <tbody>
+            <tr><td><code>_ga</code></td><td>Tells visitors apart so we can count how many different people visit the site.</td><td>2 years</td></tr>
+            <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Keeps the measurement session state.</td><td>2 years</td></tr>
+          </tbody>
+        </table>
+        <p>If advertising is also accepted, Google Analytics enables the Google Ads campaign measurement signals, which tell us whether an ad led to a visit or a sign-up. If declined, those signals stay off.</p>
+        <p>To remember the choice we store in the browser itself, in local storage rather than a cookie, the entry <code>micarga-cookies</code>, holding what was accepted and the date. It expires after <strong>12 months</strong>, and once expired we ask again. It is technical storage needed to honour the choice itself, and it is not sent to anyone.</p>
+        <p>The site also loads two external resources, needed to display the page correctly, which install no tracking cookies:</p>
         <ul>
           <li><strong>Google Fonts</strong> (the Outfit and Space Grotesk typefaces), served from fonts.googleapis.com.</li>
           <li><strong>Font Awesome</strong> (icons), served from cdnjs.cloudflare.com.</li>
@@ -105,7 +115,7 @@
       </section>
 
       <section>
-        <h2>4. Types of cookies (should any be added in future)</h2>
+        <h2>4. Types of cookies</h2>
         <h3>4.1. Technical or necessary cookies</h3>
         <p>Needed for the website or the app to work properly: keeping the session open, authenticating the user, protecting the platform against unauthorised access, remembering essential preferences or managing security. They do not require consent.</p>
 
@@ -118,12 +128,14 @@
         <h3>4.4. Advertising or marketing cookies</h3>
         <p>These measure campaigns or show personalised advertising. Mi Carga will not set these cookies without prior, informed, specific and revocable consent.</p>
 
-        <p>If analytics or advertising cookies are added in future, this page will be updated with the details of each cookie (provider, purpose, duration) and a consent banner will be shown before they are set.</p>
+        <p>The detail of every cookie installed — provider, purpose and duration — is in section 3 of this same page.</p>
       </section>
 
       <section>
         <h2>5. Consent</h2>
-        <p>As long as the site uses no non-essential cookies, no consent banner is required. If preference, analytics or advertising cookies are added in future, a cookie management tool will be shown allowing them to be accepted, rejected or configured by category before they are set.</p>
+        <p>The first time you enter the site a panel appears letting you <strong>accept all</strong>, <strong>reject all</strong> o <strong>choose by category</strong>. Rejecting costs exactly the same as accepting: one click, on an equally visible button.</p>
+        <p>Until you answer, no non-essential cookie is installed and no Google resource is loaded.</p>
+        <p>You can change or withdraw the choice at any time from the <strong>“Cookie settings”</strong> link in the footer of every page. Withdrawing consent is as easy as giving it and has no effect on your use of the site.</p>
       </section>
 
       <section>
@@ -194,6 +206,7 @@
           <p><a href="terminos">Terms of use</a></p>
           <p><a href="borrar-cuenta">Delete my account</a></p>
           <p><a href="cookies">Cookie policy</a></p>
+          <p><a href="#" data-cookies>Cookie settings</a></p>
         </div>
       </div>
     </div>
@@ -204,5 +217,6 @@
     </div>
   </footer>
 
+  <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

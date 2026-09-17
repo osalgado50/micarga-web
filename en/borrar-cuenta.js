@@ -13,9 +13,12 @@
 // pendientes que atender a mano dentro del plazo de 30 días.
 //
 // Quien decide es la Edge Function `borrar-cuenta`, la misma que usa la app:
-// aquí no se replica ninguna regla. Rechaza si hay suscripción viva (borrar el
-// perfil no cancela nada en Stripe: seguiría cobrando sin que el cliente tenga
-// dónde entrar a pararlo) y exige que el correo escrito coincida.
+// aquí no se replica ninguna regla. Desde el 17-09-2026 una suscripción viva YA
+// NO impide borrar —lo prohíbe la guideline 5.1.1(v) de Apple—: el servidor la
+// cancela él en Stripe antes de borrar. Lo único que rechaza es que el correo
+// escrito no coincida. (Antes rechazaba con suscripción viva porque borrar el
+// perfil no cancelaba nada en Stripe: seguiría cobrando sin que el cliente
+// tenga dónde entrar a pararlo.)
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 import { montarTurnstile } from './turnstile.js';
