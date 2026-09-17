@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <!-- CRÍTICO: los PDF emitidos antes del split de dominios llevan códigos QR
+       que apuntan a micarga.es/?token=... (hoy, esta web). La Resolución de
+       5/6/2026 exige que ese QR descargue el documento: se redirige a la app,
+       que es quien lo sirve. NO QUITAR. -->
+  <script>
+    if (location.search.indexOf('token=') !== -1) {
+      location.replace('https://app.micarga.es/' + location.search);
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Erstellen Sie Ihre Transportkontrolldokumente (DeCA / Frachtbrief / ADR) in digitaler Form. Erfüllt das spanische Gesetz ab Oktober 2026. 10 Testsendungen gratis!">
+  <meta name="theme-color" content="#0b0f19">
+  <link rel="canonical" href="https://micarga.es/de/">
+  <!-- ALTERNATIVAS:inicio -->
+  <link rel="alternate" hreflang="es" href="https://micarga.es/">
+  <link rel="alternate" hreflang="ca" href="https://micarga.es/ca/">
+  <link rel="alternate" hreflang="en" href="https://micarga.es/en/">
+  <link rel="alternate" hreflang="pt" href="https://micarga.es/pt/">
+  <link rel="alternate" hreflang="fr" href="https://micarga.es/fr/">
+  <link rel="alternate" hreflang="de" href="https://micarga.es/de/">
+  <link rel="alternate" hreflang="x-default" href="https://micarga.es/">
+  <!-- ALTERNATIVAS:fin -->
+  <!-- Camión de la marca. Sustituye al emoji 🚚 que iba incrustado como SVG.
+       El .ico lleva 16, 32, 48 y 64 px porque cada navegador escoge uno
+       distinto (pestaña, marcador, acceso directo del escritorio); dejar solo
+       uno obliga al navegador a reescalar y el camión sale sucio.
+       Va sobre el azul de marca a propósito: un favicon transparente
+       desaparece en la barra de pestañas cuando el navegador está en tema
+       oscuro. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Open Graph: la tarjeta que se ve al compartir el enlace por WhatsApp
+       (el canal principal de captación de esta web) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://micarga.es/de/">
+  <meta property="og:title" content="Mi Carga — Das Transportkontrolldokument, digital">
+  <meta property="og:description" content="Erstellen Sie das DeCA und den Frachtbrief (ADR inklusive) vom Handy aus. Pflicht ab dem 5. Oktober 2026. 10 Testsendungen gratis.">
+  <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Mi Carga – Digitales Transportkontrolldokument ROTT &amp; ADR</title>
+  
+  <!-- Google Fonts: Outfit (headings) & Space Grotesk (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for modern UI look -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/styles.css?v=20260914b">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Mi Carga",
+    "legalName": "RESITECH 2021, S.L.U.",
+    "vatID": "ESB67419168",
+    "url": "https://micarga.es/",
+    "logo": "https://micarga.es/apple-touch-icon.png",
+    "email": "soporte@micarga.es",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Gran Via de Carles III, 98, planta 10",
+      "postalCode": "08028",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    },
+    "sameAs": [
+      "https://wa.me/34744716449",
+      "https://www.instagram.com/mi_carga_app",
+      "https://www.facebook.com/profile.php?id=61592920812098"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "soporte@micarga.es",
+      "areaServed": "ES"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mi Carga",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web, Android, iOS",
+    "description": "Genera el documento de control de transporte (DeCA) y la carta de porte, incluido ADR, en PDF desde el móvil.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Plan mensual",
+        "price": "12.10",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "12.10",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
+        "priceValidUntil": "2027-12-31"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plan anual",
+        "price": "108.90",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "108.90",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
+        "priceValidUntil": "2027-12-31"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#intro">Start</a>
+        <a href="#videos">Videos</a>
+        <a href="#ley">Das Gesetz 2026</a>
+        <a href="#funciones">Was kann sie?</a>
+        <a href="#tarifas">Preise</a>
+        <a href="blog/">Blog</a>
+        <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="nav-btn">Kostenlos testen</a>
+      </nav>
+      <!-- IDIOMAS:inicio -->
+      <details class="selector-idioma">
+        <summary aria-label="Deutsch" title="Deutsch"><span class="bandera">🇩🇪</span><span class="selector-idioma-codigo">DE</span></summary>
+        <div class="selector-idioma-lista">
+            <a href="https://micarga.es/" hreflang="es" lang="es"><span class="bandera">🇪🇸</span>Castellano</a>
+            <a href="https://micarga.es/ca/" hreflang="ca" lang="ca"><span class="bandera"><svg class="bandera-svg" viewBox="0 0 9 6" aria-hidden="true"><rect width="9" height="6" fill="#FCDD09"/><path stroke="#DA121A" stroke-width=".67" d="M0 1h9M0 2.33h9M0 3.67h9M0 5h9"/></svg></span>Català</a>
+            <a href="https://micarga.es/en/" hreflang="en" lang="en"><span class="bandera">🇬🇧</span>English</a>
+            <a href="https://micarga.es/pt/" hreflang="pt" lang="pt"><span class="bandera">🇵🇹</span>Português</a>
+            <a href="https://micarga.es/fr/" hreflang="fr" lang="fr"><span class="bandera">🇫🇷</span>Français</a>
+        </div>
+      </details>
+      <!-- IDIOMAS:fin -->
+      
+      <button class="mobile-menu-toggle" aria-label="Menü öffnen">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg">
+      <img src="/images/highway_truck.jpg" alt="LKW bei Sonnenuntergang auf der Landstraße" class="hero-bg-image">
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <div class="container hero-content reveal-on-scroll">
+      <div class="hero-texto">
+        <span class="badge">NEUE PFLICHTVORSCHRIFT 2026</span>
+        <h1>Papier fährt nicht mehr mit.<br>Wechseln Sie zum <mark class="glow-text">digitalen Transport</mark>.</h1>
+        <p class="hero-lead">Erstellen Sie Ihre Transportkontrolldokumente (DeCA) und Frachtbriefe direkt vom Handy. Schnell, rechtssicher und ohne Komplikationen unterwegs.</p>
+      
+        <!-- Offer Hook Card -->
+        <div class="offer-hook-card">
+          <div class="hook-icon-wrap">
+            <i class="fa-solid fa-gift pulse-icon"></i>
+          </div>
+          <div class="hook-text">
+            <h3>Starten Sie, ohne etwas zu zahlen!</h3>
+            <p>Wir schenken Ihnen <strong>10 Testtransporte kostenlos</strong>. Ohne Kreditkarte, ohne Verpflichtungen.</p>
+          </div>
+        </div>
+      
+        <!-- Los dos botones llevan a los dos caminos reales, y no al formulario
+             de contacto: quien quiere probar necesita la app, y quien quiere
+             pagar necesita los planes. Antes «Probar 10 Envíos Gratis» mandaba a
+             #contacto, o sea a rellenar un formulario y esperar a que alguien
+             contestara, cuando la prueba se coge sola descargando la app. -->
+        <div class="hero-buttons">
+          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-circle-play"></i> 10 Sendungen kostenlos testen
+          </a>
+          <a href="#tarifas" class="btn btn-secondary btn-large">
+            <i class="fa-solid fa-cart-shopping"></i> Ich möchte kaufen
+          </a>
+        </div>
+      
+        <div class="store-badges-preview">
+          <span>Verfügbar für:</span>
+          <div class="badges-row">
+            <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
+            <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
+                 al bloque de descarga, lleva a un botón que tampoco se puede
+                 pulsar, y eso es peor que no ofrecerlo. -->
+            <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · demnächst</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- El vídeo ---------------------------------------------------------
+           NO se reproduce solo: se enseña el fotograma del albarán con un
+           botón de play encima y no pasa nada hasta que alguien lo pulsa. Un
+           vídeo que arranca por su cuenta encima de la página se cierra antes
+           de verlo, y este lleva voz: sonar sin que nadie lo haya pedido, en
+           mitad de una cabina o de una oficina, es la forma más rápida de que
+           cierren la pestaña.
+
+           `preload="none"`: sin pulsar el play no se descarga ni un byte del
+           vídeo, solo el fotograma. La portada la abre gente con datos
+           contados desde la carretera.
+
+           `playsinline` para que en el iPhone se vea dentro de la página en
+           vez de saltar al reproductor a pantalla completa. Se reproduce una
+           vez: sin `loop` y sin `autoplay`. -->
+      <div class="hero-video">
+        <div class="video-marco">
+          <video id="video-hero" class="video-pieza"
+                 poster="/images/video-hero-poster.jpg"
+                 preload="none" playsinline
+                 aria-label="Video: eine Kontrolle der Guardia Civil mit dem DeCA auf dem Handy">
+            <source src="/videos/micarga-hero.mp4" type="video/mp4">
+            Ihr Browser kann das Video nicht abspielen.
+          </video>
+          <button type="button" class="video-play" id="video-play"
+                  aria-controls="video-hero" aria-label="Video abspielen, 13 Sekunden">
+            <i class="fa-solid fa-play" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="video-pie">13 Sekunden: So läuft eine Kontrolle mit dem DeCA auf dem Handy ab.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Intro (Text-Image) -->
+  <section id="intro" class="intro-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="intro-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Digitalisierung von Dokumenten</span>
+          <h2>Das schnellste digitale Kontrolldokument, überall und zum besten Preis</h2>
+          <p class="lead-paragraph">Führen Sie Gütertransporte in Spanien oder international durch?</p>
+          <p>Ab sofort erledigen Sie die Dokumentation in Sekunden und <strong>Schluss mit dem Papier</strong>. Wir bieten Ihnen die endgültige Lösung für die Fahrerkabine: Erstellen Sie mit unserer App sowohl das Kontrolldokument als auch den Frachtbrief (bei ADR) in wenigen Minuten als PDF.</p>
+          <div class="highlights-box">
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> Laden Sie überall</div>
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> Zu jeder Uhrzeit</div>
+            <div class="highlight-item"><i class="fa-solid fa-check"></i> An jedem Wochentag</div>
+          </div>
+          <p class="tagline">Egal, wo Sie sind. Erledigen Sie es selbst, sofort.</p>
+          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.5rem;">Jetzt sofort loslegen</a>
+        </div>
+        
+        <div class="intro-image-wrapper reveal-on-scroll">
+          <img src="/images/control_digital.webp" alt="Digitalisierung von Transportkontrolldokumenten" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge badge-accent">
+            <i class="fa-solid fa-bolt"></i> Schnell und einfach
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vídeos de cómo funciona ---------------------------------------------
+       Cuatro grabaciones de pantalla reales de la app. No se cargan con la
+       página: cada tarjeta enseña solo un fotograma (una imagen de 50 kB) y el
+       vídeo no se descarga hasta que alguien pulsa. Son ~7 MB entre los cuatro
+       y esta portada la abre gente con datos contados desde la carretera.
+
+       Se abren en un <dialog> nativo: la tecla Escape y el botón de la X
+       cierran y devuelven a la web, que es justo lo que se pidió. El vídeo se
+       para y se vacía al cerrar, para que no siga sonando por detrás. -->
+  <section id="videos" class="videos-section scroll-padding">
+    <div class="container">
+      <div class="videos-cabecera reveal-on-scroll">
+        <span class="section-subtitle">Sehen Sie es in Aktion</span>
+        <h2>So funktioniert es, im Video</h2>
+        <p>Echte Aufnahmen aus der App, ungeschnitten. Tippen Sie auf eines, um es anzusehen; mit dem X kehren Sie zur Website zurück.</p>
+      </div>
+
+      <div class="videos-rejilla reveal-on-scroll">
+        <button type="button" class="video-tarjeta"
+                data-video="/videos/micarga-envio-completo.mp4">
+          <span class="video-tarjeta-marco">
+            <img src="/images/poster-envio-completo.jpg" alt="" loading="lazy" width="540" height="1107">
+            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+            <span class="video-tarjeta-duracion">58 s</span>
+          </span>
+          <span class="video-tarjeta-pie">
+            <span class="video-tarjeta-icono"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
+            <span>
+              <strong>Eine komplette Sendung, von Anfang bis Ende</strong>
+              <small>Route, Personen, Ladung und Unterschriften: das ganze Dokument in weniger als einer Minute.</small>
+            </span>
+          </span>
+        </button>
+
+        <button type="button" class="video-tarjeta"
+                data-video="/videos/micarga-albaran.mp4">
+          <span class="video-tarjeta-marco">
+            <img src="/images/poster-albaran.jpg" alt="" loading="lazy" width="540" height="1107">
+            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+            <span class="video-tarjeta-duracion">48 s</span>
+          </span>
+          <span class="video-tarjeta-pie">
+            <span class="video-tarjeta-icono"><i class="fa-solid fa-file-signature" aria-hidden="true"></i></span>
+            <span>
+              <strong>Den Lieferschein ausfüllen und unterschreiben</strong>
+              <small>Die Daten der Ware und die drei digitalen Unterschriften, Feld für Feld.</small>
+            </span>
+          </span>
+        </button>
+
+        <button type="button" class="video-tarjeta"
+                data-video="/videos/micarga-tareas.mp4">
+          <span class="video-tarjeta-marco">
+            <img src="/images/poster-tareas.jpg" alt="" loading="lazy" width="540" height="1107">
+            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+            <span class="video-tarjeta-duracion">24 s</span>
+          </span>
+          <span class="video-tarjeta-pie">
+            <span class="video-tarjeta-icono"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
+            <span>
+              <strong>Was Sie mit einem Transport alles machen können</strong>
+              <small>Das PDF herunterladen, den QR-Code zeigen, ihn teilen, ihn duplizieren oder den Transport starten.</small>
+            </span>
+          </span>
+        </button>
+
+        <button type="button" class="video-tarjeta"
+                data-video="/videos/micarga-ruta.mp4">
+          <span class="video-tarjeta-marco">
+            <img src="/images/poster-ruta.jpg" alt="" loading="lazy" width="540" height="1107">
+            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+            <span class="video-tarjeta-duracion">25 s</span>
+          </span>
+          <span class="video-tarjeta-pie">
+            <span class="video-tarjeta-icono"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></span>
+            <span>
+              <strong>Die Route des Transports ansehen</strong>
+              <small>Kilometer, geschätzte Fahrzeit für LKW und die Halte entlang der Strecke.</small>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Ley 2026 (Image-Text) -->
+  <section id="ley" class="ley-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="ley-image-wrapper reveal-on-scroll">
+          <img src="/images/documentos.jpg" alt="Gedruckte und digitale Transportdokumente" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge">
+            <i class="fa-solid fa-shield-halved"></i> 100 % zugelassen
+          </div>
+        </div>
+        
+        <div class="ley-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Verbindliche spanische Vorschrift</span>
+          <h2>Ab dem 5. Oktober 2026 ist Papier nicht mehr gültig</h2>
+          <p>Das <strong>Gesetz 9/2025 über nachhaltige Mobilität</strong> und die Aktualisierung der <strong>ROTT</strong> legen fest, dass die digitalen Verwaltungskontrolldokumente in Spanien verpflichtend werden. Vermeiden Sie Bußgelder unterwegs und stellen Sie noch heute um.</p>
+          
+          <ul class="ley-list">
+            <li>
+              <i class="fa-solid fa-qrcode"></i>
+              <div>
+                <strong>QR-Code für die Kontrolle:</strong> Zeigen Sie den QR-Code auf Ihrem Handy. Der Beamte (Guardia Civil) scannt ihn und validiert das digitale Kontrolldokument sofort.
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-history"></i>
+              <div>
+                <strong>Rechtssichere Rückverfolgbarkeit:</strong> Die Anwendung speichert unveränderlich Datum und Uhrzeit der Erstellung des Transports sowie jede Änderung.
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-server"></i>
+              <div>
+                <strong>Aufbewahrungspflicht von 12 Monaten:</strong> Alle Ihre PDFs werden sicher in der Cloud gespeichert, im Einklang mit der geltenden Gesetzgebung.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Conformidad punto por punto con la Resolución de 5/6/2026 -->
+      <div class="conformidad-box reveal-on-scroll">
+        <h3><i class="fa-solid fa-clipboard-check"></i> Wir erfüllen die Resolution vom 5. Juni 2026, Punkt für Punkt</h3>
+        <p class="conformidad-intro">
+          Die Norm, die das DeCA ausgestaltet<a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-12784" target="_blank" rel="noopener">BOE-A-2026-12784</a>)
+          legt sehr konkrete technische Anforderungen fest. Das wird verlangt – und so erfüllt Mi Carga es:
+        </p>
+        <ul class="conformidad-list">
+          <li><strong>Natives digitales PDF, höchstens 5 MB</strong> (Abschnitt 2.1 und 2.2) — wir erzeugen das Dokument aus den Daten, niemals als Scan. Unsere PDFs wiegen rund 0,5 MB.</li>
+          <li><strong>Datum und Uhrzeit von Erstellung und Änderung als Metadaten</strong> (Abschnitt 2.1) — in der Datei selbst und im Rückverfolgungsverlauf festgehalten.</li>
+          <li><strong>QR-Code mit der eindeutigen URL des Dokuments</strong> (Abschnitt 2.3) — auf jedem PDF aufgedruckt.</li>
+          <li><strong>Die URL lädt das PDF direkt herunter</strong> (Abschnitt 3.3 und 3.4) — den QR-Code scannen <em>lädt die Datei herunter</em>: keine Zwischenseiten, keine Passwörter, keine Schaltflächen, die die Norm ausdrücklich für ungültig erklärt.</li>
+          <li><strong>HTTPS mit TLS 1.2 oder höher</strong> (Abschnitt 3.1) — der gesamte Datenverkehr ist verschlüsselt.</li>
+          <li><strong>Für die Kontrolle jederzeit verfügbares Archiv</strong> (Abschnitt 1.3) — jedes Dokument wird als Datei gespeichert, nicht nur als Daten.</li>
+          <li><strong>Aufbewahrung von mindestens einem Jahr</strong> (Abschnitt 2.4) — Ihre Dokumente bleiben auch nach dem Transport herunterladbar.</li>
+          <li><strong>Kopie für den Fahrer vor Beginn des Transports</strong> (Abschnitt 7) — auf dem Handy oder ausgedruckt, immer mit QR-Code.</li>
+        </ul>
+        <p class="conformidad-nota">
+          Das Ministerium stellt keine offizielle Anwendung zur Erstellung des DeCA bereit: Die Norm legt die Anforderungen fest, die
+          die von jedem Unternehmen eingesetzte Anwendung erfüllen muss. Mi Carga ist diese Anwendung.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Features / What the App does (Text-Image) -->
+  <section id="funciones" class="features-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="features-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Was kann unsere App für Sie tun?</span>
+          <h2>Die einfachste und vollständigste App für den Transport</h2>
+          <p>Speziell entwickelt, um die tägliche Arbeit von Fahrern und Güterflotten zu erleichtern:</p>
+          
+          <ul class="features-custom-list">
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-file-pdf"></i></div>
+              <div>
+                <h4>Sofortige PDF-Erstellung</h4>
+                <p>Erstellen Sie das Kontrolldokument oder den digitalen Frachtbrief als PDF, indem Sie ein paar ganz einfache Daten ausfüllen.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-route"></i></div>
+              <div>
+                <h4>Optimale Route und ADR-Pflichtroute</h4>
+                <p>Berechnet die optimale Route für Ihren LKW und die vorgeschriebene Route beim Transport gefährlicher Güter (ADR), damit Sie Bußgelder vermeiden.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-bed"></i></div>
+              <div>
+                <h4>Halte- und Ruhezonen</h4>
+                <p>Zeigt Ihnen die besten Orte für Ihre vorgeschriebenen Pausen zum Essen und Schlafen auf der berechneten Route.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-square-parking"></i></div>
+              <div>
+                <h4>Parkplätze und Tankstellen</h4>
+                <p>Zeigt im Detail, wo Sie sicher parken können: Tankstellen mit LKW-Parkplatz und bewachte gebührenpflichtige Parkplätze.</p>
+              </div>
+            </li>
+            <li>
+              <div class="icon-wrap"><i class="fa-solid fa-cloud"></i></div>
+              <div>
+                <h4>Automatische Archivierung in der Cloud</h4>
+                <p>Archiviert alle erzeugten PDFs in der Cloud, damit sie nicht verloren gehen und bei jeder Kontrolle bereitliegen.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="features-image-wrapper reveal-on-scroll">
+          <img src="/images/conductora.webp" alt="Transportprofi am Steuer eines LKW" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge badge-accent">
+            <i class="fa-solid fa-truck-moving"></i> Routen &amp; ADR
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Cartel «PDF ilimitados» — gancho de venta principal. Va justo ANTES de
+       las tarifas a propósito: cuando el visitante ve el precio de 10 € ya sabe
+       que no hay tope, que es lo que lo hace parecer barato.
+       Las cifras de la comparativa salen de docs/COMPETENCIA.md (apps por
+       crédito: 0,30–0,75 €/documento; apps con tope: 9,90 €/mes y 75
+       expediciones). Decisión deliberada: NO se nombra a ningún competidor —
+       se describe su modelo de cobro. Si se actualizan sus precios, actualizar
+       también COMPETENCIA.md.
+       ⚠️ Lo ilimitado es la SUSCRIPCIÓN, no la prueba: el límite de 10
+       documentos de la prueba está aplicado en RLS (`can_create_document()`).
+       No prometer nunca ilimitado en la prueba gratuita. -->
+  <section id="ilimitado" class="unlimited-banner scroll-padding">
+    <div class="container">
+      <div class="unlimited-card reveal-on-scroll">
+        <span class="unlimited-tag">
+          <i class="fa-solid fa-infinity"></i> OHNE DOKUMENTENLIMIT
+        </span>
+
+        <h2 class="unlimited-title">Herunterladen <mark class="glow-text">unbegrenzt PDFs</mark></h2>
+
+        <p class="unlimited-lead">
+          Keine Guthaben, keine Sendungspakete, kein Bezahlen für jeden ausgestellten Transport.
+          Egal, ob Sie <strong>20 Transporte im Monat oder 400</strong>: Sie zahlen dasselbe.
+        </p>
+
+        <div class="unlimited-compare">
+          <div class="compare-col compare-ours">
+            <span class="compare-label">Mi Carga</span>
+            <!-- El precio va SIEMPRE con su aviso de impuestos: el titular de
+                 esta sección promete «sin costes ocultos», y un precio sin
+                 decir si lleva IVA es justamente un coste oculto.
+                 11-09-2026: los precios pasan a ser SIN IVA. Se cobran 12,10 €
+                 al mes y 108,90 € al año; los 10 € y los 90 € son la base. El
+                 número redondo se queda como titular porque es el que se
+                 compara con la competencia, pero nunca va solo. -->
+            <span class="compare-value">10&nbsp;€<small>/Monat</small></span>
+            <span class="compare-detail" style="opacity:.75">zzgl. MwSt.</span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-infinity"></i> Unbegrenzte Dokumente
+            </span>
+          </div>
+
+          <div class="compare-col">
+            <span class="compare-label">Apps, die pro Guthaben abrechnen</span>
+            <span class="compare-value">0,30&nbsp;–&nbsp;0,75&nbsp;€<small>/Dokument</small></span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-xmark"></i> Sie zahlen für jeden ausgestellten Transport
+            </span>
+          </div>
+
+          <div class="compare-col">
+            <span class="compare-label">Apps mit Sendungslimit</span>
+            <span class="compare-value">9,90&nbsp;€<small>/Monat</small></span>
+            <span class="compare-detail">
+              <i class="fa-solid fa-xmark"></i> Schluss bei 75 Sendungen
+            </span>
+          </div>
+        </div>
+
+        <div class="unlimited-actions">
+          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-circle-play"></i> Mit 10 kostenlosen Transporten starten
+          </a>
+          <a href="#tarifas" class="btn btn-secondary btn-large">
+            <i class="fa-solid fa-tags"></i> Die Tarife ansehen
+          </a>
+        </div>
+
+        <p class="unlimited-note">
+          <i class="fa-solid fa-circle-info"></i>
+          Der kostenlose Test umfasst 10 Dokumente. Unbegrenzte PDFs gibt es mit dem
+          Abo für 10 €/Monat oder 90 €/Jahr, zzgl. MwSt.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Pricing (Image-Text) -->
+  <section id="tarifas" class="pricing-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col align-center">
+        <div class="pricing-image-wrapper reveal-on-scroll">
+          <img src="/images/descargar.webp" alt="Transport-App Mi Carga herunterladen" class="side-img rounded-lg shadow-card">
+          <div class="floating-badge">
+            <i class="fa-solid fa-piggy-bank"></i> Der beste Preis
+          </div>
+        </div>
+        
+        <div class="pricing-text-wrapper reveal-on-scroll">
+          <span class="section-subtitle">Transparente Tarife</span>
+          <h2>Erstellen Sie so viele Dokumente, wie Sie brauchen, ohne versteckte Kosten</h2>
+          <p>Ein professionelles Werkzeug zum wettbewerbsfähigsten Preis auf dem spanischen Markt. Wählen Sie das Abo, das am besten zu Ihrem Arbeitsrhythmus passt:</p>
+          
+          <!-- Pricing grid -->
+          <div class="pricing-grid">
+            <div class="price-card">
+              <h3>Monatstarif</h3>
+              <div class="price">10€<span>/Monat</span></div>
+              <p class="price-tax">+ MwSt. · insgesamt 12,10 € im Monat</p>
+              <p>Ideal für Selbstständige oder Flotten, die lieber monatlich zahlen. Verlängert sich jeden Monat und kann jederzeit gekündigt werden, ohne Mindestlaufzeit.</p>
+              <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+                Mit diesem Tarif starten
+              </a>
+            </div>
+
+            <div class="price-card popular">
+              <h3>Jahrestarif</h3>
+              <div class="price">90€<span>/Jahr</span></div>
+              <p class="price-tax">+ MwSt. · insgesamt 108,90 € im Jahr</p>
+              <!-- Decía «Pago único», y no lo es: es una suscripción que se
+                   renueva sola cada doce meses. Un cliente que leyera «pago
+                   único» y se encontrara el segundo cargo al año siguiente
+                   tendría razón al reclamar al banco, y la disputa se perdería
+                   con esa frase escrita aquí.
+                   Y decía «te ahorras 2 meses», que se quedaba corto: 12 × 10 €
+                   son 120 €, frente a 90 € son 30 € de ahorro, o sea TRES
+                   meses. -->
+              <p>Sie sparen 3 Monate: das entspricht 7,50 € im Monat. Empfohlen für ständige Transportunternehmer. Es handelt sich um ein Jahresabo, das sich automatisch jedes Jahr verlängert; Sie können es jederzeit in Ihrem Konto kündigen.</p>
+              <a href="suscripcion" class="btn btn-primary" style="width:100%;margin-top:1rem;text-align:center;text-decoration:none;">
+                Mit diesem Tarif starten
+              </a>
+            </div>
+          </div>
+
+          <!-- Nota sobre el proceso de suscripción.
+               El pago se hace AQUÍ, en la web (suscripcion.html): se entra con
+               la cuenta que ya existe en la app y se contrata. Dentro de la app
+               NO se puede pagar —Apple y Google exigirían su compra integrada,
+               con comisión del 15-30%—, así que la web es la única vía.
+               Hace falta cuenta antes de pagar porque el enlace de Stripe debe
+               llevar el client_reference_id del usuario: sin él el webhook no
+               puede casar el pago con ninguna cuenta y el cliente paga y se
+               queda bloqueado igual.
+               Si algún día cambia el flujo, cambiar también este párrafo. -->
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.75rem;">
+            Erstellen Sie Ihr kostenloses Konto in <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="text-link">der App</a>
+            und dann <a href="suscripcion" class="text-link">schließen Sie hier Ihren Tarif ab</a>: Sie melden sich mit
+            derselben E-Mail an und wählen monatlich oder jährlich. Sie müssen den Test nicht aufgebraucht haben
+            —die 10 Transporte verfallen nicht und gehen nicht verloren, wenn Sie später ein Abo abschließen—.
+          </p>
+
+          <!-- Portal de cliente de Stripe, en MODO REAL desde el 27-08-2026.
+               Hasta esa fecha aquí estaba la URL de PRUEBAS, que se reconocía
+               por el segmento «/test_» después de «/p/login/»; un cliente que
+               hubiera pagado de verdad y la abriera habría visto un portal
+               vacío —sin su suscripción y sin sus facturas— y habría pensado
+               que le perdimos el pago. Nunca llegó a pasar: no había cobros.
+               Dato para la próxima vez: resultó que la URL real SÍ es la misma
+               sin el «test_», al contrario de lo que decía este aviso.
+               ⚠️ La MISMA URL está también en suscripcion.js (constante
+               PORTAL_CLIENTE), que es adonde se manda a quien ya tiene
+               suscripción. Si se cambia una, HAY QUE CAMBIAR LAS DOS. -->
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">
+            Sie sind schon Kunde?
+            <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
+              Verwalten Sie Ihr Abo
+            </a>
+            — Tarif wechseln, Karte aktualisieren oder Rechnungen herunterladen.
+          </p>
+
+          <!-- Offer Hook Badge -->
+          <div class="pricing-hook-card" style="margin-top: 2rem;">
+            <div class="pricing-hook-icon"><i class="fa-solid fa-gift"></i></div>
+            <div>
+              <h4>Kostenloser Test garantiert!</h4>
+              <p><strong>die ersten 10 Dokumente gratis</strong>. Erstellen Sie Ihre ersten 10 Testfahrten, ohne etwas zu zahlen, und sehen Sie, wie einfach es ist.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Presupuesto para empresas -------------------------------------------
+       Va justo DEBAJO de las tarifas a propósito: quien acaba de leer «10 €/mes»
+       con doce conductores en plantilla se está preguntando exactamente esto, y
+       es el momento en que la pregunta está viva. El formulario vive en su
+       propia página y no en un modal para que el enlace se pueda mandar
+       directamente a una empresa por correo. -->
+  <section id="empresas" class="empresas-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="empresas-card">
+        <div class="empresas-texto">
+          <span class="section-subtitle">Mehrere Fahrer?</span>
+          <h2>Angebot für Unternehmen</h2>
+          <p>
+            Jeder Fahrer braucht sein eigenes Konto, um seine Transporte zu unterschreiben. Sagen Sie uns,
+            wie viele Sie sind, und wir nennen Ihnen einen Festpreis pro Jahr mit allen
+            Konten inklusive, ohne dass Sie sie einzeln anlegen müssen.
+          </p>
+        </div>
+        <a href="presupuesto" class="btn btn-primary btn-large empresas-btn">
+          <i class="fa-solid fa-file-invoice"></i> Angebot anfordern
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consejero de seguridad ADR ----------------------------------------
+       Servicio aparte de la app: aquí no se vende software, se vende que una
+       persona firme como consejero de seguridad de la empresa.
+
+       NO lleva formulario. Un formulario más en la página significa otro
+       endpoint público que mantener y otra bandeja que vigilar, y para una
+       consulta que llega una vez cada mucho no compensa: el `mailto:` abre el
+       correo del cliente con las preguntas ya escritas y la respuesta aterriza
+       en soporte como cualquier otro correo. -->
+  <section id="adr" class="adr-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="adr-card">
+        <div class="adr-cinta" aria-hidden="true"></div>
+
+        <div class="adr-cuerpo">
+          <div class="adr-imagen">
+            <img src="/images/adr-placas.webp" width="578" height="529" loading="lazy"
+                 alt="ADR-Gefahrzettel: orangefarbene Warntafel, entzündbar Klasse 3, ätzend Klasse 8 und oxidierend Klasse 5.1">
+          </div>
+
+          <div class="adr-texto">
+            <span class="section-subtitle">Gefahrgut</span>
+            <h2>Ihr ADR-Sicherheitsberater, ohne ihn anstellen zu müssen</h2>
+            <p>
+              Wenn Ihr Unternehmen Gefahrgut versendet, verlädt, entlädt oder
+              befördert, verpflichtet Sie das ADR, einen benannten Sicherheitsberater
+              zu haben. Diese Aufgabe übernehmen wir: Sie fahren einfach weiter.
+            </p>
+
+            <ul class="adr-lista">
+              <li><i class="fa-solid fa-user-shield" aria-hidden="true"></i> Benennung und Anmeldung des Beraters bei der Verwaltung</li>
+              <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Der vorgeschriebene Jahresbericht, verfasst und eingereicht</li>
+              <li><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Prüfung von Frachtbriefen, Kennzeichnung und Dokumentation</li>
+              <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Schulungsplan für das Personal, das mit dem Gefahrgut umgeht</li>
+              <li><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Unfall- oder Ereignisbericht, falls es dazu kommt</li>
+            </ul>
+
+            <div class="adr-botones">
+              <a href="contacto?motivo=Consejero+de+seguridad+ADR" class="btn btn-primary btn-large">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i> Schreiben Sie uns
+              </a>
+              <a href="https://wa.me/34744716449?text=Hola%2C%20nos%20interesa%20el%20servicio%20de%20consejero%20de%20seguridad%20ADR.%20Os%20cuento%3A%20" target="_blank" rel="noopener" class="btn btn-secondary">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Ich bevorzuge WhatsApp
+              </a>
+            </div>
+
+            <p class="adr-pie">
+              Die Nachricht öffnet sich mit den Fragen bereits vorgeschrieben: Sie müssen sie nur
+              ausfüllen und absenden. Wir antworten Ihnen mit einem Festpreis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Download Section -->
+  <section id="descarga" class="download-section scroll-padding">
+    <div class="container text-center reveal-on-scroll">
+      <div class="download-card">
+        <span class="badge badge-accent">SOFORT VERFÜGBAR</span>
+        <h2>Installieren Sie Mi Carga noch heute</h2>
+        <p>Auf Android laden Sie sie bei Google Play herunter. Die Version für iPhone und iPad ist unterwegs; in der Zwischenzeit können Sie sie auf dem iPhone im Browser nutzen.</p>
+
+        <div class="store-buttons-grid">
+          <!-- Android: YA HAY FICHA EN GOOGLE PLAY (publicada el 27-08-2026).
+               Antes este botón mandaba a la PWA porque no existía la ficha; se
+               comprobó el 03-09-2026 que play.google.com/store/apps/details?id=es.micarga.app
+               responde 200. Mandar a la tienda es mejor: instalación de verdad,
+               actualizaciones automáticas y reseñas. -->
+          <a href="https://play.google.com/store/apps/details?id=es.micarga.app" target="_blank" rel="noopener" class="store-btn">
+            <div class="store-icon"><i class="fa-brands fa-google-play"></i></div>
+            <div class="store-text">
+              <span>HERUNTERLADEN BEI</span>
+              <strong>Google Play</strong>
+            </div>
+          </a>
+
+          <!-- iPhone / iPad: EN PRÓXIMAMENTE desde el 07-09-2026, por decisión
+               del propietario. Apple rechazó la 1.3 (guidelines 3.1.1 y 3.1.3(c),
+               compra integrada obligatoria) y el trabajo para resolverlo está
+               aparcado, así que anunciar una instalación en iPhone sería
+               prometer algo que no se puede cumplir.
+
+               NO es un enlace: un botón que parece pulsable y no lleva a ningún
+               sitio molesta más que un rótulo honesto. El iPhone no se queda sin
+               salida — abajo sigue estando la app en el navegador, que funciona.
+
+               Para reactivarlo: volver a poner un <a> con la ficha de la App
+               Store (apps.apple.com/es/app/id6795932951) y el rótulo
+               «DESCARGAR EN / App Store». -->
+          <div class="store-btn store-btn-pronto" aria-disabled="true">
+            <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
+            <div class="store-text">
+              <span>DEMNÄCHST FÜR</span>
+              <strong>iPhone / iPad</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="web-alternative">
+          <p>Sie haben ein iPhone oder möchten lieber nichts installieren? Nutzen Sie die App direkt im Browser, mit allen Funktionen: <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contacto" class="contact-section scroll-padding">
+    <div class="container">
+      <div class="grid grid-2-col">
+        <div class="contact-info reveal-on-scroll">
+          <span class="section-subtitle">Reden wir?</span>
+          <h2>Holen Sie sich Ihre 10 kostenlosen Transporte</h2>
+          <p>Legen Sie das Konto an und Sie haben sie sofort. Sie müssen nichts beantragen und auf keine Antwort warten: anmelden und Transporte ausstellen.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <h4>Schreiben Sie uns</h4>
+                <a href="contacto">Kontaktformular</a>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <h4>Support-WhatsApp</h4>
+                <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a>
+              </div>
+            </div>
+            
+            <!-- La dirección es la del domicilio social, la misma que consta
+                 en el aviso legal: si las dos no coinciden, la que manda es la
+                 del aviso legal y hay que corregir esta. No es una oficina de
+                 atención al público —el soporte va por correo y WhatsApp— pero
+                 tiene que estar a la vista: una empresa sin dirección en la web
+                 da la misma confianza que un teléfono que no contesta. -->
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <h4>Wo Sie uns finden</h4>
+                <p>
+                  RESITECH 2021, S.L.U. · USt-IdNr. B67419168<br>
+                  Gran Via de Carles III, 98, 10. Stock<br>
+                  08028 Barcelona, Spanien
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-truck-moving"></i>
+              <div>
+                <h4>Besonderes Testangebot</h4>
+                <p>10 Transporte in jedem neuen Konto enthalten, und wir helfen Ihnen bei der Ersteinrichtung, wenn Sie möchten.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- El camino real de la prueba gratuita ------------------------
+             Aquí había un formulario «Solicitar Alta Gratuita» que pedía
+             nombre, teléfono y flota y abría WhatsApp para que alguien mandara
+             credenciales a mano. No era cierto: los 10 portes NO son una
+             promoción que haya que solicitar —los trae cualquier cuenta por el
+             hecho de existir— y la contraseña la elige el propio conductor al
+             registrarse. El formulario solo metía una espera y una persona en
+             medio de algo que ya es automático. -->
+        <div class="contact-form-wrapper reveal-on-scroll">
+          <div class="form-card">
+            <h3>In einer Minute startklar</h3>
+            <p class="form-lead">Ohne Karte, ohne Anrufe und ohne darauf zu warten, dass jemand Sie freischaltet</p>
+
+            <ol class="pasos-prueba">
+              <li>
+                <strong>Konto erstellen</strong>
+                <span>E-Mail, Passwort und Ihre Daten als Transportunternehmer.</span>
+              </li>
+              <li>
+                <strong>Stellen Sie Ihre ersten 10 Transporte aus</strong>
+                <span>Rechtsgültig ab dem ersten, unterschrieben und mit QR-Code.</span>
+              </li>
+              <li>
+                <strong>Machen Sie weiter, wann Sie wollen</strong>
+                <span>Sind sie aufgebraucht, führt Sie die App zum Abo. Nicht genutzte Transporte verfallen nicht.</span>
+              </li>
+            </ol>
+
+            <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-circle-play"></i> Mein kostenloses Konto erstellen
+            </a>
+
+            <span class="form-privacy-note">Die 10 Transporte sind im Konto enthalten. Sie müssen sie nicht anfordern.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="#" class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Digitale Lösung zur Erstellung von Kontrolldokumenten und Frachtbriefen. Mit der Unterstützung von Ecosmep für ADR-Prüfungen.</p>
+        <!-- Redes sociales. Los enlaces van SIN los parámetros con los que se
+             comparten desde las apps (`?stkn=…` de Instagram, `/share/…` de
+             Facebook): esos identifican a QUIÉN compartió el perfil, no al
+             perfil, y no pintan nada en una web pública. El de Facebook se
+             resolvió al perfil real siguiendo la redirección del enlace corto,
+             para no depender de un atajo que puede caducar. -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga auf Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga auf Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Kontakt</h4>
+          <p><a href="contacto">Schreiben Sie uns</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+          <!-- Misma dirección que la del bloque de contacto y la del aviso
+               legal. Si alguna vez cambia el domicilio, son TRES sitios. -->
+          <p class="footer-direccion">
+            RESITECH 2021, S.L.U.<br>
+            Gran Via de Carles III, 98, 10. Stock<br>
+            08028 Barcelona
+          </p>
+        </div>
+        
+        <div class="footer-links-group">
+          <h4>Ressourcen</h4>
+          <p><a href="blog/">Blog</a></p>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Rechtliches</h4>
+          <p><a href="aviso-legal">Impressum</a></p>
+          <p><a href="privacidad">Datenschutzerklärung</a></p>
+          <p><a href="terminos">Nutzungsbedingungen</a></p>
+          <p><a href="borrar-cuenta">Mein Konto löschen</a></p>
+          <p><a href="cookies">Cookie-Richtlinie</a></p>
+          <p><a href="#" data-cookies>Cookies einstellen</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-empresa">
+          Mi Carga ist ein Dienst von <strong>RESITECH 2021, S.L.U.</strong>
+          · USt-IdNr. B67419168
+          · <a href="https://www.resitech.es" target="_blank" rel="noopener">resitech.es</a>
+        </p>
+        <p class="footer-empresa">Im RELI, im ROLECE und bei FACe eingetragenes Unternehmen.</p>
+        <p>© 2026 Mi Carga (micarga.es). Alle Rechte vorbehalten. Entwickelt in Übereinstimmung mit dem Gesetz 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/34744716449?text=Hola,%20quiero%20más%20información%20sobre%20la%20app%20Mi%20Carga%20y%20activar%20los%2010%20transportes%20de%20prueba%20gratis." 
+     class="whatsapp-floating" 
+     target="_blank" 
+     rel="noopener" 
+     aria-label="Über WhatsApp kontaktieren">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-floating-tooltip">Fragen? Schreiben Sie uns</span>
+  </a>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Nach oben">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- La ventana del reproductor. Una sola para los cuatro vídeos: se le
+       cambia el <source> al abrirla. Es un <dialog> nativo, así que la tecla
+       Escape ya cierra sin escribir una línea, el foco se queda dentro
+       mientras está abierta y el resto de la página queda inerte. -->
+  <dialog id="video-ventana" class="video-ventana" aria-labelledby="video-ventana-titulo">
+    <div class="video-ventana-caja">
+      <div class="video-ventana-cabecera">
+        <h3 id="video-ventana-titulo" class="video-ventana-titulo"></h3>
+        <button type="button" class="video-ventana-cerrar" data-cerrar-video
+                aria-label="Video schließen und zur Website zurückkehren">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="video-ventana-marco">
+        <video id="video-ventana-pieza" class="video-ventana-pieza"
+               controls playsinline preload="auto"></video>
+
+        <!-- Lo que se ve al acabar: volver a la web o repetirlo. Va encima del
+             último fotograma en vez de cerrarse solo, porque un vídeo que se
+             cierra por su cuenta deja al que lo estaba viendo sin saber qué ha
+             pasado. -->
+        <div class="video-ventana-final" id="video-ventana-final" hidden>
+          <p>Ende des Videos</p>
+          <div class="video-ventana-final-botones">
+            <button type="button" class="btn btn-primary" data-cerrar-video>
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zurück zur Website
+            </button>
+            <button type="button" class="btn btn-secondary" id="video-ventana-repetir">
+              <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Noch einmal ansehen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- JavaScript scripts -->
+  <script src="/script.js?v=20260914b"></script>
+  <script src="/consentimiento.js?v=20260917a" defer></script>
+</body>
+</html>
