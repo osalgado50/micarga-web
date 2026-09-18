@@ -7,3 +7,7 @@
 # Los listados de frases pendientes de traducir son un apunte de trabajo, no
 # parte de la web: se regeneran con `python3 herramientas/i18n.py extraer`.
 traducciones/*.pendiente.json
+
+# Caché de Python de las herramientas de i18n
+__pycache__/
+*.pyc
