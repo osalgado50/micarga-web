@@ -96,3 +96,8 @@
   Cache-Control: public, max-age=60, must-revalidate
 /en/turnstile.js
   Cache-Control: public, max-age=60, must-revalidate
+
+# El fichero de verificación de Search Console. Caché corta: si hubiera que
+# tocarlo o quitarlo, que se note enseguida.
+/google279fb54ea943369d.html
+  Cache-Control: public, max-age=300, must-revalidate
