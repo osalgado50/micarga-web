@@ -93,6 +93,13 @@ const estaVigente = async (userId) => {
     if (await estaVigente(session.user.id)) {
       ponerCabecera('ok', 'Ja ets premium!');
       mostrarPaso('paso-activa');
+      try {
+        window.gtag?.('event', 'purchase', {
+          transaction_id: session.user.id,
+          value: 9.99,
+          currency: 'EUR',
+        });
+      } catch { /* sin efecto si no hay analítica */ }
       return;
     }
     await dormir(ESPERA_MS);

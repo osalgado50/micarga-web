@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260914b">
+  <link rel="stylesheet" href="/styles.css?v=20260918a">
 
   <script type="application/ld+json">
   {
@@ -789,6 +789,50 @@
 
         <div class="web-alternative">
           <p>Vous avez un iPhone, ou vous préférez ne rien installer ? Utilisez l'appli directement depuis le navigateur, avec toutes ses fonctions : <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reseñas ------------------------------------------------------------
+       Va DESPUÉS de la descarga y antes del contacto a propósito: el orden
+       natural es instalar → usarla → contarlo. Pedir la reseña antes de que
+       nadie haya probado nada no lo hace nadie.
+
+       El QR es un SVG generado a partir de la propia URL (no una captura):
+       así es nítido a cualquier tamaño, pesa 1,5 kB y se puede comprobar que
+       apunta donde debe. Verificado con el lector del navegador: decodifica
+       exactamente https://g.page/r/CWBWemv_ZpM0EBM/review
+
+       El QR va sobre un panel BLANCO, no sobre el fondo oscuro de la tarjeta.
+       Los lectores de código esperan módulos oscuros sobre claro; invertido
+       hay móviles que no lo cogen, y un QR que falla la mitad de las veces es
+       peor que no ponerlo. -->
+  <section id="resenas" class="resenas-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="resenas-card">
+        <div class="resenas-texto">
+          <span class="badge">AVIS</span>
+          <h2>Mi Carga vous rend service ?</h2>
+          <div class="resenas-estrellas" role="img" aria-label="Cinq étoiles">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+          </div>
+          <p>Dites-le sur Google. À celui qui cherche comment se mettre en règle avec le DeCA, deux lignes de vous servent plus que tout ce que nous pourrions écrire nous-mêmes.</p>
+          <a href="https://g.page/r/CWBWemv_ZpM0EBM/review" target="_blank" rel="noopener" class="btn btn-primary btn-large resenas-boton">
+            <i class="fa-brands fa-google" aria-hidden="true"></i>
+            Écrire mon avis
+          </a>
+          <p class="resenas-nota">Google s'ouvre et votre compte est nécessaire. Cela prend moins d'une minute.</p>
+        </div>
+
+        <div class="resenas-qr">
+          <img src="/images/qr-resena-google.svg" width="320" height="320"
+               alt="Code QR pour laisser un avis sur Mi Carga dans Google" loading="lazy">
+          <span>Ou visez avec l'appareil photo du téléphone</span>
         </div>
       </div>
     </div>

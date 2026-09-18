@@ -3043,3 +3043,106 @@ body > section:not(.hero-section) > .container > h2 {
 .tabla-legal th { color: var(--text-heading); font-weight: 700; white-space: nowrap; }
 .tabla-legal td { color: var(--text-main); }
 .tabla-legal code { font-size: .92em; color: var(--primary); }
+
+/* ── Reseñas ──────────────────────────────────────────────────────────────
+   Dos columnas: el texto con su botón a la izquierda y el QR a la derecha.
+   Por debajo de 860 px se apila y el QR se va ARRIBA: en el móvil, que es
+   donde está la cámara, el código es lo primero que interesa. */
+.resenas-card {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(3, 7, 18, 0.9) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.resenas-card h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  margin: 0.2rem 0 0.6rem;
+}
+
+.resenas-estrellas {
+  color: var(--primary);
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.9rem;
+}
+
+.resenas-texto > p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 1.6rem;
+}
+
+.resenas-boton {
+  /* `.btn` es inline-flex y en un grid se estiraría a todo el ancho de la
+     columna. Con fit-content se queda del tamaño de su texto. */
+  width: fit-content;
+}
+
+.resenas-nota {
+  font-size: 0.9rem;
+  margin: 0.9rem 0 0 !important;
+}
+
+/* El panel blanco no es decoración: los lectores esperan módulos oscuros
+   sobre fondo claro. Sobre el azul oscuro de la tarjeta, invertido, hay
+   móviles que no lo leen. */
+.resenas-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 1rem 1rem 0.9rem;
+  box-shadow: var(--shadow-card);
+}
+
+.resenas-qr img {
+  display: block;
+  width: clamp(150px, 20vw, 190px);
+  height: auto;
+}
+
+.resenas-qr span {
+  color: #374151;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 190px;
+  line-height: 1.35;
+}
+
+@media (max-width: 860px) {
+  .resenas-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  /* `justify-items: center` encoge los hijos del grid a su contenido, así que
+     sin esto el botón calcula su 100% sobre una columna ya estrecha. */
+  .resenas-texto { order: 2; width: 100%; }
+  .resenas-qr { order: 1; }
+  /* En el móvil el botón ocupa el ancho disponible en vez de ceñirse al texto.
+     Con `fit-content` la columna queda estrecha y rótulos largos —«Meine
+     Bewertung schreiben», «Scrieți recenzia mea»— se parten en tres líneas y el
+     botón sale como un ladrillo. */
+  .resenas-boton {
+    width: 100%;
+    max-width: 22rem;
+    margin: 0 auto;
+    /* `btn-large` mete 2,6 rem de relleno a cada lado: en una pantalla de 375
+       px son 83 px que le quita al texto, y rótulos como «Meine Bewertung
+       schreiben» se parten en tres líneas. Aquí manda el ancho, no el relleno. */
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+}

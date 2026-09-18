@@ -162,6 +162,13 @@ form.addEventListener('submit', async (e) => {
     $('paso-formulario').hidden = true;
     $('paso-enviado').hidden = false;
     limpiarAviso();
+
+    try {
+      window.gtag?.('event', 'generate_lead', {
+        event_category: 'presupuesto',
+        event_label: 'flota_' + (datos.camiones || 'no_especificado'),
+      });
+    } catch { /* sin efecto si no hay analítica */ }
   } catch {
     // Sin conexión, o la función caída.
     avisar('We couldn\'t connect. Check your connection, or write to us at soporte@micarga.es and we\'ll sort it out anyway.');
