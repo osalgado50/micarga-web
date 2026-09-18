@@ -177,6 +177,13 @@ form.addEventListener('submit', async (e) => {
     $('paso-formulario').hidden = true;
     $('paso-enviado').hidden = false;
     limpiarAviso();
+
+    try {
+      window.gtag?.('event', 'generate_lead', {
+        event_category: 'contacto',
+        event_label: datos.asunto || 'consulta_general',
+      });
+    } catch { /* sin efecto si no hay analítica */ }
   } catch {
     // Sin conexión, o la función caída.
     avisar('No hemos podido conectar. Comprueba la conexión y vuelve a intentarlo, o escríbenos por WhatsApp al +34 744 716 449.');
