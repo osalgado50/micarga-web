@@ -29,7 +29,7 @@
 // ridículo, y molestaría a los visitantes a cambio de nada.
 
 /** El identificador de GA4, «G-XXXXXXXXXX». Vacío = todo esto está apagado. */
-const MEDICION = '';
+const MEDICION = 'G-9G0GZCR1W7';
 
 /** Dónde se guarda lo que ha elegido. Un año, que es lo que recomienda la AEPD. */
 const CLAVE = 'micarga-cookies';
