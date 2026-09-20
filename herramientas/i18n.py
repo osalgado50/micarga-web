@@ -35,7 +35,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 # Los idiomas que EXISTEN como diccionario y se pueden ir rellenando.
-IDIOMAS = ("ca", "en", "pt", "fr", "de", "it", "pl", "ro")
+IDIOMAS = ("ca", "en", "pt", "fr", "de", "it", "pl", "ro", "bg")
 
 # Los que SALEN A LA WEB.
 #
@@ -81,7 +81,7 @@ IGUAL_EN_TODOS = {
     # polaca—, así que no pasa por el diccionario. Va como literal y no como
     # `NOMBRE_IDIOMA.values()` porque ese diccionario se define más abajo.
     "Castellano", "Català", "English", "Português", "Français", "Deutsch",
-    "Italiano", "Polski", "Română",
+    "Italiano", "Polski", "Română", "Български",
     # Las etiquetas del propio selector de idioma. El nombre de un idioma se
     # escribe en ese idioma, en las tres versiones: quien busca el catalán
     # busca «Català», no «Catalán» ni «Catalan».
@@ -217,6 +217,7 @@ DOMINIO = "https://micarga.es"
 NOMBRE_IDIOMA = {
     "es": "Castellano", "ca": "Català", "en": "English", "pt": "Português",
     "fr": "Français", "de": "Deutsch", "it": "Italiano", "pl": "Polski",
+    "bg": "Български",
     "ro": "Română",
 }
 ETIQUETA_IDIOMA = {
@@ -250,12 +251,13 @@ BANDERA = {
     "pt": "\U0001F1F5\U0001F1F9", "fr": "\U0001F1EB\U0001F1F7",
     "de": "\U0001F1E9\U0001F1EA", "it": "\U0001F1EE\U0001F1F9",
     "pl": "\U0001F1F5\U0001F1F1", "ro": "\U0001F1F7\U0001F1F4",
+    "bg": "\U0001F1E7\U0001F1EC",
 }
 
 LOCALE_OG = {
     "es": "es_ES", "ca": "ca_ES", "en": "en_GB", "pt": "pt_PT",
     "fr": "fr_FR", "de": "de_DE", "it": "it_IT", "pl": "pl_PL",
-    "ro": "ro_RO",
+    "ro": "ro_RO", "bg": "bg_BG",
 }
 
 # Todos, con el castellano delante: es el original del que salen los demás.
