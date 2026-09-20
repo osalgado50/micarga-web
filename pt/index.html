@@ -341,7 +341,13 @@
           <h3>Por trás disto está uma empresa, não um projeto de fim de semana</h3>
           <p>Dedicamo-nos a 100% à Mi Carga, 24/7. A aplicação está em desenvolvimento constante: o que um transportador nos pede numa terça-feira costuma estar a funcionar na semana seguinte.</p>
           <p>E se a sua empresa precisar de algo que ainda não existe, fala-se: adaptamo-nos à vossa forma de trabalhar e desenvolvemos soluções à medida.</p>
-          <a href="#contacto" class="btn btn-secondary">Diga-nos do que precisa</a>
+          <!-- Al formulario de empresas, NO a `#contacto`: ese ancla solo baja al
+               final de la misma página, y lo que hace falta aquí es que nos
+               cuenten qué necesitan. `presupuesto` pregunta empresa, conductores
+               y qué transporte hacen, que es el contexto para contestar a una
+               petición a medida. El enlace va RELATIVO a propósito: en /de/ se
+               resuelve como /de/presupuesto y cada idioma cae en su formulario. -->
+          <a href="presupuesto" class="btn btn-secondary">Diga-nos do que precisa</a>
         </div>
       </div>
     </div>
