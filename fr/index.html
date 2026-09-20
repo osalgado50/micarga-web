@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260918a">
+  <link rel="stylesheet" href="/styles.css?v=20260920a">
 
   <script type="application/ld+json">
   {
@@ -249,6 +249,100 @@
           </button>
         </div>
         <p class="video-pie">13 secondes : voilà comment passer un contrôle avec le DeCA sur le téléphone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosistema: por dónde se entra, el núcleo, y por dónde sale ----------
+       ⚠️ EL DIAGRAMA ES HTML Y CSS, NO UNA IMAGEN NI TEXTO DENTRO DE UN <svg>.
+       Es deliberado y es lo único que aguanta nueve idiomas: el texto de un
+       <svg> no se ajusta solo, así que «Aplicación en el navegador» cabe y
+       «Die Anwendung im Browser» se sale del recuadro sin que nadie se entere
+       hasta que un alemán abre la página. En HTML el texto parte de línea solo.
+       Las rayas que unen las cajas sí son decorativas: van en CSS y llevan
+       aria-hidden, porque una raya no se lee en voz alta.
+
+       El orden del marcado (entradas → núcleo → salidas) es el mismo que se ve
+       y el mismo que lee un lector de pantalla. -->
+  <section id="ecosistema" class="ecosistema-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="ecosistema-cabecera">
+        <span class="section-subtitle">Un seul système</span>
+        <h2>Où que vous travailliez, tout finit au même endroit</h2>
+        <p class="section-desc">En cabine, chez vous ou au bureau : chaque document entre dans le même noyau. Et vous le ressortez comme vous en avez besoin.</p>
+      </div>
+
+      <div class="ecosistema-diagrama">
+        <p class="ecosistema-rotulo">Par où vous travaillez</p>
+        <ul class="ecosistema-fila ecosistema-fila--cuatro">
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-brands fa-apple" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Application pour iPhone</span>
+            <span class="ecosistema-pie">Sur l'App Store</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-brands fa-android" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Application pour Android</span>
+            <span class="ecosistema-pie">Sur Google Play</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">L'application dans le navigateur</span>
+            <span class="ecosistema-pie">Sans rien installer</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Le CRM de bureau</span>
+            <span class="ecosistema-pie">Pour gérer votre flotte</span>
+          </li>
+        </ul>
+
+        <div class="ecosistema-union ecosistema-union--cuatro" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <div class="ecosistema-nucleo">
+          <span class="ecosistema-nucleo-icono"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+          <div class="ecosistema-nucleo-texto">
+            <span class="ecosistema-nucleo-titulo">Le noyau de Mi Carga</span>
+            <p>Un seul endroit où sont conservés chaque document de contrôle, chaque signature et chaque transport. Ce que vous faites sur le téléphone, le bureau le voit aussitôt, et inversement. Sans rien recopier d'un endroit à l'autre.</p>
+          </div>
+        </div>
+
+        <p class="ecosistema-rotulo ecosistema-rotulo--salidas">Et vous le sortez comme il vous faut</p>
+
+        <div class="ecosistema-union ecosistema-union--tres" aria-hidden="true">
+          <i class="fa-solid fa-chevron-down"></i>
+          <span></span><span></span><span></span>
+        </div>
+        <ul class="ecosistema-fila ecosistema-fila--tres">
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">PDF juridiquement valable</span>
+            <span class="ecosistema-pie">Signé et prêt pour un contrôle</span>
+          </li>
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">CSV et Excel</span>
+            <span class="ecosistema-pie">Vos données pour le comptable</span>
+          </li>
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Enregistré sur votre disque</span>
+            <span class="ecosistema-pie">Une copie à vous, sur votre ordinateur</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ecosistema-nota">
+        <span class="ecosistema-nota-icono"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
+        <div>
+          <h3>Derrière tout cela, il y a une entreprise, pas un projet du week-end</h3>
+          <p>Nous nous consacrons à 100 % à Mi Carga, 24h/24 et 7j/7. L'application est en développement permanent : ce qu'un transporteur nous demande un mardi fonctionne généralement la semaine suivante.</p>
+          <p>Et si votre entreprise a besoin de quelque chose qui n'existe pas encore, on en parle : nous nous adaptons à votre façon de travailler et développons des solutions sur mesure.</p>
+          <a href="#contacto" class="btn btn-secondary">Dites-nous ce dont vous avez besoin</a>
+        </div>
       </div>
     </div>
   </section>

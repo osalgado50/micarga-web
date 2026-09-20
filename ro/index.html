@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260918a">
+  <link rel="stylesheet" href="/styles.css?v=20260920a">
 
   <script type="application/ld+json">
   {
@@ -249,6 +249,100 @@
           </button>
         </div>
         <p class="video-pie">13 secunde: așa treceți un control cu DeCA pe telefon.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosistema: por dónde se entra, el núcleo, y por dónde sale ----------
+       ⚠️ EL DIAGRAMA ES HTML Y CSS, NO UNA IMAGEN NI TEXTO DENTRO DE UN <svg>.
+       Es deliberado y es lo único que aguanta nueve idiomas: el texto de un
+       <svg> no se ajusta solo, así que «Aplicación en el navegador» cabe y
+       «Die Anwendung im Browser» se sale del recuadro sin que nadie se entere
+       hasta que un alemán abre la página. En HTML el texto parte de línea solo.
+       Las rayas que unen las cajas sí son decorativas: van en CSS y llevan
+       aria-hidden, porque una raya no se lee en voz alta.
+
+       El orden del marcado (entradas → núcleo → salidas) es el mismo que se ve
+       y el mismo que lee un lector de pantalla. -->
+  <section id="ecosistema" class="ecosistema-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="ecosistema-cabecera">
+        <span class="section-subtitle">Un singur sistem</span>
+        <h2>Oriunde ați lucra, totul ajunge în același loc</h2>
+        <p class="section-desc">În cabină, acasă sau la birou: fiecare document intră în același nucleu. Iar de acolo îl scoateți cum aveți nevoie.</p>
+      </div>
+
+      <div class="ecosistema-diagrama">
+        <p class="ecosistema-rotulo">De unde lucrați</p>
+        <ul class="ecosistema-fila ecosistema-fila--cuatro">
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-brands fa-apple" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Aplicația pentru iPhone</span>
+            <span class="ecosistema-pie">Din App Store</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-brands fa-android" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Aplicația pentru Android</span>
+            <span class="ecosistema-pie">Din Google Play</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Aplicația în browser</span>
+            <span class="ecosistema-pie">Fără să instalați nimic</span>
+          </li>
+          <li class="ecosistema-nodo">
+            <span class="ecosistema-icono"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">CRM-ul de birou</span>
+            <span class="ecosistema-pie">Pentru a vă gestiona flota</span>
+          </li>
+        </ul>
+
+        <div class="ecosistema-union ecosistema-union--cuatro" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <div class="ecosistema-nucleo">
+          <span class="ecosistema-nucleo-icono"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+          <div class="ecosistema-nucleo-texto">
+            <span class="ecosistema-nucleo-titulo">Nucleul Mi Carga</span>
+            <p>Un singur loc în care se păstrează fiecare document de control, fiecare semnătură și fiecare transport. Ce faceți pe telefon vede biroul pe loc, și invers. Fără să treceți nimic dintr-o parte în alta de mână.</p>
+          </div>
+        </div>
+
+        <p class="ecosistema-rotulo ecosistema-rotulo--salidas">Și îl scoateți cum aveți nevoie</p>
+
+        <div class="ecosistema-union ecosistema-union--tres" aria-hidden="true">
+          <i class="fa-solid fa-chevron-down"></i>
+          <span></span><span></span><span></span>
+        </div>
+        <ul class="ecosistema-fila ecosistema-fila--tres">
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">PDF valabil legal</span>
+            <span class="ecosistema-pie">Semnat și gata pentru un control</span>
+          </li>
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">CSV și Excel</span>
+            <span class="ecosistema-pie">Datele dumneavoastră pentru contabilitate</span>
+          </li>
+          <li class="ecosistema-nodo ecosistema-nodo--salida">
+            <span class="ecosistema-icono"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i></span>
+            <span class="ecosistema-titulo">Salvat pe discul dumneavoastră</span>
+            <span class="ecosistema-pie">O copie a dumneavoastră, pe calculatorul dumneavoastră</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ecosistema-nota">
+        <span class="ecosistema-nota-icono"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
+        <div>
+          <h3>În spatele acestui lucru este o firmă, nu un proiect de weekend</h3>
+          <p>Ne dedicăm 100% platformei Mi Carga, 24/7. Aplicația este în dezvoltare constantă: ce ne cere un transportator marți funcționează de obicei în săptămâna următoare.</p>
+          <p>Iar dacă firma dumneavoastră are nevoie de ceva ce încă nu există, vorbim: ne adaptăm la felul în care lucrați și dezvoltăm soluții la comandă.</p>
+          <a href="#contacto" class="btn btn-secondary">Spuneți-ne de ce aveți nevoie</a>
+        </div>
       </div>
     </div>
   </section>
