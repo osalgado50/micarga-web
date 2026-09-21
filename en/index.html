@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921e">
+  <link rel="stylesheet" href="/styles.css?v=20260921h">
 
   <script type="application/ld+json">
   {
@@ -356,11 +356,6 @@
                 </th>
                 <td class="calc-importe"><span data-imp-crm-mes>49</span> €</td>
                 <td class="calc-importe"><span data-imp-crm-ano>588</span> €</td>
-              </tr>
-              <tr class="calc-total">
-                <th scope="row">Total</th>
-                <td class="calc-importe"><span data-total-mes>10</span> €</td>
-                <td class="calc-importe"><span data-total-ano>90</span> €</td>
               </tr>
             </tbody>
           </table>
@@ -705,9 +700,39 @@
     <div class="container">
       <div class="grid grid-2-col align-center">
         <div class="pricing-image-wrapper reveal-on-scroll">
-          <img src="/images/descargar.webp" alt="Download the Mi Carga transport app" class="side-img rounded-lg shadow-card">
-          <div class="floating-badge">
-            <i class="fa-solid fa-piggy-bank"></i> The best price
+          <!-- La imagen y su distintivo, en su propia caja. El distintivo se
+               coloca en absoluto respecto al ancestro posicionado más cercano;
+               si ese fuera el contenedor entero, al añadir el cuadro del CRM
+               debajo se iría al fondo y taparía su texto. Pasó exactamente
+               eso. -->
+          <div class="pricing-image-caja">
+            <img src="/images/descargar.webp" alt="Download the Mi Carga transport app" class="side-img rounded-lg shadow-card">
+            <div class="floating-badge">
+              <i class="fa-solid fa-piggy-bank"></i> The best price
+            </div>
+          </div>
+
+          <!-- El CRM va AQUÍ, debajo de la imagen, y no como una tercera
+               tarjeta junto a los planes: no es una alternativa a ellos, se
+               SUMA. Quien lleva flota paga las licencias de sus conductores Y
+               esto. Ponerlo en la misma fila daría a entender que se elige uno
+               de los tres. -->
+          <div class="crm-card">
+            <span class="crm-card-etiqueta">For the office</span>
+            <h3>Fleet CRM</h3>
+            <p>Assign consignments to your drivers and follow every delivery from your computer. It is added to the licences, it does not replace them.</p>
+            <div class="crm-card-precios">
+              <div class="crm-card-precio">
+                <span class="crm-card-cifra">49 €</span>
+                <span class="crm-card-periodo">per month</span>
+              </div>
+              <div class="crm-card-precio">
+                <span class="crm-card-cifra">588 €</span>
+                <span class="crm-card-periodo">per year</span>
+              </div>
+            </div>
+            <p class="price-tax">+ VAT · €59.29 per month or €711.48 per year in total</p>
+            <p class="crm-card-nota">Flat price, however many drivers you have.</p>
           </div>
         </div>
         
@@ -1143,7 +1168,7 @@
   </dialog>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260921e"></script>
+  <script src="/script.js?v=20260921f"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

@@ -1437,5 +1437,12 @@
   "Total": "Total",
   "Pagando al año cada licencia sale por": "Plătind anual, fiecare licență costă",
   "en vez de": "în loc de",
-  ": te ahorras tres meses por conductor.": ": economisiți trei luni pentru fiecare șofer."
+  ": te ahorras tres meses por conductor.": ": economisiți trei luni pentru fiecare șofer.",
+  "Para la oficina": "Pentru birou",
+  "CRM de flota": "CRM de flotă",
+  "Reparte los portes entre tus conductores y sigue cada entrega desde el ordenador. Se suma a las licencias, no las sustituye.": "Repartizați transporturile între șoferii dumneavoastră și urmăriți fiecare livrare de la calculator. Se adaugă la licențe, nu le înlocuiește.",
+  "al mes": "pe lună",
+  "al año": "pe an",
+  "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ TVA · 59,29 € pe lună sau 711,48 € pe an în total",
+  "Precio fijo, sin importar cuántos conductores seáis.": "Preț fix, indiferent de câți șoferi aveți."
 }

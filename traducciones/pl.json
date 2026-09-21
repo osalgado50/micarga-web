@@ -1437,5 +1437,12 @@
   "Total": "Razem",
   "Pagando al año cada licencia sale por": "Przy płatności rocznej każda licencja kosztuje",
   "en vez de": "zamiast",
-  ": te ahorras tres meses por conductor.": ": oszczędzasz trzy miesiące na kierowcę."
+  ": te ahorras tres meses por conductor.": ": oszczędzasz trzy miesiące na kierowcę.",
+  "Para la oficina": "Dla biura",
+  "CRM de flota": "CRM floty",
+  "Reparte los portes entre tus conductores y sigue cada entrega desde el ordenador. Se suma a las licencias, no las sustituye.": "Rozdzielaj przewozy między kierowców i śledź każdą dostawę z komputera. Dolicza się do licencji, nie zastępuje ich.",
+  "al mes": "miesięcznie",
+  "al año": "rocznie",
+  "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ VAT · 59,29 € miesięcznie lub 711,48 € rocznie łącznie",
+  "Precio fijo, sin importar cuántos conductores seáis.": "Cena stała, niezależnie od liczby kierowców."
 }

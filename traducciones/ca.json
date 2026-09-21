@@ -1460,5 +1460,12 @@
   "Total": "Total",
   "Pagando al año cada licencia sale por": "Pagant a l'any cada llicència surt per",
   "en vez de": "en comptes de",
-  ": te ahorras tres meses por conductor.": ": t'estalvies tres mesos per conductor."
+  ": te ahorras tres meses por conductor.": ": t'estalvies tres mesos per conductor.",
+  "Para la oficina": "Per a l'oficina",
+  "CRM de flota": "CRM de flota",
+  "Reparte los portes entre tus conductores y sigue cada entrega desde el ordenador. Se suma a las licencias, no las sustituye.": "Reparteix els ports entre els teus conductors i segueix cada lliurament des de l'ordinador. Se suma a les llicències, no les substitueix.",
+  "al mes": "al mes",
+  "al año": "a l'any",
+  "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ IVA · 59,29 € al mes o 711,48 € a l'any en total",
+  "Precio fijo, sin importar cuántos conductores seáis.": "Preu fix, sense importar quants conductors sigueu."
 }

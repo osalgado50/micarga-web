@@ -1460,5 +1460,12 @@
   "Total": "Total",
   "Pagando al año cada licencia sale por": "Paying annually, each licence costs",
   "en vez de": "instead of",
-  ": te ahorras tres meses por conductor.": ": you save three months per driver."
+  ": te ahorras tres meses por conductor.": ": you save three months per driver.",
+  "Para la oficina": "For the office",
+  "CRM de flota": "Fleet CRM",
+  "Reparte los portes entre tus conductores y sigue cada entrega desde el ordenador. Se suma a las licencias, no las sustituye.": "Assign consignments to your drivers and follow every delivery from your computer. It is added to the licences, it does not replace them.",
+  "al mes": "per month",
+  "al año": "per year",
+  "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ VAT · €59.29 per month or €711.48 per year in total",
+  "Precio fijo, sin importar cuántos conductores seáis.": "Flat price, however many drivers you have."
 }

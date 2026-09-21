@@ -281,8 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
       pon('[data-lic-ano]', numero(licAno));
       pon('[data-imp-crm-mes]', numero(crmMesActual));
       pon('[data-imp-crm-ano]', numero(crmAnoActual));
-      pon('[data-total-mes]', numero(licMes + crmMesActual));
-      pon('[data-total-ano]', numero(licAno + crmAnoActual));
 
       filaCrm.hidden = !esEmpresa;
       if (ctaAutonomo) ctaAutonomo.hidden = esEmpresa;

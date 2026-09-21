@@ -3701,6 +3701,14 @@ body > section:not(.hero-section) > .container > h2 {
 
 .calc-tabla th { font-weight: 600; color: var(--text-heading); }
 
+/* Sin la fila de «Total», la última fila de la tabla es la última de verdad:
+   la raya de debajo sobraba y dejaba la tabla abierta por abajo. */
+.calc-tabla tbody tr:last-child th,
+.calc-tabla tbody tr:last-child td { border-bottom: none; }
+
+/* Los importes, algo más grandes: ahora son el dato principal de la tabla. */
+.calc-importe { font-size: 1.15rem; }
+
 /* El detalle («8 × 10 €») va debajo del concepto, no en una columna aparte:
    con dos columnas de importes —al mes y al año— una tercera de texto dejaba
    los números sin sitio ya en tableta. */
@@ -3712,19 +3720,24 @@ body > section:not(.hero-section) > .container > h2 {
   color: var(--text-muted);
 }
 
+/* Las dos columnas de precios van CENTRADAS y con el mismo ancho, de modo que
+   el rótulo («AL MES») caiga justo encima de su cifra. Con el ancho a ojo, la
+   columna del año quedaba más estrecha que la del mes y los rótulos bailaban
+   respecto a los números. */
 .calc-tabla thead th {
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  text-align: right;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.5rem;
 }
 
-/* La columna del año es la que interesa destacar: es la que ahorra. */
-.calc-tabla th:last-child,
-.calc-tabla td:last-child { padding-left: 1.2rem; }
+.calc-tabla thead th,
+.calc-tabla .calc-importe {
+  text-align: center;
+  width: 22%;
+}
 
 /* `tabular-nums` para que las cifras no bailen al cambiar el número de
    conductores: sin esto, pasar de 9 a 10 mueve toda la columna. */
@@ -3736,16 +3749,6 @@ body > section:not(.hero-section) > .container > h2 {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
-
-.calc-total th,
-.calc-total td {
-  border-bottom: none;
-  padding-top: 1.2rem;
-  font-size: 1.5rem;
-  color: var(--text-heading);
-}
-
-.calc-total .calc-importe { color: var(--primary); }
 
 .calc-nota {
   margin: 0.8rem 0 0;
@@ -3787,9 +3790,102 @@ body > section:not(.hero-section) > .container > h2 {
 
   /* El detalle ya no ocupa columna, así que se queda también en móvil. */
   .calc-tabla { font-size: 0.95rem; }
-  .calc-tabla th:last-child,
-  .calc-tabla td:last-child { padding-left: 0.6rem; }
+  .calc-tabla thead th,
+  .calc-tabla .calc-importe { width: 26%; }
+  .calc-importe { font-size: 1rem; }
 
-  .calc-total th, .calc-total td { font-size: 1.25rem; }
   .calc-acciones .btn { width: 100%; justify-content: center; }
+}
+
+/* La caja que ancla el distintivo «El Mejor Precio» a la imagen y no al
+   contenedor entero. Sin esto, el distintivo se iba al fondo de la columna en
+   cuanto apareció el cuadro del CRM debajo. */
+.pricing-image-caja { position: relative; }
+
+/* --- El CRM, debajo de la imagen de tarifas ------------------------------
+   No es una tercera tarjeta de plan: es un añadido que se SUMA a las
+   licencias. Por eso va en la columna de la imagen y no en la rejilla de
+   planes, y por eso lleva un aire distinto —borde izquierdo naranja— en vez
+   de la caja blanca de los planes. */
+
+.crm-card {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+}
+
+.crm-card-etiqueta {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+}
+
+.crm-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  color: var(--text-heading);
+}
+
+.crm-card > p {
+  margin: 0 0 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* Las dos cifras, del mismo ancho y centradas: así «al mes» y «al año» caen
+   simétricos y no parece que una valga más que la otra. */
+.crm-card-precios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.crm-card-precio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.crm-card-cifra {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.crm-card-periodo {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.crm-card .price-tax {
+  margin: 0.9rem 0 0;
+}
+
+.crm-card-nota {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+@media (max-width: 620px) {
+  .crm-card { padding: 1.2rem; }
+  .crm-card-cifra { font-size: 1.6rem; }
 }
