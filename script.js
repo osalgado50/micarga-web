@@ -275,8 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       pon('[data-n]', numero(n));
       pon('[data-precio-licencia]', numero(precioMes));
-      pon('[data-precio-ano]', numero(precioAno));
-      pon('[data-precio-12]', numero(precioMes * 12));
+      // El ahorro del plan anual, en total y no por licencia: es la cifra que
+      // de verdad mira quien tiene flota.
+      const sinPlanAnual = n * precioMes * 12;
+      pon('[data-ahorro-con]', numero(licAno));
+      pon('[data-ahorro-sin]', numero(sinPlanAnual));
+      pon('[data-ahorro]', numero(sinPlanAnual - licAno));
       pon('[data-lic-mes]', numero(licMes));
       pon('[data-lic-ano]', numero(licAno));
       pon('[data-imp-crm-mes]', numero(crmMesActual));

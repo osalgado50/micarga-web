@@ -1444,5 +1444,7 @@
   "al mes": "miesięcznie",
   "al año": "rocznie",
   "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ VAT · 59,29 € miesięcznie lub 711,48 € rocznie łącznie",
-  "Precio fijo, sin importar cuántos conductores seáis.": "Cena stała, niezależnie od liczby kierowców."
+  "Precio fijo, sin importar cuántos conductores seáis.": "Cena stała, niezależnie od liczby kierowców.",
+  "Pagando las licencias al año pagas": "Przy rocznej płatności za licencje płacisz",
+  "Te ahorras": "Oszczędzasz"
 }

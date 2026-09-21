@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921h">
+  <link rel="stylesheet" href="/styles.css?v=20260921i">
 
   <script type="application/ld+json">
   {
@@ -362,10 +362,22 @@
 
           <p class="calc-nota">Prețuri fără TVA.</p>
 
-          <p class="calc-anual">
-            Plătind anual, fiecare licență costă <strong><span data-precio-ano>90</span> €</strong>
-            în loc de <strong><span data-precio-12>120</span> €</strong>: economisiți trei luni pentru fiecare șofer.
-          </p>
+          <!-- El ahorro del plan anual, con las cifras YA MULTIPLICADAS por el
+               número de licencias: con cuatro conductores no interesa «90 en
+               vez de 120», interesa «360 en vez de 480, te ahorras 120». -->
+          <div class="calc-ahorro">
+            <p class="calc-ahorro-linea">
+              Plătind licențele anual, plătiți
+              <strong><span data-ahorro-con>90</span> €</strong>
+              în loc de
+              <s><span data-ahorro-sin>120</span> €</s>
+            </p>
+            <p class="calc-ahorro-cifra">
+              <span class="calc-ahorro-etiqueta">Economisiți</span>
+              <strong><span data-ahorro>30</span> €</strong>
+              <span class="calc-ahorro-etiqueta">pe an</span>
+            </p>
+          </div>
 
           <div class="calc-acciones">
             <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener"
@@ -1168,7 +1180,7 @@
   </dialog>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260921f"></script>
+  <script src="/script.js?v=20260921i"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

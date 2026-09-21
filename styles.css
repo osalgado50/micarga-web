@@ -3756,18 +3756,58 @@ body > section:not(.hero-section) > .container > h2 {
   color: var(--text-muted);
 }
 
-.calc-anual {
+/* El cuadro del ahorro.
+   Va en VERDE y no en el naranja de la marca a propósito: el naranja es el
+   color de los botones y de los precios que se pagan, y aquí se cuenta lo que
+   NO se paga. Un color distinto separa las dos ideas de un vistazo. */
+.calc-ahorro {
   margin: 1.2rem 0 0;
-  padding: 0.9rem 1.1rem;
-  background: rgba(var(--primary-rgb), 0.08);
-  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  padding: 1.1rem 1.3rem;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.28);
   border-radius: var(--radius-md);
+}
+
+.calc-ahorro-linea {
+  margin: 0;
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-main);
 }
 
-.calc-anual strong { color: var(--text-heading); }
+.calc-ahorro-linea strong { color: var(--text-heading); }
+
+/* El precio que se evitaría, tachado: se entiende sin leer nada. */
+.calc-ahorro-linea s {
+  color: var(--text-muted);
+  text-decoration-color: rgba(239, 68, 68, 0.7);
+  text-decoration-thickness: 2px;
+}
+
+.calc-ahorro-cifra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(52, 211, 153, 0.22);
+}
+
+.calc-ahorro-cifra strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #34d399;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-ahorro-etiqueta {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
 
 .calc-acciones {
   display: flex;

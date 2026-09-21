@@ -1444,5 +1444,7 @@
   "al mes": "par mois",
   "al año": "par an",
   "+ IVA · 59,29 € al mes o 711,48 € al año en total": "+ TVA · 59,29 € par mois ou 711,48 € par an au total",
-  "Precio fijo, sin importar cuántos conductores seáis.": "Prix fixe, quel que soit le nombre de conducteurs."
+  "Precio fijo, sin importar cuántos conductores seáis.": "Prix fixe, quel que soit le nombre de conducteurs.",
+  "Pagando las licencias al año pagas": "En payant les licences à l'année, vous payez",
+  "Te ahorras": "Vous économisez"
 }
