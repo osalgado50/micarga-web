@@ -3692,11 +3692,30 @@ body > section:not(.hero-section) > .container > h2 {
 
 .calc-tabla th { font-weight: 600; color: var(--text-heading); }
 
+/* El detalle («8 × 10 €») va debajo del concepto, no en una columna aparte:
+   con dos columnas de importes —al mes y al año— una tercera de texto dejaba
+   los números sin sitio ya en tableta. */
 .calc-detalle {
-  font-size: 0.92rem;
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--text-muted);
-  text-align: center;
 }
+
+.calc-tabla thead th {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-align: right;
+  padding-bottom: 0.4rem;
+}
+
+/* La columna del año es la que interesa destacar: es la que ahorra. */
+.calc-tabla th:last-child,
+.calc-tabla td:last-child { padding-left: 1.2rem; }
 
 /* `tabular-nums` para que las cifras no bailen al cambiar el número de
    conductores: sin esto, pasar de 9 a 10 mueve toda la columna. */
@@ -3757,10 +3776,10 @@ body > section:not(.hero-section) > .container > h2 {
   .calc-pregunta { font-size: 1.15rem; }
   .calc-numero { width: 110px; font-size: 1.6rem; }
 
-  /* En una pantalla estrecha la columna del medio se come el ancho de las
-     otras dos y los importes acaban partidos. Se esconde: el detalle
-     «8 × 10 €» es un apoyo, no el dato. */
-  .calc-detalle { display: none; }
+  /* El detalle ya no ocupa columna, así que se queda también en móvil. */
+  .calc-tabla { font-size: 0.95rem; }
+  .calc-tabla th:last-child,
+  .calc-tabla td:last-child { padding-left: 0.6rem; }
 
   .calc-total th, .calc-total td { font-size: 1.25rem; }
   .calc-acciones .btn { width: 100%; justify-content: center; }

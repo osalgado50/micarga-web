@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921c">
+  <link rel="stylesheet" href="/styles.css?v=20260921d">
 
   <script type="application/ld+json">
   {
@@ -333,30 +333,43 @@
           <p class="calc-resultado-titulo">Aquest és el teu pack</p>
 
           <table class="calc-tabla">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">Al mes</th>
+                <th scope="col">A l'any</th>
+              </tr>
+            </thead>
             <tbody>
               <tr data-fila="licencias">
-                <th scope="row">Llicències de l'app</th>
-                <td class="calc-detalle"><span data-n>1</span> × <span data-precio-licencia>10</span> €</td>
-                <td class="calc-importe"><span data-importe-licencias>10</span> €</td>
+                <th scope="row">
+                  Llicències de l'app
+                  <span class="calc-detalle"><span data-n>1</span> × <span data-precio-licencia>10</span> €</span>
+                </th>
+                <td class="calc-importe"><span data-lic-mes>10</span> €</td>
+                <td class="calc-importe"><span data-lic-ano>90</span> €</td>
               </tr>
               <tr data-fila="crm" hidden>
-                <th scope="row">CRM d'oficina</th>
-                <td class="calc-detalle">Preu fix, sense importar quants sigueu</td>
-                <td class="calc-importe"><span data-importe-crm>49</span> €</td>
+                <th scope="row">
+                  CRM d'oficina
+                  <span class="calc-detalle">Preu fix, sense importar quants sigueu</span>
+                </th>
+                <td class="calc-importe"><span data-imp-crm-mes>49</span> €</td>
+                <td class="calc-importe"><span data-imp-crm-ano>588</span> €</td>
               </tr>
               <tr class="calc-total">
-                <th scope="row">Total al mes</th>
-                <td></td>
+                <th scope="row">Total</th>
                 <td class="calc-importe"><span data-total-mes>10</span> €</td>
+                <td class="calc-importe"><span data-total-ano>90</span> €</td>
               </tr>
             </tbody>
           </table>
 
           <p class="calc-nota">Preus sense IVA.</p>
 
-          <p class="calc-anual" data-anual>
-            Amb les llicències en pla anual pagues
-            <strong><span data-total-ano>90</span> €</strong> a l'any per les llicències i t'estalvies tres mesos.
+          <p class="calc-anual">
+            Pagant a l'any cada llicència surt per <strong><span data-precio-ano>90</span> €</strong>
+            en comptes de <strong><span data-precio-12>120</span> €</strong>: t'estalvies tres mesos per conductor.
           </p>
 
           <div class="calc-acciones">
@@ -1130,7 +1143,7 @@
   </dialog>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260921b"></script>
+  <script src="/script.js?v=20260921d"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

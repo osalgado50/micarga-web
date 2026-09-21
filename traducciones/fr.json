@@ -1431,5 +1431,11 @@
   "¿Sois muchos o tenéis algo especial? Pídenos presupuesto y te cerramos un precio anual con todas las cuentas incluidas.": "Vous êtes nombreux ou vous avez un besoin particulier ? Demandez-nous un devis et nous fixons un prix annuel avec tous les comptes inclus.",
   "Quitar un conductor": "Retirer un conducteur",
   "Número de conductores": "Nombre de conducteurs",
-  "Añadir un conductor": "Ajouter un conducteur"
+  "Añadir un conductor": "Ajouter un conducteur",
+  "Al mes": "Par mois",
+  "Al año": "Par an",
+  "Total": "Total",
+  "Pagando al año cada licencia sale por": "En payant à l'année, chaque licence revient à",
+  "en vez de": "au lieu de",
+  ": te ahorras tres meses por conductor.": ": vous économisez trois mois par conducteur."
 }

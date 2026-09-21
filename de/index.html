@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921c">
+  <link rel="stylesheet" href="/styles.css?v=20260921d">
 
   <script type="application/ld+json">
   {
@@ -333,30 +333,43 @@
           <p class="calc-resultado-titulo">Das ist Ihr Paket</p>
 
           <table class="calc-tabla">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">Pro Monat</th>
+                <th scope="col">Pro Jahr</th>
+              </tr>
+            </thead>
             <tbody>
               <tr data-fila="licencias">
-                <th scope="row">App-Lizenzen</th>
-                <td class="calc-detalle"><span data-n>1</span> × <span data-precio-licencia>10</span> €</td>
-                <td class="calc-importe"><span data-importe-licencias>10</span> €</td>
+                <th scope="row">
+                  App-Lizenzen
+                  <span class="calc-detalle"><span data-n>1</span> × <span data-precio-licencia>10</span> €</span>
+                </th>
+                <td class="calc-importe"><span data-lic-mes>10</span> €</td>
+                <td class="calc-importe"><span data-lic-ano>90</span> €</td>
               </tr>
               <tr data-fila="crm" hidden>
-                <th scope="row">Büro-CRM</th>
-                <td class="calc-detalle">Fester Preis, egal wie viele Sie sind</td>
-                <td class="calc-importe"><span data-importe-crm>49</span> €</td>
+                <th scope="row">
+                  Büro-CRM
+                  <span class="calc-detalle">Fester Preis, egal wie viele Sie sind</span>
+                </th>
+                <td class="calc-importe"><span data-imp-crm-mes>49</span> €</td>
+                <td class="calc-importe"><span data-imp-crm-ano>588</span> €</td>
               </tr>
               <tr class="calc-total">
-                <th scope="row">Gesamt pro Monat</th>
-                <td></td>
+                <th scope="row">Gesamt</th>
                 <td class="calc-importe"><span data-total-mes>10</span> €</td>
+                <td class="calc-importe"><span data-total-ano>90</span> €</td>
               </tr>
             </tbody>
           </table>
 
           <p class="calc-nota">Preise zzgl. MwSt.</p>
 
-          <p class="calc-anual" data-anual>
-            Mit den Lizenzen im Jahresplan zahlen Sie
-            <strong><span data-total-ano>90</span> €</strong> pro Jahr für die Lizenzen und sparen drei Monate.
+          <p class="calc-anual">
+            Bei jährlicher Zahlung kostet jede Lizenz <strong><span data-precio-ano>90</span> €</strong>
+            statt <strong><span data-precio-12>120</span> €</strong>: Sie sparen drei Monate pro Fahrer.
           </p>
 
           <div class="calc-acciones">
@@ -1130,7 +1143,7 @@
   </dialog>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260921b"></script>
+  <script src="/script.js?v=20260921d"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

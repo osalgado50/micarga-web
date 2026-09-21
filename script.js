@@ -237,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultado = calc.querySelector('[data-resultado]');
     const filaCrm = calc.querySelector('[data-fila="crm"]');
     const entrada = calc.querySelector('[data-conductores]');
-    const bloqueAnual = calc.querySelector('[data-anual]');
     const ctaAutonomo = calc.querySelector('[data-cta-autonomo]');
     const ctaEmpresa = calc.querySelector('[data-cta-empresa]');
     const notaEmpresa = calc.querySelector('[data-nota-empresa]');
@@ -262,23 +261,33 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!Number.isFinite(n) || n < 1) n = 1;
       if (n > 9999) n = 9999;
 
-      const licencias = n * precioMes;
-      const crm = perfil === 'empresa' ? crmMes : 0;
+      const esEmpresa = perfil === 'empresa';
+
+      const licMes = n * precioMes;
+      const licAno = n * precioAno;
+      // El CRM no tiene precio anual propio publicado: se cobra por meses, así
+      // que el año son doce mensualidades SIN descuento. El ahorro de tres
+      // meses es solo de las licencias, y el texto lo dice así de claro. Si
+      // algún día hay precio anual de CRM, se añade un `data-` y se cambia
+      // esta línea, no el resto.
+      const crmMesActual = esEmpresa ? crmMes : 0;
+      const crmAnoActual = crmMesActual * 12;
 
       pon('[data-n]', numero(n));
       pon('[data-precio-licencia]', numero(precioMes));
-      pon('[data-importe-licencias]', numero(licencias));
-      pon('[data-importe-crm]', numero(crm));
-      pon('[data-total-mes]', numero(licencias + crm));
-      pon('[data-total-ano]', numero(n * precioAno));
+      pon('[data-precio-ano]', numero(precioAno));
+      pon('[data-precio-12]', numero(precioMes * 12));
+      pon('[data-lic-mes]', numero(licMes));
+      pon('[data-lic-ano]', numero(licAno));
+      pon('[data-imp-crm-mes]', numero(crmMesActual));
+      pon('[data-imp-crm-ano]', numero(crmAnoActual));
+      pon('[data-total-mes]', numero(licMes + crmMesActual));
+      pon('[data-total-ano]', numero(licAno + crmAnoActual));
 
-      filaCrm.hidden = perfil !== 'empresa';
-      if (ctaAutonomo) ctaAutonomo.hidden = perfil === 'empresa';
-      if (ctaEmpresa) ctaEmpresa.hidden = perfil !== 'empresa';
-      if (notaEmpresa) notaEmpresa.hidden = perfil !== 'empresa';
-      // El plan anual es de las licencias. El CRM no tiene precio anual
-      // publicado, así que con empresa no se enseña una cifra a medias.
-      if (bloqueAnual) bloqueAnual.hidden = perfil === 'empresa';
+      filaCrm.hidden = !esEmpresa;
+      if (ctaAutonomo) ctaAutonomo.hidden = esEmpresa;
+      if (ctaEmpresa) ctaEmpresa.hidden = !esEmpresa;
+      if (notaEmpresa) notaEmpresa.hidden = !esEmpresa;
     };
 
     const enseñar = (nombre) => {
