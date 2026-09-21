@@ -89,6 +89,27 @@ const pedirReto = async () => {
   caja.hidden = false;
 };
 
+// Si se llega desde la calculadora de la portada, el número de cuentas ya está
+// elegido: viene en `?cuentas=8`. Se rellena para que el formulario llegue
+// medio hecho.
+//
+// Se rellena SOLO «cuentas», no «Personas en la empresa»: son preguntas
+// distintas. La calculadora pregunta cuántos conductores van a firmar —que es
+// exactamente una cuenta cada uno— y en la plantilla puede haber gente de
+// oficina que no conduce. Rellenar ese campo sería inventarse un dato.
+const precargarCuentas = () => {
+  const valor = new URLSearchParams(location.search).get('cuentas');
+  // Solo dígitos y dentro de lo razonable: esto viene de la URL, y la URL la
+  // escribe cualquiera.
+  if (!valor || !/^\d{1,4}$/.test(valor)) return;
+  const n = Number(valor);
+  if (n < 1) return;
+  const campo = form.elements.cuentas;
+  if (campo && !campo.value) campo.value = String(n);
+};
+
+precargarCuentas();
+
 pedirReto();
 
 form.addEventListener('submit', async (e) => {

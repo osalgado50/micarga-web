@@ -286,6 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
       pon('[data-imp-crm-mes]', numero(crmMesActual));
       pon('[data-imp-crm-ano]', numero(crmAnoActual));
 
+      // El botón de presupuesto se lleva el número puesto, para que el
+      // formulario llegue medio hecho.
+      //
+      // ⚠️ SE CONSERVA EL CAMINO QUE YA TENÍA EL ENLACE y solo se le cambia la
+      // parte de la interrogación. El generador de idiomas reescribe ese
+      // `href` a `/de/presupuesto`, `/pl/presupuesto`…; si aquí se pusiera la
+      // ruta a pelo, la versión alemana mandaría al formulario en castellano.
+      if (ctaEmpresa) {
+        const destino = ctaEmpresa.getAttribute('href').split('?')[0];
+        ctaEmpresa.setAttribute('href', `${destino}?cuentas=${n}`);
+      }
+
       filaCrm.hidden = !esEmpresa;
       if (ctaAutonomo) ctaAutonomo.hidden = esEmpresa;
       if (ctaEmpresa) ctaEmpresa.hidden = !esEmpresa;
