@@ -290,14 +290,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (notaEmpresa) notaEmpresa.hidden = !esEmpresa;
     };
 
+    // Qué bloques se ven en cada momento.
+    //
+    // 🚨 EL PASO «CUÁNTOS SOIS» ENSEÑA TAMBIÉN EL RESULTADO, y no es un
+    // capricho: antes no lo hacía y la calculadora se quedaba encallada ahí.
+    // El único camino al precio era ESCRIBIR en el campo, porque solo el
+    // evento `input` llevaba al resultado. Quien pulsaba los botones + y −, o
+    // quien se quedaba con el número que viene puesto, veía cambiar la cifra y
+    // nada más: ni precio, ni botones de contacto. Reportado el 21-09-2026.
+    //
+    // Enseñar las dos cosas a la vez lo arregla de raíz en lugar de parchear
+    // un camino: es una calculadora, el precio se actualiza mientras se elige
+    // el número y no hace falta ningún botón de «calcular».
     const enseñar = (nombre) => {
       Object.values(pasos).forEach((p) => { p.hidden = true; });
       resultado.hidden = true;
-      if (nombre === 'resultado') {
+
+      if (nombre !== 'resultado') pasos[nombre].hidden = false;
+
+      if (nombre === 'resultado' || nombre === 'cuantos') {
         resultado.hidden = false;
         calcular();
-      } else {
-        pasos[nombre].hidden = false;
       }
     };
 
@@ -329,8 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (suma) {
         const n = Math.max(1, Math.floor(Number(entrada.value) || 1) + Number(suma.dataset.suma));
         entrada.value = String(n);
-        // Si ya se está viendo el resultado, se recalcula en el sitio.
-        if (!resultado.hidden) calcular();
+        // Siempre, no «si ya se veía»: en el paso de «cuántos sois» el
+        // resultado está a la vista desde el primer momento.
+        calcular();
         return;
       }
 
@@ -344,12 +358,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Desde el paso «cuántos sois» se pasa al resultado en cuanto se escribe,
     // sin un botón de «calcular»: es una calculadora, no un formulario.
-    entrada.addEventListener('input', () => {
-      if (resultado.hidden) enseñar('resultado');
-      else calcular();
-    });
+    entrada.addEventListener('input', calcular);
+    // Enter no envía nada —no hay formulario— pero la gente lo pulsa igual.
     entrada.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); enseñar('resultado'); }
+      if (e.key === 'Enter') e.preventDefault();
     });
   }
 

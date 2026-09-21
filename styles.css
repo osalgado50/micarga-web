@@ -3666,6 +3666,15 @@ body > section:not(.hero-section) > .container > h2 {
 
 /* --- El resultado --------------------------------------------------------- */
 
+/* Cuando el contador y el resultado se ven a la vez, hace falta separarlos o
+   «Este es tu pack» queda pegado a la línea de ayuda. El `:not([hidden])` evita
+   la raya cuando el resultado va solo (autónomo que conduce él solo). */
+.calc-paso:not([hidden]) + .calc-resultado {
+  margin-top: 1.8rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border);
+}
+
 .calc-resultado-titulo {
   margin: 0 0 1.2rem;
   text-align: center;
