@@ -2511,6 +2511,15 @@ body > section:not(.hero-section) > .container > h2 {
   margin-top: 0.9rem;
   line-height: 1.6;
   color: var(--text-muted);
+  /* La columna de Contacto es estrecha y «Gran Via de Carles III, 98, planta
+     10» partía dejando el «10» solo en una línea. Se le da el ancho que pide
+     la línea más larga en vez de meter un espacio duro en el texto: el texto
+     es la CLAVE del diccionario de traducciones, y tocarlo dejaría la
+     dirección sin traducir en los ocho idiomas. En alemán e italiano la línea
+     es aún más larga («10. Stock», «piano 10»), así que el ancho lo marca el
+     contenido. */
+  width: max-content;
+  max-width: 100%;
 }
 
 /* --- Selector de idioma ----------------------------------------------------
