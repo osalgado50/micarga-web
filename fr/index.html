@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921a">
+  <link rel="stylesheet" href="/styles.css?v=20260921c">
 
   <script type="application/ld+json">
   {
@@ -253,101 +253,122 @@
     </div>
   </section>
 
-  <!-- Ecosistema: por dónde se entra, el núcleo, y por dónde sale ----------
-       ⚠️ EL DIAGRAMA ES HTML Y CSS, NO UNA IMAGEN NI TEXTO DENTRO DE UN <svg>.
-       Es deliberado y es lo único que aguanta nueve idiomas: el texto de un
-       <svg> no se ajusta solo, así que «Aplicación en el navegador» cabe y
-       «Die Anwendung im Browser» se sale del recuadro sin que nadie se entere
-       hasta que un alemán abre la página. En HTML el texto parte de línea solo.
-       Las rayas que unen las cajas sí son decorativas: van en CSS y llevan
-       aria-hidden, porque una raya no se lee en voz alta.
+  <!-- Calculadora de precio ------------------------------------------------
+       ⚠️ TODO EL TEXTO VISIBLE VA AQUÍ, EN EL HTML, NUNCA EN `script.js`.
+       `script.js` NO está en la lista SCRIPTS de `herramientas/i18n.py`, así
+       que no se traduce: cualquier frase que se escriba desde JavaScript
+       saldría en castellano en los ocho idiomas. El JS solo enseña, esconde y
+       calcula; las palabras las pone el HTML y las traduce el generador.
 
-       El orden del marcado (entradas → núcleo → salidas) es el mismo que se ve
-       y el mismo que lee un lector de pantalla. -->
-  <section id="ecosistema" class="ecosistema-section scroll-padding">
+       Los PRECIOS viven en los `data-` de aquí abajo, no repartidos por el
+       JavaScript: si mañana suben, se cambian en un sitio y se ven a simple
+       vista revisando la página.
+
+       El modelo, a 21-09-2026:
+         · Autónomo  → conductores × 10 €/mes (o × 90 €/año). SIN CRM.
+         · Empresa   → conductores × 10 €/mes + 49 €/mes de CRM, fijo.
+       Hubo una versión con tramos de CRM (125/135/145/200 según el número de
+       conductores) que se descartó el mismo día: precio único de 49 €. -->
+  <section id="calculadora" class="calc-section scroll-padding">
     <div class="container reveal-on-scroll">
-      <div class="ecosistema-cabecera">
-        <span class="section-subtitle">Un seul système</span>
-        <h2>Où que vous travailliez, tout finit au même endroit</h2>
-        <p class="section-desc">En cabine, chez vous ou au bureau : chaque document entre dans le même noyau. Et vous le ressortez comme vous en avez besoin.</p>
+      <div class="calc-cabecera">
+        <span class="section-subtitle">Ce que cela vous coûterait</span>
+        <h2>Dites-nous comment vous travaillez et nous vous indiquons votre formule</h2>
+        <p class="section-desc">Deux questions et le prix exact. Sans laisser votre courriel et sans que personne ne vous appelle.</p>
       </div>
 
-      <div class="ecosistema-diagrama">
-        <p class="ecosistema-rotulo">Par où vous travaillez</p>
-        <ul class="ecosistema-fila ecosistema-fila--cuatro">
-          <li class="ecosistema-nodo">
-            <span class="ecosistema-icono"><i class="fa-brands fa-apple" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">Application pour iPhone</span>
-            <span class="ecosistema-pie">Sur l'App Store</span>
-          </li>
-          <li class="ecosistema-nodo">
-            <span class="ecosistema-icono"><i class="fa-brands fa-android" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">Application pour Android</span>
-            <span class="ecosistema-pie">Sur Google Play</span>
-          </li>
-          <li class="ecosistema-nodo">
-            <span class="ecosistema-icono"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">L'application dans le navigateur</span>
-            <span class="ecosistema-pie">Sans rien installer</span>
-          </li>
-          <li class="ecosistema-nodo">
-            <span class="ecosistema-icono"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">Le CRM de bureau</span>
-            <span class="ecosistema-pie">Pour gérer votre flotte</span>
-          </li>
-        </ul>
+      <div class="calc-caja" data-calc
+           data-precio-mes="10"
+           data-precio-ano="90"
+           data-crm-mes="49">
 
-        <div class="ecosistema-union ecosistema-union--cuatro" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
-
-        <div class="ecosistema-nucleo">
-          <span class="ecosistema-nucleo-icono"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
-          <div class="ecosistema-nucleo-texto">
-            <span class="ecosistema-nucleo-titulo">Le noyau de Mi Carga</span>
-            <p>Un seul endroit où sont conservés chaque document de contrôle, chaque signature et chaque transport. Ce que vous faites sur le téléphone, le bureau le voit aussitôt, et inversement. Sans rien recopier d'un endroit à l'autre.</p>
+        <!-- Paso 1 -->
+        <div class="calc-paso" data-paso="perfil">
+          <p class="calc-pregunta">Êtes-vous indépendant ou une entreprise ?</p>
+          <div class="calc-opciones">
+            <button type="button" class="calc-opcion" data-elige="perfil" data-valor="autonomo">
+              <span class="calc-icono"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+              <span class="calc-opcion-titulo">Indépendant</span>
+              <span class="calc-opcion-pie">Je travaille à mon compte</span>
+            </button>
+            <button type="button" class="calc-opcion" data-elige="perfil" data-valor="empresa">
+              <span class="calc-icono"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+              <span class="calc-opcion-titulo">Entreprise</span>
+              <span class="calc-opcion-pie">J'ai une flotte à gérer</span>
+            </button>
           </div>
         </div>
 
-        <p class="ecosistema-rotulo ecosistema-rotulo--salidas">Et vous le sortez comme il vous faut</p>
-
-        <div class="ecosistema-union ecosistema-union--tres" aria-hidden="true">
-          <i class="fa-solid fa-chevron-down"></i>
-          <span></span><span></span><span></span>
+        <!-- Paso 2, solo para autónomo -->
+        <div class="calc-paso" data-paso="solo" hidden>
+          <p class="calc-pregunta">Conduisez-vous seul ou êtes-vous plusieurs ?</p>
+          <div class="calc-opciones">
+            <button type="button" class="calc-opcion" data-elige="solo" data-valor="si">
+              <span class="calc-icono"><i class="fa-solid fa-truck" aria-hidden="true"></i></span>
+              <span class="calc-opcion-titulo">Je conduis seul</span>
+              <span class="calc-opcion-pie">Un compte et c'est tout</span>
+            </button>
+            <button type="button" class="calc-opcion" data-elige="solo" data-valor="no">
+              <span class="calc-icono"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
+              <span class="calc-opcion-titulo">Nous sommes plusieurs</span>
+              <span class="calc-opcion-pie">Chaque conducteur signe le sien</span>
+            </button>
+          </div>
         </div>
-        <ul class="ecosistema-fila ecosistema-fila--tres">
-          <li class="ecosistema-nodo ecosistema-nodo--salida">
-            <span class="ecosistema-icono"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">PDF juridiquement valable</span>
-            <span class="ecosistema-pie">Signé et prêt pour un contrôle</span>
-          </li>
-          <li class="ecosistema-nodo ecosistema-nodo--salida">
-            <span class="ecosistema-icono"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">CSV et Excel</span>
-            <span class="ecosistema-pie">Vos données pour le comptable</span>
-          </li>
-          <li class="ecosistema-nodo ecosistema-nodo--salida">
-            <span class="ecosistema-icono"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i></span>
-            <span class="ecosistema-titulo">Enregistré sur votre disque</span>
-            <span class="ecosistema-pie">Une copie à vous, sur votre ordinateur</span>
-          </li>
-        </ul>
-      </div>
 
-      <div class="ecosistema-nota">
-        <span class="ecosistema-nota-icono"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
-        <div>
-          <h3>Derrière tout cela, il y a une entreprise, pas un projet du week-end</h3>
-          <p>Nous nous consacrons à 100 % à Mi Carga, 24h/24 et 7j/7. L'application est en développement permanent : ce qu'un transporteur nous demande un mardi fonctionne généralement la semaine suivante.</p>
-          <p>Et si votre entreprise a besoin de quelque chose qui n'existe pas encore, on en parle : nous nous adaptons à votre façon de travailler et développons des solutions sur mesure.</p>
-          <!-- Al formulario de empresas, NO a `#contacto`: ese ancla solo baja al
-               final de la misma página, y lo que hace falta aquí es que nos
-               cuenten qué necesitan. `presupuesto` pregunta empresa, conductores
-               y qué transporte hacen, que es el contexto para contestar a una
-               petición a medida. El enlace va RELATIVO a propósito: en /de/ se
-               resuelve como /de/presupuesto y cada idioma cae en su formulario. -->
-          <a href="presupuesto" class="btn btn-secondary">Dites-nous ce dont vous avez besoin</a>
+        <!-- Paso 3: cuántos son. El resultado se recalcula al teclear. -->
+        <div class="calc-paso" data-paso="cuantos" hidden>
+          <p class="calc-pregunta">Combien de conducteurs êtes-vous ?</p>
+          <div class="calc-contador">
+            <button type="button" class="calc-mas-menos" data-suma="-1" aria-label="Retirer un conducteur">−</button>
+            <input type="number" min="1" max="9999" step="1" value="2"
+                   data-conductores class="calc-numero" aria-label="Nombre de conducteurs">
+            <button type="button" class="calc-mas-menos" data-suma="1" aria-label="Ajouter un conducteur">+</button>
+          </div>
+          <p class="calc-ayuda">Chaque conducteur a besoin de son propre compte pour signer ses transports.</p>
+        </div>
+
+        <!-- Resultado -->
+        <div class="calc-resultado" data-resultado hidden aria-live="polite">
+          <p class="calc-resultado-titulo">Voici votre formule</p>
+
+          <table class="calc-tabla">
+            <tbody>
+              <tr data-fila="licencias">
+                <th scope="row">Licences de l'application</th>
+                <td class="calc-detalle"><span data-n>1</span> × <span data-precio-licencia>10</span> €</td>
+                <td class="calc-importe"><span data-importe-licencias>10</span> €</td>
+              </tr>
+              <tr data-fila="crm" hidden>
+                <th scope="row">CRM de bureau</th>
+                <td class="calc-detalle">Prix fixe, quel que soit votre nombre</td>
+                <td class="calc-importe"><span data-importe-crm>49</span> €</td>
+              </tr>
+              <tr class="calc-total">
+                <th scope="row">Total par mois</th>
+                <td></td>
+                <td class="calc-importe"><span data-total-mes>10</span> €</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="calc-nota">Prix hors TVA.</p>
+
+          <p class="calc-anual" data-anual>
+            Avec les licences en formule annuelle, vous payez
+            <strong><span data-total-ano>90</span> €</strong> par an pour les licences et vous économisez trois mois.
+          </p>
+
+          <div class="calc-acciones">
+            <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener"
+               class="btn btn-primary btn-large" data-cta-autonomo>Commencer avec 10 transports gratuits</a>
+            <a href="/fr/presupuesto" class="btn btn-primary btn-large" data-cta-empresa hidden>Demander un devis pour ma flotte</a>
+            <button type="button" class="btn btn-secondary" data-reiniciar>Recommencer</button>
+          </div>
+
+          <p class="calc-nota calc-nota-empresa" data-nota-empresa hidden>
+            Vous êtes nombreux ou vous avez un besoin particulier ? Demandez-nous un devis et nous fixons un prix annuel avec tous les comptes inclus.
+          </p>
         </div>
       </div>
     </div>
@@ -1109,7 +1130,7 @@
   </dialog>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260914b"></script>
+  <script src="/script.js?v=20260921b"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

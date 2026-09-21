@@ -216,4 +216,132 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Calculadora de precio -----------------------------------------------
+  //
+  // ⚠️ AQUÍ NO SE ESCRIBE NI UNA PALABRA VISIBLE. `script.js` NO está en la
+  // lista SCRIPTS de `herramientas/i18n.py`, así que no se traduce: una frase
+  // puesta desde aquí saldría en castellano en los ocho idiomas. Todo el texto
+  // vive en el HTML, que sí se traduce. Este código solo enseña, esconde y
+  // pone números.
+  //
+  // Los precios salen de los `data-` de la sección, no de constantes de aquí:
+  // así se cambian en un sitio y se ven leyendo la página.
+  const calc = document.querySelector('[data-calc]');
+  if (calc) {
+    const precioMes = Number(calc.dataset.precioMes);
+    const precioAno = Number(calc.dataset.precioAno);
+    const crmMes = Number(calc.dataset.crmMes);
+
+    const pasos = {};
+    calc.querySelectorAll('[data-paso]').forEach((p) => { pasos[p.dataset.paso] = p; });
+    const resultado = calc.querySelector('[data-resultado]');
+    const filaCrm = calc.querySelector('[data-fila="crm"]');
+    const entrada = calc.querySelector('[data-conductores]');
+    const bloqueAnual = calc.querySelector('[data-anual]');
+    const ctaAutonomo = calc.querySelector('[data-cta-autonomo]');
+    const ctaEmpresa = calc.querySelector('[data-cta-empresa]');
+    const notaEmpresa = calc.querySelector('[data-nota-empresa]');
+
+    let perfil = null;
+
+    const pon = (selector, valor) => {
+      const el = calc.querySelector(selector);
+      if (el) el.textContent = String(valor);
+    };
+
+    // Los números se escriben con el separador de miles del idioma de la
+    // página: 1.200 en castellano, 1,200 en inglés. `document.documentElement.lang`
+    // lo pone el generador en cada versión.
+    const idioma = document.documentElement.lang || 'es';
+    const numero = (n) => new Intl.NumberFormat(idioma).format(n);
+
+    const calcular = () => {
+      // Un conductor como mínimo: con 0 el resultado sería 0 € y no significa
+      // nada. `Math.floor` por si alguien teclea «2,5» en un campo numérico.
+      let n = Math.floor(Number(entrada.value));
+      if (!Number.isFinite(n) || n < 1) n = 1;
+      if (n > 9999) n = 9999;
+
+      const licencias = n * precioMes;
+      const crm = perfil === 'empresa' ? crmMes : 0;
+
+      pon('[data-n]', numero(n));
+      pon('[data-precio-licencia]', numero(precioMes));
+      pon('[data-importe-licencias]', numero(licencias));
+      pon('[data-importe-crm]', numero(crm));
+      pon('[data-total-mes]', numero(licencias + crm));
+      pon('[data-total-ano]', numero(n * precioAno));
+
+      filaCrm.hidden = perfil !== 'empresa';
+      if (ctaAutonomo) ctaAutonomo.hidden = perfil === 'empresa';
+      if (ctaEmpresa) ctaEmpresa.hidden = perfil !== 'empresa';
+      if (notaEmpresa) notaEmpresa.hidden = perfil !== 'empresa';
+      // El plan anual es de las licencias. El CRM no tiene precio anual
+      // publicado, así que con empresa no se enseña una cifra a medias.
+      if (bloqueAnual) bloqueAnual.hidden = perfil === 'empresa';
+    };
+
+    const enseñar = (nombre) => {
+      Object.values(pasos).forEach((p) => { p.hidden = true; });
+      resultado.hidden = true;
+      if (nombre === 'resultado') {
+        resultado.hidden = false;
+        calcular();
+      } else {
+        pasos[nombre].hidden = false;
+      }
+    };
+
+    calc.addEventListener('click', (e) => {
+      const opcion = e.target.closest('[data-elige]');
+      if (opcion) {
+        const { elige, valor } = opcion.dataset;
+        if (elige === 'perfil') {
+          perfil = valor;
+          if (valor === 'empresa') {
+            entrada.value = '5';
+            enseñar('cuantos');
+          } else {
+            enseñar('solo');
+          }
+        } else if (elige === 'solo') {
+          if (valor === 'si') {
+            entrada.value = '1';
+            enseñar('resultado');
+          } else {
+            entrada.value = '2';
+            enseñar('cuantos');
+          }
+        }
+        return;
+      }
+
+      const suma = e.target.closest('[data-suma]');
+      if (suma) {
+        const n = Math.max(1, Math.floor(Number(entrada.value) || 1) + Number(suma.dataset.suma));
+        entrada.value = String(n);
+        // Si ya se está viendo el resultado, se recalcula en el sitio.
+        if (!resultado.hidden) calcular();
+        return;
+      }
+
+      if (e.target.closest('[data-reiniciar]')) {
+        perfil = null;
+        entrada.value = '2';
+        enseñar('perfil');
+        return;
+      }
+    });
+
+    // Desde el paso «cuántos sois» se pasa al resultado en cuanto se escribe,
+    // sin un botón de «calcular»: es una calculadora, no un formulario.
+    entrada.addEventListener('input', () => {
+      if (resultado.hidden) enseñar('resultado');
+      else calcular();
+    });
+    entrada.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); enseñar('resultado'); }
+    });
+  }
+
 });

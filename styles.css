@@ -3498,3 +3498,270 @@ body > section:not(.hero-section) > .container > h2 {
     padding: 1.5rem 1.3rem;
   }
 }
+
+/* ===========================================================================
+   Calculadora de precio — debajo del hero
+   ===========================================================================
+   Sustituye al diagrama del ecosistema el 21-09-2026. Las clases `.ecosistema-*`
+   se conservan un tiempo por si se recupera aquel bloque.
+
+   Los pasos se enseñan y esconden con el atributo `hidden`, no con una clase:
+   así un lector de pantalla y el buscador ven lo mismo que el ojo, y no hay
+   texto escondido que Google pueda leer como relleno. */
+
+.calc-section {
+  padding: 5rem 0 4rem;
+}
+
+/* 🚨 ESTO NO ES COSMÉTICA, ARREGLA UN FALLO QUE SE VE EN PANTALLA.
+   El atributo `hidden` esconde con `display: none`, pero eso lo pone la hoja
+   del navegador y LO PISA cualquier regla de autor que fije `display`. Los
+   `.btn` son `inline-flex`, así que `boton.hidden = true` no escondía nada: en
+   modo empresa se veían a la vez «Empezar con 10 portes gratis» y «Pedir
+   presupuesto para mi flota». Los `<p>` y los `<div>` sí funcionaban, porque
+   no tienen `display` propio — por eso el fallo solo salía en los botones. */
+.calc-caja [hidden] { display: none !important; }
+
+.calc-cabecera {
+  text-align: center;
+}
+
+.calc-cabecera .section-desc {
+  margin-bottom: 2.5rem;
+}
+
+.calc-caja {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.calc-pregunta {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  text-wrap: balance;
+}
+
+.calc-opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* Cada opción es un <button> de verdad, no un <div> con un click: así se llega
+   con el tabulador y se dispara con Enter sin escribir una línea de más. */
+.calc-opcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.calc-opcion:hover,
+.calc-opcion:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(var(--primary-rgb), 0.5);
+  background: rgba(var(--primary-rgb), 0.06);
+}
+
+.calc-icono {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 1.25rem;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.12);
+  border: 1px solid rgba(var(--primary-rgb), 0.25);
+}
+
+.calc-opcion-titulo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-heading);
+  text-wrap: balance;
+}
+
+.calc-opcion-pie {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* --- El contador de conductores ------------------------------------------ */
+
+.calc-contador {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.6rem;
+}
+
+.calc-mas-menos {
+  width: 54px;
+  border: 1px solid var(--border);
+  background: var(--bg-app);
+  color: var(--text-heading);
+  border-radius: var(--radius-md);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.calc-mas-menos:hover,
+.calc-mas-menos:focus-visible {
+  border-color: rgba(var(--primary-rgb), 0.5);
+  background: rgba(var(--primary-rgb), 0.08);
+}
+
+.calc-numero {
+  width: 140px;
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.calc-numero:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Las flechitas del campo numérico sobran: ya hay botones de + y −, y en móvil
+   se comen la mitad del ancho. */
+.calc-numero::-webkit-outer-spin-button,
+.calc-numero::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-numero { -moz-appearance: textfield; appearance: textfield; }
+
+.calc-ayuda {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* --- El resultado --------------------------------------------------------- */
+
+.calc-resultado-titulo {
+  margin: 0 0 1.2rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-heading);
+}
+
+.calc-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calc-tabla th,
+.calc-tabla td {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-weight: 400;
+  color: var(--text-main);
+  vertical-align: baseline;
+}
+
+.calc-tabla th { font-weight: 600; color: var(--text-heading); }
+
+.calc-detalle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* `tabular-nums` para que las cifras no bailen al cambiar el número de
+   conductores: sin esto, pasar de 9 a 10 mueve toda la columna. */
+.calc-importe {
+  text-align: right;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-heading);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-total th,
+.calc-total td {
+  border-bottom: none;
+  padding-top: 1.2rem;
+  font-size: 1.5rem;
+  color: var(--text-heading);
+}
+
+.calc-total .calc-importe { color: var(--primary); }
+
+.calc-nota {
+  margin: 0.8rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.calc-anual {
+  margin: 1.2rem 0 0;
+  padding: 0.9rem 1.1rem;
+  background: rgba(var(--primary-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.calc-anual strong { color: var(--text-heading); }
+
+.calc-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.calc-nota-empresa {
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 620px) {
+  .calc-section { padding: 3.5rem 0 3rem; }
+  .calc-caja { padding: 1.8rem 1.2rem; }
+  .calc-opciones { grid-template-columns: 1fr; }
+  .calc-pregunta { font-size: 1.15rem; }
+  .calc-numero { width: 110px; font-size: 1.6rem; }
+
+  /* En una pantalla estrecha la columna del medio se come el ancho de las
+     otras dos y los importes acaban partidos. Se esconde: el detalle
+     «8 × 10 €» es un apoyo, no el dato. */
+  .calc-detalle { display: none; }
+
+  .calc-total th, .calc-total td { font-size: 1.25rem; }
+  .calc-acciones .btn { width: 100%; justify-content: center; }
+}
