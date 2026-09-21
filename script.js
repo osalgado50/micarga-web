@@ -231,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const precioMes = Number(calc.dataset.precioMes);
     const precioAno = Number(calc.dataset.precioAno);
     const crmMes = Number(calc.dataset.crmMes);
+    const crmAno = Number(calc.dataset.crmAno);
 
     const pasos = {};
     calc.querySelectorAll('[data-paso]').forEach((p) => { pasos[p.dataset.paso] = p; });
@@ -265,22 +266,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const licMes = n * precioMes;
       const licAno = n * precioAno;
-      // El CRM no tiene precio anual propio publicado: se cobra por meses, así
-      // que el año son doce mensualidades SIN descuento. El ahorro de tres
-      // meses es solo de las licencias, y el texto lo dice así de claro. Si
-      // algún día hay precio anual de CRM, se añade un `data-` y se cambia
-      // esta línea, no el resto.
+      // El CRM ya tiene precio anual propio (490 €, dos meses menos que pagarlo
+      // mes a mes), así que se lee del `data-` y NO se multiplica por doce.
       const crmMesActual = esEmpresa ? crmMes : 0;
-      const crmAnoActual = crmMesActual * 12;
+      const crmAnoActual = esEmpresa ? crmAno : 0;
 
       pon('[data-n]', numero(n));
       pon('[data-precio-licencia]', numero(precioMes));
-      // El ahorro del plan anual, en total y no por licencia: es la cifra que
-      // de verdad mira quien tiene flota.
-      const sinPlanAnual = n * precioMes * 12;
-      pon('[data-ahorro-con]', numero(licAno));
+      // El ahorro cubre TODO lo que se está enseñando, no solo las licencias:
+      // con empresa, el CRM anual también ahorra dos meses, y poner solo el de
+      // las licencias se quedaría corto justo en el caso que más paga.
+      const conPlanAnual = licAno + crmAnoActual;
+      const sinPlanAnual = (licMes + crmMesActual) * 12;
+      pon('[data-ahorro-con]', numero(conPlanAnual));
       pon('[data-ahorro-sin]', numero(sinPlanAnual));
-      pon('[data-ahorro]', numero(sinPlanAnual - licAno));
+      pon('[data-ahorro]', numero(sinPlanAnual - conPlanAnual));
       pon('[data-lic-mes]', numero(licMes));
       pon('[data-lic-ano]', numero(licAno));
       pon('[data-imp-crm-mes]', numero(crmMesActual));

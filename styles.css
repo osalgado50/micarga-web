@@ -3929,3 +3929,18 @@ body > section:not(.hero-section) > .container > h2 {
   .crm-card { padding: 1.2rem; }
   .crm-card-cifra { font-size: 1.6rem; }
 }
+
+/* El ahorro del CRM anual, en la tarjeta de tarifas. Mismo verde que el de la
+   calculadora: en toda la página, verde = lo que NO se paga. */
+.crm-card-ahorro {
+  margin: 0.9rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+.crm-card-ahorro strong {
+  color: #34d399;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
