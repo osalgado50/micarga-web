@@ -2505,6 +2505,80 @@ body > section:not(.hero-section) > .container > h2 {
   .adr-botones .btn { width: 100%; justify-content: center; }
 }
 
+/* --- Quiénes somos ---------------------------------------------------------
+   Sección de texto, sin imagen. Se sostiene sola con la medida de lectura y la
+   jerarquía: un párrafo de 100 palabras a todo el ancho del contenedor no lo
+   lee nadie, así que la columna se limita y se centra.
+
+   La tarjeta de «Detrás de Mi Carga» se separa del fondo para que no parezca
+   la continuación del párrafo de arriba: son dos cosas distintas —qué hacemos
+   y quién lo hace— y visualmente tienen que parecerlo. */
+.quienes-cabecera {
+  text-align: center;
+  max-width: 68ch;
+  margin: 0 auto 3rem;
+}
+.quienes-cabecera h2 { margin: 0.5rem 0 1.25rem; }
+.quienes-cabecera .lead-paragraph { margin: 0; }
+
+.quienes-detras {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  /* La línea de color a la izquierda ata la tarjeta al resto de la página sin
+     tener que pintarla entera de naranja. */
+  border-left: 3px solid var(--primary);
+}
+.quienes-detras h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--text-heading);
+}
+.quienes-detras p {
+  margin: 0;
+  max-width: 72ch;
+  color: var(--text-main);
+}
+
+/* Los cuatro perfiles. `auto-fit` con un mínimo: en el móvil salen en una
+   columna, en el escritorio en cuatro, y en medio lo que quepa.
+
+   El mínimo es 180px y no 200px por muy poco y a propósito: dentro de la
+   tarjeta quedan 828px útiles y, quitando los tres huecos, tocan a 198px. Con
+   200 se caía el cuarto perfil a una segunda fila él solo. */
+.quienes-perfiles {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+.quienes-perfiles li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(var(--primary-rgb), 0.05);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+.quienes-perfiles i {
+  flex: 0 0 auto;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 640px) {
+  .quienes-detras { padding: 1.5rem; }
+}
+
 /* La dirección en el pie: el mismo tamaño que los enlaces de al lado pero sin
    pinta de enlace, que no lo es. */
 .footer-direccion {
@@ -2665,249 +2739,25 @@ body > section:not(.hero-section) > .container > h2 {
 .videos-cabecera h2 { margin: 0.5rem 0 1rem; }
 .videos-cabecera p { margin: 0; color: var(--text-muted); }
 
-/* Columnas a mano y no `auto-fit`: son CUATRO tarjetas, y con `auto-fit` en
-   pantallas medianas salen tres arriba y una suelta debajo. */
-.videos-rejilla {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-@media (min-width: 600px) {
-  .videos-rejilla { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1100px) {
-  .videos-rejilla { grid-template-columns: repeat(4, 1fr); }
+/* El vídeo, centrado y con un ancho de lectura. A pantalla completa un 16:9
+   de borde a borde queda enorme y descolocado respecto al resto de la página. */
+.video-unico {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.video-tarjeta {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0.9rem;
-  text-align: left;
-  font: inherit;
-  color: inherit;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+/* El marco del hero es 9:16 porque allí el vídeo es de móvil. Este es apaisado,
+   así que solo cambia la proporción: 1240x720, que NO es 16/9 exacto. Se pone
+   la real para que no queden dos franjas negras arriba y abajo. */
+.video-marco-ancho {
+  aspect-ratio: 31 / 18;
 }
-.video-tarjeta:hover {
-  transform: translateY(-6px);
-  border-color: rgba(var(--primary-rgb), 0.55);
-  box-shadow: var(--shadow-card);
-}
-.video-tarjeta:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 3px;
-}
-
-.video-tarjeta-marco {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  /* El hueco se reserva antes de que llegue el fotograma: sin esto la rejilla
-     pega un salto al cargar las cuatro imágenes. */
-  aspect-ratio: 4 / 5;
-  background: #0b0f19;
-}
-.video-tarjeta-marco img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  /* `top`, no `center`: la cabecera de la app y el título del documento están
-     arriba del todo, y centrando el recorte se pierden. */
-  object-fit: cover;
-  object-position: top center;
-}
-
-.video-tarjeta-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(11, 15, 25, 0.35);
-  transition: background 0.2s ease;
-}
-.video-tarjeta:hover .video-tarjeta-play { background: rgba(11, 15, 25, 0.15); }
-.video-tarjeta-play i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
-  font-size: 1.2rem;
-  /* El triángulo pesa hacia la izquierda; centrado exacto se ve descolocado. */
-  padding-left: 5px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  transition: transform 0.2s ease;
-}
-.video-tarjeta:hover .video-tarjeta-play i { transform: scale(1.1); }
-
-.video-tarjeta-duracion {
-  position: absolute;
-  right: 0.6rem;
-  bottom: 0.6rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: rgba(3, 7, 18, 0.8);
-  color: #fff;
-  font-size: 0.75rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.video-tarjeta-pie {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-.video-tarjeta-icono {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
-  background: rgba(var(--primary-rgb), 0.12);
-  color: var(--primary);
-}
-.video-tarjeta-pie strong {
-  display: block;
-  font-family: var(--font-display);
-  color: var(--text-heading);
-  font-size: 1rem;
-  line-height: 1.3;
-  text-wrap: balance;
-}
-.video-tarjeta-pie small {
-  display: block;
-  margin-top: 0.3rem;
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  line-height: 1.45;
-}
-
-/* --- La ventana del reproductor ------------------------------------------- */
-.video-ventana {
-  width: min(92vw, 460px);
-  max-width: none;
-  /* El `* { margin: 0 }` del reset de arriba se lleva por delante el
-     `margin: auto` con el que el navegador centra un <dialog> modal, y la
-     ventana se pega a la esquina de arriba a la izquierda. Hay que devolvérselo. */
-  margin: auto;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg-card);
-  color: var(--text-main);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-}
-.video-ventana::backdrop {
-  background: rgba(3, 7, 18, 0.85);
-}
-
-.video-ventana-cabecera {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.9rem 0.9rem 0.9rem 1.2rem;
-  border-bottom: 1px solid var(--border);
-}
-.video-ventana-titulo {
-  flex: 1;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  color: var(--text-heading);
-}
-.video-ventana-cerrar {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--text-main);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.video-ventana-cerrar:hover {
-  background: rgba(var(--primary-rgb), 0.15);
-  color: var(--primary);
-}
-.video-ventana-cerrar:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 2px;
-}
-
-.video-ventana-marco {
-  position: relative;
-  background: #000;
-}
-.video-ventana-pieza {
-  display: block;
-  width: 100%;
-  /* El vídeo es 9:16 y la pantalla del portátil no da para tanto alto: se le
-     pone un tope y `object-fit: contain` para que no se recorte nada. */
-  max-height: 72vh;
-  aspect-ratio: 9 / 16;
+.video-marco-ancho .video-pieza {
+  /* `contain` y no `cover`: aquí dentro hay capturas de pantalla con texto, y
+     recortar los bordes se come justo lo que se quiere leer. */
   object-fit: contain;
-  background: #000;
 }
 
-.video-ventana-final {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 1.5rem;
-  text-align: center;
-  background: rgba(3, 7, 18, 0.88);
-}
-/* Igual que en el vídeo del hero: el `display:none` de [hidden] lo pisa el
-   `display:flex` de arriba, que es más específico. */
-.video-ventana-final[hidden] { display: none; }
-.video-ventana-final p {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--text-heading);
-}
-.video-ventana-final-botones {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: 260px;
-}
-.video-ventana-final-botones .btn {
-  width: 100%;
-  justify-content: center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .video-tarjeta,
-  .video-tarjeta-play,
-  .video-tarjeta-play i,
-  .video-ventana-cerrar { transition: none; }
-  .video-tarjeta:hover { transform: none; }
-  .video-tarjeta:hover .video-tarjeta-play i { transform: none; }
-}
 
 /* Entre el móvil (donde el menú es una hamburguesa) y la pantalla ancha hay una
    franja en la que los seis enlaces con `gap: 2rem` no caben y el menú se parte

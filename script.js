@@ -82,21 +82,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Vídeo del hero ------------------------------------------------------
+  // --- Los vídeos de la página ---------------------------------------------
   //
-  // No arranca solo. Se enseña el fotograma con el botón de play encima y no
-  // pasa nada hasta que alguien lo pulsa: el vídeo lleva voz, y sonar sin que
-  // nadie lo haya pedido —en una cabina, en una oficina— es la forma más
-  // rápida de que cierren la pestaña.
+  // Hay dos —el del hero y el de «cómo funciona»— y los dos se comportan
+  // igual: no arrancan solos. Se enseña el fotograma con el botón de play
+  // encima y no pasa nada hasta que alguien lo pulsa. Los dos llevan voz, y
+  // sonar sin que nadie lo haya pedido —en una cabina, en una oficina— es la
+  // forma más rápida de que cierren la pestaña.
   //
   // Los controles aparecen AL EMPEZAR, no antes: con la barra de controles
   // encima del fotograma, el botón de play grande compite con el pequeño de la
   // barra y no se sabe cuál es el bueno. Una vez en marcha sí hacen falta, para
   // poder pararlo o quitarle el sonido.
-  const video = document.getElementById('video-hero');
-  const botonPlay = document.getElementById('video-play');
+  //
+  // Una sola función para los dos: hasta el 22-09-2026 el de «cómo funciona»
+  // eran cuatro tarjetas que abrían una ventana modal, con su propio código
+  // aparte. Ahora es un vídeo más, así que se comporta como el otro.
+  const prepararVideo = (idVideo, idBoton, esperaFinalMs) => {
+    const video = document.getElementById(idVideo);
+    const botonPlay = document.getElementById(idBoton);
+    if (!video || !botonPlay) { return; }
 
-  if (video && botonPlay) {
     botonPlay.addEventListener('click', () => {
       botonPlay.hidden = true;
       video.controls = true;
@@ -115,106 +121,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Al terminar se ve una vez, y quien quiera repetirlo lo pide otra vez.
     //
-    // Los tres segundos de espera son a propósito: el vídeo acaba con el logo
-    // de Mi Carga en pantalla, y volver al fotograma inicial en el mismo
-    // instante en que aparece se lleva por delante justo el cierre de la
-    // pieza. Se deja respirar y luego se vuelve al principio.
+    // La espera es a propósito: los dos vídeos acaban con el logo de Mi Carga
+    // en pantalla, y volver al fotograma inicial en el mismo instante en que
+    // aparece se lleva por delante justo el cierre de la pieza. Se deja
+    // respirar y luego se vuelve al principio.
     //
     // `load()` es lo que devuelve el póster a la pantalla; con
     // `currentTime = 0` se quedaría congelado el último cuadro.
-    const ESPERA_FINAL_MS = 3000;
     video.addEventListener('ended', () => {
       video.controls = false;
       setTimeout(() => {
         video.load();
         botonPlay.hidden = false;
-      }, ESPERA_FINAL_MS);
+      }, esperaFinalMs);
     });
-  }
+  };
 
-  // --- Los cuatro vídeos de «cómo funciona» ---------------------------------
-  //
-  // Una sola ventana para los cuatro: al pulsar una tarjeta se le cambia el
-  // origen al <video> y se abre. Así no hay cuatro reproductores en la página
-  // compitiendo por la memoria del móvil.
-  //
-  // El <source> se pone con `src` directo sobre el <video>, no con una etiqueta
-  // <source> hija: cambiar un <source> hijo no hace nada si no se llama a
-  // `load()`, y esto es menos código y menos sitios donde equivocarse.
-  const ventana = document.getElementById('video-ventana');
-  const reproductor = document.getElementById('video-ventana-pieza');
-  const tituloVentana = document.getElementById('video-ventana-titulo');
-  const finalVentana = document.getElementById('video-ventana-final');
-  const repetir = document.getElementById('video-ventana-repetir');
-  const tarjetas = document.querySelectorAll('.video-tarjeta');
-
-  if (ventana && reproductor && tarjetas.length) {
-    const arrancar = () => {
-      finalVentana.hidden = true;
-      const enMarcha = reproductor.play();
-      // El navegador puede negarse a arrancar (una política de reproducción, un
-      // fallo de red). No se hace nada: quedan los controles del reproductor a
-      // la vista y se le puede dar al play a mano.
-      if (enMarcha) { enMarcha.catch(() => {}); }
-    };
-
-    tarjetas.forEach((tarjeta) => {
-      tarjeta.addEventListener('click', () => {
-        const fuente = tarjeta.dataset.video;
-        if (!fuente) { return; }
-        // El título se saca del <strong> de la propia tarjeta y no de un
-        // atributo aparte: el generador de /ca y /en traduce el texto que se
-        // ve, no los `data-*`, y con un `data-titulo` la ventana salía en
-        // castellano encima de una página en catalán.
-        const rotulo = tarjeta.querySelector('.video-tarjeta-pie strong');
-        tituloVentana.textContent = rotulo ? rotulo.textContent.trim() : '';
-        reproductor.src = fuente;
-        reproductor.currentTime = 0;
-        finalVentana.hidden = true;
-        // `showModal` en vez de `show`: deja el resto de la página inerte, mete
-        // el foco dentro y hace que Escape cierre, todo sin escribirlo.
-        if (typeof ventana.showModal === 'function') {
-          ventana.showModal();
-        } else {
-          ventana.setAttribute('open', '');
-        }
-        arrancar();
-      });
-    });
-
-    reproductor.addEventListener('ended', () => { finalVentana.hidden = false; });
-    if (repetir) { repetir.addEventListener('click', arrancar); }
-
-    const cerrar = () => {
-      if (typeof ventana.close === 'function') {
-        ventana.close();
-      } else {
-        ventana.removeAttribute('open');
-      }
-    };
-
-    ventana.querySelectorAll('[data-cerrar-video]').forEach((boton) => {
-      boton.addEventListener('click', cerrar);
-    });
-
-    // Pulsar el fondo oscuro también cierra. El <dialog> recibe el clic del
-    // ::backdrop como si fuese suyo, así que basta con mirar si el clic cayó
-    // fuera de la caja de dentro.
-    ventana.addEventListener('click', (evento) => {
-      if (evento.target === ventana) { cerrar(); }
-    });
-
-    // Se limpia SIEMPRE al cerrar, venga el cierre de donde venga —la X, el
-    // fondo o la tecla Escape—. Vaciar el `src` es lo que corta de verdad la
-    // descarga y el sonido; con `pause()` a secas el vídeo sigue bajando por
-    // detrás.
-    ventana.addEventListener('close', () => {
-      reproductor.pause();
-      reproductor.removeAttribute('src');
-      reproductor.load();
-      finalVentana.hidden = true;
-    });
-  }
+  prepararVideo('video-hero', 'video-play', 3000);
+  prepararVideo('video-completo', 'video-completo-play', 3000);
 
   // --- Calculadora de precio -----------------------------------------------
   //

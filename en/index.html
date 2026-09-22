@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260921j">
+  <link rel="stylesheet" href="/styles.css?v=20260922a">
 
   <script type="application/ld+json">
   {
@@ -423,87 +423,43 @@
     </div>
   </section>
 
-  <!-- Vídeos de cómo funciona ---------------------------------------------
-       Cuatro grabaciones de pantalla reales de la app. No se cargan con la
-       página: cada tarjeta enseña solo un fotograma (una imagen de 50 kB) y el
-       vídeo no se descarga hasta que alguien pulsa. Son ~7 MB entre los cuatro
-       y esta portada la abre gente con datos contados desde la carretera.
+  <!-- Vídeo de cómo funciona ----------------------------------------------
+       Una sola pieza de 2:09 que cuenta la plataforma entera, en sustitución
+       de las cuatro grabaciones de pantalla sueltas que había aquí hasta el
+       22-09-2026. Es la misma información mejor contada: hay una persona
+       explicándola y el recorrido va seguido, en vez de cuatro trozos que
+       había que abrir uno a uno.
 
-       Se abren en un <dialog> nativo: la tecla Escape y el botón de la X
-       cierran y devuelven a la web, que es justo lo que se pidió. El vídeo se
-       para y se vacía al cerrar, para que no siga sonando por detrás. -->
+       Se reproduce DENTRO de la página, igual que el vídeo del hero, y ya no
+       en la ventana modal: la ventana estaba hecha a medida de los vídeos
+       verticales del móvil (9:16, 460px de ancho) y este es apaisado.
+
+       `preload="none"`: sin pulsar el play no se descarga ni un byte de los
+       7 MB, solo el fotograma. Esta portada la abre gente con datos contados
+       desde la carretera. -->
   <section id="videos" class="videos-section scroll-padding">
     <div class="container">
       <div class="videos-cabecera reveal-on-scroll">
         <span class="section-subtitle">See it in action</span>
         <h2>How it works, on video</h2>
-        <p>Real screen recordings of the app, no editing. Tap any of them to watch; the X takes you back to the site.</p>
+        <p>Two minutes inside the platform and the app, walked through by a person. Real recordings, no editing.</p>
       </div>
 
-      <div class="videos-rejilla reveal-on-scroll">
-        <button type="button" class="video-tarjeta"
-                data-video="/videos/micarga-envio-completo.mp4">
-          <span class="video-tarjeta-marco">
-            <img src="/images/poster-envio-completo.jpg" alt="" loading="lazy" width="540" height="1107">
-            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-            <span class="video-tarjeta-duracion">58 s</span>
-          </span>
-          <span class="video-tarjeta-pie">
-            <span class="video-tarjeta-icono"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
-            <span>
-              <strong>A full shipment, start to finish</strong>
-              <small>Route, parties, goods and signatures: the whole document in under a minute.</small>
-            </span>
-          </span>
-        </button>
-
-        <button type="button" class="video-tarjeta"
-                data-video="/videos/micarga-albaran.mp4">
-          <span class="video-tarjeta-marco">
-            <img src="/images/poster-albaran.jpg" alt="" loading="lazy" width="540" height="1107">
-            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-            <span class="video-tarjeta-duracion">48 s</span>
-          </span>
-          <span class="video-tarjeta-pie">
-            <span class="video-tarjeta-icono"><i class="fa-solid fa-file-signature" aria-hidden="true"></i></span>
-            <span>
-              <strong>Filling in the control document and signing it</strong>
-              <small>The goods details and the three digital signatures, field by field.</small>
-            </span>
-          </span>
-        </button>
-
-        <button type="button" class="video-tarjeta"
-                data-video="/videos/micarga-tareas.mp4">
-          <span class="video-tarjeta-marco">
-            <img src="/images/poster-tareas.jpg" alt="" loading="lazy" width="540" height="1107">
-            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-            <span class="video-tarjeta-duracion">24 s</span>
-          </span>
-          <span class="video-tarjeta-pie">
-            <span class="video-tarjeta-icono"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
-            <span>
-              <strong>What you can do with a consignment</strong>
-              <small>Download the PDF, show the QR code, share it, duplicate it or start the journey.</small>
-            </span>
-          </span>
-        </button>
-
-        <button type="button" class="video-tarjeta"
-                data-video="/videos/micarga-ruta.mp4">
-          <span class="video-tarjeta-marco">
-            <img src="/images/poster-ruta.jpg" alt="" loading="lazy" width="540" height="1107">
-            <span class="video-tarjeta-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-            <span class="video-tarjeta-duracion">25 s</span>
-          </span>
-          <span class="video-tarjeta-pie">
-            <span class="video-tarjeta-icono"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i></span>
-            <span>
-              <strong>Checking the route</strong>
-              <small>Distance, estimated truck driving time and the stops along the way.</small>
-            </span>
-          </span>
-        </button>
+      <div class="video-unico reveal-on-scroll">
+        <div class="video-marco video-marco-ancho">
+          <video id="video-completo" class="video-pieza"
+                 poster="/images/poster-micarga-completo.jpg"
+                 preload="none" playsinline
+                 aria-label="Video: a full walkthrough of the Mi Carga platform and the app">
+            <source src="/videos/micarga-completo.mp4" type="video/mp4">
+            Your browser cannot play this video.
+          </video>
+          <button type="button" class="video-play" id="video-completo-play"
+                  aria-controls="video-completo" aria-label="Play the video, 2 minutes and 9 seconds">
+            <i class="fa-solid fa-play" aria-hidden="true"></i>
+          </button>
+        </div>
+        <p class="video-pie">2:09 · From creating the control document to signing it and checking the route.</p>
       </div>
     </div>
   </section>
@@ -916,6 +872,53 @@
     </div>
   </section>
 
+  <!-- Quiénes somos --------------------------------------------------------
+       Va DETRÁS del ADR y no al principio: toda la página de arriba explica
+       qué hace la herramienta, y esta contesta a la pregunta que viene después
+       —quién hay detrás—, justo antes de pedir que se descarguen la app.
+
+       Los perfiles del equipo van en tarjetas y no metidos en el párrafo:
+       «Inspectores de transporte, Consejeros de Seguridad, formadores CAP y
+       ADR y técnicos en logística» es exactamente la lista que hace creíble lo
+       demás, y dentro de una frase larga no la lee nadie. Aquí es donde irán
+       las fichas del equipo con su foto. -->
+  <section id="quienes-somos" class="quienes-section scroll-padding">
+    <div class="container">
+      <div class="quienes-cabecera reveal-on-scroll">
+        <span class="section-subtitle">About us</span>
+        <h2>We digitise road transport paperwork</h2>
+        <p class="lead-paragraph">
+          Mi Carga was born with one clear goal: that no haulier loses time or risks a fine. We are the platform that generates the Administrative Control Document (DeCA) from a phone or a PC, in minutes, from anywhere and at any hour. Our tool is built to the technical requirements set out in the Resolution of 5 June 2026 that implements the DeCA.
+        </p>
+      </div>
+
+      <div class="quienes-detras reveal-on-scroll">
+        <h3>Behind Mi Carga</h3>
+        <p>
+          Behind our platform is <strong>RESITECH 2021, S.L.U.</strong>, based in Barcelona. A team that combines knowledge of the transport sector with product development, in direct contact with the professionals who use the app every day. Thanks to a team that watches over regulatory compliance, made up of professionals from the sector:
+        </p>
+
+        <ul class="quienes-perfiles">
+          <li>
+            <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+            <span>Transport inspectors</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+            <span>Safety advisers</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            <span>CAP and ADR trainers</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-boxes-packing" aria-hidden="true"></i>
+            <span>Logistics and transport technicians</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
   <!-- App Download Section -->
   <section id="descarga" class="download-section scroll-padding">
     <div class="container text-center reveal-on-scroll">
@@ -1103,6 +1106,7 @@
         <div class="footer-links-group">
           <h4>Resources</h4>
           <p><a href="/en/blog/">Blog</a></p>
+          <p><a href="/en/#quienes-somos">About us</a></p>
         </div>
 
         <div class="footer-links-group">
@@ -1144,45 +1148,8 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-  <!-- La ventana del reproductor. Una sola para los cuatro vídeos: se le
-       cambia el <source> al abrirla. Es un <dialog> nativo, así que la tecla
-       Escape ya cierra sin escribir una línea, el foco se queda dentro
-       mientras está abierta y el resto de la página queda inerte. -->
-  <dialog id="video-ventana" class="video-ventana" aria-labelledby="video-ventana-titulo">
-    <div class="video-ventana-caja">
-      <div class="video-ventana-cabecera">
-        <h3 id="video-ventana-titulo" class="video-ventana-titulo"></h3>
-        <button type="button" class="video-ventana-cerrar" data-cerrar-video
-                aria-label="Close the video and go back to the site">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-      </div>
-
-      <div class="video-ventana-marco">
-        <video id="video-ventana-pieza" class="video-ventana-pieza"
-               controls playsinline preload="auto"></video>
-
-        <!-- Lo que se ve al acabar: volver a la web o repetirlo. Va encima del
-             último fotograma en vez de cerrarse solo, porque un vídeo que se
-             cierra por su cuenta deja al que lo estaba viendo sin saber qué ha
-             pasado. -->
-        <div class="video-ventana-final" id="video-ventana-final" hidden>
-          <p>End of video</p>
-          <div class="video-ventana-final-botones">
-            <button type="button" class="btn btn-primary" data-cerrar-video>
-              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to the site
-            </button>
-            <button type="button" class="btn btn-secondary" id="video-ventana-repetir">
-              <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Watch it again
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </dialog>
-
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260921k"></script>
+  <script src="/script.js?v=20260922a"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>
