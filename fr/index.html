@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260922a">
+  <link rel="stylesheet" href="/styles.css?v=20260922b">
 
   <script type="application/ld+json">
   {
@@ -123,6 +123,46 @@
           "valueAddedTaxIncluded": true
         },
         "priceValidUntil": "2027-12-31"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuándo es obligatorio el documento de control digital (DeCA) en España?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El documento de control administrativo electrónico (DeCA) es obligatorio a partir del 5 de octubre de 2026 en virtud de la Ley de Movilidad Sostenible y la Resolución de 5 de junio de 2026 de la Dirección General de Transporte por Carretera (BOE-A-2026-12784), prohibiéndose el papel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son las multas por no llevar el DeCA en formato digital homologado?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No disponer del documento de control digital exigido o carecer del código QR de inspección puede conllevar sanciones de 2.001 € a 6.000 € según la LOTT, además de la posible inmovilización del vehículo en carretera."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo comprueban los inspectores de transporte o la Guardia Civil el documento en carretera?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Los documentos generados por Mi Carga incluyen un código QR oficial y un enlace seguro que permite a los agentes de la Guardia Civil, Mossos d'Esquadra, Ertzaintza o Policía Foral descargar y verificar el PDF firmado de forma instantánea sin necesidad de cobertura física o papel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+        }
       }
     ]
   }
@@ -877,48 +917,194 @@
        qué hace la herramienta, y esta contesta a la pregunta que viene después
        —quién hay detrás—, justo antes de pedir que se descarguen la app.
 
-       Los perfiles del equipo van en tarjetas y no metidos en el párrafo:
-       «Inspectores de transporte, Consejeros de Seguridad, formadores CAP y
-       ADR y técnicos en logística» es exactamente la lista que hace creíble lo
-       demás, y dentro de una frase larga no la lee nadie. Aquí es donde irán
-       las fichas del equipo con su foto. -->
+       🚨 LOS NUEVE PERFILES SON DE MAQUETA. Nombres, retratos, cargos,
+       especialidades y biografías vienen del paquete de diseño del 22-09-2026
+       y son ficticios o representativos. Hay que sustituirlos por personas
+       reales —o validar uno por uno cargo y titulación— antes de darlos por
+       buenos. Ojo especialmente con «Inspector / Exinspector de Transportes»,
+       «Consejero de Seguridad ADR» y «Formador CAP / ADR»: son credenciales
+       profesionales concretas y comprobables.
+
+       Por eso mismo AQUÍ NO HAY DATOS ESTRUCTURADOS `Person` de Schema.org.
+       Marcar estos perfiles como personas reales para Google es justo lo que
+       no se puede hacer hasta que lo sean.
+
+       Los dos grupos se distinguen a propósito: el Consejo Asesor va en una
+       banda aparte y cada ficha lleva su rótulo de «Asesor externo», porque
+       decir que un inspector de transportes es de la plantilla cuando asesora
+       desde fuera es un problema distinto y peor. -->
   <section id="quienes-somos" class="quienes-section scroll-padding">
     <div class="container">
       <div class="quienes-cabecera reveal-on-scroll">
         <span class="section-subtitle">Qui sommes-nous</span>
-        <h2>Nous numérisons les documents du transport routier</h2>
+        <h2>La technologie et l'expérience réelle de la route</h2>
         <p class="lead-paragraph">
-          Mi Carga est née avec un objectif clair : qu'aucun transporteur ne perde de temps ni ne risque une sanction. Nous sommes la plateforme qui génère le Document de Contrôle Administratif (DeCA) depuis le téléphone ou le PC, en quelques minutes, où que vous soyez et à n'importe quelle heure. Notre outil est développé selon les exigences techniques de la Résolution du 5 juin 2026 qui met en œuvre le DeCA.
+          Mi Carga réunit produit numérique, opérations logistiques et connaissance de la réglementation pour que transporteurs et flottes gèrent leurs documents avec rapidité, clarté et sécurité.
+        </p>
+        <p class="quienes-empresa">
+          Derrière la plateforme se trouve <strong>RESITECH 2021, S.L.U.</strong>, dont le siège est à Barcelone, et un outil développé selon les exigences techniques de la Résolution du 5 juin 2026 qui met en œuvre le DeCA.
         </p>
       </div>
 
-      <div class="quienes-detras reveal-on-scroll">
-        <h3>Derrière Mi Carga</h3>
-        <p>
-          Derrière notre plateforme se trouve <strong>RESITECH 2021, S.L.U.</strong>, dont le siège est à Barcelone. Une équipe qui associe la connaissance du secteur du transport et le développement de produit, en contact direct avec les professionnels qui utilisent l'application chaque jour. Grâce à une équipe humaine qui veille au respect de la réglementation, composée de professionnels du secteur :
-        </p>
+      <div class="equipo-grupo reveal-on-scroll">
+        <div class="equipo-rotulo">
+          <h3>Équipe interne</h3>
+          <p>Produit, opérations et croissance</p>
+        </div>
 
-        <ul class="quienes-perfiles">
-          <li>
-            <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
-            <span>Inspecteurs des transports</span>
+        <ul class="equipo-rejilla">
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/jeroen-van-dijk.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Jeroen van Dijk, General Manager et CEO de Mi Carga">
+            </div>
+            <h4>Jeroen van Dijk</h4>
+            <p class="ficha-cargo">General Manager / CEO</p>
+            <p class="ficha-bio">Définit le cap de Mi Carga et relie produit, activité et secteur du transport pour transformer des besoins réels en solutions concrètes.</p>
+            <ul class="ficha-chips">
+              <li>Stratégie</li>
+              <li>Produit</li>
+              <li>Partenariats</li>
+            </ul>
           </li>
-          <li>
-            <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
-            <span>Conseillers à la sécurité</span>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/laura-martinez.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Laura Martínez, directrice commerciale de Mi Carga">
+            </div>
+            <h4>Laura Martínez</h4>
+            <p class="ficha-cargo">Directrice commerciale</p>
+            <p class="ficha-bio">Accompagne indépendants et entreprises dans l'adoption de Mi Carga, avec un suivi commercial clair et adapté à chaque exploitation.</p>
+            <ul class="ficha-chips">
+              <li>Développement commercial</li>
+              <li>Flottes</li>
+              <li>Clients</li>
+            </ul>
           </li>
-          <li>
-            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-            <span>Formateurs CAP et ADR</span>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/carlos-ruiz.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Carlos Ruiz, directeur des opérations et de la logistique de Mi Carga">
+            </div>
+            <h4>Carlos Ruiz</h4>
+            <p class="ficha-cargo">Directeur des opérations et de la logistique</p>
+            <p class="ficha-bio">Traduit le quotidien des itinéraires, des chargements et des flottes en processus efficaces, mesurables et faciles à appliquer.</p>
+            <ul class="ficha-chips">
+              <li>Opérations</li>
+              <li>Logistique</li>
+              <li>Processus</li>
+            </ul>
           </li>
-          <li>
-            <i class="fa-solid fa-boxes-packing" aria-hidden="true"></i>
-            <span>Techniciens en logistique et transport</span>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/marta-gomez.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Marta Gómez, responsable des ressources humaines et de l&#x27;administration de Mi Carga">
+            </div>
+            <h4>Marta Gómez</h4>
+            <p class="ficha-cargo">Responsable des ressources humaines et de l'administration</p>
+            <p class="ficha-bio">Veille à l'organisation interne, à la coordination administrative et à une façon de travailler proche, responsable et durable.</p>
+            <ul class="ficha-chips">
+              <li>Ressources humaines</li>
+              <li>Administration</li>
+              <li>Organisation</li>
+            </ul>
+          </li>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/david-torres.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de David Torres, responsable technique de Mi Carga">
+            </div>
+            <h4>David Torres</h4>
+            <p class="ficha-cargo">Responsable technique</p>
+            <p class="ficha-bio">Pilote l'architecture technique et la fiabilité d'une plateforme conçue pour fonctionner quand le transport en a besoin.</p>
+            <ul class="ficha-chips">
+              <li>Architecture</li>
+              <li>Sécurité</li>
+              <li>Évolutivité</li>
+            </ul>
+          </li>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/pablo-sanchez.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Pablo Sánchez, responsable R&amp;amp;D et logiciel de Mi Carga">
+            </div>
+            <h4>Pablo Sánchez</h4>
+            <p class="ficha-cargo">Responsable R&amp;D et logiciel</p>
+            <p class="ficha-bio">Étudie et développe de nouvelles fonctions pour supprimer des tâches manuelles et rendre les documents numériques toujours plus simples.</p>
+            <ul class="ficha-chips">
+              <li>I+D</li>
+              <li>Logiciel</li>
+              <li>Automatisation</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="equipo-grupo equipo-grupo-asesor reveal-on-scroll">
+        <div class="equipo-rotulo">
+          <h3>Conseil consultatif</h3>
+          <p>Expérience externe et connaissance de la réglementation</p>
+        </div>
+
+        <ul class="equipo-rejilla equipo-rejilla-asesor">
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/antonio-beltran.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait d&#x27;Antonio Beltrán, conseiller externe en contrôle des transports">
+            </div>
+            <h4>Antonio Beltrán</h4>
+            <p class="ficha-cargo">Inspecteur / ancien inspecteur des transports</p>
+            <p class="ficha-externo">Conseiller externe</p>
+            <p class="ficha-bio">Apporte un regard pratique sur le contrôle, les documents et la conformité dans le transport routier.</p>
+            <ul class="ficha-chips">
+              <li>Contrôle</li>
+              <li>ROTT</li>
+              <li>Conformité</li>
+            </ul>
+          </li>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/luis-herrera.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Luis Herrera, conseiller externe et conseiller à la sécurité ADR">
+            </div>
+            <h4>Luis Herrera</h4>
+            <p class="ficha-cargo">Conseiller à la sécurité ADR</p>
+            <p class="ficha-externo">Conseiller externe</p>
+            <p class="ficha-bio">Oriente l'application des exigences ADR et la gestion documentaire liée aux marchandises dangereuses.</p>
+            <ul class="ficha-chips">
+              <li>ADR</li>
+              <li>Marchandises dangereuses</li>
+              <li>Sécurité</li>
+            </ul>
+          </li>
+
+          <li class="ficha">
+            <div class="ficha-retrato">
+              <img src="/images/equipo/raul-mendez.webp" width="480" height="480" loading="lazy" decoding="async"
+                   alt="Portrait de Raúl Méndez, conseiller externe et formateur professionnel du transport">
+            </div>
+            <h4>Raúl Méndez</h4>
+            <p class="ficha-cargo">Formateur CAP / ADR / chronotachygraphe et attestation de capacité</p>
+            <p class="ficha-externo">Conseiller externe</p>
+            <p class="ficha-bio">Rapproche la réglementation des conducteurs et des gestionnaires par une formation pratique, claire et liée au travail quotidien.</p>
+            <ul class="ficha-chips">
+              <li>CAP</li>
+              <li>ADR</li>
+              <li>Chronotachygraphe</li>
+              <li>Capacité professionnelle</li>
+            </ul>
           </li>
         </ul>
       </div>
     </div>
   </section>
+
   <!-- App Download Section -->
   <section id="descarga" class="download-section scroll-padding">
     <div class="container text-center reveal-on-scroll">

@@ -86,6 +86,16 @@ IGUAL_EN_TODOS = {
     # escribe en ese idioma, en las tres versiones: quien busca el catalán
     # busca «Català», no «Catalán» ni «Catalan».
     "ES", "CA", "EN", "Castellano", "Català", "English",
+    # Los nombres del equipo de «Quiénes somos». Un nombre propio no se
+    # traduce: «Jeroen van Dijk» se escribe igual en las nueve versiones, y
+    # dejarlos en el diccionario solo servía para pedir nueve veces que
+    # alguien copiase la misma cadena y para que `comprobar` avisase de 81
+    # frases sin traducir que no hay que traducir.
+    "Jeroen van Dijk", "Laura Martínez", "Carlos Ruiz", "Marta Gómez",
+    "David Torres", "Pablo Sánchez", "Antonio Beltrán", "Luis Herrera",
+    "Raúl Méndez",
+    # Siglas del sector, iguales en los nueve idiomas.
+    "CAP", "I+D",
 }
 SIN_LETRAS = re.compile(r"^[^\wáéíóúàèìòùïüçñÁÉÍÓÚÀÈÌÒÙÏÜÇÑ]*$")
 

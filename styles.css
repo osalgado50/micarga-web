@@ -2506,77 +2506,204 @@ body > section:not(.hero-section) > .container > h2 {
 }
 
 /* --- Quiénes somos ---------------------------------------------------------
-   Sección de texto, sin imagen. Se sostiene sola con la medida de lectura y la
-   jerarquía: un párrafo de 100 palabras a todo el ancho del contenedor no lo
-   lee nadie, así que la columna se limita y se centra.
+   Cabecera de texto centrada y, debajo, dos grupos de fichas: el equipo
+   interno y el Consejo Asesor.
 
-   La tarjeta de «Detrás de Mi Carga» se separa del fondo para que no parezca
-   la continuación del párrafo de arriba: son dos cosas distintas —qué hacemos
-   y quién lo hace— y visualmente tienen que parecerlo. */
+   Los dos grupos NO se ven igual a propósito. El asesor va sobre una banda
+   más oscura, con menos fichas por fila y su propio rótulo de «Asesor
+   externo» en cada una: dar a entender que un inspector de transportes está
+   en plantilla cuando asesora desde fuera no es un matiz de diseño. */
 .quienes-cabecera {
   text-align: center;
   max-width: 68ch;
-  margin: 0 auto 3rem;
+  margin: 0 auto 3.5rem;
 }
 .quienes-cabecera h2 { margin: 0.5rem 0 1.25rem; }
 .quienes-cabecera .lead-paragraph { margin: 0; }
+.quienes-empresa {
+  margin: 1.25rem 0 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
 
-.quienes-detras {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2.25rem;
+/* --- Los grupos ------------------------------------------------------------ */
+.equipo-grupo + .equipo-grupo { margin-top: 3.5rem; }
+
+.equipo-grupo-asesor {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  /* Un punto más oscuro que el fondo de la página: separa el consejo del
+     equipo sin meter otra caja clara en una web que no tiene ninguna. */
+  background: rgba(3, 7, 18, 0.45);
+}
+
+/* El rótulo del grupo: título, subtítulo y una línea que se come el resto del
+   ancho. La línea es un `<hr>` implícito hecho con el propio grid, así no hay
+   un elemento vacío en el HTML solo para pintar una raya. */
+.equipo-rotulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin-bottom: 2rem;
+}
+.equipo-rotulo h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: var(--text-heading);
+}
+.equipo-rotulo p {
+  flex: 1;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  /* La raya a continuación del subtítulo, hasta el borde. */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+.equipo-rotulo p::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  min-width: 2rem;
+  background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.5), transparent);
+}
+
+/* --- La rejilla ------------------------------------------------------------ */
+.equipo-rejilla {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 620px) {
+  .equipo-rejilla { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .equipo-rejilla { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- Una ficha ------------------------------------------------------------- */
+.ficha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem 1.5rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  /* La línea de color a la izquierda ata la tarjeta al resto de la página sin
-     tener que pintarla entera de naranja. */
-  border-left: 3px solid var(--primary);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.quienes-detras h3 {
-  margin: 0 0 1rem;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: var(--text-heading);
+.ficha:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--primary-rgb), 0.4);
+  box-shadow: var(--shadow-card);
 }
-.quienes-detras p {
+
+/* El retrato. El tamaño se fija AQUÍ y no en el <img>: los atributos `width` y
+   `height` del HTML son los del archivo (480×480) y están para reservar el
+   hueco antes de que baje la imagen, que es lo que evita el salto de la
+   página al cargar las nueve. */
+.ficha-retrato {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 1.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  /* Halo suave, no neón: el acento ya manda bastante en esta página. */
+  box-shadow: 0 0 0 6px rgba(var(--primary-rgb), 0.08),
+              0 12px 30px rgba(0, 0, 0, 0.45);
+  background: #0b0f19;
+}
+.ficha-retrato img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ficha h4 {
   margin: 0;
-  max-width: 72ch;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--text-heading);
+  text-wrap: balance;
+}
+.ficha-cargo {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-wrap: balance;
+}
+/* El rótulo de externo. Va en la ficha y no solo en la cabecera del grupo
+   porque en el móvil las fichas se leen de una en una y la cabecera queda
+   lejísimos. */
+.ficha-externo {
+  margin: 0.6rem 0 0;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.ficha-bio {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--text-main);
 }
 
-/* Los cuatro perfiles. `auto-fit` con un mínimo: en el móvil salen en una
-   columna, en el escritorio en cuatro, y en medio lo que quepa.
-
-   El mínimo es 180px y no 200px por muy poco y a propósito: dentro de la
-   tarjeta quedan 828px útiles y, quitando los tres huecos, tocan a 198px. Con
-   200 se caía el cuarto perfil a una segunda fila él solo. */
-.quienes-perfiles {
+/* Las especialidades. `margin-top: auto` las empuja al fondo de la ficha para
+   que queden a la misma altura en toda la fila aunque las biografías midan
+   distinto; sin eso, cada ficha las coloca donde le cae el texto. */
+.ficha-chips {
   list-style: none;
-  margin: 1.75rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-}
-.quienes-perfiles li {
+  margin: auto 0 0;
+  padding: 1.25rem 0 0;
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: rgba(var(--primary-rgb), 0.05);
-  font-size: 0.92rem;
-  line-height: 1.35;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
 }
-.quienes-perfiles i {
-  flex: 0 0 auto;
-  color: var(--primary);
-  font-size: 1.05rem;
+.ficha-chips li {
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgba(var(--primary-rgb), 0.25);
+  border-radius: 999px;
+  background: rgba(var(--primary-rgb), 0.07);
+  font-size: 0.74rem;
+  color: var(--text-main);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ficha { transition: none; }
+  .ficha:hover { transform: none; }
 }
 
 @media (max-width: 640px) {
-  .quienes-detras { padding: 1.5rem; }
+  .equipo-grupo-asesor { padding: 1.75rem 1.25rem; }
+  .ficha-retrato { width: 150px; height: 150px; }
+  /* El rótulo se apila y se queda sin raya. Al lado del título, el subtítulo
+     se parte en tres líneas dentro de una columna estrechísima, y la raya
+     cuelga de ahí sin atar nada. */
+  .equipo-rotulo {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .equipo-rotulo p {
+    flex: none;
+    white-space: normal;
+  }
+  .equipo-rotulo p::after { display: none; }
 }
 
 /* La dirección en el pie: el mismo tamaño que los enlaces de al lado pero sin
