@@ -60,7 +60,11 @@ def meter_en_indice(entrada: dict) -> None:
     fresco y es lo que tiene que ver quien entra.
     """
     t = INDICE.read_text(encoding="utf-8")
-    tarjeta = (
+    # Las marcas SOLO-ES hacen que esta tarjeta desaparezca en los otros ocho
+    # idiomas. El artículo solo existe en castellano: traducir el titular sería
+    # mandar a quien lee en alemán a un texto en castellano, y dejarlo sin
+    # traducir llenaría el índice alemán de tarjetas castellanas.
+    tarjeta_desnuda = (
         f'          <a href="{entrada["slug"]}" class="blog-card">\n'
         f'            <img src="../images/blog/{entrada["slug"]}.webp" alt="" '
         f'class="blog-card-image" width="1200" height="675" loading="lazy">\n'
@@ -68,21 +72,37 @@ def meter_en_indice(entrada: dict) -> None:
         f'            <p>{html.escape(entrada["resumen"])}</p>\n'
         f'          </a>\n'
     )
+    tarjeta = (
+        f'          <!-- SOLO-ES:inicio -->\n'
+        f'{tarjeta_desnuda}'
+        f'          <!-- SOLO-ES:fin -->\n'
+    )
 
     marca = f"<h2>{html.escape(entrada['grupo'])}</h2>"
     if marca in t:
         i = t.index(marca)
         j = t.index('<div class="blog-card-grid">', i) + len('<div class="blog-card-grid">') + 1
-        t = t[:j] + tarjeta + t[j:]
+        # Si el grupo entero ya está marcado como solo-castellano, la tarjeta
+        # NO lleva sus propias marcas: unas marcas dentro de otras rompen la
+        # expresión que las recorta, que se pararía en el primer cierre y se
+        # dejaría media sección suelta.
+        dentro = t.rfind("<!-- SOLO-ES:inicio -->", 0, i)
+        ya_marcado = dentro != -1 and t.find("<!-- SOLO-ES:fin -->", dentro) > i
+        t = t[:j] + (tarjeta_desnuda if ya_marcado else tarjeta) + t[j:]
     else:
-        # Grupo nuevo: se abre justo antes de que se cierre el contenedor.
+        # Grupo nuevo. Se marca ENTERO, cabecera incluida: todas las entradas
+        # que van a caer aquí son de este paquete y solo existen en castellano,
+        # así que en alemán este grupo no debe existir. Marcar solo las
+        # tarjetas dejaría un título de sección con nada debajo.
         bloque = (
+            f'      <!-- SOLO-ES:inicio -->\n'
             f'      <div class="blog-cluster">\n'
             f'        {marca}\n'
             f'        <div class="blog-card-grid">\n'
-            f'{tarjeta}'
+            f'{tarjeta_desnuda}'
             f'        </div>\n'
-            f'      </div>\n\n'
+            f'      </div>\n'
+            f'      <!-- SOLO-ES:fin -->\n\n'
         )
         cierre = t.rindex("    </div>\n  </main>")
         t = t[:cierre] + bloque + t[cierre:]

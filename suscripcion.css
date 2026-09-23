@@ -418,3 +418,84 @@
   justify-content: center;
   margin-top: 18px;
 }
+
+/* --- Cuántas licencias -------------------------------------------------------
+   Va ENCIMA de los dos planes, no dentro de cada uno: el número de conductores
+   es el mismo se pague al mes o al año, y duplicarlo invita a contestarlo dos
+   veces con números distintos. */
+.sus-cantidad {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(var(--primary-rgb), 0.05);
+}
+.sus-cantidad-rotulo {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  color: var(--text-heading);
+}
+.sus-contador {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sus-contador-boton {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(var(--primary-rgb), 0.5);
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--text-heading);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.sus-contador-boton:hover { background: rgba(var(--primary-rgb), 0.22); }
+.sus-contador-boton:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.sus-contador input {
+  width: 5.5rem;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-heading);
+}
+
+.sus-crm {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.sus-crm input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 0.1rem;
+  accent-color: var(--primary);
+}
+
+/* Los planes pasaron de <a> a <button> al llamar a la función de pago: hay que
+   devolverles a mano lo que el navegador le quita a un botón. */
+.sus-plan {
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+.sus-plan[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}

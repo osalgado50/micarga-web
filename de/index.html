@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260923a">
+  <link rel="stylesheet" href="/styles.css?v=20260923b">
 
   <script type="application/ld+json">
   {
@@ -436,10 +436,19 @@
             </p>
           </div>
 
+          <!-- «Contratar ahora» va el PRIMERO y en naranja, y la prueba
+               gratuita pasa a segundo plano. Quien ha llegado hasta aquí ya
+               ha contestado dos preguntas y ha visto su precio: está más
+               cerca de comprar que de empezar una prueba. La prueba sigue a
+               un clic, que es lo que importa.
+
+               El enlace se lleva el número de conductores puesto para que la
+               página de contratación no lo vuelva a preguntar. -->
           <div class="calc-acciones">
+            <a href="/de/suscripcion" class="btn btn-primary btn-large" data-cta-contratar>Jetzt abonnieren</a>
             <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener"
-               class="btn btn-primary btn-large" data-cta-autonomo>Mit 10 kostenlosen Transporten starten</a>
-            <a href="/de/presupuesto" class="btn btn-primary btn-large" data-cta-empresa hidden>Angebot für meinen Fuhrpark anfordern</a>
+               class="btn btn-secondary btn-large" data-cta-autonomo>Mit 10 kostenlosen Transporten starten</a>
+            <a href="/de/presupuesto" class="btn btn-secondary btn-large" data-cta-empresa hidden>Angebot für meinen Fuhrpark anfordern</a>
             <button type="button" class="btn btn-secondary" data-reiniciar>Von vorn beginnen</button>
           </div>
 
@@ -1399,7 +1408,7 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260923a"></script>
+  <script src="/script.js?v=20260923b"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

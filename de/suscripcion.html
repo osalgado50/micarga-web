@@ -39,8 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=20260923a">
-  <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
+  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <link rel="stylesheet" href="/suscripcion.css?v=20260923a">
 </head>
 <body>
 
@@ -268,19 +268,45 @@
           den Tarif jederzeit in Ihrem Konto wechseln.
         </p>
 
-        <div class="sus-planes">
-          <a class="sus-plan sus-plan-destacado" id="plan-anual" href="#">
-            <span class="sus-plan-etiqueta">Sie sparen 3 Monate</span>
-            <span class="sus-plan-precio">90 €<small> / Jahr</small></span>
-            <span class="sus-plan-nota">+ MwSt. · berechnet werden 108,90 €</span>
-            <span class="sus-plan-cta">Jahrestarif abschließen</span>
-          </a>
-          <a class="sus-plan" id="plan-mensual" href="#">
-            <span class="sus-plan-precio">10 €<small> / Monat</small></span>
-            <span class="sus-plan-nota">+ MwSt. · berechnet werden 12,10 €</span>
-            <span class="sus-plan-cta">Monatstarif abschließen</span>
-          </a>
+        <!-- Cuántas licencias. Llega puesto desde la calculadora de la
+             portada (?licencias=8&crm=1) y aquí solo se confirma.
+
+             ⚠️ LOS PRECIOS VIVEN EN ESTOS `data-`, no en suscripcion.js: si
+             suben, se cambian en un sitio y se ven leyendo la página. Y el
+             texto visible va SIEMPRE en el HTML, que es lo que traduce el
+             generador; de JavaScript salen solo las cifras. -->
+        <div class="sus-cantidad" data-precios
+             data-lic-mes="10" data-lic-ano="90"
+             data-crm-mes="49" data-crm-ano="490" data-iva="21">
+          <label class="sus-cantidad-rotulo" for="sus-conductores">Für wie viele Fahrer?</label>
+          <div class="sus-contador">
+            <button type="button" class="sus-contador-boton" data-menos aria-label="Einen Fahrer entfernen">−</button>
+            <input id="sus-conductores" type="number" inputmode="numeric" min="1" max="100" value="1">
+            <button type="button" class="sus-contador-boton" data-mas aria-label="Einen Fahrer hinzufügen">+</button>
+          </div>
+          <label class="sus-crm">
+            <input type="checkbox" id="sus-crm">
+            <span>Das Flotten-CRM hinzufügen, um das Büro vom Rechner aus zu führen</span>
+          </label>
         </div>
+
+        <div class="sus-planes">
+          <button type="button" class="sus-plan sus-plan-destacado" id="plan-anual">
+            <span class="sus-plan-etiqueta">Sie sparen 3 Monate</span>
+            <span class="sus-plan-precio"><span data-total-ano>90</span> €<small> / Jahr</small></span>
+            <span class="sus-plan-nota">+ MwSt. · abgebucht werden <span data-iva-ano>108,90</span> €</span>
+            <span class="sus-plan-cta">Jahrestarif abschließen</span>
+          </button>
+          <button type="button" class="sus-plan" id="plan-mensual">
+            <span class="sus-plan-precio"><span data-total-mes>10</span> €<small> / Monat</small></span>
+            <span class="sus-plan-nota">+ MwSt. · abgebucht werden <span data-iva-mes>12,10</span> €</span>
+            <span class="sus-plan-cta">Monatstarif abschließen</span>
+          </button>
+        </div>
+
+        <p class="sus-ayuda" data-desglose hidden>
+          <span data-n-licencias>1</span> Lizenz(en) × der Preis für eine, zuzüglich CRM, wenn Sie es angehakt haben.
+        </p>
 
         <p class="sus-ayuda">
           Preise <strong>ohne MwSt.</strong>: An der Kasse kommen 21 % hinzu,
@@ -423,7 +449,7 @@
     </div>
   </footer>
 
-  <script type="module" src="/de/suscripcion.js?v=20260911h"></script>
+  <script type="module" src="/de/suscripcion.js?v=20260923a"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

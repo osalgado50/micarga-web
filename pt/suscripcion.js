@@ -694,10 +694,158 @@ const pedirEnlaces = async () => {
     return;
   }
 
-  $('plan-mensual').href = data.enlaceMensual;
-  $('plan-anual').href = data.enlaceAnual;
+  // Los enlaces fijos ya no se usan para contratar —solo saben vender UNA
+  // licencia— pero se siguen pidiendo porque es esta llamada la que dice si
+  // la persona ya paga (409) o le faltan datos fiscales (412). Lo que se
+  // pinta viene de `crear-sesion-pago`.
+  prepararCantidad();
   mostrarPaso('paso-planes');
 };
+
+// ---------------------------------------------------------------------------
+// Cuántas licencias, cuánto cuesta y a pagar
+// ---------------------------------------------------------------------------
+//
+// ⚠️ AQUÍ NO SE ESCRIBE NI UNA PALABRA VISIBLE, SOLO CIFRAS. El texto vive en
+// suscripcion.html, que es lo que traduce el generador de idiomas; una frase
+// montada desde aquí saldría en castellano en los ocho.
+//
+// Y los precios salen de los `data-` del HTML, no de constantes de este
+// archivo: si mañana suben, se cambian en un sitio.
+
+const MAXIMO_LICENCIAS = 100;
+
+/** Las cifras, con el separador decimal del idioma en el que esté la página. */
+const dinero = (n) =>
+  new Intl.NumberFormat(document.documentElement.lang || 'es', {
+    minimumFractionDigits: n % 1 ? 2 : 0,
+    maximumFractionDigits: 2,
+  }).format(n);
+
+const leerCantidad = () => {
+  const campo = $('sus-conductores');
+  let n = parseInt(campo.value, 10);
+  if (!Number.isInteger(n) || n < 1) n = 1;
+  if (n > MAXIMO_LICENCIAS) n = MAXIMO_LICENCIAS;
+  return n;
+};
+
+const pintarPrecios = () => {
+  const caja = document.querySelector('[data-precios]');
+  if (!caja) return;
+  const p = caja.dataset;
+  const n = leerCantidad();
+  const crm = $('sus-crm').checked;
+  const iva = 1 + Number(p.iva) / 100;
+
+  const mes = n * Number(p.licMes) + (crm ? Number(p.crmMes) : 0);
+  const ano = n * Number(p.licAno) + (crm ? Number(p.crmAno) : 0);
+
+  const pon = (sel, valor) => {
+    const e = document.querySelector(sel);
+    if (e) e.textContent = valor;
+  };
+  pon('[data-total-mes]', dinero(mes));
+  pon('[data-total-ano]', dinero(ano));
+  // El IVA se redondea a céntimos ANTES de enseñarlo: es lo que va a cobrar
+  // Stripe, y una diferencia de un céntimo entre lo que pone aquí y lo que
+  // sale en la pasarela es una llamada a soporte.
+  pon('[data-iva-mes]', dinero(Math.round(mes * iva * 100) / 100));
+  pon('[data-iva-ano]', dinero(Math.round(ano * iva * 100) / 100));
+  pon('[data-n-licencias]', String(n));
+
+  const desglose = document.querySelector('[data-desglose]');
+  if (desglose) desglose.hidden = n === 1 && !crm;
+};
+
+/**
+ * Deja la pantalla con lo que ya contestó en la calculadora de la portada.
+ *
+ * Los valores llegan por la interrogación de la URL y se validan igual que si
+ * viniesen de un desconocido: acaban en un cobro recurrente. `licencias` solo
+ * se acepta como un entero de 1 a 100.
+ */
+const prepararCantidad = () => {
+  const params = new URLSearchParams(location.search);
+  const pedidas = params.get('licencias');
+  if (/^\d{1,3}$/.test(pedidas || '')) {
+    const n = Number(pedidas);
+    if (n >= 1 && n <= MAXIMO_LICENCIAS) $('sus-conductores').value = String(n);
+  }
+  if (params.get('crm') === '1') $('sus-crm').checked = true;
+  pintarPrecios();
+};
+
+/** Pide la sesión de pago y manda a Stripe. */
+const contratar = async (periodo, boton) => {
+  limpiarAviso();
+  boton.disabled = true;
+
+  const { data, error } = await supabase.functions.invoke('crear-sesion-pago', {
+    body: { periodo, licencias: leerCantidad(), crm: $('sus-crm').checked },
+  });
+
+  if (error) {
+    boton.disabled = false;
+    const status = estadoDe(error);
+    const cuerpo = await cuerpoDe(error);
+
+    if (status === 409 && cuerpo?.codigo === 'ya-suscrita') {
+      await prepararYaSuscrito();
+      mostrarPaso('paso-ya-suscrito');
+      return;
+    }
+    if (status === 401) {
+      avisar('Se ha cerrado la sesión. Vuelve a entrar con tu correo.');
+      mostrarPaso('paso-correo');
+      return;
+    }
+    // El resto —demasiadas licencias, varias empresas, precios mal
+    // configurados— trae un mensaje pensado para leerse, así que se enseña
+    // tal cual en vez de taparlo con uno genérico.
+    avisar(cuerpo?.error || 'Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es o por WhatsApp al +34 744 716 449 y lo activamos nosotros.');
+    return;
+  }
+
+  if (!enlaceUsable(data?.url)) {
+    boton.disabled = false;
+    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es y lo activamos nosotros.');
+    return;
+  }
+
+  // El botón se queda apagado a propósito mientras salta a Stripe: un segundo
+  // clic abriría una segunda sesión de pago.
+  location.href = data.url;
+};
+
+// Los mandos del contador y los dos botones de contratar.
+//
+// Se atan al cargar y no al enseñar el paso: el paso se enseña y se esconde
+// varias veces —al volver de facturación, por ejemplo— y atarlos allí dejaría
+// un oyente nuevo cada vez, así que un solo clic acabaría pidiendo tres
+// sesiones de pago.
+const cantidad = $('sus-conductores');
+if (cantidad) {
+  const mover = (paso) => {
+    cantidad.value = String(Math.min(MAXIMO_LICENCIAS, Math.max(1, leerCantidad() + paso)));
+    pintarPrecios();
+  };
+  document.querySelector('[data-menos]')?.addEventListener('click', () => mover(-1));
+  document.querySelector('[data-mas]')?.addEventListener('click', () => mover(1));
+  // `input` y no `change`: el precio tiene que moverse mientras se teclea, no
+  // al salir del campo.
+  cantidad.addEventListener('input', pintarPrecios);
+  // Al salir se corrige lo que se haya escrito —un 0, un 500, vacío— para que
+  // lo que se ve en pantalla sea lo que se va a cobrar.
+  cantidad.addEventListener('blur', () => {
+    cantidad.value = String(leerCantidad());
+    pintarPrecios();
+  });
+  $('sus-crm')?.addEventListener('change', pintarPrecios);
+
+  $('plan-anual')?.addEventListener('click', (e) => contratar('anual', e.currentTarget));
+  $('plan-mensual')?.addEventListener('click', (e) => contratar('mensual', e.currentTarget));
+}
 
 // ---------------------------------------------------------------------------
 // Arranque: si ya hay sesión en este navegador, no se vuelve a pedir el código

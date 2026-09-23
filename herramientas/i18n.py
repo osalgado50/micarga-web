@@ -98,6 +98,17 @@ ATRIBUTOS = ("alt", "title", "placeholder", "aria-label")
 METAS_TRADUCIBLES = ("description", "og:title", "og:description", "twitter:title",
                      "twitter:description", "og:image:alt")
 
+# Trozos que existen SOLO en la versión castellana y desaparecen en las otras.
+#
+# Hacen falta por las tarjetas del blog: una entrada que solo existe en
+# castellano no puede aparecer en el índice alemán. Si apareciera traducida,
+# quien pulsa un titular en alemán aterriza en un artículo en castellano; y si
+# apareciera sin traducir, el índice alemán tendría tarjetas en castellano.
+# Las dos cosas son peores que no enseñarla: en alemán ese artículo no existe.
+#
+# `publicar_blog.py` envuelve así cada tarjeta que publica.
+SOLO_ES = re.compile(r"[ \t]*<!-- SOLO-ES:inicio -->.*?<!-- SOLO-ES:fin -->\n?", re.S)
+
 # Zonas del HTML donde no se traduce nada.
 INTOCABLES = re.compile(r"<(script|style)\b.*?</\1>", re.I | re.S)
 COMENTARIOS = re.compile(r"<!--.*?-->", re.S)
@@ -175,7 +186,7 @@ def _devolver_intocables(texto: str, guardados) -> str:
 
 def cadenas(ruta: Path) -> list:
     """Todas las frases traducibles de una página, en orden de aparición."""
-    crudo = ruta.read_text(encoding="utf-8")
+    crudo = SOLO_ES.sub("", ruta.read_text(encoding="utf-8"))
     cuerpo, _ = _trozos_intocables(crudo)
     encontradas = []
 
@@ -436,6 +447,10 @@ def _enlaces_con_idioma(texto: str, idioma: str) -> str:
 
 def traducir_html(crudo: str, dicc: dict, faltan: set) -> str:
     """Cambia las frases del castellano por las del diccionario."""
+    # Primero fuera lo que solo existe en castellano: las tarjetas de las
+    # entradas de blog sin traducir. No se traducen ni se dejan a medias, se
+    # quitan.
+    crudo = SOLO_ES.sub("", crudo)
     cuerpo, guardados = _trozos_intocables(crudo)
 
     def cambia(t: str) -> str:

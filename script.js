@@ -253,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const entrada = calc.querySelector('[data-conductores]');
     const ctaAutonomo = calc.querySelector('[data-cta-autonomo]');
     const ctaEmpresa = calc.querySelector('[data-cta-empresa]');
+    const ctaContratar = calc.querySelector('[data-cta-contratar]');
     const notaEmpresa = calc.querySelector('[data-nota-empresa]');
 
     let perfil = null;
@@ -309,6 +310,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ctaEmpresa) {
         const destino = ctaEmpresa.getAttribute('href').split('?')[0];
         ctaEmpresa.setAttribute('href', `${destino}?cuentas=${n}`);
+      }
+
+      // Y el de contratar se lleva el número y si quiere CRM, para que la
+      // página de contratación no vuelva a preguntar lo que ya se ha
+      // contestado aquí. Mismo cuidado con el camino: lo reescribe el
+      // generador de idiomas.
+      if (ctaContratar) {
+        const destino = ctaContratar.getAttribute('href').split('?')[0];
+        ctaContratar.setAttribute('href',
+          `${destino}?licencias=${n}${esEmpresa ? '&crm=1' : ''}`);
       }
 
       filaCrm.hidden = !esEmpresa;
