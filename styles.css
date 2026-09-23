@@ -1584,9 +1584,56 @@ body > section:not(.hero-section) > .container > h2 {
   margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 0.9rem;
-  opacity: 0.75;
 }
+
+/* ── Sanciones y Baremo LOTT 2026 (sección «La Ley») ───────── */
+.sanciones-box {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 16px;
+  background: rgba(239, 68, 68, 0.05);
+}
+.sanciones-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+  color: #ef4444;
+}
+.sanciones-box h3 i { color: #ef4444; margin-right: 0.5rem; }
+.sanciones-intro { margin-bottom: 1.25rem; opacity: 0.9; }
+.sanciones-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.85rem 1.75rem;
+}
+.sanciones-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.sanciones-list li::before {
+  content: "\f071"; /* fa-triangle-exclamation */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #ef4444;
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+}
+.sanciones-nota {
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(239, 68, 68, 0.25);
+  opacity: 0.9;
+}
+.sanciones-nota strong { color: #ef4444; }
+
 
 /* ── Cartel «PDF ilimitados» (gancho de venta, va antes de las tarifas) ──────
    Las secciones de esta web no tienen padding vertical propio (el aire lo dan

@@ -60,6 +60,38 @@ PAGINAS = [
     f"blog/{p.name}" for p in (RAIZ / "blog").glob("*.html") if p.name != "index.html"
 )
 
+# Las entradas del paquete editorial de septiembre de 2026: 34 artículos que
+# SOLO existen en castellano, y es deliberado.
+#
+# El paquete decía traerlos en diez idiomas y trae 34 ficheros en castellano y
+# nada más (su propio manifest.json: `generated_version_count: 34` de 340).
+# Traducirlos son ~2.450 frases por ocho idiomas: casi 20.000 cadenas. Y este
+# generador CAE AL CASTELLANO en cada frase que falte, así que publicarlos a
+# medias pondría 34 artículos en castellano bajo `hreflang="pl"`, que para
+# Google es contenido duplicado a gran escala sobre TODO el dominio.
+#
+# Un artículo que solo existe en castellano no es contenido duplicado:
+# simplemente no existe en polaco. Así que estas páginas:
+#   · no se generan en los otros ocho idiomas,
+#   · no piden traducción (no salen en `comprobar` ni en `extraer`),
+#   · van al sitemap SOLO con su URL castellana, sin `hreflang` a hermanas
+#     que no existen.
+#
+# La lista se lee de la cola del paquete para que no haya que mantener dos
+# sitios. Si algún día se traduce uno, se saca de la cola y entra en el
+# circuito normal.
+def _solo_castellano() -> set:
+    cola = RAIZ / "borradores-blog" / "cola.json"
+    if not cola.exists():
+        return set()
+    try:
+        return {f"blog/{e['slug']}.html" for e in json.loads(cola.read_text(encoding="utf-8"))}
+    except (ValueError, KeyError):
+        return set()
+
+
+SOLO_CASTELLANO = _solo_castellano()
+
 # Atributos cuyo valor lee una persona. `content` solo en las metaetiquetas que
 # describen la página; el resto de `content` (theme-color, og:type…) son datos.
 ATRIBUTOS = ("alt", "title", "placeholder", "aria-label")
@@ -182,6 +214,8 @@ def cadenas(ruta: Path) -> list:
 def todas_las_cadenas() -> list:
     vistas, todas = set(), []
     for pagina in PAGINAS:
+        if pagina in SOLO_CASTELLANO:
+            continue
         for t in cadenas(RAIZ / pagina):
             if t not in vistas:
                 vistas.add(t)
@@ -598,6 +632,13 @@ def cmd_generar():
     for pagina in PAGINAS:
         ruta = RAIZ / pagina
         s = ruta.read_text(encoding="utf-8")
+        if pagina in SOLO_CASTELLANO:
+            # Ni una alternativa: esta página no tiene hermanas. Lo que sí se
+            # refresca es el selector, que tiene que seguir llevando al
+            # visitante a la portada de su idioma aunque el artículo no exista.
+            s = _entre_marcas(s, "IDIOMAS", bloque_idiomas("index.html", "es"))
+            ruta.write_text(s, encoding="utf-8")
+            continue
         s = _entre_marcas(s, "ALTERNATIVAS", bloque_alternativas(pagina))
         s = _entre_marcas(s, "IDIOMAS", bloque_idiomas(pagina, "es"))
         ruta.write_text(s, encoding="utf-8")
@@ -618,6 +659,8 @@ def cmd_generar():
                 encoding="utf-8",
             )
         for pagina in PAGINAS:
+            if pagina in SOLO_CASTELLANO:
+                continue
             crudo = (RAIZ / pagina).read_text(encoding="utf-8")
             s = traducir_html(crudo, dicc, faltan)
             s = _rutas_absolutas(s)
@@ -642,7 +685,8 @@ def cmd_generar():
             destino.parent.mkdir(parents=True, exist_ok=True)
             destino.write_text(s, encoding="utf-8")
         faltan_por_idioma[idioma] = faltan
-        print(f"{idioma}: {len(PAGINAS)} páginas escritas, {len(faltan)} frases sin traducir")
+        escritas = len(PAGINAS) - len(SOLO_CASTELLANO & set(PAGINAS))
+        print(f"{idioma}: {escritas} páginas escritas, {len(faltan)} frases sin traducir")
     return faltan_por_idioma
 
 
@@ -675,6 +719,18 @@ def cmd_sitemap():
             continue
         prioridad = PRIORIDAD.get(pagina, PRIORIDAD_LEGAL if pagina in LEGALES else "0.6")
         frecuencia = "weekly" if pagina in ("index.html", "blog/index.html") else "monthly"
+        if pagina in SOLO_CASTELLANO:
+            # Una sola URL y ninguna alternativa. Declarar hermanas que no
+            # existen es pedirle a Google que rastree nueve 404.
+            filas.append(
+                f"  <url>\n"
+                f"    <loc>{url_de(pagina, 'es')}</loc>\n"
+                f"    <lastmod>{hoy}</lastmod>\n"
+                f"    <changefreq>monthly</changefreq>\n"
+                f"    <priority>{prioridad}</priority>\n"
+                f"  </url>"
+            )
+            continue
         alternativas = "\n".join(
             f'    <xhtml:link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}"/>'
             for i in TODOS_LOS_IDIOMAS

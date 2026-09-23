@@ -11,3 +11,7 @@ traducciones/*.pendiente.json
 # Caché de Python de las herramientas de i18n
 __pycache__/
 *.pyc
+
+# La tipografía de marca, descargada de Google Fonts para dibujar las portadas
+# del blog. No se versiona: se vuelve a bajar sola si hace falta.
+herramientas/Outfit-Bold.ttf
