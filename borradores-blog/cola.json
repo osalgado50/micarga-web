@@ -6,7 +6,8 @@
     "grupo": "Historia del transporte",
     "resumen": "La historia del transporte en España es la historia de cómo se han movido las mercancías, las personas y la economía.",
     "fecha": "2026-09-23",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-09-23"
   },
   {
     "orden": 2,
