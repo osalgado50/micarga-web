@@ -39,6 +39,30 @@ def correr(*orden: str) -> str:
     return r.stdout
 
 
+def idiomas_pendientes(ruta_articulo: Path):
+    """
+    Qué idiomas le faltan a un artículo, con cuántas frases cada uno.
+
+    Se pregunta a `i18n.py`, que es quien sabe de esto, en vez de repetir aquí
+    la lógica: duplicarla significaría que el día que cambie una, la otra
+    seguiría diciendo que todo está bien.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "i18n", RAIZ / "herramientas" / "i18n.py")
+    i18n = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(i18n)
+
+    frases = i18n.cadenas(ruta_articulo)
+    pendientes = []
+    for idioma in i18n.IDIOMAS_PUBLICADOS:
+        dicc = i18n.diccionario(idioma)
+        n = sum(1 for f in frases if not dicc.get(f))
+        if n:
+            pendientes.append((idioma, n))
+    return pendientes
+
+
 def siguiente(cola, forzar: bool):
     """La primera sin publicar cuya fecha ya ha llegado."""
     hoy = dt.date.today().isoformat()
@@ -125,6 +149,24 @@ def main():
     if not borrador.exists():
         raise SystemExit(f"Falta el borrador {borrador}. ¿Se ha regenerado la cola sin los ficheros?")
 
+    # 🚨 NO SE PUBLICA NADA SIN TRADUCIR. Regla del propietario, 23-09-2026:
+    # primero los ocho idiomas, y cuando está listo, se publica.
+    #
+    # El artículo sale a la vez en los nueve idiomas o no sale. Publicarlo solo
+    # en castellano y traducirlo después significa que durante días Google
+    # indexa una página que luego cambia de vecindario —le aparecen ocho
+    # hermanas de golpe— y que quien entra desde Alemania ve el blog sin esa
+    # entrada y vuelve más tarde a encontrársela. Es ruido evitable.
+    faltan = idiomas_pendientes(borrador)
+    if faltan:
+        detalle = ", ".join(f"{i} ({n})" for i, n in faltan)
+        raise SystemExit(
+            f"NO SE PUBLICA: «{entrada['titulo']}» todavía no está traducido.\n"
+            f"  Frases pendientes por idioma: {detalle}\n"
+            f"  Se traduce primero y se publica después. Para ver qué falta:\n"
+            f"    python3 herramientas/i18n.py pendientes blog/{entrada['slug']}.html"
+        )
+
     destino = RAIZ / "blog" / f"{entrada['slug']}.html"
     destino.write_text(borrador.read_text(encoding="utf-8"), encoding="utf-8")
     borrador.unlink()
@@ -146,7 +188,7 @@ def main():
            f"Entrada {entrada['orden']} de {len(cola)} del paquete editorial. "
            f"Quedan {quedan} en cola.\n"
            f"Publicada por la rutina de herramientas/publicar_blog.py.\n\n"
-           f"Solo en castellano, a propósito: ver SOLO_CASTELLANO en i18n.py.\n\n"
+           f"Traducida a los ocho idiomas antes de publicarla.\n\n"
            f"Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>")
     correr("git", "push")
 

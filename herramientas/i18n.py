@@ -105,8 +105,19 @@ def frases_del_articulo(pagina: str) -> set:
 
 
 def articulo_listo(pagina: str, dicc: dict) -> bool:
-    """¿Está este artículo entero en este idioma?"""
-    return all(dicc.get(f) for f in frases_del_articulo(pagina))
+    """
+    ¿Está este artículo entero en este idioma?
+
+    🚨 UN ARTÍCULO SIN FRASES NO ESTÁ LISTO, ESTÁ AUSENTE. Sin este primer
+    `if`, `all()` sobre un conjunto vacío devuelve CIERTO, y un artículo que
+    todavía está en borradores —cuyo fichero no existe en `blog/`— pasaba por
+    traducido a los ocho idiomas. Pillado el 23-09-2026 generando 272 portadas
+    de artículos sin una sola frase traducida.
+    """
+    frases = frases_del_articulo(pagina)
+    if not frases:
+        return False
+    return all(dicc.get(f) for f in frases)
 
 # Atributos cuyo valor lee una persona. `content` solo en las metaetiquetas que
 # describen la página; el resto de `content` (theme-color, og:type…) son datos.
@@ -745,6 +756,11 @@ def cmd_generar():
             crudo = (RAIZ / pagina).read_text(encoding="utf-8")
             s = traducir_html(crudo, dicc, faltan)
             s = _rutas_absolutas(s)
+            # La portada del blog lleva el titular INCRUSTADO, así que cada
+            # idioma tiene la suya. Sin esto, el artículo polaco saldría con
+            # una imagen que dice el título en castellano.
+            s = re.sub(r'/images/blog/([a-z0-9-]+\.webp)',
+                       rf'/images/blog/{idioma}/\1', s)
             s = _enlaces_con_idioma(s, idioma)
             # Los scripts traducidos viven junto a las páginas traducidas.
             for nombre in SCRIPTS:

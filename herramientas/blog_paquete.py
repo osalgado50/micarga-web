@@ -165,6 +165,52 @@ def a_html(cuerpo: str):
     return "\n".join(partes), resumen, llamadas
 
 
+def portadas_traducidas():
+    """
+    Una portada por idioma, con el titular y el grupo YA TRADUCIDOS.
+
+    🚨 El titular va incrustado en la imagen, así que una sola portada para los
+    nueve idiomas significa un artículo en polaco con el título en castellano
+    dentro de la foto. Se ve a la primera y es de las cosas que hacen dudar de
+    todo lo demás de la página.
+
+    Se generan solo las de los idiomas en los que el artículo está entero: si
+    no está traducido, esa página no existe y la imagen no haría falta.
+    """
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("i18n", RAIZ / "herramientas" / "i18n.py")
+    i18n = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(i18n)
+
+    if not COLA.exists():
+        print("No hay cola.")
+        return
+
+    por_slug = {s: (g, f) for _, s, g, f in ARTICULOS}
+    hechas = 0
+    for e in json.loads(COLA.read_text(encoding="utf-8")):
+        slug = e["slug"]
+        grupo, foto = por_slug[slug]
+        pagina = f"blog/{slug}.html"
+        origen = RAIZ / pagina
+        if not origen.exists():
+            origen = BORRADORES / f"{slug}.html"
+        if not origen.exists():
+            continue
+
+        for idioma in i18n.IDIOMAS_PUBLICADOS:
+            dicc = i18n.diccionario(idioma)
+            if not i18n.articulo_listo(pagina, dicc):
+                continue
+            destino = PORTADAS / idioma / f"{slug}.webp"
+            if destino.exists():
+                continue
+            portada(destino, dicc.get(e["titulo"], e["titulo"]),
+                    dicc.get(grupo, grupo), RAIZ / "images" / foto)
+            hechas += 1
+    print(f"{hechas} portadas traducidas")
+
+
 def portada(ruta_salida: Path, titulo: str, grupo: str, foto: Path):
     """
     La imagen de portada: la foto de fondo oscurecida y el titular encima, en
@@ -378,5 +424,7 @@ if __name__ == "__main__":
         preparar()
     elif orden == "cola":
         ver_cola()
+    elif orden == "portadas":
+        portadas_traducidas()
     else:
         print(__doc__)
