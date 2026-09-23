@@ -110,39 +110,32 @@ def limpiar(texto: str) -> str:
 # Se aplica al fichero ENTERO antes de partirlo en líneas, que es donde se
 # puede ver el salto; la otra versión de `limpiar` trabaja línea a línea y por
 # eso no lo pillaba. Hay 15 casos repartidos por nueve de los 34 artículos.
-# El PDF parte una palabra al final del renglón y el extractor deja el trozo de
-# atrás en su propio bloque, a veces marcado como otro titular: vio
-# «## …carga autopropul-» y luego «## sado», y quedaron dos titulares, uno con
-# media palabra. Son 15 casos en nueve de los 34 artículos.
+# El PDF parte un titular al final del renglón y el extractor lo deja como DOS
+# titulares, el segundo con el final de la frase. A veces con un guion —«…carga
+# autopropul-» + «sado»— y a veces sin él —«…desde el 1 de julio» + «de 2026»—.
+# Son 22 casos repartidos por los 34 artículos.
 #
-# 🚨 Y UNO DE LOS 15 NO ES UN CORTE DE PALABRA.
-# En «título de transportista» el PDF traía una TABLA y el extractor le mezcló
-# las columnas: «…conducir profesionalmente determina-» seguido de «del
-# conductor dos vehículos». Unirlo da «determinadel», que no es nada.
+# La señal que los delata es la misma en los dos: un titular en castellano NO
+# empieza en minúscula. Cuando el segundo empieza así, es la cola del primero.
+# Con eso se arreglan los 22 de una vez, y el guion lo remata después
+# `limpiar()`, que ya sabía deshacer «autopropul- sado» dentro de una línea.
 #
-# Va como EXCEPCIÓN EXPRESA y no como regla automática, y es deliberado. Se
-# probaron dos reglas y las dos se equivocaron en el sentido contrario: una
-# lista de palabras funcionales frenaba «vehícu-» + «lo», y exigir que la
-# continuación ocupase su bloque entero frenaba «proce-» + «so sigue». Los 15
-# casos están mirados uno a uno; son quince, no quince mil, y una lista que se
-# puede leer vale más que una regla que se equivoca sola.
-CORTE_DE_RENGLON = re.compile(r"([a-záéíóúüñ])-\n+(?:#{1,4} )?([a-záéíóúüñ]\w*)")
-
-# (lo que va delante del guion, lo que viene detrás) que NO hay que unir.
-NO_UNIR = {("determina", "del")}
+# 🚨 Lo que esta regla NO toca, y es importante que no lo toque: en «título de
+# transportista» el PDF traía una TABLA y el extractor le mezcló las columnas
+# —«…profesionalmente determina-» seguido de «del conductor dos vehículos»—.
+# Eso no son dos titulares, es texto corrido, así que se queda como está.
+# Unirlo daría «determinadel», que no es nada.
+TITULAR_PARTIDO = re.compile(
+    r"^(#{2,4}) (.+)\n\n\1 ([a-záéíóúüñ].*)$", re.M)
 
 
-def unir_renglones(texto: str, aviso=None) -> str:
-    def decidir(m):
-        ini = texto[max(0, m.start() - 12):m.start() + 1]
-        cola = m.group(2)
-        for antes, despues in NO_UNIR:
-            if ini.endswith(antes) and cola == despues:
-                if aviso is not None:
-                    aviso.append(f"…{antes}- + «{cola}» (tabla aplastada, sin unir)")
-                return m.group(0)
-        return m.group(1) + cola
-    return CORTE_DE_RENGLON.sub(decidir, texto)
+def unir_titulares(texto: str) -> str:
+    # En bucle: un titular puede venir partido en tres trozos.
+    previo = None
+    while previo != texto:
+        previo = texto
+        texto = TITULAR_PARTIDO.sub(r"\1 \2 \3", texto)
+    return texto
 
 
 def frontmatter(crudo: str):
@@ -173,8 +166,7 @@ def a_html(cuerpo: str):
             partes.append("      <ul>\n" + "\n".join(lista) + "\n      </ul>")
             lista.clear()
 
-    avisos = []
-    for bruto in unir_renglones(cuerpo, avisos).split("\n"):
+    for bruto in unir_titulares(cuerpo).split("\n"):
         linea = limpiar(bruto.strip())
         if not linea:
             cerrar_lista()
@@ -205,8 +197,6 @@ def a_html(cuerpo: str):
         partes.append(f"      <p>{html.escape(linea)}</p>")
 
     cerrar_lista()
-    if avisos:
-        print(f"  ⚠️  posible tabla aplastada: {', '.join(avisos)}")
     return "\n".join(partes), resumen, llamadas
 
 
