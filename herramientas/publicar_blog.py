@@ -176,8 +176,13 @@ def main():
     entrada["publicado_el"] = dt.date.today().isoformat()
     COLA.write_text(json.dumps(cola, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # El índice del blog SÍ se traduce —es una página del sitio— así que hay
-    # que regenerar. La entrada nueva no: está en SOLO_CASTELLANO.
+    # Las portadas de los otros ocho idiomas, ANTES de generar: el titular va
+    # incrustado en la imagen y sin esto el artículo saldría a la web con la
+    # portada en castellano en los nueve idiomas.
+    correr("python3", "herramientas/blog_paquete.py", "portadas")
+
+    # El índice del blog se traduce —es una página del sitio— así que hay que
+    # regenerar. El artículo se escribirá en cada idioma donde esté completo.
     correr("python3", "herramientas/i18n.py", "generar")
     correr("python3", "herramientas/i18n.py", "sitemap")
 

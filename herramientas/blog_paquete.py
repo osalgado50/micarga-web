@@ -243,9 +243,15 @@ def portadas_traducidas():
         if not origen.exists():
             continue
 
+        # La comprobación se hace sobre el fichero que EXISTE —el borrador o el
+        # publicado—, no sobre la ruta de `blog/`. `articulo_listo()` mira ahí
+        # y un artículo todavía en borradores le sale «no listo», así que sin
+        # esto las portadas no se preparaban hasta después de publicar y el
+        # artículo salía a la web con la portada en castellano en los nueve.
+        frases = i18n.cadenas(origen)
         for idioma in i18n.IDIOMAS_PUBLICADOS:
             dicc = i18n.diccionario(idioma)
-            if not i18n.articulo_listo(pagina, dicc):
+            if not frases or not all(dicc.get(f) for f in frases):
                 continue
             destino = PORTADAS / idioma / f"{slug}.webp"
             if destino.exists():
