@@ -103,6 +103,48 @@ def limpiar(texto: str) -> str:
     return re.sub(r"(\w)- (\w)", r"\1\2", texto)
 
 
+# El mismo corte, pero CON SALTO DE LÍNEA en medio: el PDF parte la palabra al
+# final del renglón y el extractor deja «autopropul-\nsado». En un titular eso
+# se convierte en dos titulares, uno de ellos con media palabra.
+#
+# Se aplica al fichero ENTERO antes de partirlo en líneas, que es donde se
+# puede ver el salto; la otra versión de `limpiar` trabaja línea a línea y por
+# eso no lo pillaba. Hay 15 casos repartidos por nueve de los 34 artículos.
+# El PDF parte una palabra al final del renglón y el extractor deja el trozo de
+# atrás en su propio bloque, a veces marcado como otro titular: vio
+# «## …carga autopropul-» y luego «## sado», y quedaron dos titulares, uno con
+# media palabra. Son 15 casos en nueve de los 34 artículos.
+#
+# 🚨 Y UNO DE LOS 15 NO ES UN CORTE DE PALABRA.
+# En «título de transportista» el PDF traía una TABLA y el extractor le mezcló
+# las columnas: «…conducir profesionalmente determina-» seguido de «del
+# conductor dos vehículos». Unirlo da «determinadel», que no es nada.
+#
+# Va como EXCEPCIÓN EXPRESA y no como regla automática, y es deliberado. Se
+# probaron dos reglas y las dos se equivocaron en el sentido contrario: una
+# lista de palabras funcionales frenaba «vehícu-» + «lo», y exigir que la
+# continuación ocupase su bloque entero frenaba «proce-» + «so sigue». Los 15
+# casos están mirados uno a uno; son quince, no quince mil, y una lista que se
+# puede leer vale más que una regla que se equivoca sola.
+CORTE_DE_RENGLON = re.compile(r"([a-záéíóúüñ])-\n+(?:#{1,4} )?([a-záéíóúüñ]\w*)")
+
+# (lo que va delante del guion, lo que viene detrás) que NO hay que unir.
+NO_UNIR = {("determina", "del")}
+
+
+def unir_renglones(texto: str, aviso=None) -> str:
+    def decidir(m):
+        ini = texto[max(0, m.start() - 12):m.start() + 1]
+        cola = m.group(2)
+        for antes, despues in NO_UNIR:
+            if ini.endswith(antes) and cola == despues:
+                if aviso is not None:
+                    aviso.append(f"…{antes}- + «{cola}» (tabla aplastada, sin unir)")
+                return m.group(0)
+        return m.group(1) + cola
+    return CORTE_DE_RENGLON.sub(decidir, texto)
+
+
 def frontmatter(crudo: str):
     if not crudo.startswith("---"):
         return {}, crudo
@@ -131,7 +173,8 @@ def a_html(cuerpo: str):
             partes.append("      <ul>\n" + "\n".join(lista) + "\n      </ul>")
             lista.clear()
 
-    for bruto in cuerpo.split("\n"):
+    avisos = []
+    for bruto in unir_renglones(cuerpo, avisos).split("\n"):
         linea = limpiar(bruto.strip())
         if not linea:
             cerrar_lista()
@@ -162,6 +205,8 @@ def a_html(cuerpo: str):
         partes.append(f"      <p>{html.escape(linea)}</p>")
 
     cerrar_lista()
+    if avisos:
+        print(f"  ⚠️  posible tabla aplastada: {', '.join(avisos)}")
     return "\n".join(partes), resumen, llamadas
 
 
