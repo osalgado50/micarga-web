@@ -120,6 +120,66 @@ def limpiar(texto: str) -> str:
 # Se aplica al fichero ENTERO antes de partirlo en líneas, que es donde se
 # puede ver el salto; la otra versión de `limpiar` trabaja línea a línea y por
 # eso no lo pillaba. Hay 15 casos repartidos por nueve de los 34 artículos.
+# 🚨 DOS TABLAS QUE EL EXTRACTOR DESTROZÓ, RECONSTRUIDAS A MANO.
+#
+# Cuando el PDF trae una tabla, el extractor lee las columnas entrelazadas y
+# saca frases imposibles: «Carta de porte na- Documenta el contrato de
+# transporte dentro de España. cional», o «Título de trans- Competencia
+# profesional Demuestra que puedes dirigir la actividad de portista
+# transporte». No hay regla que arregle eso: hay que mirar la tabla y
+# escribirla otra vez.
+#
+# Solo pasa en DOS de los 34 artículos —comprobado buscando el patrón en los
+# 34— así que van escritas aquí, en el repositorio, y no tocando el paquete:
+# el paquete es material de entrada y puede volver a llegar igual de roto.
+#
+# Se convierten en listas y no en tablas porque el blog no tiene estilos de
+# tabla y una tabla sin estilo en un móvil se sale de la pantalla.
+CORRECCIONES = {
+    "cmr-transporte-qu-es-la-carta-de-porte-internacional-y-cundo-es-obligatoria": [
+        (
+            "Documento Función principal\n\n"
+            "CMR o e-CMR Acredita el contrato de transporte internacional por carretera. "
+            "Documento Función principal\n\n"
+            "DeCA Cumple la obligación española de control administrativo del trans-\n\n"
+            "porte.\n\n"
+            "Carta de porte na- Documenta el contrato de transporte dentro de España. cional",
+
+            "- CMR o e-CMR: acredita el contrato de transporte internacional por carretera.\n"
+            "- DeCA: cumple la obligación española de control administrativo del transporte.\n"
+            "- Carta de porte nacional: documenta el contrato de transporte dentro de España.",
+        ),
+    ],
+    "ttulo-de-transportista-qu-es-cmo-obtenerlo-y-qu-te-habilita-a-hacer": [
+        (
+            "Documento Qué acredita Para qué sirve\n\n"
+            "Título de trans- Competencia profesional Demuestra que puedes dirigir la actividad de portista transporte\n\n"
+            "Tarjeta de Autorización administrativa Permite prestar servicios de transporte con vetransporte hículos autorizados\n\n"
+            "CAP Cualificación profesional Permite conducir profesionalmente determina-\n\n"
+            "del conductor dos vehículos\n\n"
+            "Permiso de Aptitud para conducir Te habilita para conducir una categoría concconducir reta",
+
+            "- Título de transportista: acredita competencia profesional. Demuestra que puedes dirigir la actividad de transporte.\n"
+            "- Tarjeta de transporte: es una autorización administrativa. Permite prestar servicios de transporte con vehículos autorizados.\n"
+            "- CAP del conductor: acredita cualificación profesional. Permite conducir profesionalmente determinados vehículos.\n"
+            "- Permiso de conducir: acredita aptitud para conducir. Te habilita para conducir una categoría concreta.",
+        ),
+    ],
+}
+
+
+def corregir(nombre: str, texto: str) -> str:
+    """Aplica las reconstrucciones de tablas de ese artículo, si las tiene."""
+    for antes, despues in CORRECCIONES.get(nombre, ()):
+        if antes not in texto:
+            raise SystemExit(
+                f"⚠️  La corrección de «{nombre}» ya no encaja con el original.\n"
+                f"   El paquete ha cambiado: hay que volver a mirar esa tabla."
+            )
+        texto = texto.replace(antes, despues)
+    return texto
+
+
 # El PDF parte un titular al final del renglón y el extractor lo deja como DOS
 # titulares, el segundo con el final de la frase. A veces con un guion —«…carga
 # autopropul-» + «sado»— y a veces sin él —«…desde el 1 de julio» + «de 2026»—.
@@ -420,7 +480,8 @@ def preparar():
     for i, (num, slug, grupo, foto) in enumerate(ARTICULOS):
         fila = calendario[num]
         origen = PAQUETE / "content" / "es" / f"{fila['slug']}.md"
-        cabecera, cuerpo_md = frontmatter(origen.read_text(encoding="utf-8"))
+        cabecera, cuerpo_md = frontmatter(
+            corregir(fila["slug"], origen.read_text(encoding="utf-8")))
         titulo = limpiar(cabecera.get("title") or fila["title_es"])
         cuerpo, resumen, llamadas = a_html(cuerpo_md)
 
