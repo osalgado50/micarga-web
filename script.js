@@ -140,6 +140,95 @@ document.addEventListener('DOMContentLoaded', () => {
   prepararVideo('video-hero', 'video-play', 3000);
   prepararVideo('video-completo', 'video-completo-play', 3000);
 
+  // --- El carrusel del equipo ----------------------------------------------
+  //
+  // ⚠️ AQUÍ NO SE ESCRIBE NI UNA PALABRA, SOLO NÚMEROS. `script.js` NO está en
+  // la lista SCRIPTS de `herramientas/i18n.py`, así que no pasa por el
+  // generador: un «1 de 6» montado desde aquí saldría en castellano en los
+  // ocho idiomas. El «de» vive en el HTML, partido entre dos <span>, y de aquí
+  // sale únicamente la cifra de la izquierda.
+  //
+  // El desplazamiento de verdad lo hace el navegador: la tira es un scroller
+  // con `scroll-snap` y estos botones no son más que un `scrollTo`. Si este
+  // archivo no llegase a cargar, el carrusel seguiría moviéndose con el dedo y
+  // con la rueda; lo único que se perdería son las flechas.
+  const carrusel = document.querySelector('[data-carrusel]');
+  if (carrusel) {
+    const tarjetas = [...carrusel.children];
+    const atras = document.querySelector('[data-carrusel-anterior]');
+    const alante = document.querySelector('[data-carrusel-siguiente]');
+    const desde = document.querySelector('[data-carrusel-desde]');
+    const hasta = document.querySelector('[data-carrusel-hasta]');
+    const tramo = document.querySelector('[data-carrusel-tramo]');
+    let actual = 0;
+
+    // Cuántas caben a la vista. Se mide, no se deduce de un punto de corte:
+    // los anchos de las tarjetas los pone el CSS y aquí no hay por qué saber
+    // en qué píxel cambia. Así mover el punto de corte no obliga a tocar esto.
+    const aLaVista = () => {
+      if (!tarjetas.length) { return 1; }
+      const ancho = tarjetas[0].getBoundingClientRect().width;
+      if (!ancho) { return 1; }
+      return Math.max(1, Math.round(carrusel.clientWidth / ancho));
+    };
+
+    const ultima = () => Math.max(0, tarjetas.length - aLaVista());
+
+    const repintar = () => {
+      actual = Math.min(actual, ultima());
+      if (atras) { atras.disabled = actual === 0; }
+      if (alante) { alante.disabled = actual >= ultima(); }
+      // Se enseña el TRAMO a la vista —«4–6 de 6»— y no solo la primera. Con
+      // un número suelto, al llegar al final ponía «4 de 6» con las tres
+      // últimas delante y la flecha apagada: parecía que faltaban dos.
+      // Cuentan desde 1, no desde 0.
+      const fin = Math.min(tarjetas.length, actual + aLaVista());
+      if (desde) { desde.textContent = String(actual + 1); }
+      if (hasta) { hasta.textContent = String(fin); }
+      // Cuando solo cabe una tarjeta —el móvil— se esconde el tramo entero,
+      // guion incluido: «1–1 de 6» no es un rango, es una errata.
+      if (tramo) { tramo.hidden = fin === actual + 1; }
+    };
+
+    const ir = (paso) => {
+      actual = Math.max(0, Math.min(ultima(), actual + paso));
+      carrusel.scrollTo({
+        left: tarjetas[actual].offsetLeft - tarjetas[0].offsetLeft,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'auto' : 'smooth',
+      });
+      repintar();
+    };
+
+    if (atras) { atras.addEventListener('click', () => ir(-1)); }
+    if (alante) { alante.addEventListener('click', () => ir(1)); }
+
+    // Las flechas del teclado solo mueven la tira cuando el foco está DENTRO.
+    // Si se escuchasen en la ventana, las flechas dejarían de servir para
+    // desplazar la página en cuanto el carrusel estuviera en pantalla.
+    carrusel.addEventListener('keydown', (evento) => {
+      if (evento.key !== 'ArrowRight' && evento.key !== 'ArrowLeft') { return; }
+      evento.preventDefault();
+      ir(evento.key === 'ArrowRight' ? 1 : -1);
+    });
+
+    // Arrastrando con el dedo el número también tiene que seguir el movimiento:
+    // se busca la tarjeta que ha quedado más cerca del borde izquierdo.
+    carrusel.addEventListener('scroll', () => {
+      let cerca = 0;
+      let minima = Infinity;
+      tarjetas.forEach((tarjeta, i) => {
+        const d = Math.abs(tarjeta.offsetLeft - tarjetas[0].offsetLeft - carrusel.scrollLeft);
+        if (d < minima) { minima = d; cerca = i; }
+      });
+      actual = cerca;
+      repintar();
+    }, { passive: true });
+
+    window.addEventListener('resize', repintar);
+    repintar();
+  }
+
   // --- Calculadora de precio -----------------------------------------------
   //
   // ⚠️ AQUÍ NO SE ESCRIBE NI UNA PALABRA VISIBLE. `script.js` NO está en la

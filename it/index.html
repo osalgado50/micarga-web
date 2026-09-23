@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260922b">
+  <link rel="stylesheet" href="/styles.css?v=20260923a">
 
   <script type="application/ld+json">
   {
@@ -946,17 +946,46 @@
         </p>
       </div>
 
+      <!-- El equipo interno va en carrusel y el Consejo Asesor NO, y es la
+           diferencia importante de aquí abajo. Los seis de dentro se pueden
+           recorrer; los tres de fuera tienen que verse los tres, siempre, sin
+           que nadie pulse nada: son las credenciales que sostienen el resto
+           de la página y esconder una detrás de una flecha es esconderla.
+
+           Los mandos van en la misma fila que el rótulo. La cuenta «1 de 6»
+           está partida a propósito: el JavaScript solo escribe el número de
+           la izquierda, porque `script.js` no lo traduce el generador y un
+           «de» escrito desde ahí saldría en castellano en los ocho idiomas.
+           La palabra vive en el HTML, que sí se traduce. -->
       <div class="equipo-grupo reveal-on-scroll">
         <div class="equipo-rotulo">
           <h3>Squadra interna</h3>
           <p>Prodotto, operazioni e crescita</p>
+
+          <div class="carrusel-mandos">
+            <button type="button" class="carrusel-boton" data-carrusel-anterior
+                    aria-label="Vedere il profilo precedente">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <span class="carrusel-cuenta" aria-live="polite">
+              <span data-carrusel-desde>1</span><span data-carrusel-tramo>–<span data-carrusel-hasta>3</span></span> di <span>6</span>
+            </span>
+            <button type="button" class="carrusel-boton" data-carrusel-siguiente
+                    aria-label="Vedere il profilo successivo">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
 
-        <ul class="equipo-rejilla">
-          <li class="ficha">
+        <!-- `tabindex="0"` para que con el teclado se pueda entrar en la tira y
+             moverla con las flechas. Sin él, un teclado solo llega a las
+             tarjetas que ya estén a la vista. -->
+        <ul class="equipo-carrusel" data-carrusel tabindex="0"
+            aria-label="Profili della squadra interna">
+          <li class="ficha ficha-destacada">
             <div class="ficha-retrato">
               <img src="/images/equipo/jeroen-van-dijk.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Jeroen van Dijk, General Manager e CEO di Mi Carga">
+                   alt="Ritratto rappresentativo di Jeroen van Dijk, General Manager e CEO di Mi Carga">
             </div>
             <h4>Jeroen van Dijk</h4>
             <p class="ficha-cargo">General Manager / CEO</p>
@@ -971,7 +1000,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/laura-martinez.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Laura Martínez, direttrice commerciale di Mi Carga">
+                   alt="Ritratto rappresentativo di Laura Martínez, direttrice commerciale di Mi Carga">
             </div>
             <h4>Laura Martínez</h4>
             <p class="ficha-cargo">Direttrice commerciale</p>
@@ -986,7 +1015,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/carlos-ruiz.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Carlos Ruiz, direttore operazioni e logistica di Mi Carga">
+                   alt="Ritratto rappresentativo di Carlos Ruiz, direttore operazioni e logistica di Mi Carga">
             </div>
             <h4>Carlos Ruiz</h4>
             <p class="ficha-cargo">Direttore operazioni e logistica</p>
@@ -1001,7 +1030,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/marta-gomez.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Marta Gómez, responsabile Persone e Amministrazione di Mi Carga">
+                   alt="Ritratto rappresentativo di Marta Gómez, responsabile Persone e Amministrazione di Mi Carga">
             </div>
             <h4>Marta Gómez</h4>
             <p class="ficha-cargo">Responsabile Persone e Amministrazione</p>
@@ -1016,7 +1045,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/david-torres.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di David Torres, responsabile Tecnologia di Mi Carga">
+                   alt="Ritratto rappresentativo di David Torres, responsabile Tecnologia di Mi Carga">
             </div>
             <h4>David Torres</h4>
             <p class="ficha-cargo">Responsabile Tecnologia</p>
@@ -1031,13 +1060,13 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/pablo-sanchez.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Pablo Sánchez, responsabile R&amp;amp;S e Software di Mi Carga">
+                   alt="Ritratto rappresentativo di Pablo Sánchez, responsabile R&amp;amp;S e Software di Mi Carga">
             </div>
             <h4>Pablo Sánchez</h4>
             <p class="ficha-cargo">Responsabile R&amp;S e Software</p>
             <p class="ficha-bio">Studia e sviluppa nuove funzioni per ridurre il lavoro manuale e rendere i documenti digitali sempre più semplici.</p>
             <ul class="ficha-chips">
-              <li>I+D</li>
+              <li>R&amp;S</li>
               <li>Software</li>
               <li>Automazione</li>
             </ul>
@@ -1055,7 +1084,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/antonio-beltran.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Antonio Beltrán, consulente esterno in materia di controlli sui trasporti">
+                   alt="Ritratto rappresentativo di Antonio Beltrán, consulente esterno in materia di controlli sui trasporti">
             </div>
             <h4>Antonio Beltrán</h4>
             <p class="ficha-cargo">Ispettore / ex ispettore dei trasporti</p>
@@ -1071,7 +1100,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/luis-herrera.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Luis Herrera, consulente esterno e consulente per la sicurezza ADR">
+                   alt="Ritratto rappresentativo di Luis Herrera, consulente esterno e consulente per la sicurezza ADR">
             </div>
             <h4>Luis Herrera</h4>
             <p class="ficha-cargo">Consulente per la sicurezza ADR</p>
@@ -1087,7 +1116,7 @@
           <li class="ficha">
             <div class="ficha-retrato">
               <img src="/images/equipo/raul-mendez.webp" width="480" height="480" loading="lazy" decoding="async"
-                   alt="Ritratto di Raúl Méndez, consulente esterno e formatore professionale del trasporto">
+                   alt="Ritratto rappresentativo di Raúl Méndez, consulente esterno e formatore professionale del trasporto">
             </div>
             <h4>Raúl Méndez</h4>
             <p class="ficha-cargo">Formatore CAP / ADR / cronotachigrafo e attestato di trasportatore</p>
@@ -1335,7 +1364,7 @@
   </button>
 
   <!-- JavaScript scripts -->
-  <script src="/script.js?v=20260922a"></script>
+  <script src="/script.js?v=20260923a"></script>
   <script src="/consentimiento.js?v=20260917a" defer></script>
 </body>
 </html>

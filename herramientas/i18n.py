@@ -94,16 +94,30 @@ IGUAL_EN_TODOS = {
     "Jeroen van Dijk", "Laura Martínez", "Carlos Ruiz", "Marta Gómez",
     "David Torres", "Pablo Sánchez", "Antonio Beltrán", "Luis Herrera",
     "Raúl Méndez",
-    # Siglas del sector, iguales en los nueve idiomas.
-    "CAP", "I+D",
+    # Siglas del sector, iguales en los nueve idiomas. «CAP» se queda porque
+    # así está ya en las ocho traducciones del resto de la web.
+    #
+    # ⚠️ «I+D» estuvo aquí y era un error: es la sigla CASTELLANA. En inglés es
+    # «R&D», en alemán «F&E» y en polaco «B+R», así que salía en castellano en
+    # los ocho idiomas dentro de una tarjeta cuyo cargo sí decía «R&D».
+    "CAP",
 }
 SIN_LETRAS = re.compile(r"^[^\wáéíóúàèìòùïüçñÁÉÍÓÚÀÈÌÒÙÏÜÇÑ]*$")
+
+# La regla de abajo pide DOS letras seguidas para dar algo por traducible, y eso
+# deja fuera a las siglas con un símbolo en medio: «I+D» no tiene dos letras
+# juntas, así que se colaba sin traducir y salía en castellano en los ocho
+# idiomas —dentro de una tarjeta cuyo cargo sí decía «R&D»—. Aquí van las que
+# hay que traducir a pesar de la regla.
+CORTAS_PERO_TRADUCIBLES = {"I+D"}
 
 
 def _traducible(texto: str) -> bool:
     t = texto.strip()
     if not t or t in IGUAL_EN_TODOS or SIN_LETRAS.match(t):
         return False
+    if t in CORTAS_PERO_TRADUCIBLES:
+        return True
     if t.startswith(("http://", "https://", "mailto:", "#", "{{")):
         return False
     # «+34 744 716 449», «10 €/mes», «2026»: cifras y símbolos, nada que traducir.

@@ -2548,13 +2548,13 @@ body > section:not(.hero-section) > .container > h2 {
   gap: 0.35rem 1rem;
   margin-bottom: 2rem;
 }
-.equipo-rotulo h3 {
+.equipo-rotulo > h3 {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.45rem;
   color: var(--text-heading);
 }
-.equipo-rotulo p {
+.equipo-rotulo > p {
   flex: 1;
   margin: 0;
   font-size: 0.9rem;
@@ -2565,7 +2565,7 @@ body > section:not(.hero-section) > .container > h2 {
   gap: 1rem;
   white-space: nowrap;
 }
-.equipo-rotulo p::after {
+.equipo-rotulo > p::after {
   content: "";
   flex: 1;
   height: 1px;
@@ -2573,7 +2573,101 @@ body > section:not(.hero-section) > .container > h2 {
   background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.5), transparent);
 }
 
-/* --- La rejilla ------------------------------------------------------------ */
+/* --- Los mandos del carrusel ----------------------------------------------- */
+.carrusel-mandos {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.carrusel-boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(var(--primary-rgb), 0.55);
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.09);
+  color: var(--text-heading);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.carrusel-boton:hover:not(:disabled) {
+  background: rgba(var(--primary-rgb), 0.2);
+  border-color: var(--primary);
+}
+.carrusel-boton:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+/* En el extremo el botón se apaga, no desaparece: si se va, los otros dos
+   mandos se mueven de sitio cada vez que se llega al final. */
+.carrusel-boton:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+/* `hidden` a secas aquí basta —no hay ninguna regla de `display` de autor que
+   lo pise— pero se deja escrito: en esta hoja ya ha pasado dos veces. */
+.carrusel-cuenta [hidden] { display: none; }
+.carrusel-cuenta {
+  min-width: 3.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- La tira del carrusel --------------------------------------------------
+   Es un scroller nativo con `scroll-snap`: el dedo lo arrastra solo, sin una
+   línea de JavaScript, y los botones no son más que un `scrollTo`. Si el
+   JavaScript falla o tarda, la tira sigue funcionando a dedo y a rueda; lo
+   único que se pierde son las flechas.
+
+   Tres tarjetas a la vista en escritorio, dos en tableta y en el móvil una
+   entera con el borde de la siguiente asomando, que es lo que dice que hay
+   más y se puede arrastrar. */
+.equipo-carrusel {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0.3rem 1.25rem;
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--primary-rgb), 0.6) transparent;
+}
+.equipo-carrusel:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+.equipo-carrusel > .ficha {
+  flex: 0 0 calc((100% - 3rem) / 3);
+  scroll-snap-align: start;
+}
+@media (max-width: 900px) {
+  .equipo-carrusel > .ficha { flex-basis: calc((100% - 1.5rem) / 2); }
+}
+@media (max-width: 600px) {
+  .equipo-carrusel > .ficha { flex-basis: 86%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .equipo-carrusel { scroll-behavior: auto; }
+}
+
+/* La primera tarjeta, la que abre el carrusel, con el borde un punto más
+   marcado. Nada más: un tratamiento más fuerte convertiría media sección en
+   una escala de importancia que no hace falta enseñar. */
+.ficha-destacada {
+  border-color: rgba(var(--primary-rgb), 0.45);
+}
+
+/* --- La rejilla del Consejo Asesor ----------------------------------------- */
 .equipo-rejilla {
   list-style: none;
   margin: 0;
@@ -2692,6 +2786,9 @@ body > section:not(.hero-section) > .container > h2 {
 @media (max-width: 640px) {
   .equipo-grupo-asesor { padding: 1.75rem 1.25rem; }
   .ficha-retrato { width: 150px; height: 150px; }
+  /* Los mandos se van a su propia línea y se pegan a la izquierda, debajo del
+     rótulo. Apretados contra el borde derecho de un móvil se pulsan mal. */
+  .carrusel-mandos { margin-top: 0.4rem; }
   /* El rótulo se apila y se queda sin raya. Al lado del título, el subtítulo
      se parte en tres líneas dentro de una columna estrechísima, y la raya
      cuelga de ahí sin atar nada. */
