@@ -104,6 +104,31 @@ def frases_del_articulo(pagina: str) -> set:
     return _FRASES_ARTICULO[pagina]
 
 
+def ruta_del_articulo(pagina: str) -> Path:
+    """
+    Dónde está de verdad el fichero de un artículo: publicado o en borradores.
+
+    Hace falta porque un artículo se traduce ANTES de publicarse, así que
+    durante días vive en `borradores-blog/` mientras su sitio en `blog/` está
+    vacío. Buscarlo solo en `blog/` hacía que `pendientes` se quedara clavado
+    en el mismo artículo una y otra vez, y que las portadas traducidas no se
+    prepararan hasta después de publicar.
+    """
+    publicado = RAIZ / pagina
+    if publicado.exists():
+        return publicado
+    return RAIZ / "borradores-blog" / Path(pagina).name
+
+
+def articulo_completo(pagina: str, dicc: dict) -> bool:
+    """Como `articulo_listo`, pero mirando también en borradores."""
+    ruta = ruta_del_articulo(pagina)
+    if not ruta.exists():
+        return False
+    frases = cadenas(ruta)
+    return bool(frases) and all(dicc.get(f) for f in frases)
+
+
 def articulo_listo(pagina: str, dicc: dict) -> bool:
     """
     ¿Está este artículo entero en este idioma?
@@ -835,7 +860,7 @@ def cmd_pendientes():
             return
         for e in _json.loads(cola.read_text(encoding="utf-8")):
             candidato = f"blog/{e['slug']}.html"
-            if any(not articulo_listo(candidato, diccionario(i)) for i in IDIOMAS_PUBLICADOS):
+            if any(not articulo_completo(candidato, diccionario(i)) for i in IDIOMAS_PUBLICADOS):
                 pagina = candidato
                 break
         if not pagina:
