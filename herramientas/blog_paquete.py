@@ -40,10 +40,20 @@ BORRADORES = RAIZ / "borradores-blog"
 COLA = BORRADORES / "cola.json"
 PORTADAS = RAIZ / "images" / "blog"
 
-# Una entrada cada DOS días. Lo pidió así el propietario: «publicas uno hoy,
-# mañana no, al día siguiente otro». El calendario del paquete empezaba el
-# 28-09 y se recalcula desde el día en que se preparan, que es lo que se pidió.
-CADA_CUANTOS_DIAS = 2
+# Una entrada cada CUATRO días.
+#
+# Empezó siendo cada dos —«publicas uno hoy, mañana no, al día siguiente
+# otro»— y se aflojó el 23-09-2026 con los números delante: cada artículo son
+# unas 130 frases, y por ocho idiomas son 35.000 frases para los 34. La rutina
+# traduce un idioma al día, o sea un artículo cada ocho días; una cola que pide
+# uno cada dos no la alcanza ni de lejos.
+#
+# Cuatro días no la alcanza tampoco por sí sola, y eso NO es un problema: el
+# publicador nunca saca un artículo sin traducir, así que el calendario es un
+# objetivo, no una promesa. Lo que marca el ritmo de verdad es lo que se
+# traduzca en las sesiones largas; el calendario solo evita que la cola se
+# aleje tanto que deje de significar nada.
+CADA_CUANTOS_DIAS = 4
 
 # El orden, la ruta, el grupo del índice y la foto de fondo de la portada.
 #
@@ -449,6 +459,44 @@ def preparar():
     print(f"Del {cola[0]['fecha']} al {cola[-1]['fecha']}, uno cada {CADA_CUANTOS_DIAS} días.")
 
 
+def recalendar():
+    """
+    Recoloca las fechas de lo que NO está publicado, con la cadencia de hoy.
+
+    Va aparte de `preparar` a propósito: `preparar` respeta las fechas
+    existentes —si no, cada regeneración movería el calendario entero— así que
+    cambiar `CADA_CUANTOS_DIAS` no serviría de nada sin esto.
+
+    Lo ya publicado no se toca: tiene su fecha real y su enlace en la web.
+    """
+    if not COLA.exists():
+        print("No hay cola.")
+        return
+    cola = json.loads(COLA.read_text(encoding="utf-8"))
+    hoy = dt.date.today()
+
+    # Se arranca del día siguiente a la última publicada, o de hoy si no hay
+    # ninguna. Así la primera pendiente no cae encima de la última publicada.
+    publicadas = [e for e in cola if e["publicado"]]
+    desde = hoy
+    if publicadas:
+        ultima = max(dt.date.fromisoformat(e["fecha"]) for e in publicadas)
+        desde = max(hoy, ultima + dt.timedelta(days=CADA_CUANTOS_DIAS))
+
+    i = 0
+    for e in cola:
+        if e["publicado"]:
+            continue
+        e["fecha"] = (desde + dt.timedelta(days=i * CADA_CUANTOS_DIAS)).isoformat()
+        i += 1
+
+    COLA.write_text(json.dumps(cola, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    pendientes = [e for e in cola if not e["publicado"]]
+    print(f"{len(pendientes)} entradas recolocadas, una cada {CADA_CUANTOS_DIAS} días.")
+    if pendientes:
+        print(f"De {pendientes[0]['fecha']} a {pendientes[-1]['fecha']}.")
+
+
 def ver_cola():
     if not COLA.exists():
         print("No hay cola. Ejecuta primero: python3 herramientas/blog_paquete.py preparar")
@@ -467,5 +515,7 @@ if __name__ == "__main__":
         ver_cola()
     elif orden == "portadas":
         portadas_traducidas()
+    elif orden == "calendario":
+        recalendar()
     else:
         print(__doc__)
