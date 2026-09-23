@@ -256,12 +256,19 @@ def plantilla(datos: dict) -> str:
                     f"<title>{html.escape(datos['titulo'])} | Mi Carga</title>",
                     cabeza, count=1, flags=re.S)
 
-    # 🚨 Fuera las alternativas de idioma: este artículo SOLO existe en
-    # castellano. Dejar los `hreflang` apuntando a /en/, /de/… sería prometerle
-    # a Google nueve versiones que no existen.
-    cabeza = re.sub(r"<!-- ALTERNATIVAS:inicio -->.*?<!-- ALTERNATIVAS:fin -->",
-                    '<link rel="alternate" hreflang="es" href="https://micarga.es/blog/'
-                    + datos["slug"] + '">', cabeza, flags=re.S)
+    # Las alternativas arrancan con una sola: el castellano. Un artículo recién
+    # preparado no existe en ningún otro idioma, y prometerle a Google nueve
+    # versiones que no están es mandarlo a nueve 404.
+    #
+    # ⚠️ SE CONSERVAN LOS HUECOS `<!-- ALTERNATIVAS:… -->`. Son los que usa
+    # i18n.py para ir añadiendo cada idioma según se vaya traduciendo; sin
+    # ellos el generador se para en seco («falta el hueco ALTERNATIVAS»).
+    cabeza = re.sub(
+        r"<!-- ALTERNATIVAS:inicio -->.*?<!-- ALTERNATIVAS:fin -->",
+        '<!-- ALTERNATIVAS:inicio -->\n'
+        f'  <link rel="alternate" hreflang="es" href="https://micarga.es/blog/{datos["slug"]}">\n'
+        '  <!-- ALTERNATIVAS:fin -->',
+        cabeza, flags=re.S)
 
     llamada = datos["llamadas"][0] if datos["llamadas"] else (
         "Genera tus 10 primeros documentos gratis con Mi Carga")
@@ -302,6 +309,17 @@ def preparar():
     hoy = dt.date.today()
     cola = []
 
+    # 🚨 Si ya hay cola, se RESPETAN sus fechas y lo ya publicado. Volver a
+    # preparar es normal —se corrige la plantilla y se regeneran los 34— y sin
+    # esto cada regeneración recolocaría el calendario desde hoy y daría por no
+    # publicado lo que ya está en la web.
+    anterior = {}
+    if COLA.exists():
+        try:
+            anterior = {e["slug"]: e for e in json.loads(COLA.read_text(encoding="utf-8"))}
+        except (ValueError, KeyError):
+            anterior = {}
+
     for i, (num, slug, grupo, foto) in enumerate(ARTICULOS):
         fila = calendario[num]
         origen = PAQUETE / "content" / "es" / f"{fila['slug']}.md"
@@ -316,17 +334,28 @@ def preparar():
 
         datos = dict(slug=slug, titulo=titulo, grupo=grupo, cuerpo=cuerpo,
                      entradilla=resumen, resumen_corto=corto, llamadas=llamadas)
-        (BORRADORES / f"{slug}.html").write_text(plantilla(datos), encoding="utf-8")
+        pagina = plantilla(datos)
+        previo = anterior.get(slug, {})
 
-        cola.append({
+        if previo.get("publicado"):
+            # Ya está en la web: se actualiza ALLÍ, no se devuelve a borradores.
+            (RAIZ / "blog" / f"{slug}.html").write_text(pagina, encoding="utf-8")
+        else:
+            (BORRADORES / f"{slug}.html").write_text(pagina, encoding="utf-8")
+
+        entrada = {
             "orden": num,
             "slug": slug,
             "titulo": titulo,
             "grupo": grupo,
             "resumen": corto,
-            "fecha": (hoy + dt.timedelta(days=i * CADA_CUANTOS_DIAS)).isoformat(),
-            "publicado": False,
-        })
+            "fecha": previo.get(
+                "fecha", (hoy + dt.timedelta(days=i * CADA_CUANTOS_DIAS)).isoformat()),
+            "publicado": bool(previo.get("publicado")),
+        }
+        if previo.get("publicado_el"):
+            entrada["publicado_el"] = previo["publicado_el"]
+        cola.append(entrada)
 
     COLA.write_text(json.dumps(cola, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{len(cola)} borradores en {BORRADORES.relative_to(RAIZ)}/")

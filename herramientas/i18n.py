@@ -60,27 +60,25 @@ PAGINAS = [
     f"blog/{p.name}" for p in (RAIZ / "blog").glob("*.html") if p.name != "index.html"
 )
 
-# Las entradas del paquete editorial de septiembre de 2026: 34 artículos que
-# SOLO existen en castellano, y es deliberado.
+# Las entradas del paquete editorial de septiembre de 2026.
 #
-# El paquete decía traerlos en diez idiomas y trae 34 ficheros en castellano y
-# nada más (su propio manifest.json: `generated_version_count: 34` de 340).
-# Traducirlos son ~2.450 frases por ocho idiomas: casi 20.000 cadenas. Y este
-# generador CAE AL CASTELLANO en cada frase que falte, así que publicarlos a
-# medias pondría 34 artículos en castellano bajo `hreflang="pl"`, que para
-# Google es contenido duplicado a gran escala sobre TODO el dominio.
+# Son 34 artículos que llegaron SOLO en castellano —el paquete decía traerlos
+# en diez idiomas y su propio manifest.json confiesa 34 de 340— y que se van
+# traduciendo uno a uno, sin prisa.
 #
-# Un artículo que solo existe en castellano no es contenido duplicado:
-# simplemente no existe en polaco. Así que estas páginas:
-#   · no se generan en los otros ocho idiomas,
-#   · no piden traducción (no salen en `comprobar` ni en `extraer`),
-#   · van al sitemap SOLO con su URL castellana, sin `hreflang` a hermanas
-#     que no existen.
+# 🚨 CADA ARTÍCULO APARECE EN UN IDIOMA SOLO CUANDO ESE IDIOMA ESTÁ COMPLETO.
+# No es una manía: este generador CAE AL CASTELLANO en cada frase que le falte,
+# sin avisar. Publicar un artículo a medias pondría párrafos en castellano bajo
+# `hreflang="pl"`, y para Google eso es contenido duplicado a gran escala sobre
+# TODO el dominio, no solo sobre esa página. Un artículo que todavía no existe
+# en polaco no hace ningún daño; uno que dice existir y está a medias, sí.
 #
-# La lista se lee de la cola del paquete para que no haya que mantener dos
-# sitios. Si algún día se traduce uno, se saca de la cola y entra en el
-# circuito normal.
-def _solo_castellano() -> set:
+# Por eso la puerta es por PÁGINA y por IDIOMA, no por idioma entero como en el
+# resto del sitio: el alemán puede tener nueve artículos y el polaco dos, y
+# cada uno enseña los suyos.
+#
+# La lista sale de la cola del paquete, para no mantener dos sitios.
+def _articulos_del_paquete() -> set:
     cola = RAIZ / "borradores-blog" / "cola.json"
     if not cola.exists():
         return set()
@@ -90,7 +88,25 @@ def _solo_castellano() -> set:
         return set()
 
 
-SOLO_CASTELLANO = _solo_castellano()
+ARTICULOS_PAQUETE = _articulos_del_paquete()
+
+# Las frases de cada artículo, calculadas una vez. `cadenas()` abre y recorre
+# el fichero, y esto se pregunta una vez por artículo y por idioma: sin la
+# caché, generar los nueve idiomas con los 34 artículos son trescientas
+# lecturas del mismo HTML.
+_FRASES_ARTICULO: dict = {}
+
+
+def frases_del_articulo(pagina: str) -> set:
+    if pagina not in _FRASES_ARTICULO:
+        ruta = RAIZ / pagina
+        _FRASES_ARTICULO[pagina] = set(cadenas(ruta)) if ruta.exists() else set()
+    return _FRASES_ARTICULO[pagina]
+
+
+def articulo_listo(pagina: str, dicc: dict) -> bool:
+    """¿Está este artículo entero en este idioma?"""
+    return all(dicc.get(f) for f in frases_del_articulo(pagina))
 
 # Atributos cuyo valor lee una persona. `content` solo en las metaetiquetas que
 # describen la página; el resto de `content` (theme-color, og:type…) son datos.
@@ -98,16 +114,31 @@ ATRIBUTOS = ("alt", "title", "placeholder", "aria-label")
 METAS_TRADUCIBLES = ("description", "og:title", "og:description", "twitter:title",
                      "twitter:description", "og:image:alt")
 
-# Trozos que existen SOLO en la versión castellana y desaparecen en las otras.
+# Las tarjetas del índice del blog, una por artículo del paquete.
 #
-# Hacen falta por las tarjetas del blog: una entrada que solo existe en
-# castellano no puede aparecer en el índice alemán. Si apareciera traducida,
-# quien pulsa un titular en alemán aterriza en un artículo en castellano; y si
-# apareciera sin traducir, el índice alemán tendría tarjetas en castellano.
-# Las dos cosas son peores que no enseñarla: en alemán ese artículo no existe.
+# Cada tarjeta lleva marcado a qué artículo pertenece, y desaparece del índice
+# de un idioma mientras ese artículo no esté traducido a ese idioma. Las dos
+# alternativas son peores: una tarjeta traducida que lleva a un texto en
+# castellano engaña a quien la pulsa, y una tarjeta en castellano en el índice
+# alemán es un descuido a la vista.
 #
-# `publicar_blog.py` envuelve así cada tarjeta que publica.
-SOLO_ES = re.compile(r"[ \t]*<!-- SOLO-ES:inicio -->.*?<!-- SOLO-ES:fin -->\n?", re.S)
+# Las pone `publicar_blog.py` al publicar.
+TARJETA_ARTICULO = re.compile(
+    r"[ \t]*<!-- ARTICULO:([a-z0-9-]+):inicio -->.*?<!-- ARTICULO:\1:fin -->\n?", re.S)
+
+# Un grupo del índice que se queda sin tarjetas. Pasa en los idiomas donde
+# todavía no hay ningún artículo de ese grupo traducido: quedaría el título de
+# la sección con nada debajo.
+GRUPO_VACIO = re.compile(
+    r"[ \t]*<div class=\"blog-cluster\">\s*<h2>[^<]*</h2>\s*"
+    r"<div class=\"blog-card-grid\">\s*</div>\s*</div>\n?", re.S)
+
+
+def _quitar_articulos_no_listos(html_texto: str, dicc: dict) -> str:
+    """Deja solo las tarjetas de los artículos que existen en este idioma."""
+    def decidir(m):
+        return m.group(0) if articulo_listo(f"blog/{m.group(1)}.html", dicc) else ""
+    return GRUPO_VACIO.sub("", TARJETA_ARTICULO.sub(decidir, html_texto))
 
 # Zonas del HTML donde no se traduce nada.
 INTOCABLES = re.compile(r"<(script|style)\b.*?</\1>", re.I | re.S)
@@ -186,7 +217,7 @@ def _devolver_intocables(texto: str, guardados) -> str:
 
 def cadenas(ruta: Path) -> list:
     """Todas las frases traducibles de una página, en orden de aparición."""
-    crudo = SOLO_ES.sub("", ruta.read_text(encoding="utf-8"))
+    crudo = ruta.read_text(encoding="utf-8")
     cuerpo, _ = _trozos_intocables(crudo)
     encontradas = []
 
@@ -225,8 +256,6 @@ def cadenas(ruta: Path) -> list:
 def todas_las_cadenas() -> list:
     vistas, todas = set(), []
     for pagina in PAGINAS:
-        if pagina in SOLO_CASTELLANO:
-            continue
         for t in cadenas(RAIZ / pagina):
             if t not in vistas:
                 vistas.add(t)
@@ -254,12 +283,40 @@ def cmd_extraer():
 
 
 def cmd_comprobar():
+    """
+    Se cuentan DOS cosas distintas, y mezclarlas haría inútil la única cuenta
+    que de verdad protege el sitio.
+
+    · Las frases del SITIO: menús, formularios, páginas legales, portada.
+      Aquí faltar una frase es grave, porque esa página SÍ se genera y el
+      traductor cae al castellano justo en esa línea, sin avisar. Un idioma no
+      se publica hasta que esta cuenta es cero.
+
+    · Las frases de los ARTÍCULOS del blog. Aquí faltar es lo normal: los 34
+      se van traduciendo poco a poco, y mientras un artículo no esté entero en
+      un idioma, sencillamente no se escribe en ese idioma. No hay nada roto.
+    """
     todas = todas_las_cadenas()
+    de_articulos = set()
+    for pagina in PAGINAS:
+        if pagina in ARTICULOS_PAQUETE:
+            de_articulos |= frases_del_articulo(pagina)
+    # Una frase que esté en un artículo Y en el resto del sitio cuenta como del
+    # sitio: es la que puede romper una página que sí se genera.
+    del_sitio = [t for t in todas if t not in de_articulos]
+    solo_articulos = [t for t in todas if t in de_articulos]
+
     fallos = 0
     for idioma in IDIOMAS:
         d = diccionario(idioma)
-        faltan = [t for t in todas if not d.get(t)]
-        print(f"{idioma}: faltan {len(faltan)} de {len(todas)}")
+        faltan = [t for t in del_sitio if not d.get(t)]
+        arts = [t for t in solo_articulos if not d.get(t)]
+        listos = sum(1 for p in PAGINAS
+                     if p in ARTICULOS_PAQUETE and articulo_listo(p, d))
+        total_arts = sum(1 for p in PAGINAS if p in ARTICULOS_PAQUETE)
+        extra = (f"  ·  artículos del blog: {listos}/{total_arts} listos"
+                 f" ({len(arts)} frases por traducir)" if total_arts else "")
+        print(f"{idioma}: faltan {len(faltan)} de {len(del_sitio)}{extra}")
         for t in faltan[:10]:
             print(f"    · {t[:90]}")
         fallos += len(faltan)
@@ -350,16 +407,20 @@ def url_de(pagina: str, idioma: str) -> str:
     return f"{DOMINIO}{prefijo}/{ruta}"
 
 
-def bloque_alternativas(pagina: str) -> str:
+def bloque_alternativas(pagina: str, idiomas=None) -> str:
     """Las etiquetas hreflang: «esta misma página, en los otros idiomas».
 
     Sin esto, Google trata las versiones como páginas distintas que dicen lo
     mismo y se las come entre ellas. Con esto sabe que son la misma y le enseña
     a cada uno la suya. `x-default` apunta al castellano: es el idioma del
     mercado y el original del que salen los demás.
+
+    `idiomas` se pasa para los artículos del blog, que no existen en todos:
+    solo se declara lo que de verdad hay. Prometer una versión polaca que no
+    está es mandar a Google a un 404.
     """
     lineas = [f'  <link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}">'
-              for i in TODOS_LOS_IDIOMAS]
+              for i in (idiomas if idiomas is not None else TODOS_LOS_IDIOMAS)]
     lineas.append(f'  <link rel="alternate" hreflang="x-default" href="{url_de(pagina, "es")}">')
     return "\n".join(lineas)
 
@@ -447,10 +508,9 @@ def _enlaces_con_idioma(texto: str, idioma: str) -> str:
 
 def traducir_html(crudo: str, dicc: dict, faltan: set) -> str:
     """Cambia las frases del castellano por las del diccionario."""
-    # Primero fuera lo que solo existe en castellano: las tarjetas de las
-    # entradas de blog sin traducir. No se traducen ni se dejan a medias, se
-    # quitan.
-    crudo = SOLO_ES.sub("", crudo)
+    # Primero fuera las tarjetas de los artículos que todavía no existen en
+    # este idioma, y los grupos que se queden vacíos.
+    crudo = _quitar_articulos_no_listos(crudo, dicc)
     cuerpo, guardados = _trozos_intocables(crudo)
 
     def cambia(t: str) -> str:
@@ -647,10 +707,12 @@ def cmd_generar():
     for pagina in PAGINAS:
         ruta = RAIZ / pagina
         s = ruta.read_text(encoding="utf-8")
-        if pagina in SOLO_CASTELLANO:
-            # Ni una alternativa: esta página no tiene hermanas. Lo que sí se
-            # refresca es el selector, que tiene que seguir llevando al
-            # visitante a la portada de su idioma aunque el artículo no exista.
+        if pagina in ARTICULOS_PAQUETE:
+            # Un artículo solo declara las hermanas que EXISTEN de verdad, que
+            # son los idiomas en los que está entero. Y el selector lleva a la
+            # portada de cada idioma, no a una traducción que puede no haber.
+            listos = [i for i in IDIOMAS_PUBLICADOS if articulo_listo(pagina, diccionario(i))]
+            s = _entre_marcas(s, "ALTERNATIVAS", bloque_alternativas(pagina, ["es"] + listos))
             s = _entre_marcas(s, "IDIOMAS", bloque_idiomas("index.html", "es"))
             ruta.write_text(s, encoding="utf-8")
             continue
@@ -673,8 +735,12 @@ def cmd_generar():
                 traducir_js((RAIZ / nombre).read_text(encoding="utf-8"), dicc_js),
                 encoding="utf-8",
             )
+        escritas = 0
         for pagina in PAGINAS:
-            if pagina in SOLO_CASTELLANO:
+            # 🚨 LA PUERTA. Un artículo a medias NO se escribe en este idioma:
+            # el traductor caería al castellano en cada frase que falte y
+            # nadie se enteraría.
+            if pagina in ARTICULOS_PAQUETE and not articulo_listo(pagina, dicc):
                 continue
             crudo = (RAIZ / pagina).read_text(encoding="utf-8")
             s = traducir_html(crudo, dicc, faltan)
@@ -699,9 +765,23 @@ def cmd_generar():
             destino = RAIZ / idioma / pagina
             destino.parent.mkdir(parents=True, exist_ok=True)
             destino.write_text(s, encoding="utf-8")
+            escritas += 1
+
+            # Un artículo que deja de estar listo —porque se ha tocado el
+            # castellano y hay frases nuevas— tiene que DESAPARECER de ese
+            # idioma. Si no, se queda la versión de ayer, con el texto viejo,
+            # mientras el castellano dice otra cosa.
+        for pagina in PAGINAS:
+            if pagina in ARTICULOS_PAQUETE and not articulo_listo(pagina, dicc):
+                sobra = RAIZ / idioma / pagina
+                if sobra.exists():
+                    sobra.unlink()
+
         faltan_por_idioma[idioma] = faltan
-        escritas = len(PAGINAS) - len(SOLO_CASTELLANO & set(PAGINAS))
-        print(f"{idioma}: {escritas} páginas escritas, {len(faltan)} frases sin traducir")
+        arts = [p for p in PAGINAS if p in ARTICULOS_PAQUETE]
+        listos = sum(1 for p in arts if articulo_listo(p, dicc))
+        print(f"{idioma}: {escritas} páginas escritas, {len(faltan)} frases sin traducir"
+              + (f", {listos}/{len(arts)} artículos del blog" if arts else ""))
     return faltan_por_idioma
 
 
@@ -716,6 +796,57 @@ PRIORIDAD = {"index.html": "1.0", "blog/index.html": "0.9", "suscripcion.html": 
              "presupuesto.html": "0.7", "borrar-cuenta.html": "0.3"}
 PRIORIDAD_LEGAL = "0.2"
 LEGALES = {"aviso-legal.html", "privacidad.html", "terminos.html", "cookies.html"}
+
+
+def cmd_pendientes():
+    """Qué falta por traducir de UN artículo, idioma a idioma.
+
+    Es lo que usa la rutina diaria para saber qué tiene entre manos. Se pide
+    por artículo y no en bloque a propósito: traducir uno entero y bien es lo
+    que abre su puerta; medio traducidos, treinta artículos no publican nada.
+
+        python3 herramientas/i18n.py pendientes blog/historia-del-transporte-en-espana.html
+        python3 herramientas/i18n.py pendientes            # el siguiente que toque
+    """
+    import json as _json
+    pagina = sys.argv[2] if len(sys.argv) > 2 else None
+
+    if not pagina:
+        # El siguiente sin publicar de la cola: es el que corre prisa.
+        cola = RAIZ / "borradores-blog" / "cola.json"
+        if not cola.exists():
+            print("No hay cola.")
+            return
+        for e in _json.loads(cola.read_text(encoding="utf-8")):
+            candidato = f"blog/{e['slug']}.html"
+            if any(not articulo_listo(candidato, diccionario(i)) for i in IDIOMAS_PUBLICADOS):
+                pagina = candidato
+                break
+        if not pagina:
+            print("Todos los artículos están traducidos a los ocho idiomas.")
+            return
+
+    ruta = RAIZ / pagina
+    if not ruta.exists():
+        # Todavía en borradores: se mira ahí.
+        ruta = RAIZ / "borradores-blog" / Path(pagina).name
+    if not ruta.exists():
+        print(f"No encuentro {pagina}")
+        return
+
+    frases = cadenas(ruta)
+    print(f"# {pagina}  ·  {len(frases)} frases")
+    for idioma in IDIOMAS_PUBLICADOS:
+        dicc = diccionario(idioma)
+        faltan = [f for f in frases if not dicc.get(f)]
+        print(f"{idioma}: faltan {len(faltan)}")
+    print()
+    # Las frases, una por línea, en orden: así se traducen por posición y no
+    # hay que volver a teclear el castellano, que es donde se cuelan los
+    # errores que no avisan (un espacio duro, una tilde distinta).
+    primero = IDIOMAS_PUBLICADOS[0]
+    for i, f in enumerate(frases):
+        print(f"{i}\t{f}")
 
 
 def cmd_sitemap():
@@ -734,17 +865,26 @@ def cmd_sitemap():
             continue
         prioridad = PRIORIDAD.get(pagina, PRIORIDAD_LEGAL if pagina in LEGALES else "0.6")
         frecuencia = "weekly" if pagina in ("index.html", "blog/index.html") else "monthly"
-        if pagina in SOLO_CASTELLANO:
-            # Una sola URL y ninguna alternativa. Declarar hermanas que no
-            # existen es pedirle a Google que rastree nueve 404.
-            filas.append(
-                f"  <url>\n"
-                f"    <loc>{url_de(pagina, 'es')}</loc>\n"
-                f"    <lastmod>{hoy}</lastmod>\n"
-                f"    <changefreq>monthly</changefreq>\n"
-                f"    <priority>{prioridad}</priority>\n"
-                f"  </url>"
+        if pagina in ARTICULOS_PAQUETE:
+            # Solo los idiomas en los que el artículo existe de verdad.
+            # Declarar hermanas que no existen es mandar a Google a un 404.
+            suyos = ["es"] + [i for i in IDIOMAS_PUBLICADOS
+                              if articulo_listo(pagina, diccionario(i))]
+            alt = "\n".join(
+                f'    <xhtml:link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}"/>'
+                for i in suyos
             )
+            alt += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{url_de(pagina, "es")}"/>'
+            for i in suyos:
+                filas.append(
+                    f"  <url>\n"
+                    f"    <loc>{url_de(pagina, i)}</loc>\n"
+                    f"{alt}\n"
+                    f"    <lastmod>{hoy}</lastmod>\n"
+                    f"    <changefreq>monthly</changefreq>\n"
+                    f"    <priority>{prioridad}</priority>\n"
+                    f"  </url>"
+                )
             continue
         alternativas = "\n".join(
             f'    <xhtml:link rel="alternate" hreflang="{i}" href="{url_de(pagina, i)}"/>'
@@ -777,6 +917,8 @@ if __name__ == "__main__":
         cmd_extraer()
     elif orden == "generar":
         cmd_generar()
+    elif orden == "pendientes":
+        cmd_pendientes()
     elif orden == "sitemap":
         cmd_sitemap()
     elif orden == "comprobar":
