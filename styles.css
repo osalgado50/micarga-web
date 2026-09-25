@@ -1562,7 +1562,10 @@ body > section:not(.hero-section) > .container > h2 {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* `min(280px, 100%)` y no `280px` a secas: en un móvil de 375 px el hueco
+     útil dentro de la caja se queda en 245, y un mínimo de 280 obliga a la
+     columna a salirse. Con el min() la columna cede cuando no cabe. */
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 0.85rem 1.75rem;
 }
 .conformidad-list li {
@@ -1606,7 +1609,10 @@ body > section:not(.hero-section) > .container > h2 {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* `min(280px, 100%)` y no `280px` a secas: en un móvil de 375 px el hueco
+     útil dentro de la caja se queda en 245, y un mínimo de 280 obliga a la
+     columna a salirse. Con el min() la columna cede cuando no cabe. */
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 0.85rem 1.75rem;
 }
 .sanciones-list li {
@@ -1633,6 +1639,88 @@ body > section:not(.hero-section) > .container > h2 {
   opacity: 0.9;
 }
 .sanciones-nota strong { color: #ef4444; }
+
+/* ── Exenciones: quién NO necesita el DeCA ──────────────────────────────────
+   Va justo debajo del baremo y en AZUL, no en rojo. Es deliberado: el bloque
+   de arriba avisa de lo que te juegas y éste aclara si la cosa va contigo. Si
+   los dos fueran rojos, el segundo se leería como más amenaza en vez de como
+   lo que es —una aclaración, y en muchos casos una buena noticia—. */
+.exenciones-box {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  background: rgba(56, 189, 248, 0.05);
+}
+.exenciones-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+  color: #38bdf8;
+}
+.exenciones-box h3 i { color: #38bdf8; margin-right: 0.5rem; }
+.exenciones-intro { margin-bottom: 1.25rem; opacity: 0.9; }
+.exenciones-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  /* `min(280px, 100%)` y no `280px` a secas: en un móvil de 375 px el hueco
+     útil dentro de la caja se queda en 245, y un mínimo de 280 obliga a la
+     columna a salirse. Con el min() la columna cede cuando no cabe. */
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 0.85rem 1.75rem;
+}
+.exenciones-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.exenciones-list li::before {
+  content: "\f058"; /* fa-circle-check */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #38bdf8;
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+}
+
+/* El umbral de las 2 toneladas se saca de la lista y se le da caja propia:
+   es el dato que más gente tiene mal y el que más caro sale confundir. */
+.exenciones-umbral {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.08);
+  border-left: 3px solid #38bdf8;
+}
+.exenciones-umbral h4 {
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem;
+  color: var(--text-heading);
+}
+.exenciones-umbral p {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+.exenciones-tabla-nota {
+  margin-bottom: 0 !important;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
+}
+.exenciones-nota {
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+  opacity: 0.9;
+}
+.exenciones-nota strong { color: #38bdf8; }
+.exenciones-nota a { color: #38bdf8; text-decoration: underline; }
 
 
 /* ── Cartel «PDF ilimitados» (gancho de venta, va antes de las tarifas) ──────
