@@ -66,14 +66,72 @@ const ESPERA_MS = 2500;
 
 const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** La etiqueta de la acción de conversión de Google Ads. */
+const CONVERSION_ADS = 'AW-18461463262/Po2QCI_i-YAdEN6ljuNE';
+
+/** Precios reales, IVA incluido, los mismos que cobra Stripe. */
+const PRECIO_MENSUAL = 12.10;
+const PRECIO_ANUAL = 108.90;
+
+/**
+ * Cuánto vale esta conversión.
+ *
+ * 🚨 ANTES SE MANDABA 9,99 € FIJOS, QUE NO ES NINGUNO DE NUESTROS PRECIOS.
+ * Con un valor inventado, Google optimiza las pujas contra un número que no
+ * existe y trata igual a quien paga 12,10 € que a quien paga 108,90 €: es
+ * pagar por anuncios a ciegas, que es justo lo contrario de para lo que se
+ * mide una conversión.
+ *
+ * El plan no se guarda en `profiles`, así que se deduce de cuándo vence: si
+ * queda más de un trimestre por delante solo puede ser el anual. Es una
+ * inferencia, no un dato, y por eso no se usa para nada que no sea esto.
+ */
+const valorDeLaConversion = (venceEn) => {
+  if (!venceEn) return PRECIO_MENSUAL;
+  const dias = (new Date(venceEn) - Date.now()) / (1000 * 60 * 60 * 24);
+  return dias > 100 ? PRECIO_ANUAL : PRECIO_MENSUAL;
+};
+
 const estaVigente = async (userId) => {
   const { data, error } = await supabase
     .from('profiles')
-    .select('subscription_status')
+    .select('subscription_status, subscription_expires_at')
     .eq('id', userId)
     .maybeSingle();
-  if (error) return false;
-  return VIGENTES.includes(data?.subscription_status);
+  if (error) return null;
+  if (!VIGENTES.includes(data?.subscription_status)) return null;
+  return { venceEn: data?.subscription_expires_at ?? null };
+};
+
+/**
+ * Avisa a Google de que esto ha sido una venta.
+ *
+ * ⚠️ Se envía cuando la suscripción consta ACTIVA en la base de datos, no al
+ * cargar la página. Google propone dispararlo nada más abrirse, pero aquí
+ * llega gente cuyo cobro todavía no ha confirmado el webhook, y contar esas
+ * visitas como conversiones ensucia la cuenta de Ads con ventas que a veces
+ * no lo son.
+ *
+ * ⚠️ Y solo si la persona aceptó las cookies de publicidad. Lo decide
+ * `consentimiento.js`, que es quien carga —o no— el identificador de Ads.
+ */
+const medirLaVenta = (userId, venceEn) => {
+  const valor = valorDeLaConversion(venceEn);
+  try {
+    window.gtag?.('event', 'purchase', {
+      transaction_id: userId,
+      value: valor,
+      currency: 'EUR',
+    });
+    if (window.micargaPuedeMedirAnuncios?.()) {
+      window.gtag('event', 'conversion', {
+        send_to: CONVERSION_ADS,
+        transaction_id: userId,
+        value: valor,
+        currency: 'EUR',
+      });
+    }
+  } catch { /* sin efecto si no hay analítica */ }
 };
 
 (async () => {
@@ -90,16 +148,11 @@ const estaVigente = async (userId) => {
   }
 
   for (let intento = 0; intento < INTENTOS; intento++) {
-    if (await estaVigente(session.user.id)) {
+    const suscripcion = await estaVigente(session.user.id);
+    if (suscripcion) {
       ponerCabecera('ok', '¡Ya eres premium!');
       mostrarPaso('paso-activa');
-      try {
-        window.gtag?.('event', 'purchase', {
-          transaction_id: session.user.id,
-          value: 9.99,
-          currency: 'EUR',
-        });
-      } catch { /* sin efecto si no hay analítica */ }
+      medirLaVenta(session.user.id, suscripcion.venceEn);
       return;
     }
     await dormir(ESPERA_MS);

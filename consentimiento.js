@@ -31,6 +31,19 @@
 /** El identificador de GA4, «G-XXXXXXXXXX». Vacío = todo esto está apagado. */
 const MEDICION = 'G-9G0GZCR1W7';
 
+/**
+ * El identificador de Google Ads, «AW-XXXXXXXXX». Vacío = no se mide ningún
+ * anuncio.
+ *
+ * ⚠️ VA DETRÁS DE LA CASILLA DE PUBLICIDAD, NO DE LA DE ANALÍTICA. Son dos
+ * permisos distintos en el panel y la política de cookies los describe por
+ * separado. Quien acepta saber qué páginas se visitan pero no quiere que le
+ * midamos los anuncios tiene derecho a esa combinación, y aquí se respeta:
+ * sin `publicidad`, este identificador no se configura y la conversión no se
+ * envía.
+ */
+const ANUNCIOS = 'AW-18461463262';
+
 /** Dónde se guarda lo que ha elegido. Un año, que es lo que recomienda la AEPD. */
 const CLAVE = 'micarga-cookies';
 const MESES_VALIDO = 12;
@@ -151,6 +164,24 @@ const cargarAnalytics = (analitica, publicidad) => {
   // `anonymize_ip` ya no hace falta en GA4 (siempre anonimiza), pero
   // `allow_google_signals` sí: sin publicidad consentida, fuera.
   gtag('config', MEDICION, { allow_google_signals: !!publicidad });
+
+  // Google Ads solo si ha aceptado publicidad. Un `config` de AW- ya empieza a
+  // poner cookies de conversión, así que no basta con no mandar el evento
+  // después: es esta línea la que no se debe ejecutar.
+  if (ANUNCIOS && publicidad) gtag('config', ANUNCIOS);
+};
+
+/**
+ * ¿Se puede medir una conversión de Ads ahora mismo?
+ *
+ * Lo pregunta la página de gracias antes de enviar nada. Se expone aquí y no
+ * se deduce allí para que la respuesta salga del mismo sitio que toma la
+ * decisión de cargar: si mañana cambia la regla, cambia en un solo fichero.
+ */
+window.micargaPuedeMedirAnuncios = () => {
+  if (!ANUNCIOS || !cargado || !window.gtag) return false;
+  const e = leer();
+  return !!(e && e.publicidad);
 };
 
 const cerrarPanel = () => {
