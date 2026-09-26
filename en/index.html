@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · From creating the control document to signing it and checking the route.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Everything it does</h3>
+        <p class="caracteristicas-intro">Tap each section to open it.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> The document</summary>
+          <ul>
+            <li><strong>DeCA</strong> compliant with Order FOM/2861/2012 and the Resolution of 5 June 2026.</li>
+            <li><strong>Consignment note</strong> for domestic transport, covering the carriage contract.</li>
+            <li><strong>One document per destination</strong> on multi-drop runs, as the law requires.</li>
+            <li>Correcting an issued job: a new one is generated with a different QR and the previous one is voided but kept for traceability.</li>
+            <li>Duplicate a job so you do not retype what repeats.</li>
+            <li>The parties are identified as <strong>«contractual shipper» and «effective carrier»</strong>, expressly and separately.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> The QR code and roadside checks</summary>
+          <ul>
+            <li><strong>QR code embedded in the PDF itself</strong>, which is what the Resolution requires: a separate link or a photo of the document will not do.</li>
+            <li>When it is scanned, the document <strong>downloads straight away</strong>: no passwords, no buttons, no sign-up. The officer has nothing else to do.</li>
+            <li>A unique address per document, over an encrypted connection.</li>
+            <li>There is also a <strong>readable verification page</strong>, showing the status of the job, for anyone who would rather look at it than download it.</li>
+            <li><strong>One-year retention</strong> in the cloud, which is the minimum the rules require.</li>
+            <li>The driver can show it on the phone or on paper: both carry the same QR code.</li>
+            <li>If you correct a job, the new one carries <strong>a different QR code</strong> and the previous one is voided but still viewable.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Dangerous goods (ADR)</summary>
+          <ul>
+            <li><strong>Official dangerous goods table</strong> built in: pick the substance and the UN number, class and packing group fill themselves in.</li>
+            <li>The document is marked as <strong>DANGEROUS GOODS (ADR)</strong>, with class, UN number, packing group and technical name.</li>
+            <li>🚨 <strong>The route avoids roads where dangerous goods are banned.</strong> It is not the same route as for an ordinary lorry: it is calculated with ADR restrictions applied.</li>
+            <li>Truck parks <strong>suitable for ADR</strong> are flagged separately in the list of stops.</li>
+            <li>A note that the consignor may provide a printed copy of the documentation on request, under ADR 5.4.0.3.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Signatures</summary>
+          <ul>
+            <li>On-screen signature from the shipper, the driver and the consignee.</li>
+            <li><strong>Optional.</strong> The rules do not require them, and your office decides: whoever does not want them issues without them.</li>
+            <li><strong>Remote signature by link</strong>, single use and with no account needed. It works for delivery and also for loading, when the shipper is not at the dock.</li>
+            <li>Consignee's signature on delivery, with reservations if something is wrong.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Works with no signal</summary>
+          <ul>
+            <li>Full issuing of the document <strong>offline</strong>.</li>
+            <li>What you issue with no signal <strong>uploads itself</strong> once signal returns, without leaving the app open.</li>
+            <li>The document is valid on the road from the moment it is signed, even before it has uploaded.</li>
+            <li>Drafts saved on the phone itself.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Route, stops and rest</summary>
+          <ul>
+            <li>Truck route with distances and estimated arrival time at each point.</li>
+            <li><strong>Where to park, sleep and eat</strong> on your route, by kilometre and by real mealtime window.</li>
+            <li><strong>Tachograph break:</strong> it suggests where to stop within the 4 h 30 driving limit.</li>
+            <li>More than 1,500 rest areas and truck parks, with the Ministry-certified ones marked separately.</li>
+            <li>Incidents reported by other drivers, over a 12-month window. Information supplied by users, which Mi Carga does not verify.</li>
+            <li>Truck parks where a lorry does not fit or cannot enter are filtered out automatically.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nine languages</summary>
+          <ul>
+            <li>Spanish, Catalan, English, Portuguese, French, German, Italian, Polish and Romanian.</li>
+            <li>Translated by hand, not with machine translation.</li>
+            <li>The legal document is always in Spanish, which is what the Guardia Civil reads.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> The fleet CRM</summary>
+          <ul>
+            <li><strong>Operations:</strong> control documents, jobs, deliveries, pending items, incidents and CSV import.</li>
+            <li><strong>Planning:</strong> calendar, fleet, vehicles and assigning jobs to each driver.</li>
+            <li><strong>Signatures:</strong> pending, completed, external requests and history.</li>
+            <li><strong>Contacts and finance:</strong> customers, suppliers, consignees, and price, cost and margin per job.</li>
+            <li><strong>Users:</strong> roles, permissions and driver sign-up by code, with nobody handling anyone else's password.</li>
+            <li><strong>Expiry dates:</strong> licence, ADR, CPC and tachograph card, with warnings at 30, 15 and 7 days and on the day.</li>
+            <li><strong>Audit trail:</strong> a record of every change.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Billing and payment</summary>
+          <ul>
+            <li>You pay <strong>per driver</strong>, with the CRM separately.</li>
+            <li>Card payment on the web and on Android, and in-app purchase on iPhone.</li>
+            <li>Invoices with your tax details, downloadable whenever you want.</li>
+            <li><strong>10 free trial jobs</strong>, no card needed.</li>
+            <li>Change plan or cancel, yourself and whenever you want.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

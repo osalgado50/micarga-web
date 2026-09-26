@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · De crear el document de control a signar-lo i veure la ruta del port.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Tot el que fa</h3>
+        <p class="caracteristicas-intro">Toca cada apartat per desplegar-lo.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> El document</summary>
+          <ul>
+            <li><strong>DeCA</strong> conforme a l'Ordre FOM/2861/2012 i a la Resolució de 5 de juny de 2026.</li>
+            <li><strong>Carta de port</strong> nacional, per al contracte de transport.</li>
+            <li><strong>Un document per destinació</strong> als repartiments múltiples, tal com exigeix la llei.</li>
+            <li>Corregir un port ja emès: se'n genera un de nou amb un altre QR i l'anterior queda anul·lat, però es conserva per a la traçabilitat.</li>
+            <li>Duplicar un port per no tornar a teclejar el que es repeteix.</li>
+            <li>Les parts s'identifiquen com a <strong>«carregador contractual» i «transportista efectiu»</strong>, de manera expressa i diferenciada.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> El QR i la verificació a la carretera</summary>
+          <ul>
+            <li><strong>Codi QR incrustat al mateix PDF</strong>, que és el que exigeix la Resolució: no val un enllaç a part ni una foto del document.</li>
+            <li>En escanejar-lo, el document <strong>es descarrega directe</strong>: sense contrasenyes, sense botons i sense registrar-se. L'agent no ha de fer res més.</li>
+            <li>Adreça única per document, sobre connexió xifrada.</li>
+            <li>També hi ha una <strong>pantalla de verificació llegible</strong>, amb l'estat del port, per a qui prefereixi mirar-lo en comptes de descarregar-lo.</li>
+            <li><strong>Conservació d'un any</strong> al núvol, que és el mínim que demana la norma.</li>
+            <li>El conductor el pot ensenyar al mòbil o en paper: en tots dos casos porta el mateix QR.</li>
+            <li>Si corregeixes un port, el nou porta <strong>un altre QR</strong> i l'anterior queda anul·lat però consultable.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Mercaderies perilloses (ADR)</summary>
+          <ul>
+            <li><strong>Taula oficial de mercaderies perilloses</strong> incorporada: tries la substància i s'omplen sols el número ONU, la classe i el grup d'embalatge.</li>
+            <li>El document surt marcat com a <strong>MERCADERIA PERILLOSA (ADR)</strong>, amb classe, número ONU, grup d'embalatge i nom tècnic.</li>
+            <li>🚨 <strong>La ruta evita les carreteres prohibides per a mercaderies perilloses.</strong> No és la mateixa ruta que la d'un camió normal: es calcula amb les restriccions d'ADR aplicades.</li>
+            <li>Els pàrquings <strong>aptes per a ADR</strong> van assenyalats a part a la llista de parades.</li>
+            <li>Avís que l'expedidor pot facilitar còpia impresa de la documentació a requeriment, segons l'apartat 5.4.0.3 de l'ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Les signatures</summary>
+          <ul>
+            <li>Signatura en pantalla del carregador, el conductor i el destinatari.</li>
+            <li><strong>Opcionals.</strong> La normativa no les exigeix, i ho decideix la teva oficina: qui no les vulgui, emet sense elles.</li>
+            <li><strong>Signatura a distància per enllaç</strong>, d'un sol ús i sense que el signant tingui compte. Serveix per al lliurament i també per a la càrrega, quan el carregador no és al moll.</li>
+            <li>Signatura del destinatari a destinació, amb reserves si hi ha incidència.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Funciona sense cobertura</summary>
+          <ul>
+            <li>Emissió completa del document <strong>sense connexió</strong>.</li>
+            <li>El que s'emet sense senyal <strong>es puja sol</strong> en recuperar-la, sense deixar l'app oberta.</li>
+            <li>El document és vàlid a la carretera des que se signa, encara que encara no s'hagi pujat.</li>
+            <li>Esborranys desats al mateix mòbil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Ruta, parades i descans</summary>
+          <ul>
+            <li>Ruta de camió amb quilòmetres i hora estimada d'arribada a cada punt.</li>
+            <li><strong>On aparcar, on dormir i on menjar</strong> a la teva ruta, per quilòmetre i per franja horària real de menjar.</li>
+            <li><strong>Pausa del tacògraf:</strong> et suggereix on parar dins de les 4 h 30 de conducció.</li>
+            <li>Més de 1.500 àrees i pàrquings, amb els certificats pel Ministeri marcats a part.</li>
+            <li>Incidències que reporten altres conductors, amb finestra de 12 mesos. Informació aportada per usuaris, que Mi Carga no verifica.</li>
+            <li>Es descarten sols els pàrquings on un camió no cap o no pot entrar.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nou idiomes</summary>
+          <ul>
+            <li>Castellà, català, anglès, portuguès, francès, alemany, italià, polonès i romanès.</li>
+            <li>Traduïts a mà, no amb un traductor automàtic.</li>
+            <li>El document legal va sempre en castellà, que és el que llegeix la Guàrdia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> El CRM de flota</summary>
+          <ul>
+            <li><strong>Operacions:</strong> documents de control, transports, lliuraments, pendents, incidències i importació per CSV.</li>
+            <li><strong>Planificació:</strong> calendari, flota, vehicles i assignació de ports a cada conductor.</li>
+            <li><strong>Signatures:</strong> pendents, completades, sol·licituds externes i històric.</li>
+            <li><strong>Contactes i economia:</strong> clients, proveïdors, destinataris, i preu, cost i benefici per port.</li>
+            <li><strong>Usuaris:</strong> rols, permisos i alta de conductors per codi, sense que ningú toqui contrasenyes alienes.</li>
+            <li><strong>Caducitats:</strong> carnet, ADR, CAP i targeta de tacògraf, amb avís a 30, 15 i 7 dies i el mateix dia.</li>
+            <li><strong>Auditoria:</strong> registre de tots els canvis.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Cobrament i facturació</summary>
+          <ul>
+            <li>Es paga <strong>per conductor</strong>, amb el CRM a part.</li>
+            <li>Pagament amb targeta al web i a Android, i compra integrada a l'iPhone.</li>
+            <li>Factures amb les teves dades fiscals, descarregables quan vulguis.</li>
+            <li><strong>10 ports de prova gratis</strong>, sense targeta.</li>
+            <li>Canviar de pla o cancel·lar, tu mateix i quan vulguis.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

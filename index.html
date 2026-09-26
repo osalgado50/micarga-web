@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · De crear el documento de control a firmarlo y ver la ruta del porte.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Todo lo que hace</h3>
+        <p class="caracteristicas-intro">Toca cada apartado para desplegarlo.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> El documento</summary>
+          <ul>
+            <li><strong>DeCA</strong> conforme a la Orden FOM/2861/2012 y a la Resolución de 5 de junio de 2026.</li>
+            <li><strong>Carta de porte</strong> nacional, para el contrato de transporte.</li>
+            <li><strong>Un documento por destino</strong> en los repartos múltiples, como exige la ley.</li>
+            <li>Corregir un porte ya emitido: se genera uno nuevo con otro QR y el anterior queda anulado, pero se conserva para la trazabilidad.</li>
+            <li>Duplicar un porte para no volver a teclear lo que se repite.</li>
+            <li>Las partes se identifican como <strong>«cargador contractual» y «transportista efectivo»</strong>, de forma expresa y diferenciada.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> El QR y la verificación en carretera</summary>
+          <ul>
+            <li><strong>Código QR incrustado en el propio PDF</strong>, que es lo que exige la Resolución: no vale un enlace aparte ni una foto del documento.</li>
+            <li>Al escanearlo, el documento <strong>se descarga directo</strong>: sin contraseñas, sin botones y sin registrarse. El agente no tiene que hacer nada más.</li>
+            <li>Dirección única por documento, sobre conexión cifrada.</li>
+            <li>También hay una <strong>pantalla de verificación legible</strong>, con el estado del porte, para quien prefiera mirarlo en vez de descargarlo.</li>
+            <li><strong>Conservación de un año</strong> en la nube, que es el mínimo que pide la norma.</li>
+            <li>El conductor puede enseñarlo en el móvil o en papel: en los dos casos lleva el mismo QR.</li>
+            <li>Si corriges un porte, el nuevo lleva <strong>otro QR</strong> y el anterior queda anulado pero consultable.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Mercancías peligrosas (ADR)</summary>
+          <ul>
+            <li><strong>Tabla oficial de mercancías peligrosas</strong> incorporada: eliges la sustancia y se rellenan solos el número ONU, la clase y el grupo de embalaje.</li>
+            <li>El documento sale marcado como <strong>MERCANCÍA PELIGROSA (ADR)</strong>, con clase, número ONU, grupo de embalaje y nombre técnico.</li>
+            <li>🚨 <strong>La ruta evita las carreteras prohibidas para mercancías peligrosas.</strong> No es la misma ruta que la de un camión normal: se calcula con las restricciones de ADR aplicadas.</li>
+            <li>Los parkings <strong>aptos para ADR</strong> van señalados aparte en la lista de paradas.</li>
+            <li>Aviso de que el expedidor puede facilitar copia impresa de la documentación a requerimiento, según el apartado 5.4.0.3 del ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Las firmas</summary>
+          <ul>
+            <li>Firma en pantalla del cargador, el conductor y el destinatario.</li>
+            <li><strong>Opcionales.</strong> La normativa no las exige, y lo decide tu oficina: quien no las quiera, emite sin ellas.</li>
+            <li><strong>Firma a distancia por enlace</strong>, de un solo uso y sin que el firmante tenga cuenta. Sirve para la entrega y también para la carga, cuando el cargador no está en el muelle.</li>
+            <li>Firma del destinatario en destino, con reservas si hay incidencia.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Funciona sin cobertura</summary>
+          <ul>
+            <li>Emisión completa del documento <strong>sin conexión</strong>.</li>
+            <li>Lo emitido sin señal <strong>se sube solo</strong> al recuperarla, sin dejar la app abierta.</li>
+            <li>El documento es válido en carretera desde que se firma, aunque todavía no haya subido.</li>
+            <li>Borradores guardados en el propio móvil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Ruta, paradas y descanso</summary>
+          <ul>
+            <li>Ruta de camión con kilómetros y hora estimada de llegada a cada punto.</li>
+            <li><strong>Dónde aparcar, dónde dormir y dónde comer</strong> en tu ruta, por kilómetro y por franja horaria real de comida.</li>
+            <li><strong>Pausa del tacógrafo:</strong> te sugiere dónde parar dentro de las 4 h 30 de conducción.</li>
+            <li>Más de 1.500 áreas y parkings, con los certificados por el Ministerio marcados aparte.</li>
+            <li>Incidencias que reportan otros conductores, con ventana de 12 meses. Información aportada por usuarios, que Mi Carga no verifica.</li>
+            <li>Se descartan solos los parkings donde un camión no cabe o no puede entrar.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nueve idiomas</summary>
+          <ul>
+            <li>Castellano, catalán, inglés, portugués, francés, alemán, italiano, polaco y rumano.</li>
+            <li>Traducidos a mano, no con un traductor automático.</li>
+            <li>El documento legal va siempre en castellano, que es lo que lee la Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> El CRM de flota</summary>
+          <ul>
+            <li><strong>Operaciones:</strong> documentos de control, transportes, entregas, pendientes, incidencias e importación por CSV.</li>
+            <li><strong>Planificación:</strong> calendario, flota, vehículos y asignación de portes a cada conductor.</li>
+            <li><strong>Firmas:</strong> pendientes, completadas, solicitudes externas e histórico.</li>
+            <li><strong>Contactos y economía:</strong> clientes, proveedores, destinatarios, y precio, coste y beneficio por porte.</li>
+            <li><strong>Usuarios:</strong> roles, permisos y alta de conductores por código, sin que nadie toque contraseñas ajenas.</li>
+            <li><strong>Caducidades:</strong> carnet, ADR, CAP y tarjeta de tacógrafo, con aviso a 30, 15 y 7 días y el mismo día.</li>
+            <li><strong>Auditoría:</strong> registro de todos los cambios.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Cobro y facturación</summary>
+          <ul>
+            <li>Se paga <strong>por conductor</strong>, con el CRM aparte.</li>
+            <li>Pago con tarjeta en la web y en Android, y compra integrada en iPhone.</li>
+            <li>Facturas con tus datos fiscales, descargables cuando quieras.</li>
+            <li><strong>10 portes de prueba gratis</strong>, sin tarjeta.</li>
+            <li>Cambiar de plan o cancelar, tú mismo y cuando quieras.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

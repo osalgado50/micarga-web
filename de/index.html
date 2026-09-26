@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · Vom Erstellen des Kontrolldokuments bis zur Unterschrift und zur Route des Transports.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Alles, was sie kann</h3>
+        <p class="caracteristicas-intro">Tippen Sie auf jeden Abschnitt, um ihn zu öffnen.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> Das Dokument</summary>
+          <ul>
+            <li><strong>DeCA</strong> gemäß der Verordnung FOM/2861/2012 und der Resolution vom 5. Juni 2026.</li>
+            <li><strong>Frachtbrief</strong> für den Inlandsverkehr, für den Beförderungsvertrag.</li>
+            <li><strong>Ein Dokument je Ziel</strong> bei Mehrfachzustellungen, wie es das Gesetz verlangt.</li>
+            <li>Einen bereits ausgestellten Auftrag korrigieren: Es wird ein neuer mit anderem QR-Code erzeugt, der alte wird storniert, aber zur Nachverfolgbarkeit aufbewahrt.</li>
+            <li>Einen Auftrag duplizieren, damit Sie Wiederkehrendes nicht neu eintippen.</li>
+            <li>Die Parteien werden als <strong>«vertraglicher Verlader» und «tatsächlicher Frachtführer»</strong>ausgewiesen, ausdrücklich und voneinander getrennt.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> Der QR-Code und die Kontrolle unterwegs</summary>
+          <ul>
+            <li><strong>QR-Code im PDF selbst eingebettet</strong>, genau das verlangt die Resolution: ein separater Link oder ein Foto des Dokuments genügen nicht.</li>
+            <li>Beim Scannen wird das Dokument <strong>direkt heruntergeladen</strong>: ohne Passwörter, ohne Schaltflächen und ohne Anmeldung. Der Beamte muss nichts weiter tun.</li>
+            <li>Eine eindeutige Adresse je Dokument, über eine verschlüsselte Verbindung.</li>
+            <li>Es gibt außerdem eine <strong>lesbare Prüfseite</strong>, mit dem Status des Auftrags, für alle, die lieber hinschauen als herunterladen.</li>
+            <li><strong>Aufbewahrung ein Jahr lang</strong> in der Cloud, das Minimum, das die Vorschrift verlangt.</li>
+            <li>Der Fahrer kann es auf dem Handy oder auf Papier zeigen: Beides trägt denselben QR-Code.</li>
+            <li>Wenn Sie einen Auftrag korrigieren, trägt der neue <strong>einen anderen QR-Code</strong> und der vorherige ist storniert, aber weiterhin einsehbar.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Gefahrgut (ADR)</summary>
+          <ul>
+            <li><strong>Amtliche Gefahrguttabelle</strong> integriert: Sie wählen den Stoff und UN-Nummer, Klasse und Verpackungsgruppe füllen sich von selbst aus.</li>
+            <li>Das Dokument trägt den Vermerk <strong>GEFAHRGUT (ADR)</strong>, mit Klasse, UN-Nummer, Verpackungsgruppe und technischer Benennung.</li>
+            <li>🚨 <strong>Die Route meidet Straßen, auf denen Gefahrgut verboten ist.</strong> Es ist nicht dieselbe Route wie für einen gewöhnlichen LKW: Sie wird mit angewandten ADR-Beschränkungen berechnet.</li>
+            <li>Die Parkplätze <strong>die für ADR geeignet sind</strong> werden in der Halteliste gesondert ausgewiesen.</li>
+            <li>Hinweis, dass der Absender auf Verlangen eine gedruckte Kopie der Dokumentation bereitstellen kann, gemäß ADR 5.4.0.3.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Die Unterschriften</summary>
+          <ul>
+            <li>Unterschrift auf dem Bildschirm von Verlader, Fahrer und Empfänger.</li>
+            <li><strong>Optional.</strong> Die Vorschrift verlangt sie nicht, und Ihr Büro entscheidet: Wer sie nicht will, stellt ohne sie aus.</li>
+            <li><strong>Unterschrift aus der Ferne per Link</strong>, einmalig nutzbar und ohne Konto für den Unterzeichnenden. Gilt für die Zustellung und auch für die Beladung, wenn der Verlader nicht an der Rampe ist.</li>
+            <li>Unterschrift des Empfängers bei der Ablieferung, mit Vorbehalten, falls etwas nicht stimmt.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Funktioniert ohne Empfang</summary>
+          <ul>
+            <li>Vollständiges Ausstellen des Dokuments <strong>offline</strong>.</li>
+            <li>Was ohne Empfang ausgestellt wird <strong>lädt sich selbst hoch</strong> sobald wieder Empfang da ist, ohne die App offen zu lassen.</li>
+            <li>Das Dokument ist auf der Straße gültig, sobald es unterschrieben ist, auch bevor es hochgeladen wurde.</li>
+            <li>Entwürfe direkt auf dem Handy gespeichert.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Route, Halte und Pausen</summary>
+          <ul>
+            <li>LKW-Route mit Kilometern und geschätzter Ankunftszeit an jedem Punkt.</li>
+            <li><strong>Wo parken, wo schlafen und wo essen</strong> auf Ihrer Route, nach Kilometer und nach echten Essenszeiten.</li>
+            <li><strong>Tachographen-Pause:</strong> schlägt vor, wo Sie innerhalb der 4,5 Stunden Lenkzeit halten.</li>
+            <li>Mehr als 1.500 Rastplätze und Parkplätze, die vom Ministerium zertifizierten gesondert markiert.</li>
+            <li>Von anderen Fahrern gemeldete Vorfälle, über ein Fenster von 12 Monaten. Von Nutzern gelieferte Angaben, die Mi Carga nicht prüft.</li>
+            <li>Parkplätze, auf die ein LKW nicht passt oder nicht einfahren darf, werden automatisch aussortiert.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Neun Sprachen</summary>
+          <ul>
+            <li>Spanisch, Katalanisch, Englisch, Portugiesisch, Französisch, Deutsch, Italienisch, Polnisch und Rumänisch.</li>
+            <li>Von Hand übersetzt, nicht maschinell.</li>
+            <li>Das rechtsgültige Dokument ist immer auf Spanisch, denn das liest die Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> Das Flotten-CRM</summary>
+          <ul>
+            <li><strong>Betrieb:</strong> Kontrolldokumente, Aufträge, Zustellungen, Offenes, Vorfälle und CSV-Import.</li>
+            <li><strong>Planung:</strong> Kalender, Fuhrpark, Fahrzeuge und Zuweisung von Aufträgen an jeden Fahrer.</li>
+            <li><strong>Unterschriften:</strong> offen, erledigt, externe Anfragen und Verlauf.</li>
+            <li><strong>Kontakte und Zahlen:</strong> Kunden, Lieferanten, Empfänger sowie Preis, Kosten und Marge je Auftrag.</li>
+            <li><strong>Benutzer:</strong> Rollen, Rechte und Fahrer-Anmeldung per Code, ohne dass jemand fremde Passwörter anfasst.</li>
+            <li><strong>Ablaufdaten:</strong> Führerschein, ADR, Berufskraftfahrer-Qualifikation und Fahrerkarte, mit Hinweis 30, 15 und 7 Tage vorher und am selben Tag.</li>
+            <li><strong>Prüfprotokoll:</strong> Aufzeichnung aller Änderungen.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Abrechnung und Zahlung</summary>
+          <ul>
+            <li>Bezahlt wird <strong>pro Fahrer</strong>, das CRM gesondert.</li>
+            <li>Kartenzahlung im Web und auf Android, In-App-Kauf auf dem iPhone.</li>
+            <li>Rechnungen mit Ihren Steuerdaten, jederzeit herunterladbar.</li>
+            <li><strong>10 kostenlose Testaufträge</strong>, ohne Karte.</li>
+            <li>Tarif wechseln oder kündigen, selbst und jederzeit.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

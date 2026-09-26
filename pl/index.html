@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · Od utworzenia dokumentu kontroli po jego podpisanie i trasę przewozu.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Wszystko, co potrafi</h3>
+        <p class="caracteristicas-intro">Dotknij każdej sekcji, aby ją otworzyć.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> Dokument</summary>
+          <ul>
+            <li><strong>DeCA</strong> zgodny z rozporządzeniem FOM/2861/2012 i Rezolucją z 5 czerwca 2026 r.</li>
+            <li><strong>List przewozowy</strong> krajowy, na potrzeby umowy przewozu.</li>
+            <li><strong>Jeden dokument na każdy punkt docelowy</strong> przy dostawach wielopunktowych, jak wymaga prawo.</li>
+            <li>Korekta już wystawionego zlecenia: powstaje nowe z innym kodem QR, a poprzednie zostaje anulowane, ale zachowane dla identyfikowalności.</li>
+            <li>Zduplikuj zlecenie, żeby nie wpisywać ponownie tego, co się powtarza.</li>
+            <li>Strony są oznaczone jako <strong>«nadawca umowny» i «przewoźnik faktyczny»</strong>, wyraźnie i oddzielnie.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> Kod QR i kontrola na drodze</summary>
+          <ul>
+            <li><strong>Kod QR wbudowany w sam plik PDF</strong>, czego właśnie wymaga Rezolucja: osobny link ani zdjęcie dokumentu nie wystarczą.</li>
+            <li>Po zeskanowaniu dokument <strong>pobiera się od razu</strong>: bez haseł, bez przycisków i bez rejestracji. Funkcjonariusz nie musi robić nic więcej.</li>
+            <li>Unikalny adres dla każdego dokumentu, po połączeniu szyfrowanym.</li>
+            <li>Jest też <strong>czytelny ekran weryfikacji</strong>, ze statusem zlecenia, dla tych, którzy wolą spojrzeć niż pobierać.</li>
+            <li><strong>Przechowywanie przez rok</strong> w chmurze, czyli minimum wymagane przepisami.</li>
+            <li>Kierowca może go pokazać w telefonie albo na papierze: w obu przypadkach jest ten sam kod QR.</li>
+            <li>Jeśli poprawisz zlecenie, nowe ma <strong>inny kod QR</strong> a poprzednie zostaje anulowane, ale wciąż jest do wglądu.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Towary niebezpieczne (ADR)</summary>
+          <ul>
+            <li><strong>Urzędowa tabela towarów niebezpiecznych</strong> wbudowana: wybierasz substancję, a numer ONZ, klasa i grupa pakowania uzupełniają się same.</li>
+            <li>Dokument jest oznaczony jako <strong>TOWAR NIEBEZPIECZNY (ADR)</strong>, z klasą, numerem ONZ, grupą pakowania i nazwą techniczną.</li>
+            <li>🚨 <strong>Trasa omija drogi zakazane dla towarów niebezpiecznych.</strong> To nie ta sama trasa co dla zwykłej ciężarówki: liczona jest z zastosowanymi ograniczeniami ADR.</li>
+            <li>Parkingi <strong>przystosowane do ADR</strong> są oznaczone osobno na liście postojów.</li>
+            <li>Informacja, że nadawca może udostępnić papierową kopię dokumentacji na żądanie, zgodnie z punktem 5.4.0.3 ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Podpisy</summary>
+          <ul>
+            <li>Podpis na ekranie nadawcy, kierowcy i odbiorcy.</li>
+            <li><strong>Opcjonalne.</strong> Przepisy ich nie wymagają, a decyduje twoje biuro: kto ich nie chce, wystawia bez nich.</li>
+            <li><strong>Podpis zdalny przez link</strong>, jednorazowy i bez konta dla podpisującego. Działa przy dostawie i przy załadunku, gdy nadawcy nie ma na rampie.</li>
+            <li>Podpis odbiorcy przy dostawie, z zastrzeżeniami, jeśli coś jest nie tak.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Działa bez zasięgu</summary>
+          <ul>
+            <li>Pełne wystawienie dokumentu <strong>offline</strong>.</li>
+            <li>To, co wystawisz bez zasięgu <strong>wyśle się samo</strong> gdy tylko wróci sygnał, bez trzymania aplikacji otwartej.</li>
+            <li>Dokument jest ważny na drodze od chwili podpisania, jeszcze zanim się wyśle.</li>
+            <li>Szkice zapisane w samym telefonie.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Trasa, postoje i odpoczynek</summary>
+          <ul>
+            <li>Trasa dla ciężarówki z kilometrami i szacowaną godziną dotarcia do każdego punktu.</li>
+            <li><strong>Gdzie zaparkować, gdzie przenocować i gdzie zjeść</strong> na twojej trasie, według kilometra i rzeczywistych pór posiłków.</li>
+            <li><strong>Przerwa tachografu:</strong> podpowiada, gdzie stanąć w ramach 4 godz. 30 min jazdy.</li>
+            <li>Ponad 1500 miejsc obsługi i parkingów, z certyfikowanymi przez ministerstwo oznaczonymi osobno.</li>
+            <li>Zdarzenia zgłaszane przez innych kierowców, w oknie 12 miesięcy. Informacje przekazane przez użytkowników, których Mi Carga nie weryfikuje.</li>
+            <li>Parkingi, na które ciężarówka się nie mieści albo nie może wjechać, są odrzucane automatycznie.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Dziewięć języków</summary>
+          <ul>
+            <li>Hiszpański, kataloński, angielski, portugalski, francuski, niemiecki, włoski, polski i rumuński.</li>
+            <li>Przetłumaczone ręcznie, nie tłumaczem maszynowym.</li>
+            <li>Dokument prawny jest zawsze po hiszpańsku, bo to czyta Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> CRM floty</summary>
+          <ul>
+            <li><strong>Operacje:</strong> dokumenty kontrolne, zlecenia, dostawy, sprawy w toku, zdarzenia i import z CSV.</li>
+            <li><strong>Planowanie:</strong> kalendarz, flota, pojazdy i przydzielanie zleceń poszczególnym kierowcom.</li>
+            <li><strong>Podpisy:</strong> oczekujące, zakończone, żądania zewnętrzne i historia.</li>
+            <li><strong>Kontakty i finanse:</strong> klienci, dostawcy, odbiorcy oraz cena, koszt i marża na zlecenie.</li>
+            <li><strong>Użytkownicy:</strong> role, uprawnienia i rejestracja kierowców kodem, bez dotykania cudzych haseł.</li>
+            <li><strong>Terminy ważności:</strong> prawo jazdy, ADR, kwalifikacja zawodowa i karta kierowcy, z ostrzeżeniem na 30, 15 i 7 dni oraz tego samego dnia.</li>
+            <li><strong>Audyt:</strong> zapis wszystkich zmian.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Rozliczenia i płatności</summary>
+          <ul>
+            <li>Płaci się <strong>za kierowcę</strong>, CRM osobno.</li>
+            <li>Płatność kartą w sieci i na Androidzie oraz zakup w aplikacji na iPhonie.</li>
+            <li>Faktury z twoimi danymi podatkowymi, do pobrania kiedy chcesz.</li>
+            <li><strong>10 darmowych zleceń próbnych</strong>, bez karty.</li>
+            <li>Zmiana planu lub rezygnacja, samodzielnie i kiedy chcesz.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

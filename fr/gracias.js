@@ -66,7 +66,21 @@ const ESPERA_MS = 2500;
 
 const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** La etiqueta de la acción de conversión de Google Ads. */
+/**
+ * La etiqueta de la acción de conversión de Google Ads.
+ *
+ * ⚠️ EN GOOGLE ADS ESTA ACCIÓN SE LLAMA «Registro», Y MIDE UNA VENTA.
+ * El nombre viene de cómo se creó la acción en la cuenta y no se corresponde
+ * con lo que cuenta: aquí solo se dispara cuando la suscripción consta ACTIVA
+ * en la base de datos, o sea cuando alguien ha pagado. Decisión del
+ * propietario, 25-09-2026, preguntado expresamente.
+ *
+ * Quien mire el panel de Ads y vea «Registro» va a pensar que cuenta altas de
+ * cuenta. No lo hace: las altas ocurren en la app, no en la web, y no están
+ * instrumentadas. Si algún día se quieren medir de verdad, hace falta una
+ * acción de conversión NUEVA — no reutilizar ésta, o los dos números quedan
+ * mezclados y ninguno sirve.
+ */
 const CONVERSION_ADS = 'AW-18461463262/Po2QCI_i-YAdEN6ljuNE';
 
 /** Precios reales, IVA incluido, los mismos que cobra Stripe. */

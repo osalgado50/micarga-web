@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · Dalla creazione del documento di controllo alla firma e al percorso del trasporto.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Tutto quello che fa</h3>
+        <p class="caracteristicas-intro">Tocca ogni sezione per aprirla.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> Il documento</summary>
+          <ul>
+            <li><strong>DeCA</strong> conforme all'Ordine FOM/2861/2012 e alla Risoluzione del 5 giugno 2026.</li>
+            <li><strong>Lettera di vettura</strong> nazionale, per il contratto di trasporto.</li>
+            <li><strong>Un documento per destinazione</strong> nelle consegne multiple, come richiede la legge.</li>
+            <li>Correggere un trasporto già emesso: se ne genera uno nuovo con un altro QR e il precedente viene annullato, ma conservato per la tracciabilità.</li>
+            <li>Duplicare un trasporto per non riscrivere ciò che si ripete.</li>
+            <li>Le parti sono identificate come <strong>«caricatore contrattuale» e «vettore effettivo»</strong>, in modo espresso e distinto.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> Il QR e il controllo su strada</summary>
+          <ul>
+            <li><strong>Codice QR incorporato nel PDF stesso</strong>, che è quanto richiede la Risoluzione: non basta un link a parte né una foto del documento.</li>
+            <li>Quando lo si scansiona, il documento <strong>si scarica direttamente</strong>: senza password, senza pulsanti e senza registrarsi. L'agente non deve fare altro.</li>
+            <li>Un indirizzo unico per documento, su connessione cifrata.</li>
+            <li>C'è anche una <strong>schermata di verifica leggibile</strong>, con lo stato del trasporto, per chi preferisce guardarla invece di scaricare.</li>
+            <li><strong>Conservazione di un anno</strong> nel cloud, il minimo che la norma richiede.</li>
+            <li>L'autista può mostrarlo sul telefono o su carta: in entrambi i casi porta lo stesso QR.</li>
+            <li>Se correggi un trasporto, quello nuovo porta <strong>un altro QR</strong> e il precedente resta annullato ma consultabile.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Merci pericolose (ADR)</summary>
+          <ul>
+            <li><strong>Tabella ufficiale delle merci pericolose</strong> integrata: scegli la sostanza e numero ONU, classe e gruppo di imballaggio si compilano da soli.</li>
+            <li>Il documento esce contrassegnato come <strong>MERCE PERICOLOSA (ADR)</strong>, con classe, numero ONU, gruppo di imballaggio e nome tecnico.</li>
+            <li>🚨 <strong>Il percorso evita le strade vietate alle merci pericolose.</strong> Non è lo stesso percorso di un camion normale: si calcola con le restrizioni ADR applicate.</li>
+            <li>I parcheggi <strong>idonei all'ADR</strong> sono segnalati a parte nell'elenco delle soste.</li>
+            <li>Avviso che lo speditore può fornire copia cartacea della documentazione su richiesta, secondo il punto 5.4.0.3 dell'ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Le firme</summary>
+          <ul>
+            <li>Firma sullo schermo del caricatore, dell'autista e del destinatario.</li>
+            <li><strong>Facoltative.</strong> La normativa non le richiede, e decide il tuo ufficio: chi non le vuole emette senza.</li>
+            <li><strong>Firma a distanza tramite link</strong>, monouso e senza che il firmatario abbia un account. Vale per la consegna e anche per il carico, quando il caricatore non è alla banchina.</li>
+            <li>Firma del destinatario a destinazione, con riserve in caso di anomalia.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Funziona senza campo</summary>
+          <ul>
+            <li>Emissione completa del documento <strong>offline</strong>.</li>
+            <li>Ciò che emetti senza campo <strong>si carica da solo</strong> appena torna il segnale, senza lasciare l'app aperta.</li>
+            <li>Il documento è valido su strada da quando viene firmato, anche prima di essere caricato.</li>
+            <li>Bozze salvate sul telefono stesso.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Percorso, soste e riposo</summary>
+          <ul>
+            <li>Percorso per camion con chilometri e orario stimato di arrivo a ogni punto.</li>
+            <li><strong>Dove parcheggiare, dove dormire e dove mangiare</strong> sul tuo percorso, per chilometro e per fascia oraria reale dei pasti.</li>
+            <li><strong>Pausa del cronotachigrafo:</strong> ti suggerisce dove fermarti entro le 4 h 30 di guida.</li>
+            <li>Più di 1.500 aree e parcheggi, con quelli certificati dal Ministero segnalati a parte.</li>
+            <li>Segnalazioni di altri autisti, su una finestra di 12 mesi. Informazioni fornite dagli utenti, che Mi Carga non verifica.</li>
+            <li>I parcheggi dove un camion non entra o non può accedere vengono esclusi da soli.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nove lingue</summary>
+          <ul>
+            <li>Spagnolo, catalano, inglese, portoghese, francese, tedesco, italiano, polacco e rumeno.</li>
+            <li>Tradotte a mano, non con un traduttore automatico.</li>
+            <li>Il documento legale è sempre in spagnolo, che è quello che legge la Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> Il CRM di flotta</summary>
+          <ul>
+            <li><strong>Operazioni:</strong> documenti di controllo, trasporti, consegne, in sospeso, segnalazioni e importazione da CSV.</li>
+            <li><strong>Pianificazione:</strong> calendario, flotta, veicoli e assegnazione dei trasporti a ciascun autista.</li>
+            <li><strong>Firme:</strong> in sospeso, completate, richieste esterne e storico.</li>
+            <li><strong>Contatti ed economia:</strong> clienti, fornitori, destinatari, e prezzo, costo e margine per trasporto.</li>
+            <li><strong>Utenti:</strong> ruoli, permessi e registrazione degli autisti tramite codice, senza che nessuno tocchi password altrui.</li>
+            <li><strong>Scadenze:</strong> patente, ADR, CQC e carta del cronotachigrafo, con avviso a 30, 15 e 7 giorni e il giorno stesso.</li>
+            <li><strong>Audit:</strong> registro di tutte le modifiche.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Incasso e fatturazione</summary>
+          <ul>
+            <li>Si paga <strong>per autista</strong>, con il CRM a parte.</li>
+            <li>Pagamento con carta sul web e su Android, e acquisto integrato su iPhone.</li>
+            <li>Fatture con i tuoi dati fiscali, scaricabili quando vuoi.</li>
+            <li><strong>10 trasporti di prova gratuiti</strong>, senza carta.</li>
+            <li>Cambiare piano o disdire, da solo e quando vuoi.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

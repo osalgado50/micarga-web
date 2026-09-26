@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · De la création du document de contrôle à sa signature et à l'itinéraire du transport.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Tout ce qu'elle fait</h3>
+        <p class="caracteristicas-intro">Touchez chaque rubrique pour l'ouvrir.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> Le document</summary>
+          <ul>
+            <li><strong>DeCA</strong> conforme à l'arrêté FOM/2861/2012 et à la Résolution du 5 juin 2026.</li>
+            <li><strong>Lettre de voiture</strong> nationale, pour le contrat de transport.</li>
+            <li><strong>Un document par destination</strong> sur les tournées multiples, comme l'exige la loi.</li>
+            <li>Corriger un transport déjà émis : un nouveau est généré avec un autre QR et le précédent est annulé, mais conservé pour la traçabilité.</li>
+            <li>Dupliquer un transport pour ne pas ressaisir ce qui se répète.</li>
+            <li>Les parties sont identifiées comme <strong>« chargeur contractuel » et « transporteur effectif »</strong>, de manière expresse et distincte.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> Le QR et le contrôle routier</summary>
+          <ul>
+            <li><strong>Code QR intégré au PDF lui-même</strong>, ce qu'exige la Résolution : un lien à part ou une photo du document ne suffisent pas.</li>
+            <li>À la lecture, le document <strong>se télécharge directement</strong>, sans mot de passe, sans bouton et sans inscription. L'agent n'a rien d'autre à faire.</li>
+            <li>Une adresse unique par document, sur connexion chiffrée.</li>
+            <li>Il existe aussi un <strong>écran de vérification lisible</strong>, avec l'état du transport, pour qui préfère le consulter plutôt que le télécharger.</li>
+            <li><strong>Conservation d'un an</strong> dans le cloud, le minimum exigé par la norme.</li>
+            <li>Le chauffeur peut le montrer sur le téléphone ou sur papier : les deux portent le même QR.</li>
+            <li>Si vous corrigez un transport, le nouveau porte <strong>un autre QR</strong> et le précédent est annulé mais reste consultable.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Marchandises dangereuses (ADR)</summary>
+          <ul>
+            <li><strong>Tableau officiel des marchandises dangereuses</strong> intégré : vous choisissez la substance et le numéro ONU, la classe et le groupe d'emballage se remplissent seuls.</li>
+            <li>Le document porte la mention <strong>MARCHANDISE DANGEREUSE (ADR)</strong>, avec classe, numéro ONU, groupe d'emballage et nom technique.</li>
+            <li>🚨 <strong>L'itinéraire évite les routes interdites aux marchandises dangereuses.</strong> Ce n'est pas le même itinéraire que pour un camion ordinaire : il est calculé avec les restrictions ADR appliquées.</li>
+            <li>Les parkings <strong>aptes à l'ADR</strong> sont signalés à part dans la liste des arrêts.</li>
+            <li>Mention indiquant que l'expéditeur peut fournir une copie imprimée de la documentation sur demande, conformément au point 5.4.0.3 de l'ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Les signatures</summary>
+          <ul>
+            <li>Signature à l'écran du chargeur, du chauffeur et du destinataire.</li>
+            <li><strong>Facultatives.</strong> La réglementation ne les exige pas, et c'est votre bureau qui décide : qui n'en veut pas émet sans elles.</li>
+            <li><strong>Signature à distance par lien</strong>, à usage unique et sans compte pour le signataire. Valable pour la livraison et aussi pour le chargement, quand le chargeur n'est pas au quai.</li>
+            <li>Signature du destinataire à l'arrivée, avec réserves en cas d'incident.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Fonctionne sans réseau</summary>
+          <ul>
+            <li>Émission complète du document <strong>hors ligne</strong>.</li>
+            <li>Ce qui est émis sans réseau <strong>se téléverse tout seul</strong> dès le retour du signal, sans laisser l'application ouverte.</li>
+            <li>Le document est valable sur la route dès qu'il est signé, même avant d'être téléversé.</li>
+            <li>Brouillons enregistrés sur le téléphone lui-même.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Itinéraire, arrêts et repos</summary>
+          <ul>
+            <li>Itinéraire poids lourds avec kilomètres et heure d'arrivée estimée à chaque point.</li>
+            <li><strong>Où se garer, où dormir et où manger</strong> sur votre itinéraire, par kilomètre et selon les vraies plages de repas.</li>
+            <li><strong>Pause du tachygraphe :</strong> elle suggère où s'arrêter dans la limite des 4 h 30 de conduite.</li>
+            <li>Plus de 1 500 aires et parkings, avec ceux certifiés par le ministère signalés à part.</li>
+            <li>Incidents signalés par d'autres chauffeurs, sur une fenêtre de 12 mois. Information fournie par les utilisateurs, que Mi Carga ne vérifie pas.</li>
+            <li>Les parkings où un camion ne tient pas ou ne peut pas entrer sont écartés automatiquement.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Neuf langues</summary>
+          <ul>
+            <li>Espagnol, catalan, anglais, portugais, français, allemand, italien, polonais et roumain.</li>
+            <li>Traduites à la main, pas avec un traducteur automatique.</li>
+            <li>Le document légal est toujours en espagnol, puisque c'est ce que lit la Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> Le CRM de flotte</summary>
+          <ul>
+            <li><strong>Opérations :</strong> documents de contrôle, transports, livraisons, en attente, incidents et import CSV.</li>
+            <li><strong>Planification :</strong> calendrier, flotte, véhicules et attribution des transports à chaque chauffeur.</li>
+            <li><strong>Signatures :</strong> en attente, terminées, demandes externes et historique.</li>
+            <li><strong>Contacts et finances :</strong> clients, fournisseurs, destinataires, et prix, coût et marge par transport.</li>
+            <li><strong>Utilisateurs :</strong> rôles, autorisations et inscription des chauffeurs par code, sans que personne ne touche au mot de passe d'un autre.</li>
+            <li><strong>Échéances :</strong> permis, ADR, FCO et carte de tachygraphe, avec alerte à 30, 15 et 7 jours et le jour même.</li>
+            <li><strong>Audit :</strong> registre de toutes les modifications.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Encaissement et facturation</summary>
+          <ul>
+            <li>On paie <strong>par chauffeur</strong>, le CRM à part.</li>
+            <li>Paiement par carte sur le web et sur Android, et achat intégré sur iPhone.</li>
+            <li>Factures avec vos données fiscales, téléchargeables quand vous voulez.</li>
+            <li><strong>10 transports d'essai gratuits</strong>, sans carte.</li>
+            <li>Changer de formule ou résilier, vous-même et quand vous voulez.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 

@@ -526,6 +526,117 @@
         </div>
         <p class="video-pie">2:09 · De la crearea documentului de control până la semnarea lui și traseul transportului.</p>
       </div>
+
+      <!-- Todo lo que hace, plegado.
+           Se usa <details>/<summary> nativo y no un acordeón de JavaScript:
+           funciona sin JS, se abre con el teclado, un lector de pantalla
+           anuncia si está abierto o cerrado, y el buscador indexa el contenido
+           aunque esté plegado. Un div con onclick no da ninguna de las cuatro. -->
+      <div class="caracteristicas reveal-on-scroll">
+        <h3 class="caracteristicas-titulo">Tot ce face</h3>
+        <p class="caracteristicas-intro">Atinge fiecare secțiune ca să o deschizi.</p>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📄</span> Documentul</summary>
+          <ul>
+            <li><strong>DeCA</strong> conform Ordinului FOM/2861/2012 și Rezoluției din 5 iunie 2026.</li>
+            <li><strong>Scrisoarea de transport</strong> națională, pentru contractul de transport.</li>
+            <li><strong>Un document pentru fiecare destinație</strong> la livrările multiple, așa cum cere legea.</li>
+            <li>Corectarea unui transport deja emis: se generează unul nou cu alt cod QR, iar cel anterior este anulat, dar păstrat pentru trasabilitate.</li>
+            <li>Duplică un transport ca să nu rescrii ce se repetă.</li>
+            <li>Părțile sunt identificate drept <strong>«încărcător contractual» și «transportator efectiv»</strong>, în mod expres și diferențiat.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🔳</span> Codul QR și controlul în trafic</summary>
+          <ul>
+            <li><strong>Cod QR încorporat chiar în PDF</strong>, exact ce cere Rezoluția: nu este de ajuns un link separat sau o poză a documentului.</li>
+            <li>La scanare, documentul <strong>se descarcă direct</strong>: fără parole, fără butoane și fără înregistrare. Agentul nu mai are nimic de făcut.</li>
+            <li>Adresă unică pentru fiecare document, pe conexiune criptată.</li>
+            <li>Există și un <strong>ecran de verificare lizibil</strong>, cu starea transportului, pentru cine preferă să se uite în loc să descarce.</li>
+            <li><strong>Păstrare timp de un an</strong> în cloud, minimul cerut de normă.</li>
+            <li>Șoferul îl poate arăta pe telefon sau pe hârtie: în ambele cazuri are același cod QR.</li>
+            <li>Dacă corectezi un transport, cel nou are <strong>alt cod QR</strong> iar cel anterior rămâne anulat, dar se poate consulta.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">☢️</span> Mărfuri periculoase (ADR)</summary>
+          <ul>
+            <li><strong>Tabelul oficial al mărfurilor periculoase</strong> încorporat: alegi substanța, iar numărul ONU, clasa și grupa de ambalare se completează singure.</li>
+            <li>Documentul apare marcat drept <strong>MARFĂ PERICULOASĂ (ADR)</strong>, cu clasă, număr ONU, grupă de ambalare și denumire tehnică.</li>
+            <li>🚨 <strong>Traseul evită drumurile interzise mărfurilor periculoase.</strong> Nu este același traseu ca pentru un camion obișnuit: se calculează cu restricțiile ADR aplicate.</li>
+            <li>Parcările <strong>potrivite pentru ADR</strong> sunt semnalate separat în lista opririlor.</li>
+            <li>Mențiune că expeditorul poate pune la dispoziție o copie tipărită a documentației la cerere, conform punctului 5.4.0.3 din ADR.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">✍️</span> Semnăturile</summary>
+          <ul>
+            <li>Semnătură pe ecran a încărcătorului, a șoferului și a destinatarului.</li>
+            <li><strong>Opționale.</strong> Normele nu le cer, iar biroul tău decide: cine nu le vrea emite fără ele.</li>
+            <li><strong>Semnătură la distanță prin link</strong>, de unică folosință și fără ca semnatarul să aibă cont. Este valabilă pentru livrare și pentru încărcare, când încărcătorul nu e la rampă.</li>
+            <li>Semnătura destinatarului la destinație, cu rezerve dacă apare un incident.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">📴</span> Funcționează fără semnal</summary>
+          <ul>
+            <li>Emiterea completă a documentului <strong>offline</strong>.</li>
+            <li>Ce emiți fără semnal <strong>se încarcă singur</strong> imediat ce revine semnalul, fără să lași aplicația deschisă.</li>
+            <li>Documentul este valabil pe șosea din momentul semnării, chiar înainte de a se încărca.</li>
+            <li>Ciorne salvate chiar pe telefon.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🛣️</span> Traseu, opriri și odihnă</summary>
+          <ul>
+            <li>Traseu pentru camion cu kilometri și ora estimată de sosire la fiecare punct.</li>
+            <li><strong>Unde parchezi, unde dormi și unde mănânci</strong> pe traseul tău, pe kilometru și pe intervalul real de masă.</li>
+            <li><strong>Pauza de tahograf:</strong> îți sugerează unde să oprești în cele 4 h 30 de condus.</li>
+            <li>Peste 1.500 de zone și parcări, cu cele certificate de minister marcate separat.</li>
+            <li>Incidente raportate de alți șoferi, pe o fereastră de 12 luni. Informații furnizate de utilizatori, pe care Mi Carga nu le verifică.</li>
+            <li>Parcările unde un camion nu încape sau nu poate intra sunt eliminate automat.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nouă limbi</summary>
+          <ul>
+            <li>Spaniolă, catalană, engleză, portugheză, franceză, germană, italiană, polonă și română.</li>
+            <li>Traduse de mână, nu cu traducător automat.</li>
+            <li>Documentul legal este întotdeauna în spaniolă, pentru că asta citește Guardia Civil.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">🏢</span> CRM-ul de flotă</summary>
+          <ul>
+            <li><strong>Operațiuni:</strong> documente de control, transporturi, livrări, în așteptare, incidente și import CSV.</li>
+            <li><strong>Planificare:</strong> calendar, flotă, vehicule și repartizarea transporturilor fiecărui șofer.</li>
+            <li><strong>Semnături:</strong> în așteptare, finalizate, solicitări externe și istoric.</li>
+            <li><strong>Contacte și economie:</strong> clienți, furnizori, destinatari, precum și preț, cost și marjă pe transport.</li>
+            <li><strong>Utilizatori:</strong> roluri, permisiuni și înscrierea șoferilor prin cod, fără ca cineva să umble la parolele altora.</li>
+            <li><strong>Expirări:</strong> permis, ADR, CPC și cardul de tahograf, cu avertizare la 30, 15 și 7 zile și în ziua respectivă.</li>
+            <li><strong>Audit:</strong> evidența tuturor modificărilor.</li>
+          </ul>
+        </details>
+
+        <details class="carac">
+          <summary><span class="carac-icono" aria-hidden="true">💳</span> Încasare și facturare</summary>
+          <ul>
+            <li>Se plătește <strong>pe șofer</strong>, cu CRM-ul separat.</li>
+            <li>Plată cu cardul pe web și pe Android, și achiziție integrată pe iPhone.</li>
+            <li>Facturi cu datele tale fiscale, descărcabile oricând.</li>
+            <li><strong>10 transporturi de probă gratuite</strong>, fără card.</li>
+            <li>Schimbi planul sau anulezi, singur și oricând.</li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 
