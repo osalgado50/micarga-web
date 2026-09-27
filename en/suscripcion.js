@@ -777,14 +777,15 @@ const pintarPrecios = () => {
  *
  * Los valores llegan por la interrogación de la URL y se validan igual que si
  * viniesen de un desconocido: acaban en un cobro recurrente. `licencias` solo
- * se acepta como un entero de 1 a 100.
+ * se acepta como un entero de 0 a 100 (0 = solo el CRM; sin CRM, 0 deja
+ * el botón de pagar apagado).
  */
 const prepararCantidad = () => {
   const params = new URLSearchParams(location.search);
   const pedidas = params.get('licencias');
   if (/^\d{1,3}$/.test(pedidas || '')) {
     const n = Number(pedidas);
-    if (n >= 1 && n <= MAXIMO_LICENCIAS) $('sus-conductores').value = String(n);
+    if (n >= 0 && n <= MAXIMO_LICENCIAS) $('sus-conductores').value = String(n);
   }
   if (params.get('crm') === '1') $('sus-crm').checked = true;
   pintarPrecios();
