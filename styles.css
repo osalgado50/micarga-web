@@ -4024,6 +4024,17 @@ body > section:not(.hero-section) > .container > h2 {
   margin: 0.9rem 0 0;
 }
 
+.crm-card-boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1.2rem 0 0.9rem;
+  text-align: center;
+  text-decoration: none;
+}
+
 .crm-card-nota {
   margin: 0.4rem 0 0;
   font-size: 0.82rem;
