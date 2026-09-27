@@ -281,13 +281,20 @@
           <label class="sus-cantidad-rotulo" for="sus-conductores">Pentru câți șoferi?</label>
           <div class="sus-contador">
             <button type="button" class="sus-contador-boton" data-menos aria-label="Eliminați un șofer">−</button>
-            <input id="sus-conductores" type="number" inputmode="numeric" min="1" max="100" value="1">
+            <input id="sus-conductores" type="number" inputmode="numeric" min="0" max="100" value="1">
             <button type="button" class="sus-contador-boton" data-mas aria-label="Adăugați un șofer">+</button>
           </div>
           <label class="sus-crm">
             <input type="checkbox" id="sus-crm">
             <span>Adăugați CRM-ul de flotă, ca să conduceți biroul de pe calculator</span>
           </label>
+          <p class="sus-cantidad-nota">
+            Vrei doar CRM-ul? Pune zero șoferi și bifează căsuța.
+          </p>
+          <p class="sus-alerta" data-carrito-vacio hidden>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Cu zero șoferi și fără CRM nu e nimic de contractat.
+          </p>
         </div>
 
         <div class="sus-planes">

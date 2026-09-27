@@ -281,13 +281,20 @@
           <label class="sus-cantidad-rotulo" for="sus-conductores">¿Para cuántos conductores?</label>
           <div class="sus-contador">
             <button type="button" class="sus-contador-boton" data-menos aria-label="Quitar un conductor">−</button>
-            <input id="sus-conductores" type="number" inputmode="numeric" min="1" max="100" value="1">
+            <input id="sus-conductores" type="number" inputmode="numeric" min="0" max="100" value="1">
             <button type="button" class="sus-contador-boton" data-mas aria-label="Añadir un conductor">+</button>
           </div>
           <label class="sus-crm">
             <input type="checkbox" id="sus-crm">
             <span>Añadir el CRM de flota, para llevar la oficina desde el ordenador</span>
           </label>
+          <p class="sus-cantidad-nota">
+            ¿Solo quieres el CRM? Pon cero conductores y marca la casilla.
+          </p>
+          <p class="sus-alerta" data-carrito-vacio hidden>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Con cero conductores y sin el CRM no hay nada que contratar.
+          </p>
         </div>
 
         <div class="sus-planes">

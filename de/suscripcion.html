@@ -281,13 +281,20 @@
           <label class="sus-cantidad-rotulo" for="sus-conductores">Für wie viele Fahrer?</label>
           <div class="sus-contador">
             <button type="button" class="sus-contador-boton" data-menos aria-label="Einen Fahrer entfernen">−</button>
-            <input id="sus-conductores" type="number" inputmode="numeric" min="1" max="100" value="1">
+            <input id="sus-conductores" type="number" inputmode="numeric" min="0" max="100" value="1">
             <button type="button" class="sus-contador-boton" data-mas aria-label="Einen Fahrer hinzufügen">+</button>
           </div>
           <label class="sus-crm">
             <input type="checkbox" id="sus-crm">
             <span>Das Flotten-CRM hinzufügen, um das Büro vom Rechner aus zu führen</span>
           </label>
+          <p class="sus-cantidad-nota">
+            Nur das CRM? Stellen Sie null Fahrer ein und setzen Sie den Haken.
+          </p>
+          <p class="sus-alerta" data-carrito-vacio hidden>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Mit null Fahrern und ohne CRM gibt es nichts zu buchen.
+          </p>
         </div>
 
         <div class="sus-planes">

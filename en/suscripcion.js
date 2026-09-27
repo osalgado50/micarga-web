@@ -722,10 +722,15 @@ const dinero = (n) =>
     maximumFractionDigits: 2,
   }).format(n);
 
+/** Cuántas licencias se están pidiendo.
+ *
+ *  🚨 El suelo es CERO y no uno desde el 27-09-2026: una oficina puede
+ *  contratar solo el CRM. Lo que no se admite es cero licencias sin CRM, y eso
+ *  se comprueba al pulsar el plan —y otra vez en el servidor—, no aquí. */
 const leerCantidad = () => {
   const campo = $('sus-conductores');
   let n = parseInt(campo.value, 10);
-  if (!Number.isInteger(n) || n < 1) n = 1;
+  if (!Number.isInteger(n) || n < 0) n = 0;
   if (n > MAXIMO_LICENCIAS) n = MAXIMO_LICENCIAS;
   return n;
 };
@@ -756,6 +761,15 @@ const pintarPrecios = () => {
 
   const desglose = document.querySelector('[data-desglose]');
   if (desglose) desglose.hidden = n === 1 && !crm;
+
+  // 🚨 Cero licencias y sin CRM es un carrito vacío: los botones de plan se
+  // apagan en vez de mandar al servidor una petición que va a rechazar. El
+  // servidor la rechaza igual —nunca se fía de la pantalla—, pero aquí se le
+  // dice a la persona lo que le falta antes de que pulse.
+  const vacio = n === 0 && !crm;
+  for (const boton of document.querySelectorAll('.sus-plan')) boton.disabled = vacio;
+  const aviso = document.querySelector('[data-carrito-vacio]');
+  if (aviso) aviso.hidden = !vacio;
 };
 
 /**
@@ -827,7 +841,7 @@ const contratar = async (periodo, boton) => {
 const cantidad = $('sus-conductores');
 if (cantidad) {
   const mover = (paso) => {
-    cantidad.value = String(Math.min(MAXIMO_LICENCIAS, Math.max(1, leerCantidad() + paso)));
+    cantidad.value = String(Math.min(MAXIMO_LICENCIAS, Math.max(0, leerCantidad() + paso)));
     pintarPrecios();
   };
   document.querySelector('[data-menos]')?.addEventListener('click', () => mover(-1));
