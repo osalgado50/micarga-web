@@ -121,7 +121,7 @@
                  autocomplete="email" inputmode="email" required
                  placeholder="el de tu cuenta de Mi Carga">
           <p class="sus-ayuda">
-            Te enviamos un código de 6 dígitos para comprobar que la cuenta es
+            Te enviamos un código para comprobar que la cuenta es
             tuya. Sin eso no borramos nada.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">Enviarme el código</button>
@@ -131,10 +131,10 @@
       <!-- PASO 2 · código -->
       <section class="sus-paso" id="paso-codigo" hidden>
         <form id="form-codigo" novalidate>
-          <label class="sus-label" for="codigo">Código de 6 dígitos</label>
+          <label class="sus-label" for="codigo">Código del correo</label>
           <input class="sus-input sus-input-codigo" type="text" id="codigo"
                  name="codigo" inputmode="numeric" autocomplete="one-time-code"
-                 maxlength="6" pattern="[0-9]{6}" required placeholder="······">
+                 maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">
           <p class="sus-ayuda" id="ayuda-codigo"></p>
           <button class="sus-btn" type="submit" id="btn-codigo">Continuar</button>
           <button class="sus-btn-plano" type="button" id="btn-otro-correo">Usar otro correo</button>
@@ -258,7 +258,7 @@
     </div>
   </footer>
 
-  <script type="module" src="borrar-cuenta.js?v=20260911h"></script>
+  <script type="module" src="borrar-cuenta.js?v=20260927a"></script>
   <script src="consentimiento.js?v=20260925a" defer></script>
 </body>
 </html>

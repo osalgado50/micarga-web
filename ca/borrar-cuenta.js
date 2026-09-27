@@ -138,7 +138,7 @@ $('form-codigo').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
   const token = $('codigo').value.replace(/\D/g, '');
-  if (token.length !== 6) { avisar('El codi són 6 dígits.'); return; }
+  if (token.length < 6 || token.length > 10) { avisar('Copia el codi sencer, tal com ve al correu.'); return; }
 
   await ocupado($('btn-codigo'), 'Comprobando…', async () => {
     const { error } = await supabase.auth.verifyOtp({ email: correoEnCurso, token, type: 'email' });
