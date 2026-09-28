@@ -225,6 +225,28 @@
   .p-azul { color: var(--azul); } .p-rojo { color: var(--rojo); }
   .p-gris { color: var(--tenue); } .p-violeta { color: var(--violeta); }
 
+  .boton-demo {
+    display: inline-block; font-size: 11.5px; white-space: nowrap;
+    padding: 4px 9px; border-radius: 6px;
+    border: 1px solid var(--borde-fuerte); color: var(--texto);
+  }
+  /* El menú se pinta DEBAJO de la tabla y no colgando del botón a propósito:
+     la caja de la tabla lleva `overflow-x` para poder desplazarla, y un
+     desplegable dentro saldría cortado por el borde. Es exactamente el recorte
+     que hubo que arreglar en el CRM de verdad. */
+  .menu-demo {
+    margin: 0 12px 12px; padding: 4px; max-width: 250px;
+    border: 1px solid var(--borde-fuerte); border-radius: var(--radio-chico);
+    background: var(--superficie-2);
+  }
+  .menu-demo__cabecera {
+    font-family: var(--datos); font-size: 9.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--tenue); padding: 6px 8px 8px;
+  }
+  .menu-demo__cabecera b { color: var(--acento); font-weight: 700; }
+  .menu-demo__opcion { padding: 7px 9px; border-radius: 5px; font-size: 13px; }
+  .menu-demo__opcion--peligro { color: var(--rojo); }
+
   .rejilla-mes { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; padding: 12px; }
   .dia {
     aspect-ratio: 1; border: 1px solid var(--borde); border-radius: 5px;
@@ -665,12 +687,23 @@
       return '<div class="rejilla-mes">' + d + '</div>';
     },
     transportes: function () {
-      return tabla(['Código', 'Estado', 'Entregas', 'Carga', 'Ruta', 'Conductor'], [
-        ['<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('Asignada', 'azul'), '<span class="dato">0 / 1</span>', '<span class="dato">22/09/26</span>', 'Barcelona → El Prat', 'Óscar Salgado'],
-        ['<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('Cargada', 'amarillo'), '<span class="dato">0 / 1</span>', '<span class="dato">10/09/26</span>', 'San Sebastián → Salou', 'Óscar Salgado'],
-        ['<span class="dato">EXP-2026-JZ44TU</span>', pastilla('Completada', 'verde'), '<span class="dato">1 / 1</span>', '<span class="dato">27/08/26</span>', 'Salou → Valls', 'Ana Pérez'],
-        ['<span class="dato">EXP-2026-UGDQFT</span>', pastilla('Cancelada', 'rojo'), '<span class="dato">0 / 0</span>', '<span class="dato">27/08/26</span>', '—', 'Ana Pérez']
-      ]);
+      var boton = '<span class="boton-demo">Acciones ▾</span>';
+      var menu =
+        '<div class="menu-demo">'
+        + '<div class="menu-demo__cabecera">Lo que abre <b>Acciones ▾</b></div>'
+        + '<div class="menu-demo__opcion">Mandar el QR por WhatsApp</div>'
+        + '<div class="menu-demo__opcion">Descargar el DeCA en PDF</div>'
+        + '<div class="menu-demo__opcion">Duplicar para otro día</div>'
+        + '<div class="menu-demo__opcion">Reenviar al conductor</div>'
+        + '<div class="menu-demo__opcion">Ver y modificar sus albaranes</div>'
+        + '<div class="menu-demo__opcion menu-demo__opcion--peligro">Cancelar el transporte</div>'
+        + '</div>';
+      return tabla(['Código', 'Estado', 'Entregas', 'Carga', 'Ruta', 'Conductor', 'Acciones'], [
+        ['<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('Asignada', 'azul'), '<span class="dato">0 / 1</span>', '<span class="dato">22/09/26</span>', 'Barcelona → El Prat', 'Óscar Salgado', boton],
+        ['<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('Cargada', 'amarillo'), '<span class="dato">0 / 1</span>', '<span class="dato">10/09/26</span>', 'San Sebastián → Salou', 'Óscar Salgado', boton],
+        ['<span class="dato">EXP-2026-JZ44TU</span>', pastilla('Completada', 'verde'), '<span class="dato">1 / 1</span>', '<span class="dato">27/08/26</span>', 'Salou → Valls', 'Ana Pérez', boton],
+        ['<span class="dato">EXP-2026-UGDQFT</span>', pastilla('Cancelada', 'rojo'), '<span class="dato">0 / 0</span>', '<span class="dato">27/08/26</span>', '—', 'Ana Pérez', boton]
+      ]) + menu;
     },
     albaranes: function () {
       return tabla(['Nº de albarán', 'Estado', 'Carga', 'Destinatario', 'Descarga'], [
