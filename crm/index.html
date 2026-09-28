@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recorre por dentro el CRM de Mi Carga: sus menús reales, qué se hace en cada pantalla y qué ve cada papel de la empresa.">
+  <meta name="theme-color" content="#070a13">
+  <link rel="canonical" href="https://micarga.es/crm">
+  <!-- Sin <link hreflang>: esta página existe solo en castellano. Cuando se
+       traduzca, va aquí el bloque de alternativas como en las demás. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mi Carga">
+  <meta property="og:url" content="https://micarga.es/crm">
+  <meta property="og:title" content="El CRM por dentro - Mi Carga">
+  <meta property="og:description" content="Recorre por dentro el CRM de Mi Carga: sus menús reales, qué se hace en cada pantalla y qué ve cada papel de la empresa.">
+  <meta property="og:image" content="https://micarga.es/images/truck_cabin.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>El CRM por dentro - Mi Carga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <!-- El manual va con su CSS y su JS AQUÍ DENTRO, no en ficheros aparte. Por
+       eso no hace falta añadir nada a /_headers: lo que ese fichero protege son
+       los .js y .css sueltos, que nacen con cuatro horas de caché. -->
+  <style>
+
+  /* Los colores y las tipografías son los del CRM de verdad (src/estilos/pieles.css):
+     quien lea esto y luego abra la aplicación tiene que reconocerla. Por eso el
+     manual se queda en oscuro, que es el mundo del producto, y pinta cada color
+     explícitamente en vez de heredar nada del visor. */
+  .manual {
+    color-scheme: dark;
+    --fondo: #070a13;
+    --superficie: #0f172a;
+    --superficie-2: #1e293b;
+    --borde: rgba(255,255,255,.09);
+    --borde-fuerte: rgba(255,255,255,.16);
+    --acento: #f97316;
+    --acento-fuerte: #ea580c;
+    --texto: #e2e8f0;
+    --tenue: #94a3b8;
+    --fuerte: #ffffff;
+    --verde: #22c55e;
+    --amarillo: #eab308;
+    --azul: #3b82f6;
+    --rojo: #ef4444;
+    --violeta: #a855f7;
+    --titulos: 'Outfit', system-ui, sans-serif;
+    --texto-f: 'Space Grotesk', system-ui, sans-serif;
+    --datos: 'JetBrains Mono', ui-monospace, monospace;
+    --r: 12px;
+    --r2: 8px;
+  }
+
+  .manual *, .manual *::before, .manual *::after { box-sizing: border-box; }
+  /* Sobre `.manual` y no sobre `body`: esta página comparte styles.css con el
+     resto de la web y pisar el body le cambiaría la barra y el pie. */
+  .manual {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: var(--texto-f);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .envoltorio { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 0 64px; }
+
+  h1, h2, h3, h4 { font-family: var(--titulos); color: var(--fuerte); text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--acento); }
+
+  /* ── Cabecera ─────────────────────────────────────────────────────────── */
+  .portada { padding-block: 56px 36px; border-bottom: 1px solid var(--borde); }
+  .marca {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--datos); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--acento); margin-bottom: 20px;
+  }
+  .marca::before {
+    content: ''; width: 26px; height: 26px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--acento), var(--acento-fuerte));
+    display: block; flex: none;
+  }
+  .portada h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.02em; }
+  .entradilla { margin-top: 18px; max-width: 62ch; color: var(--texto); font-size: 17px; }
+  .entradilla strong { color: var(--fuerte); }
+
+  .cifras { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 28px; }
+  .cifra { display: flex; flex-direction: column; gap: 2px; }
+  .cifra b { font-family: var(--datos); font-size: 22px; color: var(--fuerte); font-weight: 700; }
+  .cifra span { font-size: 12px; color: var(--tenue); letter-spacing: .04em; }
+
+  /* ── Secciones ────────────────────────────────────────────────────────── */
+  .bloque { padding-block: 44px; border-bottom: 1px solid var(--borde); }
+  .bloque:last-of-type { border-bottom: 0; }
+  .rotulo {
+    font-family: var(--datos); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--acento); margin-bottom: 10px;
+  }
+  .bloque > h2 { font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -.01em; }
+  .bajada { margin-top: 10px; max-width: 64ch; color: var(--tenue); }
+
+  /* ── Conmutador de rol ────────────────────────────────────────────────── */
+  .roles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .rol {
+    font: inherit; font-size: 13.5px; cursor: pointer;
+    padding: 9px 15px; border-radius: 999px;
+    border: 1px solid var(--borde-fuerte); background: var(--superficie);
+    color: var(--texto); transition: background .15s, border-color .15s, color .15s;
+  }
+  .rol:hover { border-color: var(--acento); }
+  .rol[aria-pressed="true"] {
+    background: var(--acento); border-color: var(--acento);
+    color: #1a0e02; font-weight: 700;
+  }
+  .rol:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+  .nota-rol {
+    margin-top: 12px; font-size: 13.5px; color: var(--tenue);
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  }
+  .nota-rol b { color: var(--fuerte); font-family: var(--datos); }
+
+  /* ── La aplicación ────────────────────────────────────────────────────── */
+  .app {
+    margin-top: 24px; display: grid; grid-template-columns: 268px 1fr;
+    gap: 0; border: 1px solid var(--borde-fuerte); border-radius: var(--r);
+    overflow: hidden; background: var(--superficie);
+  }
+  .rail {
+    background: var(--fondo); border-right: 1px solid var(--borde);
+    padding: 14px 10px; max-height: 620px; overflow-y: auto;
+  }
+  .rail__seccion { margin-bottom: 14px; }
+  .rail__titulo {
+    font-family: var(--datos); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--tenue); padding: 0 10px 6px;
+  }
+  .hoja {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    width: 100%; text-align: left; font: inherit; font-size: 13.5px;
+    padding: 7px 10px; border-radius: var(--r2); border: 0;
+    background: transparent; color: var(--texto); cursor: pointer;
+  }
+  .hoja:hover { background: var(--superficie-2); }
+  .hoja[aria-current="true"] { background: var(--superficie-2); color: var(--fuerte); font-weight: 700; box-shadow: inset 2px 0 0 var(--acento); }
+  .hoja:focus-visible { outline: 2px solid var(--acento); outline-offset: -2px; }
+  .hoja--vedada { color: #475569; cursor: not-allowed; }
+  .hoja--vedada:hover { background: transparent; }
+  .candado { font-family: var(--datos); font-size: 9px; letter-spacing: .08em; color: #475569; flex: none; }
+
+  /* ── Panel de detalle ─────────────────────────────────────────────────── */
+  .detalle { padding: 26px 28px; min-height: 620px; }
+  .detalle__ruta { font-family: var(--datos); font-size: 11.5px; color: var(--tenue); }
+  .detalle h3 { font-size: 26px; margin-top: 6px; letter-spacing: -.01em; }
+  .detalle__resumen { margin-top: 12px; max-width: 62ch; }
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .etiqueta {
+    font-family: var(--datos); font-size: 10.5px; letter-spacing: .06em;
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--borde-fuerte); color: var(--tenue);
+  }
+  .etiqueta--permiso { color: var(--acento); border-color: rgba(249,115,22,.4); }
+
+  .subtitulo {
+    font-family: var(--datos); font-size: 10.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--tenue); margin: 26px 0 10px;
+  }
+  .pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; counter-reset: p; }
+  .pasos li {
+    display: grid; grid-template-columns: 24px 1fr; gap: 11px; align-items: start;
+    font-size: 14.5px;
+  }
+  .pasos li::before {
+    counter-increment: p; content: counter(p);
+    font-family: var(--datos); font-size: 11px; font-weight: 700;
+    width: 24px; height: 24px; border-radius: 7px;
+    display: grid; place-items: center;
+    background: var(--superficie-2); color: var(--acento);
+  }
+  .pasos kbd {
+    font-family: var(--datos); font-size: 12.5px;
+    background: var(--superficie-2); border: 1px solid var(--borde-fuerte);
+    border-radius: 5px; padding: 1px 6px; color: var(--fuerte);
+  }
+  .aviso {
+    margin-top: 22px; padding: 13px 15px; border-radius: var(--r2);
+    background: rgba(249,115,22,.07); border: 1px solid rgba(249,115,22,.28);
+    font-size: 14px;
+  }
+  .aviso b { color: var(--acento); }
+
+  /* ── Maqueta de pantalla ──────────────────────────────────────────────── */
+  .maqueta {
+    margin-top: 22px; border: 1px solid var(--borde); border-radius: var(--r2);
+    background: var(--fondo); overflow: hidden;
+  }
+  .maqueta__barra {
+    display: flex; gap: 6px; padding: 9px 12px;
+    border-bottom: 1px solid var(--borde); background: var(--superficie);
+  }
+  .maqueta__barra i { width: 9px; height: 9px; border-radius: 50%; background: var(--superficie-2); display: block; }
+  .tabla-caja { overflow-x: auto; }
+  table.demo { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 460px; }
+  table.demo th {
+    text-align: left; font-family: var(--datos); font-size: 9.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--tenue);
+    padding: 9px 12px; border-bottom: 1px solid var(--borde); font-weight: 400;
+  }
+  table.demo td { padding: 9px 12px; border-bottom: 1px solid var(--borde); }
+  table.demo tr:last-child td { border-bottom: 0; }
+  table.demo .dato { font-family: var(--datos); font-size: 11.5px; }
+  .pastilla {
+    display: inline-block; font-family: var(--datos); font-size: 9.5px;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+    border: 1px solid currentColor;
+  }
+  .p-verde { color: var(--verde); } .p-amarillo { color: var(--amarillo); }
+  .p-azul { color: var(--azul); } .p-rojo { color: var(--rojo); }
+  .p-gris { color: var(--tenue); } .p-violeta { color: var(--violeta); }
+
+  .rejilla-mes { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; padding: 12px; }
+  .dia {
+    aspect-ratio: 1; border: 1px solid var(--borde); border-radius: 5px;
+    padding: 4px; font-family: var(--datos); font-size: 10px; color: var(--tenue);
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .dia--hoy { border-color: var(--acento); color: var(--acento); }
+  .porte {
+    font-size: 8px; line-height: 1.25; padding: 2px 3px; border-radius: 3px;
+    background: rgba(59,130,246,.16); color: #bfdbfe;
+    border-left: 2px solid var(--azul); overflow: hidden;
+  }
+  .porte--cargada { background: rgba(234,179,8,.14); color: #fde68a; border-left-color: var(--amarillo); }
+  .porte--ok { background: rgba(34,197,94,.14); color: #bbf7d0; border-left-color: var(--verde); }
+
+  /* ── Recorridos ───────────────────────────────────────────────────────── */
+  .recorridos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 24px; }
+  .recorrido {
+    border: 1px solid var(--borde-fuerte); border-radius: var(--r);
+    background: var(--superficie); padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .recorrido h4 { font-size: 17px; }
+  .recorrido__meta { font-family: var(--datos); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); }
+  .recorrido ol { margin: 0; padding-left: 18px; display: grid; gap: 7px; font-size: 14px; }
+  .recorrido ol li::marker { color: var(--acento); font-family: var(--datos); font-size: 12px; }
+
+  /* ── Tarjetas de capacidad ────────────────────────────────────────────── */
+  .capacidades { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 24px; }
+  .capacidad { border: 1px solid var(--borde); border-radius: var(--r); padding: 18px; background: var(--superficie); }
+  .capacidad h4 { font-size: 16px; margin-bottom: 7px; }
+  .capacidad p { font-size: 14px; color: var(--tenue); }
+
+  .pie { padding-block: 36px 0; color: var(--tenue); font-size: 13.5px; }
+
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { max-height: none; border-right: 0; border-bottom: 1px solid var(--borde); }
+    .detalle { min-height: 0; padding: 22px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .manual * { transition: none !important; } }
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Inicio</a>
+        <a href="/#tarifas">Precios</a>
+        <a href="/blog/">Blog</a>
+        <a href="https://app.micarga.es/" class="nav-btn">Abrir la app</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="manual">
+<div class="envoltorio">
+
+  <header class="portada">
+    <div class="marca">Mi Carga · Control Logístico</div>
+    <h1>El CRM por dentro</h1>
+    <p class="entradilla">
+      Un paseo por los menús reales de Mi Carga: qué hay en cada pantalla, qué se hace
+      ahí y qué ve cada persona según su papel en la empresa. <strong>Los menús, los
+      permisos y los nombres de los campos son los del programa</strong>, no un ejemplo
+      inventado.
+    </p>
+    <div class="cifras">
+      <div class="cifra"><b>10</b><span>secciones</span></div>
+      <div class="cifra"><b>34</b><span>pantallas</span></div>
+      <div class="cifra"><b>3</b><span>papeles distintos</span></div>
+      <div class="cifra"><b>12 meses</b><span>de custodia del DeCA</span></div>
+    </div>
+  </header>
+
+  <section class="bloque">
+    <div class="rotulo">Pruébalo</div>
+    <h2>Cambia de papel y mira cómo cambia el menú</h2>
+    <p class="bajada">
+      En Mi Carga el menú no es igual para todos: cada pantalla exige un permiso, y cada
+      papel tiene los suyos. Lo que no aparece aquí tampoco se abre escribiendo la
+      dirección a mano, porque la misma regla la aplica la base de datos.
+      Elige un papel y pulsa cualquier pantalla del menú.
+    </p>
+
+    <div class="roles" role="group" aria-label="Papel en la empresa">
+      <button class="rol" type="button" data-rol="admin_empresa" aria-pressed="true">Administrador de empresa</button>
+      <button class="rol" type="button" data-rol="administrativo" aria-pressed="false">Administrativo</button>
+      <button class="rol" type="button" data-rol="conductor" aria-pressed="false">Conductor</button>
+    </div>
+    <p class="nota-rol" id="notaRol"></p>
+
+    <div class="app">
+      <nav class="rail" id="rail" aria-label="Menú de Mi Carga"></nav>
+      <div class="detalle" id="detalle"></div>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <div class="rotulo">Los tres trabajos de cada día</div>
+    <h2>De la llamada del cliente al albarán firmado</h2>
+    <p class="bajada">
+      Tres recorridos completos, con los nombres de los botones tal como salen en pantalla.
+    </p>
+    <div class="recorridos">
+      <article class="recorrido">
+        <div class="recorrido__meta">Unos 2 minutos</div>
+        <h4>Emitir un transporte</h4>
+        <ol>
+          <li><b>Operaciones → Nuevo transporte</b>.</li>
+          <li>En «Remitente y transportista», despliega <b>Traer del directorio</b>: rellena nombre, NIF, dirección, lugar de carga y su sello de salida.</li>
+          <li>Rellena la entrega. Otro <b>Traer del directorio</b> hace lo mismo con el destinatario. Hasta diez entregas por camión.</li>
+          <li>Elige conductor. Le suena el móvil al instante.</li>
+          <li><b>Guardar</b>. El número de DeCA y su QR se emiten solos.</li>
+        </ol>
+      </article>
+      <article class="recorrido">
+        <div class="recorrido__meta">Unos 30 segundos</div>
+        <h4>Que el conductor tenga el papel</h4>
+        <ol>
+          <li><b>Operaciones → Transportes</b> y busca el porte.</li>
+          <li><b>Acciones ▾ → Mandar el QR por WhatsApp</b>.</li>
+          <li>Sale el QR y WhatsApp con el conductor ya puesto.</li>
+          <li>Si no le llegó el aviso: <b>Acciones ▾ → Reenviar al conductor</b>.</li>
+        </ol>
+      </article>
+      <article class="recorrido">
+        <div class="recorrido__meta">Unos 40 segundos</div>
+        <h4>Cobrar una firma que no llega</h4>
+        <ol>
+          <li><b>Firmas → Pendientes</b>: lo cargado y en tránsito sin firmar.</li>
+          <li><b>Pedir firma remota</b> en la fila del albarán.</li>
+          <li>Manda el enlace. Es de un solo uso y caduca.</li>
+          <li>El destinatario firma desde su móvil, sin registrarse.</li>
+          <li>Aparece en <b>Firmas → Completadas</b>.</li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <div class="rotulo">Lo que no se ve en el menú</div>
+    <h2>Lo que el programa hace por su cuenta</h2>
+    <div class="capacidades">
+      <div class="capacidad">
+        <h4>El DeCA se emite solo</h4>
+        <p>Al guardar el transporte sale su número y su QR. Un guardia lo escanea en carretera y descarga el documento del momento, con las firmas que haya en ese instante.</p>
+      </div>
+      <div class="capacidad">
+        <h4>Un QR para varias entregas</h4>
+        <p>Un camión con tres destinos lleva un solo documento. Cada destinatario firma lo suyo, y el PDF se rehace en cada descarga para que el estado sea el de ahora.</p>
+      </div>
+      <div class="capacidad">
+        <h4>Se guarda sin cobertura</h4>
+        <p>El conductor emite y firma en un muelle sin red. Queda en el móvil y sube solo cuando vuelve la cobertura.</p>
+      </div>
+      <div class="capacidad">
+        <h4>Cada empresa ve lo suyo</h4>
+        <p>El aislamiento entre empresas lo impone la base de datos, no la pantalla. Aunque alguien manipule la dirección, no hay forma de ver los datos de otra.</p>
+      </div>
+      <div class="capacidad">
+        <h4>Nada se borra</h4>
+        <p>Un transporte se anula con su motivo escrito, un conductor se da de baja. Los albaranes firmados son documentos legales con doce meses de custodia.</p>
+      </div>
+      <div class="capacidad">
+        <h4>Queda escrito quién y cuándo</h4>
+        <p>Cada cambio en un documento guarda su versión anterior. Desde el historial se ve qué cambió, quién lo cambió y a qué hora.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pie">
+    Mi Carga · Control Logístico — documento de control administrativo conforme a la
+    Resolución de 5 de junio de 2026. Las pantallas y los permisos de esta página salen
+    del programa; los datos de ejemplo son inventados.
+  </footer>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <a href="/" class="logo">
+          <img src="/images/camion-tema-oscuro.png" alt="" class="logo-camion">
+          <span>Mi <mark class="accent-text">Carga</mark></span>
+        </a>
+        <p>Solución digital de generación de documentos de control y cartas de porte. Con el respaldo de Ecosmep para validaciones ADR.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/mi_carga_app" target="_blank" rel="noopener"
+             aria-label="Mi Carga en Instagram" title="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61592920812098" target="_blank" rel="noopener"
+             aria-label="Mi Carga en Facebook" title="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-group">
+          <h4>Contacto</h4>
+          <p><a href="/contacto">Escríbenos</a></p>
+          <p>WhatsApp: <a href="https://wa.me/34744716449" target="_blank" rel="noopener">+34 744 716 449</a></p>
+          <p>Teléfono: <a href="tel:+34930485133">930 485 133</a></p>
+          <p class="footer-direccion">
+            RESITECH 2021, S.L.U.<br>
+            Gran Via de Carles III, 98, planta 10<br>
+            08028 Barcelona
+          </p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Recursos</h4>
+          <p><a href="/blog/">Blog</a></p>
+          <p><a href="/#quienes-somos">Quiénes somos</a></p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <p><a href="/aviso-legal">Aviso Legal</a></p>
+          <p><a href="/privacidad">Privacidad</a></p>
+          <p><a href="/cookies">Política de Cookies</a></p>
+          <p><a href="#" data-cookies>Configurar cookies</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-empresa">
+          Mi Carga es un servicio de <strong>RESITECH 2021, S.L.U.</strong>
+          &middot; CIF B67419168
+          &middot; <a href="https://www.resitech.es" target="_blank" rel="noopener">resitech.es</a>
+        </p>
+        <p>&copy; 2026 Mi Carga (micarga.es). Todos los derechos reservados. Desarrollado en conformidad con la Ley 9/2025.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js?v=20260923b" defer></script>
+  <script src="/consentimiento.js?v=20260925a" defer></script>
+  <script>
+(function () {
+  'use strict';
+
+  // Los permisos de cada papel, tal como están en la base de datos. El menú de
+  // abajo se filtra con ellos, igual que hace el programa.
+  var PERMISOS = {
+    admin_empresa: 'albaranes.asignar,albaranes.borrar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,configuracion.editar,contactos.editar,contactos.ver,documentos.subir,documentos.ver,economia.editar,economia.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver,usuarios.crear,usuarios.desactivar,usuarios.editar,usuarios.permisos,usuarios.ver'.split(','),
+    administrativo: 'albaranes.asignar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,contactos.editar,contactos.ver,documentos.subir,documentos.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver'.split(','),
+    conductor: 'albaranes.ver_propios,documentos.ver,firmas.ver,incidencias.editar,incidencias.ver,panel.ver'.split(',')
+  };
+
+  var NOMBRE_ROL = {
+    admin_empresa: 'Administrador de empresa',
+    administrativo: 'Administrativo',
+    conductor: 'Conductor'
+  };
+
+  var NOTA_ROL = {
+    admin_empresa: 'Manda en su empresa: también usuarios, economía y configuración.',
+    administrativo: 'Todo lo operativo. No toca usuarios, economía ni configuración.',
+    conductor: 'Su sitio es la app del móvil. En el CRM apenas ve nada.'
+  };
+
+  // El menú, copiado de src/navegacion.ts con el permiso que exige cada hoja.
+  var MENU = [
+    { n: 'Panel', hojas: [
+      { r: '/', t: 'Panel', p: 'panel.ver',
+        s: 'El mes de un vistazo. Es la pantalla de entrada y la que más se mira.',
+        pasos: ['Cada pastilla es un transporte, con su color según el estado.',
+                'Arrastra una pastilla a otro día para reprogramarla.',
+                'El desplegable <kbd>Todos los transportistas</kbd> deja ver solo los de uno.',
+                'Pulsa una pastilla para abrirla sin salir del calendario.'],
+        maqueta: 'mes',
+        aviso: 'Se pide solo el mes que estás mirando, así que cambiar de mes trae sus datos aunque sean de hace un año.' }
+    ]},
+    { n: 'Operaciones', hojas: [
+      { r: '/operaciones/documentos-control', t: 'Documentos de control', p: 'albaranes.ver',
+        s: 'Los albaranes uno a uno. Es donde se corrigen los datos de un documento.',
+        pasos: ['Busca por número, destinatario, remitente, lugar o matrícula.',
+                'Pulsa una fila para abrir el editor.',
+                'Cada cambio guarda la versión anterior: en <kbd>Historial</kbd> se ve qué cambió y quién.'],
+        maqueta: 'albaranes' },
+      { r: '/operaciones/transportes', t: 'Transportes', p: 'albaranes.ver',
+        s: 'El camión entero, con sus entregas. Desde aquí se gobierna el día.',
+        pasos: ['Filtra por estado, conductor y fechas. Las fechas son las de CARGA, no las de cuándo se escribió.',
+                'Cambia el conductor en el desplegable de su fila.',
+                '<kbd>Acciones ▾</kbd> abre: mandar el QR por WhatsApp, descargar el DeCA, duplicar para otro día, reenviar al conductor, ver sus albaranes y cancelar.'],
+        maqueta: 'transportes',
+        aviso: 'Duplicar copia remitente, transportista y todas las entregas, pero nunca el número de DeCA ni las firmas: nace en borrador, para mañana y sin conductor.' },
+      { r: '/operaciones/nuevo', t: 'Nuevo transporte', p: 'albaranes.crear',
+        s: 'El alta. Un camión, de una a diez entregas, y el DeCA se emite al guardar.',
+        pasos: ['Matrícula, fecha y lugar de carga.',
+                '<kbd>Traer del directorio</kbd> rellena el remitente entero, con su lugar habitual.',
+                'Firma como remitente con el ratón, con una tableta, o sube el sello de salida.',
+                'Añade entregas. Cada una con su destinatario, mercancía, peso y datos ADR.',
+                'Elige conductor y guarda.'],
+        aviso: 'La firma del remitente es opcional. Si se deja en blanco, se firma después en el muelle.' },
+      { r: '/operaciones/importar', t: 'Importar CSV', p: 'albaranes.crear',
+        s: 'Muchos transportes de golpe, desde una hoja de cálculo.',
+        pasos: ['Pega o sube el CSV.',
+                'Se comprueba antes de crear nada: te dice cuántos transportes y cuántas entregas salen.',
+                'Las líneas con el mismo valor en la columna «transporte» se juntan en un camión.'] },
+      { r: '/operaciones/entregas', t: 'Entregas', p: 'albaranes.ver',
+        s: 'Las entregas sueltas, sin agrupar por camión. Útil cuando buscas un destinatario concreto.' },
+      { r: '/operaciones/pendientes', t: 'Pendientes', p: 'albaranes.ver',
+        s: 'Lo que todavía tiene trabajo por delante: ni entregado ni anulado.' },
+      { r: '/operaciones/incidencias', t: 'Incidencias', p: 'incidencias.ver',
+        s: 'Lo que se tuerce: un retraso, una avería, una mercancía dañada.',
+        pasos: ['Abre una incidencia sobre el albarán al que afecta.',
+                'Adjunta fotos desde el móvil o desde la oficina.',
+                'Cuando se resuelve, queda escrito quién la cerró y cuándo.'] }
+    ]},
+    { n: 'Planificación', hojas: [
+      { r: '/planificacion/calendario', t: 'Calendario', p: 'planificacion.ver',
+        s: 'Como el panel, pero por semana y por conductor: quién lleva qué cada día.',
+        pasos: ['Cambia entre día, semana y mes.',
+                'La vista por conductor pone una fila por persona.',
+                'Arrastra para reprogramar o para pasarle el porte a otro.'] },
+      { r: '/planificacion/flota', t: 'Mi flota', p: 'conductores.ver',
+        s: 'Quién trabaja para ti. Aquí se decide QUIÉN está, no qué papeles tiene.',
+        pasos: ['Busca en tu flota por nombre, correo, móvil o NIF.',
+                'Para fichar a alguien de fuera, pon su correo o su móvil COMPLETOS y pulsa <kbd>Buscar</kbd>.',
+                '<kbd>Añadir</kbd> lo mete en tu flota. <kbd>Sacar</kbd> lo da de baja.',
+                'Si no tiene cuenta, créale la ficha e <kbd>Invitar</kbd>: le llega un código por WhatsApp.'],
+        maqueta: 'flota',
+        aviso: 'Hace falta el correo o el móvil exactos a propósito. Si se pudiera buscar por trozos, cualquiera rastrearía los conductores de la competencia escribiendo «gmail».' },
+      { r: '/planificacion/conductores', t: 'Documentación', p: 'conductores.ver',
+        s: 'Los papeles de cada conductor, con semáforo: carnet, ADR, CAP y tarjeta de tacógrafo.',
+        pasos: ['Verde vigente, amarillo si caduca pronto, rojo si ya caducó.',
+                'La lista de avisos enseña lo que vence en los próximos 60 días.'],
+        maqueta: 'caducidades' },
+      { r: '/planificacion/vehiculos', t: 'Vehículos', p: 'conductores.ver',
+        s: 'Las matrículas. Se llena sola: cada matrícula nueva que se teclea en un albarán queda apuntada.' },
+      { r: '/planificacion/asignaciones', t: 'Rutas y asignaciones', p: 'planificacion.ver',
+        s: 'Repartir la carga del día entre los camiones disponibles.' }
+    ]},
+    { n: 'Firmas', hojas: [
+      { r: '/firmas/pendientes', t: 'Pendientes', p: 'firmas.ver',
+        s: 'Lo cargado y en tránsito que todavía nadie ha firmado. La lista de lo que hay que perseguir.',
+        pasos: ['Busca por número de albarán, destinatario, lugar de descarga o conductor.',
+                '<kbd>Pedir firma remota</kbd> genera un enlace de un solo uso.'],
+        maqueta: 'firmas' },
+      { r: '/firmas/completadas', t: 'Completadas', p: 'firmas.ver',
+        s: 'Lo entregado y firmado. Con quién firmó, cuándo y por qué vía.' },
+      { r: '/firmas/solicitudes', t: 'Solicitudes externas', p: 'firmas.solicitar',
+        s: 'Los enlaces de firma que has mandado y en qué estado están.',
+        pasos: ['Enviada, abierta, firmada, caducada o anulada.',
+                'Un enlace nuevo anula el anterior.',
+                'El destinatario firma desde su móvil sin registrarse en nada.'] },
+      { r: '/firmas/historico', t: 'Histórico', p: 'firmas.ver',
+        s: 'Todas las entregas, firmadas o no, para buscar una de hace meses.' }
+    ]},
+    { n: 'Documentos', hojas: [
+      { r: '/documentos/deca', t: 'DeCA', p: 'documentos.ver',
+        s: 'El repositorio de documentos de control. Es lo que exige la ley: no basta con poder regenerar el PDF, el fichero tiene que existir.',
+        pasos: ['Cada fila enseña si su fichero está guardado.',
+                'Descarga uno, o varios en un ZIP.'],
+        maqueta: 'deca' },
+      { r: '/documentos/pdf', t: 'PDFs', p: 'documentos.ver',
+        s: 'Los PDF generados, para descargarlos sueltos o en bloque.' },
+      { r: '/documentos/adjuntos', t: 'Adjuntos', p: 'documentos.ver',
+        s: 'Fotos y papeles colgados de un albarán o de una incidencia. Se ven con un enlace que caduca en un minuto.' },
+      { r: '/documentos/archivo', t: 'Archivo legal', p: 'documentos.ver',
+        s: 'Los doce meses de custodia obligatoria, en un sitio, listos para descargar si los piden.' }
+    ]},
+    { n: 'Empresas y contactos', hojas: [
+      { r: '/contactos/clientes', t: 'Clientes', p: 'contactos.ver',
+        s: 'Quién te encarga los portes. Elegir uno en el alta ahorra teclear el remitente entero.',
+        pasos: ['Busca por nombre, CIF, correo o dirección.',
+                '<kbd>Importar de documentos de control</kbd> saca las fichas de los albaranes que ya tienes.',
+                'Guarda su sello de salida una vez y se traerá solo en cada alta.'],
+        maqueta: 'contactos',
+        aviso: 'Una empresa puede ser cliente y destinatario a la vez: en el transporte es lo normal, no la excepción.' },
+      { r: '/contactos/proveedores', t: 'Proveedores', p: 'contactos.ver',
+        s: 'Los transportistas a los que subcontratas.' },
+      { r: '/contactos/destinatarios', t: 'Destinatarios', p: 'contactos.ver',
+        s: 'Dónde se descarga. Cada ficha recuerda su lugar habitual de descarga.' },
+      { r: '/contactos/personas', t: 'Contactos', p: 'contactos.ver',
+        s: 'Las personas: nombre, cargo y teléfono, colgando o no de una empresa.' }
+    ]},
+    { n: 'Economía', hojas: [
+      { r: '/economia/resumen', t: 'Precio, coste y beneficio', p: 'economia.ver',
+        s: 'Qué cobras, qué te cuesta y qué queda, transporte a transporte.',
+        pasos: ['Elige el mes.',
+                'Escribe precio y coste en la fila de cada transporte.',
+                'El beneficio sale solo.'] },
+      { r: '/economia/informes', t: 'Informes económicos', p: 'economia.ver',
+        s: 'Los mismos números agrupados por cliente, por mes o por conductor.' }
+    ]},
+    { n: 'Informes', hojas: [
+      { r: '/informes/todos', t: 'Informes', p: 'informes.ver',
+        s: 'Cuántos portes, cuánto peso, cuántas incidencias. Con exportación a CSV.' }
+    ]},
+    { n: 'Usuarios', hojas: [
+      { r: '/usuarios/personas', t: 'Usuarios', p: 'usuarios.ver',
+        s: 'Quién entra en tu CRM y con qué papel.',
+        pasos: ['Invita por correo: le llega un enlace para poner su contraseña.',
+                'Cambia el papel de alguien en el desplegable de su fila.',
+                'Desactivar le cierra la puerta sin borrar nada de lo que hizo.'],
+        maqueta: 'usuarios' },
+      { r: '/usuarios/roles', t: 'Roles', p: 'usuarios.permisos',
+        s: 'Los papeles: administrador, administrativo y conductor. Puedes crear los tuyos.' },
+      { r: '/usuarios/permisos', t: 'Permisos', p: 'usuarios.permisos',
+        s: 'La matriz. Qué puede hacer cada papel, y excepciones para una persona concreta.' },
+      { r: '/usuarios/invitaciones', t: 'Invitaciones', p: 'usuarios.crear',
+        s: 'Las que están en el aire. Por correo, o por código de WhatsApp para los conductores.',
+        aviso: 'El código solo se ve UNA vez, al generarlo. Si se pierde, se invita otra vez.' }
+    ]},
+    { n: 'Configuración', hojas: [
+      { r: '/configuracion/ajustes', t: 'Ajustes', p: 'panel.ver',
+        s: 'Lo tuyo: el aspecto del programa, día o noche, dónde se guardan las descargas y el canal de soporte.',
+        aviso: 'No pide ningún permiso especial: son las preferencias de uno mismo, así que las tienen los cuatro papeles.' },
+      { r: '/configuracion/empresa', t: 'Empresa', p: 'configuracion.editar',
+        s: 'Los datos de tu empresa y los valores por defecto del formulario de alta.' }
+    ]},
+  ];
+
+  var MAQUETAS = {
+    mes: function () {
+      var d = '', n;
+      for (n = 1; n <= 28; n++) {
+        var hoy = n === 19 ? ' dia--hoy' : '';
+        var p = '';
+        if (n === 4)  p = '<span class="porte porte--ok">Reus → Málaga</span>';
+        if (n === 11) p = '<span class="porte">Barcelona → El Prat</span>';
+        if (n === 19) p = '<span class="porte porte--cargada">San Sebastián → Salou</span>';
+        if (n === 24) p = '<span class="porte">Valls → Zaragoza</span>';
+        d += '<div class="dia' + hoy + '">' + (n < 10 ? '0' + n : n) + p + '</div>';
+      }
+      return '<div class="rejilla-mes">' + d + '</div>';
+    },
+    transportes: function () {
+      return tabla(['Código', 'Estado', 'Entregas', 'Carga', 'Ruta', 'Conductor'], [
+        ['<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('Asignada', 'azul'), '<span class="dato">0 / 1</span>', '<span class="dato">22/09/26</span>', 'Barcelona → El Prat', 'Óscar Salgado'],
+        ['<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('Cargada', 'amarillo'), '<span class="dato">0 / 1</span>', '<span class="dato">10/09/26</span>', 'San Sebastián → Salou', 'Óscar Salgado'],
+        ['<span class="dato">EXP-2026-JZ44TU</span>', pastilla('Completada', 'verde'), '<span class="dato">1 / 1</span>', '<span class="dato">27/08/26</span>', 'Salou → Valls', 'Ana Pérez'],
+        ['<span class="dato">EXP-2026-UGDQFT</span>', pastilla('Cancelada', 'rojo'), '<span class="dato">0 / 0</span>', '<span class="dato">27/08/26</span>', '—', 'Ana Pérez']
+      ]);
+    },
+    albaranes: function () {
+      return tabla(['Nº de albarán', 'Estado', 'Carga', 'Destinatario', 'Descarga'], [
+        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', pastilla('Cargado', 'amarillo'), '<span class="dato">22/09/26</span>', 'Ikea Málaga', 'Muelle 7'],
+        ['<span class="dato">DEC-2026-TDPHUE</span>', pastilla('En tránsito', 'amarillo'), '<span class="dato">10/09/26</span>', 'Leroy Sevilla', 'Polígono Sur'],
+        ['<span class="dato">DEC-2026-WJ42BA</span>', pastilla('Entregado', 'verde'), '<span class="dato">27/08/26</span>', 'Bodegas Puig SL', 'Carrer Major 3']
+      ]);
+    },
+    firmas: function () {
+      return tabla(['Nº de albarán', 'Estado', 'Destinatario', 'Conductor', ''], [
+        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', pastilla('Cargado', 'amarillo'), 'Ikea Málaga', 'Óscar Salgado', '<span class="etiqueta">Pedir firma remota</span>'],
+        ['<span class="dato">DEC-2026-TDPHUE</span>', pastilla('En tránsito', 'amarillo'), 'Leroy Sevilla', 'Ana Pérez', '<span class="etiqueta">Pedir firma remota</span>']
+      ]);
+    },
+    flota: function () {
+      return tabla(['Conductor', 'Móvil', 'NIF', 'App', 'Estado'], [
+        ['Ana Pérez<br><span class="dato" style="color:var(--tenue);font-size:11px">(ana@transportes.es)</span>', '<span class="dato">600 123 456</span>', '<span class="dato">12345678Z</span>', '<span class="dato">sí</span>', 'Activo'],
+        ['Luis Mondragón<br><span class="dato" style="color:var(--tenue);font-size:11px">(luis@transportes.es)</span>', '<span class="dato">611 222 333</span>', '<span class="dato">87654321X</span>', '<span class="dato">sí</span>', 'Activo'],
+        ['Marta Ruiz<br><span class="dato" style="color:var(--tenue);font-size:11px">(marta@transportes.es)</span>', '<span class="dato">622 333 444</span>', '<span class="dato">—</span>', '<span class="etiqueta">Invitar</span>', 'Activo']
+      ]);
+    },
+    caducidades: function () {
+      return tabla(['Conductor', 'Carnet', 'ADR', 'CAP', 'Tacógrafo'], [
+        ['Ana Pérez', pastilla('14/03/29', 'verde'), pastilla('no', 'gris'), pastilla('02/11/27', 'verde'), pastilla('30/01/28', 'verde')],
+        ['Luis Mondragón', pastilla('08/10/26 · 12 d', 'amarillo'), pastilla('21/05/27', 'verde'), pastilla('19/06/28', 'verde'), pastilla('caducado', 'rojo')],
+        ['Marta Ruiz', pastilla('30/07/30', 'verde'), pastilla('11/12/26', 'amarillo'), pastilla('—', 'gris'), pastilla('04/04/29', 'verde')]
+      ]);
+    },
+    deca: function () {
+      return tabla(['Nº de DeCA', 'Transporte', 'Fichero guardado', 'Carga'], [
+        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', '<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('sí', 'verde'), '<span class="dato">22/09/26</span>'],
+        ['<span class="dato">DEC-2026-TDPHUE</span>', '<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('sí', 'verde'), '<span class="dato">10/09/26</span>'],
+        ['<span class="dato">DEC-2026-9KYH9V</span>', '<span class="dato">EXP-2026-FCJW86</span>', pastilla('pendiente', 'amarillo'), '<span class="dato">27/08/26</span>']
+      ]);
+    },
+    contactos: function () {
+      return tabla(['Empresa', 'CIF', 'Papel', 'Lugar habitual'], [
+        ['Bodegas Puig SL', '<span class="dato">B12345678</span>', pastilla('Cliente · Destinatario', 'violeta'), 'Carrer Major 3, Reus'],
+        ['Ikea Málaga', '<span class="dato">A11111111</span>', pastilla('Destinatario', 'azul'), 'Muelle 7'],
+        ['Transportes Díaz', '<span class="dato">B99999999</span>', pastilla('Proveedor', 'gris'), '—']
+      ]);
+    },
+    usuarios: function () {
+      return tabla(['Usuario', 'Papel', 'Estado', 'Último acceso'], [
+        ['Óscar Salgado<br><span class="dato" style="color:var(--tenue);font-size:11px">(oscar@transportes.es)</span>', 'Administrador de empresa', 'Activa', '<span class="dato">hoy, 09:12</span>'],
+        ['Marta Ruiz<br><span class="dato" style="color:var(--tenue);font-size:11px">(marta@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">ayer, 17:40</span>'],
+        ['Ana Pérez<br><span class="dato" style="color:var(--tenue);font-size:11px">(ana@transportes.es)</span>', 'Conductor', 'Activa', '<span class="dato">hoy, 06:55</span>']
+      ]);
+    },
+  };
+
+  function pastilla(texto, color) {
+    return '<span class="pastilla p-' + color + '">' + texto + '</span>';
+  }
+
+  function tabla(cabeceras, filas) {
+    var th = cabeceras.map(function (c) { return '<th>' + c + '</th>'; }).join('');
+    var tr = filas.map(function (f) {
+      return '<tr>' + f.map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>';
+    }).join('');
+    return '<div class="tabla-caja"><table class="demo"><thead><tr>' + th
+      + '</tr></thead><tbody>' + tr + '</tbody></table></div>';
+  }
+
+  var rail = document.getElementById('rail');
+  var detalle = document.getElementById('detalle');
+  var notaRol = document.getElementById('notaRol');
+  var rolActual = 'admin_empresa';
+  var hojaActual = '/';
+
+  function puede(hoja) {
+    return PERMISOS[rolActual].indexOf(hoja.p) !== -1;
+  }
+
+  function contarVisibles() {
+    var v = 0, t = 0;
+    MENU.forEach(function (s) {
+      s.hojas.forEach(function (h) { t++; if (puede(h)) v++; });
+    });
+    return { v: v, t: t };
+  }
+
+  function pintarRail() {
+    var html = '';
+    MENU.forEach(function (s) {
+      html += '<div class="rail__seccion"><div class="rail__titulo">' + s.n + '</div>';
+      s.hojas.forEach(function (h) {
+        var ok = puede(h);
+        html += '<button type="button" class="hoja' + (ok ? '' : ' hoja--vedada') + '"'
+          + ' data-ruta="' + h.r + '"'
+          + (hojaActual === h.r ? ' aria-current="true"' : '')
+          + (ok ? '' : ' aria-disabled="true"')
+          + '><span>' + h.t + '</span>'
+          + (ok ? '' : '<span class="candado">sin permiso</span>')
+          + '</button>';
+      });
+      html += '</div>';
+    });
+    rail.innerHTML = html;
+  }
+
+  function buscarHoja(ruta) {
+    for (var i = 0; i < MENU.length; i++) {
+      for (var j = 0; j < MENU[i].hojas.length; j++) {
+        if (MENU[i].hojas[j].r === ruta) return { hoja: MENU[i].hojas[j], seccion: MENU[i] };
+      }
+    }
+    return null;
+  }
+
+  function pintarDetalle() {
+    var encontrado = buscarHoja(hojaActual);
+    if (!encontrado) return;
+    var h = encontrado.hoja, s = encontrado.seccion;
+    var ok = puede(h);
+
+    var html = '<div class="detalle__ruta">' + s.n + ' &nbsp;·&nbsp; <span>' + h.r + '</span></div>';
+    html += '<h3>' + h.t + '</h3>';
+    html += '<p class="detalle__resumen">' + (h.s || '') + '</p>';
+
+    html += '<div class="etiquetas">';
+    html += '<span class="etiqueta etiqueta--permiso">permiso: ' + h.p + '</span>';
+    html += '<span class="etiqueta">ámbito empresa</span>';
+    html += '</div>';
+
+    if (!ok) {
+      html += '<div class="aviso"><b>Un ' + NOMBRE_ROL[rolActual].toLowerCase() + ' no ve esta pantalla.</b> '
+        + 'Le falta el permiso <span class="dato">' + h.p + '</span>.'
+        + ' No sale en su menú y tampoco se abre escribiendo la dirección: la misma regla la aplica la base de datos.</div>';
+    }
+
+    if (h.pasos && h.pasos.length) {
+      html += '<div class="subtitulo">Qué se hace aquí</div><ol class="pasos">';
+      h.pasos.forEach(function (p) { html += '<li><span>' + p + '</span></li>'; });
+      html += '</ol>';
+    }
+
+    if (h.aviso) html += '<div class="aviso">' + h.aviso + '</div>';
+
+    if (h.maqueta && MAQUETAS[h.maqueta]) {
+      html += '<div class="subtitulo">Así se ve</div>';
+      html += '<div class="maqueta"><div class="maqueta__barra"><i></i><i></i><i></i></div>'
+        + MAQUETAS[h.maqueta]() + '</div>';
+    }
+
+    detalle.innerHTML = html;
+  }
+
+  function pintarNota() {
+    var c = contarVisibles();
+    notaRol.innerHTML = NOTA_ROL[rolActual] + ' Ve <b>' + c.v + ' de ' + c.t + '</b> pantallas.';
+  }
+
+  rail.addEventListener('click', function (e) {
+    var b = e.target.closest('.hoja');
+    if (!b) return;
+    hojaActual = b.getAttribute('data-ruta');
+    pintarRail();
+    pintarDetalle();
+  });
+
+  document.querySelectorAll('.rol').forEach(function (b) {
+    b.addEventListener('click', function () {
+      rolActual = b.getAttribute('data-rol');
+      document.querySelectorAll('.rol').forEach(function (o) {
+        o.setAttribute('aria-pressed', String(o === b));
+      });
+      pintarRail();
+      pintarDetalle();
+      pintarNota();
+    });
+  });
+
+  pintarRail();
+  pintarDetalle();
+  pintarNota();
+})();
+
+  </script>
+</body>
+</html>
