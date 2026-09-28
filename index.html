@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20260928b">
+  <link rel="stylesheet" href="styles.css?v=20260928c">
 
   <script type="application/ld+json">
   {
@@ -247,6 +247,19 @@
           <div class="hook-text">
             <h3>¡Empieza sin pagar nada!</h3>
             <p>Te regalamos <strong>10 transportes de prueba sin coste</strong>. Sin tarjetas ni compromisos.</p>
+            <!-- La segunda línea del gancho: el CRM regala dos licencias.
+                 Va DESPUÉS de la prueba gratis y no antes, porque son dos
+                 públicos distintos y en este orden: el que llega aquí todavía
+                 no sabe si le sirve la app, así que primero se le dice cómo
+                 probarla; lo del CRM es lo que se lleva si además tiene flota,
+                 y solo interesa a quien ya ha decidido que sí. -->
+            <!-- ⚠️ UN SOLO <strong>, y al final. El extractor de traducciones
+                 parte la frase por cada etiqueta de dentro, y tres trozos
+                 sueltos —«Y si contratas nuestro», «, te regalamos», «dos
+                 licencias»— no se pueden recomponer en alemán ni en polaco,
+                 donde el orden de la frase es otro. Con la condición en un
+                 trozo y el premio en otro, cada idioma los ordena como toque. -->
+            <p class="hook-extra">Y si contratas el CRM de flota, <strong>te regalamos dos licencias de conductor</strong>.</p>
           </div>
         </div>
       
