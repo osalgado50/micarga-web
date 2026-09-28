@@ -44,6 +44,32 @@ const MEDICION = 'G-9G0GZCR1W7';
  */
 const ANUNCIOS = 'AW-18461463262';
 
+/**
+ * El contenedor de Google Tag Manager, «GTM-XXXXXXX». Vacío = no se carga.
+ *
+ * 🚨 VA AQUÍ Y NO PEGADO EN EL HTML, aunque Google diga que se pegue en el
+ * `<head>` de todas las páginas. Pegado ahí se descarga `gtm.js` en cuanto
+ * abres la web: una petición a un servidor de Google con la IP del visitante
+ * ANTES de que haya dicho que sí. Eso es exactamente lo que este fichero entero
+ * existe para no hacer, y lo que micarga.es/cookies promete por escrito. Desde
+ * aquí se carga igual, en todas las páginas —este fichero está en las 208—,
+ * pero después del consentimiento.
+ *
+ * ⚠️ Y OJO CON LO QUE METAS DENTRO DEL CONTENEDOR. Aquí ya se cargan GA4 y
+ * Google Ads directamente (arriba). Si en Tag Manager pones otra etiqueta de
+ * GA4 con el mismo identificador, cada visita se cuenta DOS veces: las sesiones
+ * se disparan, el porcentaje de rebote se hunde y las conversiones se duplican.
+ * El contenedor es para lo que no está ya aquí.
+ *
+ * ⚠️ El `<noscript>` con el iframe que Google da para pegar detrás de `<body>`
+ * NO se pone, a propósito: un iframe no se puede esperar a nada, se carga solo.
+ * Y solo actúa con JavaScript desactivado, que es justo cuando el panel de
+ * cookies tampoco funciona — o sea, cargaría siempre sin consentimiento. Se
+ * pierde la medición de esos visitantes, que no llegan al 1 % y que de todas
+ * formas no se podrían medir legalmente.
+ */
+const CONTENEDOR = 'GTM-TM53WWCG';
+
 /** Dónde se guarda lo que ha elegido. Un año, que es lo que recomienda la AEPD. */
 const CLAVE = 'micarga-cookies';
 const MESES_VALIDO = 12;
@@ -169,6 +195,24 @@ const cargarAnalytics = (analitica, publicidad) => {
   // poner cookies de conversión, así que no basta con no mandar el evento
   // después: es esta línea la que no se debe ejecutar.
   if (ANUNCIOS && publicidad) gtag('config', ANUNCIOS);
+
+  // Tag Manager, al final y con el consentimiento ya puesto en `dataLayer`.
+  //
+  // 🚨 EL ORDEN IMPORTA Y NO ES CAPRICHO: las señales de consentimiento se han
+  // empujado arriba, a este mismo `dataLayer`, ANTES de que exista el
+  // contenedor. Las etiquetas que se disparen dentro de Tag Manager se
+  // encuentran el consentimiento ya declarado y lo respetan. Cargándolo antes,
+  // una etiqueta de Ads podría dispararse sin saber que la publicidad está
+  // rechazada.
+  if (CONTENEDOR) {
+    // Igual que el fragmento oficial: primero el aviso en la cola, después el
+    // script. Así el contenedor sabe cuándo empezó a contar.
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    const g = document.createElement('script');
+    g.async = true;
+    g.src = `https://www.googletagmanager.com/gtm.js?id=${CONTENEDOR}`;
+    document.head.appendChild(g);
+  }
 };
 
 /**
