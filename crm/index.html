@@ -325,7 +325,7 @@
     <div class="cifras">
       <div class="cifra"><b>10</b><span>secciones</span></div>
       <div class="cifra"><b>34</b><span>pantallas</span></div>
-      <div class="cifra"><b>3</b><span>papeles distintos</span></div>
+      <div class="cifra"><b>2</b><span>papeles</span></div>
       <div class="cifra"><b>12 meses</b><span>de custodia del DeCA</span></div>
     </div>
   </header>
@@ -334,15 +334,14 @@
     <div class="rotulo">Pruébalo</div>
     <h2>Cambia de papel y mira cómo cambia el menú</h2>
     <p class="bajada">
-      En Mi Carga el menú no es igual para todos: cada pantalla exige un permiso, y cada
-      papel tiene los suyos. Lo que no aparece aquí tampoco se abre escribiendo la
-      dirección a mano, porque la misma regla la aplica la base de datos.
+      Hay dos papeles y hacen dos trabajos distintos: quien lleva la oficina y quien
+      conduce. Cada pantalla exige un permiso, y lo que no aparece aquí tampoco se abre
+      escribiendo la dirección a mano, porque la misma regla la aplica la base de datos.
       Elige un papel y pulsa cualquier pantalla del menú.
     </p>
 
     <div class="roles" role="group" aria-label="Papel en la empresa">
-      <button class="rol" type="button" data-rol="admin_empresa" aria-pressed="true">Administrador de empresa</button>
-      <button class="rol" type="button" data-rol="administrativo" aria-pressed="false">Administrativo</button>
+      <button class="rol" type="button" data-rol="administrativo" aria-pressed="true">Administrativo</button>
       <button class="rol" type="button" data-rol="conductor" aria-pressed="false">Conductor</button>
     </div>
     <p class="nota-rol" id="notaRol"></p>
@@ -501,20 +500,17 @@
   // Los permisos de cada papel, tal como están en la base de datos. El menú de
   // abajo se filtra con ellos, igual que hace el programa.
   var PERMISOS = {
-    admin_empresa: 'albaranes.asignar,albaranes.borrar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,configuracion.editar,contactos.editar,contactos.ver,documentos.subir,documentos.ver,economia.editar,economia.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver,usuarios.crear,usuarios.desactivar,usuarios.editar,usuarios.permisos,usuarios.ver'.split(','),
-    administrativo: 'albaranes.asignar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,contactos.editar,contactos.ver,documentos.subir,documentos.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver'.split(','),
+    administrativo: 'albaranes.asignar,albaranes.borrar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,configuracion.editar,contactos.editar,contactos.ver,documentos.subir,documentos.ver,economia.editar,economia.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver,usuarios.crear,usuarios.desactivar,usuarios.editar,usuarios.permisos,usuarios.ver'.split(','),
     conductor: 'albaranes.ver_propios,documentos.ver,firmas.ver,incidencias.editar,incidencias.ver,panel.ver'.split(',')
   };
 
   var NOMBRE_ROL = {
-    admin_empresa: 'Administrador de empresa',
     administrativo: 'Administrativo',
     conductor: 'Conductor'
   };
 
   var NOTA_ROL = {
-    admin_empresa: 'Manda en su empresa: también usuarios, economía y configuración.',
-    administrativo: 'Todo lo operativo. No toca usuarios, economía ni configuración.',
+    administrativo: 'Lleva la oficina entera. Todo lo de su empresa, sin excepciones.',
     conductor: 'Su sitio es la app del móvil. En el CRM apenas ve nada.'
   };
 
@@ -623,17 +619,38 @@
     { n: 'Empresas y contactos', hojas: [
       { r: '/contactos/clientes', t: 'Clientes', p: 'contactos.ver',
         s: 'Quién te encarga los portes. Elegir uno en el alta ahorra teclear el remitente entero.',
-        pasos: ['Busca por nombre, CIF, correo o dirección.',
-                '<kbd>Importar de documentos de control</kbd> saca las fichas de los albaranes que ya tienes.',
-                'Guarda su sello de salida una vez y se traerá solo en cada alta.'],
+        pasos: ['<kbd>+ Nueva ficha</kbd> crea un cliente a mano: nombre, CIF, dirección, población, teléfono, correo y su lugar habitual de carga.',
+                'Marca si además es proveedor o destinatario. Una empresa puede ser las tres cosas.',
+                'Busca por nombre, CIF, correo o dirección.',
+                '<kbd>Importar de documentos de control</kbd> saca de golpe las fichas de los albaranes que ya tienes, sin teclear nada.',
+                'Guarda su sello de salida una vez y se traerá solo en cada alta.',
+                '<kbd>Editar</kbd> y <kbd>Borrar</kbd> en cada fila.'],
         maqueta: 'contactos',
         aviso: 'Una empresa puede ser cliente y destinatario a la vez: en el transporte es lo normal, no la excepción.' },
       { r: '/contactos/proveedores', t: 'Proveedores', p: 'contactos.ver',
-        s: 'Los transportistas a los que subcontratas.' },
+        s: 'Los transportistas a los que subcontratas. Elegir uno en el alta rellena su nombre, NIF y dirección en el albarán.',
+        pasos: ['<kbd>+ Nueva ficha</kbd> y rellena nombre, CIF, dirección, población, teléfono y correo.',
+                'Marca la casilla <kbd>Proveedor</kbd>. Si además te compra portes, marca también <kbd>Cliente</kbd>.',
+                'Busca por nombre, CIF, correo o dirección.',
+                '<kbd>Importar de documentos de control</kbd> los saca de los albaranes que ya tienes: el transportista de cada uno entra como proveedor.',
+                '<kbd>Editar</kbd> y <kbd>Borrar</kbd> en cada fila.'],
+        maqueta: 'proveedores' },
       { r: '/contactos/destinatarios', t: 'Destinatarios', p: 'contactos.ver',
-        s: 'Dónde se descarga. Cada ficha recuerda su lugar habitual de descarga.' },
+        s: 'Dónde se descarga. Es la lista que más tiempo ahorra: elegir uno en el alta rellena la entrega entera.',
+        pasos: ['<kbd>+ Nueva ficha</kbd> con nombre, CIF y dirección.',
+                'Pon su <kbd>Lugar habitual de carga o descarga</kbd>: es el campo que más se repite a mano, y así viene puesto.',
+                'Marca la casilla <kbd>Destinatario</kbd>.',
+                'Busca por nombre, CIF, correo o dirección.',
+                '<kbd>Importar de documentos de control</kbd> los saca de tus albaranes con su lugar de descarga más frecuente ya relleno.'],
+        maqueta: 'destinatarios',
+        aviso: 'La misma empresa puede estar marcada como cliente, proveedor y destinatario. En el transporte es lo normal: hoy te cargan y mañana te descargan.' },
       { r: '/contactos/personas', t: 'Contactos', p: 'contactos.ver',
-        s: 'Las personas: nombre, cargo y teléfono, colgando o no de una empresa.' }
+        s: 'Las personas, no las empresas: a quién llamas cuando el camión está en la puerta y nadie abre.',
+        pasos: ['<kbd>+ Nuevo contacto</kbd> con nombre, cargo, teléfono y correo.',
+                'Cuélgalo de una empresa del directorio, o déjalo suelto si no pertenece a ninguna.',
+                'En <kbd>Notas</kbd> caben las cosas que no son un campo: horario de muelle, a quién preguntar, dónde aparcar.',
+                'Busca por nombre, cargo, teléfono o correo.'],
+        maqueta: 'personas' }
     ]},
     { n: 'Economía', hojas: [
       { r: '/economia/resumen', t: 'Precio, coste y beneficio', p: 'economia.ver',
@@ -656,7 +673,10 @@
                 'Desactivar le cierra la puerta sin borrar nada de lo que hizo.'],
         maqueta: 'usuarios' },
       { r: '/usuarios/roles', t: 'Roles', p: 'usuarios.permisos',
-        s: 'Los papeles: administrador, administrativo y conductor. Puedes crear los tuyos.' },
+        s: 'Los dos papeles —administrativo y conductor— y los que quieras crear tú.',
+        pasos: ['<kbd>Administrativo</kbd> lleva la oficina entera: todo lo de la empresa.',
+                '<kbd>Conductor</kbd> solo ve sus portes, sus documentos y sus incidencias.',
+                'Puedes crear papeles propios y darles justo los permisos que quieras.'] },
       { r: '/usuarios/permisos', t: 'Permisos', p: 'usuarios.permisos',
         s: 'La matriz. Qué puede hacer cada papel, y excepciones para una persona concreta.' },
       { r: '/usuarios/invitaciones', t: 'Invitaciones', p: 'usuarios.crear',
@@ -746,9 +766,30 @@
         ['Transportes Díaz', '<span class="dato">B99999999</span>', pastilla('Proveedor', 'gris'), '—']
       ]);
     },
+    proveedores: function () {
+      return tabla(['Empresa', 'CIF', 'Papel', 'Teléfono'], [
+        ['Transportes Díaz', '<span class="dato">B99999999</span>', pastilla('Proveedor', 'gris'), '<span class="dato">977 000 111</span>'],
+        ['Logística Vall SL', '<span class="dato">B44556677</span>', pastilla('Proveedor', 'gris'), '<span class="dato">972 334 556</span>'],
+        ['Autocares Gil', '<span class="dato">B10293847</span>', pastilla('Cliente · Proveedor', 'violeta'), '<span class="dato">934 112 998</span>']
+      ]);
+    },
+    destinatarios: function () {
+      return tabla(['Empresa', 'CIF', 'Lugar habitual', 'Papel'], [
+        ['Ikea Málaga', '<span class="dato">A11111111</span>', 'Parque Comercial Bahía Azul 1, Málaga', pastilla('Destinatario', 'azul')],
+        ['Leroy Sevilla', '<span class="dato">A22222222</span>', 'Polígono Sur, muelle 12', pastilla('Destinatario', 'azul')],
+        ['Bodegas Puig SL', '<span class="dato">B12345678</span>', 'Carrer Major 3, Reus', pastilla('Cliente · Destinatario', 'violeta')]
+      ]);
+    },
+    personas: function () {
+      return tabla(['Nombre', 'Cargo', 'Empresa', 'Teléfono'], [
+        ['Rosa Betrán', 'Jefa de muelle', 'Ikea Málaga', '<span class="dato">600 445 221</span>'],
+        ['Tomás Vidal', 'Administración', 'Bodegas Puig SL', '<span class="dato">977 000 342</span>'],
+        ['Nacho Prats', 'Tráfico', 'Transportes Díaz', '<span class="dato">610 887 004</span>']
+      ]);
+    },
     usuarios: function () {
       return tabla(['Usuario', 'Papel', 'Estado', 'Último acceso'], [
-        ['Óscar Salgado<br><span class="dato" style="color:var(--tenue);font-size:11px">(oscar@transportes.es)</span>', 'Administrador de empresa', 'Activa', '<span class="dato">hoy, 09:12</span>'],
+        ['Óscar Salgado<br><span class="dato" style="color:var(--tenue);font-size:11px">(oscar@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">hoy, 09:12</span>'],
         ['Marta Ruiz<br><span class="dato" style="color:var(--tenue);font-size:11px">(marta@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">ayer, 17:40</span>'],
         ['Ana Pérez<br><span class="dato" style="color:var(--tenue);font-size:11px">(ana@transportes.es)</span>', 'Conductor', 'Activa', '<span class="dato">hoy, 06:55</span>']
       ]);
@@ -771,7 +812,7 @@
   var rail = document.getElementById('rail');
   var detalle = document.getElementById('detalle');
   var notaRol = document.getElementById('notaRol');
-  var rolActual = 'admin_empresa';
+  var rolActual = 'administrativo';
   var hojaActual = '/';
 
   function puede(hoja) {
