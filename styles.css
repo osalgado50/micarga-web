@@ -4071,3 +4071,64 @@ body > section:not(.hero-section) > .container > h2 {
   font-family: var(--font-display);
   font-size: 1.05rem;
 }
+
+/* ===========================================================================
+   EL REGALO DE LAS DOS CUENTAS PREMIUM DEL CRM
+   ===========================================================================
+   Tiene que llamar la atención sin gritar: va dentro de la tarjeta del CRM,
+   así que compite con su propio precio. Se resuelve con un fondo tenue del
+   color de marca y un filo a la izquierda, el mismo recurso que ya usa la
+   tarjeta entera — es un acento, no un cartel.
+
+   ⚠️ El color de fondo va con `color-mix` sobre la variable de marca y no con
+   un hexadecimal a pelo: en tema oscuro un bloque claro fijo se convierte en
+   una mancha que ciega, y aquí se adapta solo. */
+.crm-regalo {
+  margin-top: 1.2rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.crm-regalo-etiqueta {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+}
+
+.crm-regalo-titular {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-heading);
+  /* Un titular de dos líneas no debe partir dejando una palabra suelta. */
+  text-wrap: balance;
+}
+
+.crm-regalo-texto {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.crm-regalo-valor {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .crm-regalo { padding: 0.9rem 1rem; }
+  .crm-regalo-titular { font-size: 1.05rem; }
+}

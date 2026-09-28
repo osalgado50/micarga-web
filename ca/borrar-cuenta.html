@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <link rel="stylesheet" href="/styles.css?v=20260928b">
   <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
 </head>
 <body>
@@ -121,7 +121,7 @@
                  autocomplete="email" inputmode="email" required
                  placeholder="el del teu compte de Mi Carga">
           <p class="sus-ayuda">
-            T'enviem un codi de 6 dígits per comprovar que el compte és
+            T'enviem un codi per comprovar que el compte és
             teu. Sense això no esborrem res.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">Enviar-me el codi</button>
@@ -131,7 +131,7 @@
       <!-- PASO 2 · código -->
       <section class="sus-paso" id="paso-codigo" hidden>
         <form id="form-codigo" novalidate>
-          <label class="sus-label" for="codigo">Codi de 6 dígits</label>
+          <label class="sus-label" for="codigo">Codi del correu</label>
           <input class="sus-input sus-input-codigo" type="text" id="codigo"
                  name="codigo" inputmode="numeric" autocomplete="one-time-code"
                  maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">

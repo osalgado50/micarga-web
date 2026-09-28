@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <link rel="stylesheet" href="/styles.css?v=20260928b">
   <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
 </head>
 <body>
@@ -120,7 +120,7 @@
                  autocomplete="email" inputmode="email" required
                  placeholder="the one on your Mi Carga account">
           <p class="sus-ayuda">
-            We'll send you a 6-digit code to check the account is
+            We send you a code to check the account is
             yours. Without it we delete nothing.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">Send me the code</button>
@@ -130,7 +130,7 @@
       <!-- PASO 2 · código -->
       <section class="sus-paso" id="paso-codigo" hidden>
         <form id="form-codigo" novalidate>
-          <label class="sus-label" for="codigo">6-digit code</label>
+          <label class="sus-label" for="codigo">Code from the email</label>
           <input class="sus-input sus-input-codigo" type="text" id="codigo"
                  name="codigo" inputmode="numeric" autocomplete="one-time-code"
                  maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">

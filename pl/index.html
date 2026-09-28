@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <link rel="stylesheet" href="/styles.css?v=20260928b">
 
   <script type="application/ld+json">
   {
@@ -856,11 +856,36 @@
             <p class="price-tax">+ VAT · 59,29 € miesięcznie lub 592,90 € rocznie łącznie</p>
             <p class="crm-card-ahorro">W skali roku oszczędzasz <strong>98 €</strong>: dwa miesiące gratis.</p>
             <p class="crm-card-nota">Cena stała, niezależnie od liczby kierowców.</p>
+
+            <!-- EL REGALO DE LAS DOS CUENTAS (28-09-2026).
+                 Va DENTRO de la tarjeta del CRM y debajo del precio, no en un
+                 banner suelto arriba: es lo que hace que el precio parezca
+                 otra cosa, y para eso el lector tiene que haber visto antes la
+                 cifra. Puesto antes, se lee como un adorno.
+                 La cifra de 217,80 € es real: dos licencias anuales a 108,90 €
+                 con IVA, que es lo que pagaría por ellas si las comprara. No
+                 se redondea ni se infla: el mismo visitante puede sumarlo en
+                 la calculadora de arriba y descuadrarle sería peor que no
+                 decirlo. -->
+            <div class="crm-regalo">
+              <span class="crm-regalo-etiqueta">W cenie planu</span>
+              <p class="crm-regalo-titular">I 2 konta premium w prezencie</p>
+              <p class="crm-regalo-texto">Dla dwóch Twoich kierowców lub dwóch zaufanych przewoźników: wystawiają swoje dokumenty kontrolne bez limitu, z telefonu, i nic nie płacą. Jeśli ktoś odejdzie, przekazujesz konto komu innemu w dwa kliknięcia.</p>
+              <p class="crm-regalo-valor">217,80 € rocznie, których nie płacisz</p>
+            </div>
             <!-- Hasta hoy este bloque no tenía botón: el CRM se anunciaba con
                  su precio y no había por dónde contratarlo. El `?crm=1` deja la
                  casilla del CRM ya marcada en el paso de planes, y el resto del
                  camino —crear la cuenta si no la tiene, datos de facturación,
                  pago— es exactamente el mismo que el de las licencias. -->
+            <!-- Verlo antes de pagarlo. Un CRM de 49 €/mes no se contrata a
+                 ciegas: quien no sabe qué va a recibir, no pulsa el botón de
+                 abajo. La demo se abre en la misma pestaña a propósito —volver
+                 es el gesto natural— y termina con su propio botón de
+                 contratar, para no obligar a rehacer el camino. -->
+            <a href="/pl/crm/" class="btn btn-secondary crm-card-boton crm-card-boton--ver">
+              <i class="fa-solid fa-desktop"></i> Zobacz CRM od środka
+            </a>
             <a href="suscripcion?crm=1&amp;licencias=0" class="btn btn-primary crm-card-boton">
               <i class="fa-solid fa-building"></i> Zamów CRM
             </a>

@@ -138,6 +138,8 @@ $('form-codigo').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
   const token = $('codigo').value.replace(/\D/g, '');
+  // Supabase manda códigos de 6 a 10 dígitos (hoy 8): el mismo arreglo que
+  // suscripcion.js del 07-09-2026. Quien decide si vale es verifyOtp().
   if (token.length < 6 || token.length > 10) { avisar('Copia el codi sencer, tal com ve al correu.'); return; }
 
   await ocupado($('btn-codigo'), 'Comprobando…', async () => {

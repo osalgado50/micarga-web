@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css?v=20260923b">
+  <link rel="stylesheet" href="/styles.css?v=20260928b">
   <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
 </head>
 <body>
@@ -121,8 +121,8 @@
                  autocomplete="email" inputmode="email" required
                  placeholder="celui de votre compte Mi Carga">
           <p class="sus-ayuda">
-            Nous vous envoyons un code à 6 chiffres pour vérifier que le compte est bien
-            le vôtre. Sans cela nous ne supprimons rien.
+            Nous vous envoyons un code pour vérifier que le compte est
+            le vôtre. Sans cela, nous ne supprimons rien.
           </p>
           <button class="sus-btn" type="submit" id="btn-correo">M'envoyer le code</button>
         </form>
@@ -131,7 +131,7 @@
       <!-- PASO 2 · código -->
       <section class="sus-paso" id="paso-codigo" hidden>
         <form id="form-codigo" novalidate>
-          <label class="sus-label" for="codigo">Code à 6 chiffres</label>
+          <label class="sus-label" for="codigo">Code reçu par e-mail</label>
           <input class="sus-input sus-input-codigo" type="text" id="codigo"
                  name="codigo" inputmode="numeric" autocomplete="one-time-code"
                  maxlength="10" pattern="[0-9]{6,10}" required placeholder="········">
