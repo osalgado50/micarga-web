@@ -4024,6 +4024,16 @@ body > section:not(.hero-section) > .container > h2 {
   margin: 0.9rem 0 0;
 }
 
+/* «Ver el CRM por dentro»: va ENCIMA del de contratar y en secundario, para
+   que se lea como el paso previo y no compita con la acción de pago. Sin él,
+   un CRM de 49 €/mes se contrataba a ciegas. */
+.crm-card-boton--ver {
+  margin-bottom: 0;
+}
+.crm-card-boton--ver + .crm-card-boton {
+  margin-top: 0.6rem;
+}
+
 .crm-card-boton {
   display: inline-flex;
   align-items: center;

@@ -99,6 +99,27 @@
   /* ── Secciones ────────────────────────────────────────────────────────── */
   .bloque { padding-block: 44px; border-bottom: 1px solid var(--borde); }
   .bloque:last-of-type { border-bottom: 0; }
+
+  /* El cierre de la página: la salida para quien se la ha leído entera. */
+  .cierre { text-align: center; }
+  .cierre-texto {
+    max-width: 52ch; margin: 12px auto 0; color: var(--tenue); line-height: 1.6;
+  }
+  .cierre-botones {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px;
+  }
+  .cierre-boton {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 13px 24px; border-radius: 10px; text-decoration: none;
+    border: 1px solid var(--borde-fuerte); color: var(--texto);
+    font-weight: 600; font-size: 15px; transition: transform .15s, background .15s;
+  }
+  .cierre-boton:hover { transform: translateY(-2px); background: var(--superficie-2); }
+  .cierre-boton--principal {
+    background: var(--acento); border-color: var(--acento); color: #0b0b0b;
+  }
+  .cierre-boton--principal:hover { background: var(--acento-fuerte); border-color: var(--acento-fuerte); }
+  .cierre-nota { margin-top: 14px; color: var(--tenue); font-size: 13px; }
   .rotulo {
     font-family: var(--datos); font-size: 11px; letter-spacing: .16em;
     text-transform: uppercase; color: var(--acento); margin-bottom: 10px;
@@ -423,6 +444,32 @@
         <p>Cada cambio en un documento guarda su versión anterior. Desde el historial se ve qué cambió, quién lo cambió y a qué hora.</p>
       </div>
     </div>
+  </section>
+
+  <!-- Quien ha llegado hasta aquí se ha leído la página entera: ya sabe qué
+       hace el programa. Dejarle sin una salida obligaría a volver atrás y
+       buscar el precio otra vez, y ese es el momento en que la gente se va.
+       El `?crm=1` deja la casilla del CRM ya marcada, igual que el botón de la
+       página de precios. -->
+  <section class="bloque cierre">
+    <div class="rotulo">Si le encaja</div>
+    <h2>Empiece con su flota esta semana</h2>
+    <p class="cierre-texto">
+      Son <strong>49 € al mes</strong> o <strong>490 € al año</strong>, más IVA, sin importar
+      cuántos conductores sean. Las licencias de sus conductores se añaden en el mismo paso,
+      si las quiere.
+    </p>
+    <div class="cierre-botones">
+      <a href="/suscripcion?crm=1&amp;licencias=0" class="cierre-boton cierre-boton--principal">
+        Contratar el CRM
+      </a>
+      <a href="/contacto" class="cierre-boton">
+        Prefiero que me lo cuenten
+      </a>
+    </div>
+    <p class="cierre-nota">
+      Sin permanencia. Si no le sirve, lo deja cuando quiera.
+    </p>
   </section>
 
   <footer class="pie">

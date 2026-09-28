@@ -15,3 +15,4 @@ __pycache__/
 # La tipografía de marca, descargada de Google Fonts para dibujar las portadas
 # del blog. No se versiona: se vuelve a bajar sola si hace falta.
 herramientas/Outfit-Bold.ttf
+.claude/
