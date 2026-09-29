@@ -16,7 +16,8 @@
     "grupo": "Historia del transporte",
     "resumen": "El camión no nació como lo conoces hoy. No tenía cabina aislada, cambio automatizado, GPS ni sistemas de asistencia. Tampoco podía recorrer cientos de…",
     "fecha": "2026-09-27",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-09-29"
   },
   {
     "orden": 3,
