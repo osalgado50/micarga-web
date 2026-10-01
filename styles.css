@@ -4143,3 +4143,82 @@ body > section:not(.hero-section) > .container > h2 {
   .crm-regalo { padding: 0.9rem 1rem; }
   .crm-regalo-titular { font-size: 1.05rem; }
 }
+
+/* ===========================================================================
+   LA SALIDA DEL IPHONE MIENTRAS NO ESTÁ EN LA APP STORE
+   ===========================================================================
+   Tiene que competir con dos botones de tienda que están justo encima, así que
+   no puede ser una línea de texto: va en su propio bloque, con el filo de color
+   de marca y fondo tenue, el mismo recurso que el regalo del CRM.
+
+   ⚠️ El `color-mix` sobre la variable de marca y no un color fijo: esta tarjeta
+   vive sobre un degradado oscuro, y un bloque claro fijo sería una mancha. */
+.iphone-ya {
+  margin-top: 2.5rem;
+  padding: 1.8rem 1.5rem;
+  text-align: left;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+
+.iphone-ya-etiqueta {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+}
+
+.iphone-ya h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--text-heading);
+  text-wrap: balance;
+}
+
+.iphone-ya > p {
+  margin: 0 0 1.2rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-main);
+}
+
+.iphone-ya-clave {
+  margin: 0 0 1.2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-heading);
+}
+
+.iphone-ya-boton { display: inline-flex; }
+
+/* Los tres pasos, numerados de verdad: es una secuencia que hay que seguir en
+   orden, no una lista de ventajas. */
+.iphone-ya-pasos {
+  margin: 1.4rem 0 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-main);
+}
+
+.iphone-ya-nota {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .iphone-ya { padding: 1.3rem 1.1rem; }
+  .iphone-ya h3 { font-size: 1.25rem; }
+  .iphone-ya-boton { width: 100%; justify-content: center; }
+}

@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20260928c">
+  <link rel="stylesheet" href="/styles.css?v=20261001a">
 
   <script type="application/ld+json">
   {
@@ -1339,8 +1339,37 @@
           </div>
         </div>
 
-        <div class="web-alternative">
-          <p>Aveți un iPhone sau preferați să nu instalați nimic? Folosiți aplicația direct din browser, cu toate funcțiile ei: <a href="https://app.micarga.es/" target="_blank" rel="noopener" class="text-link">app.micarga.es</a></p>
+        <!-- LA SALIDA DEL IPHONE, 01-10-2026.
+             Antes esto era una línea de texto gris debajo de los botones, y se
+             leía como una nota al pie: el usuario de iPhone veía «PRÓXIMAMENTE»
+             y se iba. Pero la app EN EL NAVEGADOR no es un sucedáneo —es el
+             mismo programa, con firma, QR y funcionamiento sin cobertura—, así
+             que merece el mismo peso visual que los botones de las tiendas.
+
+             ⚠️ Lo que de verdad convierte es el paso de «Añadir a pantalla de
+             inicio»: con eso queda un icono en el móvil y se abre a pantalla
+             completa, sin barra del navegador. Sin contar ese paso, la gente
+             entiende «una web» y no «una app», que es justo lo que no es. -->
+        <div class="iphone-ya">
+          <span class="iphone-ya-etiqueta">Ai un iPhone?</span>
+          <h3>Folosește-o acum, fără să aștepți App Store</h3>
+          <!-- ⚠️ CADA FRASE, ENTERA Y SIN ETIQUETAS DENTRO. El extractor de
+               traducciones parte por cada <strong>, y «Ábrela en» + «Safari» +
+               «con el botón de arriba» no se recompone en alemán ni en polaco,
+               donde el orden de la frase es otro. En los pasos de abajo el
+               <strong> envuelve un rótulo suelto —el nombre del botón— y el
+               resto va aparte: así cada idioma los coloca como le toca. -->
+          <p>Este aceeași aplicație, completă: emitere, semnare, codul QR pentru control și lucrul fără semnal.</p>
+          <p class="iphone-ya-clave"><strong>Se instalează pe ecranul principal ca orice altă aplicație.</strong></p>
+          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large iphone-ya-boton">
+            <i class="fa-solid fa-mobile-screen-button"></i> Deschide Mi Carga pe iPhone-ul meu
+          </a>
+          <ol class="iphone-ya-pasos">
+            <li><strong>Safari</strong> — deschide-o cu butonul de mai sus.</li>
+            <li><strong>Partajează</strong> — pătrățelul cu săgeata, jos de tot.</li>
+            <li><strong>Adaugă la ecranul principal</strong> — alege-l din listă.</li>
+          </ol>
+          <p class="iphone-ya-nota">Îți rămâne pictograma Mi Carga pe telefon și se deschide pe tot ecranul. Când aplicația ajunge în App Store, transporturile și contul tău rămân unde sunt.</p>
         </div>
       </div>
     </div>
