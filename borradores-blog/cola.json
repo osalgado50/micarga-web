@@ -26,7 +26,8 @@
     "grupo": "Internacional y multimodal",
     "resumen": "El transporte internacional de mercancías por carretera exige mucho más que cargar, conducir y entregar. Debes controlar documentos, fronteras, tiempos…",
     "fecha": "2026-10-01",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-01"
   },
   {
     "orden": 4,
