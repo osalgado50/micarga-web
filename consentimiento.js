@@ -449,3 +449,30 @@ if (document.readyState === 'loading') {
 } else {
   arrancar();
 }
+
+// ---------------------------------------------------------------------------
+// Restos de cuando micarga.es servía la app
+// ---------------------------------------------------------------------------
+//
+// Del 09-07 al 12-07-2026 este dominio sirvió la app (AI_COLLABORATOR.md de
+// descargo-app). Los navegadores de entonces pueden conservar aquí sus datos:
+// borradores, firmas y documentos en las claves `decargo_*` y la base local
+// `decargo-local` (src/lib/localDb.ts). La web no los usa para nada y son datos
+// de transporte y firmas de personas (auditoría 02-10-2026, REL-26).
+//
+// Se borran UNA vez por navegador. La sesión de Supabase (`sb-…`) no se toca:
+// la usa /suscripcion, y si es vieja, Supabase la renueva o la descarta solo.
+(() => {
+  const HECHO = 'micarga-restos-app-borrados';
+  try {
+    if (localStorage.getItem(HECHO)) return;
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('decargo_')) localStorage.removeItem(k);
+    }
+    if (window.indexedDB && typeof indexedDB.deleteDatabase === 'function') {
+      indexedDB.deleteDatabase('decargo-local');
+    }
+    localStorage.setItem(HECHO, '1');
+  } catch { /* almacenamiento bloqueado: no hay nada que limpiar */ }
+})();

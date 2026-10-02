@@ -34,7 +34,6 @@
  "Se ha cerrado la sesión. Vuelve a entrar con tu correo.": "You've been signed out. Sign in again with your email address.",
  "Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el": "If there's a Mi Carga account with ${correo}, we've written to it. Copy the code in here; if the",
  "Te hemos escrito a ${email}. Copia aquí el código; si el": "We've written to ${email}. Copy the code in here; if the",
- "Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.": "Your account has been created, but we couldn't save the password. You can set it from the app using “Forgotten your password?”. Let's carry on with the payment.",
  "Turnstile no ha llegado a cargar; el formulario va sin escudo.": "Turnstile never loaded; the form is running without it.",
  "correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.": "email has a link, tapping it gets you in too. If you can't see it, check your spam folder.",
  "correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.": "email has a link, tapping it works too. If you can't see it, check your spam folder.",

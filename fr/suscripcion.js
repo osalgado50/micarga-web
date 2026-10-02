@@ -44,15 +44,12 @@
 // supabase-js servido desde la propia web, no desde esm.sh (auditoría
 // 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
 import { createClient } from '/vendor/supabase-js-2.39.8.js';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
 import { montarTurnstile } from './turnstile.js?v=20261002b';
-
-// La clave publicable es pública por diseño: va ya dentro del paquete de la app
-// y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
 
 // Portal de cliente de Stripe, en MODO REAL (activado el 27-08-2026). Es donde
 // se manda a quien ya tiene suscripción: cambiar de plan, actualizar la tarjeta,
@@ -284,11 +281,13 @@ const cuerpoDe = async (error) => {
   try { return await error.context.json(); } catch { return null; }
 };
 
-// Estado del recorrido. `datosAlta` solo se rellena cuando hay que crear la
-// cuenta; la contraseña se guarda aquí porque no se puede poner hasta DESPUÉS
-// de verificar el código (antes no hay sesión con la que llamar a updateUser).
+// Estado del recorrido: el correo con el que se está entrando.
+//
+// (Aquí vivía `datosAlta`, que guardaba la contraseña del alta para ponerla
+// después del código. Desde que el alta se hace con signUp, que la pone de una
+// vez, nadie lo rellenaba y la rama que lo usaba era código muerto: fuera,
+// auditoría 02-10-2026, SEG-60.)
 let correoEnCurso = '';
-let datosAlta = null;
 
 // Ya paga su licencia y ha pedido contratar para su empresa (COB-16). Hace
 // falta recordarlo porque, al volver de rellenar la facturación, la página
@@ -384,7 +383,6 @@ $('form-correo').addEventListener('submit', async (e) => {
     if (error) {
       if (esCuentaInexistente(error)) {
         // No hay cuenta: se crea aquí, sin mandar a nadie a la app.
-        datosAlta = null;
         $('alta-correo').textContent = correo;
         mostrarPaso('paso-alta');
         return;
@@ -393,7 +391,6 @@ $('form-correo').addEventListener('submit', async (e) => {
       return;
     }
 
-    datosAlta = null;
     irAPasoCodigo(correo);
   });
 });
@@ -495,7 +492,6 @@ $('form-alta').addEventListener('submit', async (e) => {
       return;
     }
 
-    datosAlta = null;
     if (data?.session) {
       // Cuenta creada y dentro: directo a facturación o a los planes.
       await pedirEnlaces();
@@ -513,7 +509,6 @@ $('form-alta').addEventListener('submit', async (e) => {
 $('btn-otro-correo').addEventListener('click', () => {
   limpiarAviso();
   $('codigo').value = '';
-  datosAlta = null;
   mostrarPaso('paso-correo');
   $('correo').focus();
 });
@@ -549,7 +544,6 @@ $('form-contrasena').addEventListener('submit', async (e) => {
       avisar('Ce mot de passe n\'est pas correct. Réessayez ou utilisez le code que nous vous avons envoyé par e-mail.');
       return;
     }
-    datosAlta = null;
     await pedirEnlaces();
   });
 });
@@ -579,17 +573,6 @@ $('form-codigo').addEventListener('submit', async (e) => {
       return;
     }
 
-    // Cuenta recién creada: se le pone la contraseña que eligió. Sin esto
-    // entraría aquí pero NO podría entrar en la app, que pide correo y
-    // contraseña. Si falla, no se corta el proceso —ya está dentro y puede
-    // pagar—; se le dice que use «he olvidado mi contraseña» en la app.
-    if (datosAlta?.password) {
-      const { error: errPass } = await supabase.auth.updateUser({ password: datosAlta.password });
-      if (errPass) {
-        avisar('Votre compte est créé, mais nous n\'avons pas pu enregistrer le mot de passe. Vous pourrez le définir depuis l\'appli avec « Mot de passe oublié ? ». Nous continuons avec le paiement.', 'info');
-      }
-      datosAlta = null;
-    }
 
     await pedirEnlaces();
   });
@@ -660,7 +643,11 @@ $('form-facturacion').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  // getSession y no getUser: getUser pregunta al servidor en cada llamada, y
+  // aquí solo hace falta el id; lo que protege los datos es RLS (auditoría
+  // 02-10-2026, REN-52).
+  const { data: { session } } = await supabase.auth.getSession();
+  const user = session?.user;
   if (!user) {
     avisar('La session a été fermée. Reconnectez-vous avec votre adresse e-mail.');
     mostrarPaso('paso-correo');
@@ -737,7 +724,8 @@ const prepararYaSuscrito = async ({ ofrecerEmpresa = false } = {}) => {
   $('bloque-contratar-empresa').hidden = !ofrecerEmpresa;
   let clienteStripe = null;
   try {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
     if (user) {
       const { data } = await supabase
         .from('profiles')
@@ -785,9 +773,9 @@ const pedirEnlaces = async () => {
 
     if (status === 412) {
       const cuerpo = await cuerpoDe(error);
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { session } } = await supabase.auth.getSession();
       mostrarPaso('paso-facturacion');
-      if (user) await precargarFacturacion(user.id);
+      if (session?.user) await precargarFacturacion(session.user.id);
       marcarProblemas(cuerpo?.problemas);
       return;
     }

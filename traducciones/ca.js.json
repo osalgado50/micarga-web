@@ -34,7 +34,6 @@
  "Se ha cerrado la sesión. Vuelve a entrar con tu correo.": "S'ha tancat la sessió. Torna a entrar amb el teu correu.",
  "Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el": "Si hi ha un compte de Mi Carga amb ${correo}, t'hem escrit. Copia aquí el codi; si el",
  "Te hemos escrito a ${email}. Copia aquí el código; si el": "T'hem escrit a ${email}. Copia aquí el codi; si el",
- "Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.": "El teu compte està creat, però no hem pogut desar la contrasenya. La podràs posar des de l'app amb «Has oblidat la contrasenya?». Continuem amb el pagament.",
  "Turnstile no ha llegado a cargar; el formulario va sin escudo.": "Turnstile no ha arribat a carregar-se; el formulari va sense escut.",
  "correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.": "correu porta un enllaç, prement-lo també hi entres. Si no el veus, mira a la carpeta de correu brossa.",
  "correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.": "correu porta un enllaç, prement-lo també serveix. Si no el veus, mira a la carpeta de correu brossa.",

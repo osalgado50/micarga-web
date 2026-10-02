@@ -11,12 +11,13 @@
 // comprueba lo mínimo para no hacer viajar una petición que va a volver con un
 // error: quién manda es el servidor.
 
-const FUNCION = 'https://yrwletmszkfvnpbkngek.supabase.co/functions/v1/solicitar-presupuesto';
+// La dirección y la clave publicable salen de /config.js, el único sitio donde
+// están escritas (auditoría 02-10-2026, REL-18). La función está desplegada sin
+// verificación de JWT, pero la pasarela de Supabase sigue exigiendo la cabecera
+// `apikey`.
+import { SUPABASE_KEY, urlDeFuncion } from '/config.js?v=20261002a';
 
-// La clave publicable es pública por diseño: va dentro del paquete de la app y
-// del bundle de app.micarga.es. La función está desplegada sin verificación de
-// JWT, pero la pasarela de Supabase sigue exigiendo la cabecera `apikey`.
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+const FUNCION = urlDeFuncion('solicitar-presupuesto');
 
 const $ = (id) => document.getElementById(id);
 

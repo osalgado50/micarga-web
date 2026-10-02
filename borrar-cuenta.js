@@ -23,15 +23,13 @@
 // supabase-js servido desde la propia web, no desde esm.sh (auditoría
 // 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
 import { createClient } from '/vendor/supabase-js-2.39.8.js';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
 import { montarTurnstile } from './turnstile.js?v=20261002b';
 
-// Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
-// que protege los datos es RLS, no esconderla.
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
 
 // La vuelta al idioma cuando se entra por el enlace del correo: la misma
 // solución que suscripcion.js (auditoría 02-10-2026, REL-22). El enlace lleva

@@ -34,7 +34,6 @@
  "Se ha cerrado la sesión. Vuelve a entrar con tu correo.": "Die Sitzung wurde beendet. Melden Sie sich mit Ihrer E-Mail-Adresse erneut an.",
  "Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el": "Falls es ein Mi-Carga-Konto mit ${correo} gibt, haben wir Ihnen geschrieben. Kopieren Sie den Code hierher; wenn die",
  "Te hemos escrito a ${email}. Copia aquí el código; si el": "Wir haben Ihnen an ${email} geschrieben. Kopieren Sie den Code hierher; wenn die",
- "Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.": "Ihr Konto ist erstellt, aber wir konnten das Passwort nicht speichern. Sie können es in der App über „Passwort vergessen?“ festlegen. Wir machen mit der Zahlung weiter.",
  "Turnstile no ha llegado a cargar; el formulario va sin escudo.": "Turnstile wurde nicht geladen; das Formular läuft ohne Schutz.",
  "correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.": "E-Mail einen Link enthält, kommen Sie auch damit hinein. Falls Sie sie nicht sehen, schauen Sie im Spam nach.",
  "correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.": "E-Mail einen Link enthält, funktioniert auch der. Falls Sie sie nicht sehen, schauen Sie im Spam nach.",

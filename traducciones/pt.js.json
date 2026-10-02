@@ -34,7 +34,6 @@
  "Se ha cerrado la sesión. Vuelve a entrar con tu correo.": "A sessão foi terminada. Volta a entrar com o teu correio.",
  "Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el": "Se houver uma conta Mi Carga com ${correo}, escrevemos-te. Copia aqui o código; se o",
  "Te hemos escrito a ${email}. Copia aquí el código; si el": "Escrevemos-te para ${email}. Copia aqui o código; se o",
- "Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.": "A tua conta está criada, mas não conseguimos guardar a palavra-passe. Podes defini-la na app com «Esqueceste-te da palavra-passe?». Seguimos com o pagamento.",
  "Turnstile no ha llegado a cargar; el formulario va sin escudo.": "O Turnstile não chegou a carregar; o formulário segue sem proteção.",
  "correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.": "correio trouxer uma ligação, ao tocar nela também entras. Se não o vires, procura no spam.",
  "correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.": "correio trouxer uma ligação, tocar nela também serve. Se não o vires, procura no spam.",

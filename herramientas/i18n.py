@@ -551,14 +551,17 @@ def _rutas_absolutas(texto: str) -> str:
 # Los que NO se tocan son los archivos —/styles.css, /images/…— que viven en la
 # raíz y son los mismos para los tres idiomas.
 ENLACES_RAIZ = re.compile(r'href="/(?!/)([^"]*)"')
-EXTENSIONES = re.compile(r'\.(css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt|pdf)$')
+# woff2 y svg desde el 02-10-2026: las tipografías y los iconos se sirven desde
+# vendor/, y el <link rel="preload"> de la tipografía acababa en /de/vendor/…,
+# que no existe.
+EXTENSIONES = re.compile(r'\.(css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt|pdf|woff2|svg)$')
 
 
 def _enlaces_con_idioma(texto: str, idioma: str) -> str:
     def arreglar(m):
         resto = m.group(1)
         primero = resto.split("#")[0].split("?")[0]
-        if primero.startswith(("images/", "videos/")) or EXTENSIONES.search(primero):
+        if primero.startswith(("images/", "videos/", "vendor/")) or EXTENSIONES.search(primero):
             return m.group(0)
         return f'href="/{idioma}/{resto}"'
     return ENLACES_RAIZ.sub(arreglar, texto)

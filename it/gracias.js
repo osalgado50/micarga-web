@@ -21,9 +21,8 @@
 // supabase-js servido desde la propia web, no desde esm.sh (auditoría
 // 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
 import { createClient } from '/vendor/supabase-js-2.39.8.js';
-
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 

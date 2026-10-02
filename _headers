@@ -122,6 +122,12 @@
 /vendor/fuentes/tipografias-mono.css
   Cache-Control: public, max-age=60, must-revalidate
 
+# config.js: la dirección y la clave de Supabase, que importan todos los scripts
+# (auditoría 02-10-2026, REL-18). ⚠️ Si cambia la dirección del proyecto, cambia
+# también el connect-src de la CSP de arriba.
+/config.js
+  Cache-Control: public, max-age=60, must-revalidate
+
 # contacto.js: lo cargan las páginas de contacto. Faltaba, y nacía con cuatro
 # horas de caché (auditoría 02-10-2026, INV-10).
 /contacto.js

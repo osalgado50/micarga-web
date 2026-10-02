@@ -34,7 +34,6 @@
  "Se ha cerrado la sesión. Vuelve a entrar con tu correo.": "Sesiunea s-a închis. Intrați din nou cu adresa dumneavoastră de e-mail.",
  "Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el": "Dacă există un cont Mi Carga cu ${correo}, v-am scris. Copiați aici codul; dacă",
  "Te hemos escrito a ${email}. Copia aquí el código; si el": "V-am scris la ${email}. Copiați aici codul; dacă",
- "Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.": "Contul dumneavoastră este creat, dar nu am putut salva parola. O puteți seta din aplicație cu „Ați uitat parola?”. Continuăm cu plata.",
  "Turnstile no ha llegado a cargar; el formulario va sin escudo.": "Turnstile nu s-a încărcat; formularul funcționează fără protecție.",
  "correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.": "e-mailul conține un link, puteți intra și apăsând pe el. Dacă nu îl vedeți, uitați-vă în spam.",
  "correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.": "e-mailul conține un link, funcționează și apăsând pe el. Dacă nu îl vedeți, uitați-vă în spam.",
