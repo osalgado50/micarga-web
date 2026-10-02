@@ -16,6 +16,9 @@
 # cuatro horas. Cloudflare no avisa de un patrón que no reconoce, simplemente lo
 # ignora, así que aquí se listan los ficheros uno a uno.
 #
+# ⚠️ COMO MUCHO 100 REGLAS: Cloudflare ignora las que pasen, sin avisar.
+# `i18n.py generar` lo comprueba.
+#
 # ⚠️ AL AÑADIR UN .js O UN .css NUEVO, AÑADIRLO TAMBIÉN AQUÍ. Si no, nace con
 # cuatro horas de caché y el siguiente arreglo tarda eso en llegar.
 #
@@ -23,6 +26,32 @@
 # la URL y por tanto la entrada de caché. Las dos cosas se cubren mutuamente —
 # esta protege de olvidarse de subir el `?v=`, y el `?v=` protege de olvidarse
 # de añadir un fichero aquí.
+
+# ---------------------------------------------------------------------------
+# CABECERAS DE SEGURIDAD, para todas las páginas (auditoría 02-10-2026, SEG-26
+# y REL-19). Hasta ahora este fichero solo fijaba la caché: ni nosniff, ni
+# HSTS, ni protección contra que otra web incruste /suscripcion o
+# /borrar-cuenta en un iframe para engañar a quien escribe su contraseña.
+#
+# · X-Frame-Options SAMEORIGIN (y frame-ancestors 'self'), no DENY: ningún
+#   otro dominio enmarca esta web, pero la propia sí podría.
+# · HSTS SIN includeSubDomains ni preload: afectaría a app., crm., firma. y a
+#   cualquier subdominio futuro, y eso se decide aparte.
+# · La CSP va en modo Report-Only: avisa en la consola del navegador de lo que
+#   bloquearía, pero no bloquea nada. Las etiquetas «HTML personalizado» de Tag
+#   Manager pueden necesitar más de lo que hay aquí; cuando se haya revisado el
+#   contenedor y la consola esté limpia, se cambia el nombre a
+#   Content-Security-Policy. Los dos sha256 son los dos únicos scripts en
+#   línea: el que redirige los QR antiguos (?token=) en el <head> de index.html
+#   y sus 8 copias, y el del manual de crm/. ⚠️ Si se toca uno de ellos, hay
+#   que recalcular su huella aquí antes de pasar la CSP a obligatoria.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-ixkPO9wtb3AZUEfxe19/n9i+ZgIeeEQ0LV5Ul/Expn0=' 'sha256-f/+SVuPppV4Itet0xitv9d9rNXp1LRlJI2fguU11/H4=' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://www.google.es; font-src 'self'; connect-src 'self' https://yrwletmszkfvnpbkngek.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com; frame-src https://challenges.cloudflare.com https://www.googletagmanager.com https://td.doubleclick.net; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
 
 /suscripcion.js
   Cache-Control: public, max-age=60, must-revalidate

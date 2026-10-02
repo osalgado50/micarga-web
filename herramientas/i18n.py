@@ -908,7 +908,13 @@ def _cabeceras_de_los_scripts():
     lineas.append(fin)
     antes, resto = s.split(ini, 1)
     _, despues = resto.split(fin, 1)
-    ruta.write_text(antes + "\n".join(lineas) + despues, encoding="utf-8")
+    nuevo = antes + "\n".join(lineas) + despues
+    # 🚨 Cloudflare Pages admite como mucho 100 reglas en _headers e ignora el
+    # resto SIN AVISAR. Cada idioma nuevo suma una regla por script.
+    reglas = sum(1 for l in nuevo.splitlines() if l.startswith("/"))
+    assert reglas <= 100, (f"_headers tendría {reglas} reglas y Cloudflare solo lee 100: "
+                           "hay que agrupar scripts antes de añadir más")
+    ruta.write_text(nuevo, encoding="utf-8")
 
 
 # Páginas que NO van al sitemap porque llevan `noindex`: pedirle a Google que
