@@ -39,6 +39,44 @@ def correr(*orden: str) -> str:
     return r.stdout
 
 
+def _i18n():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "i18n", RAIZ / "herramientas" / "i18n.py")
+    i18n = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(i18n)
+    return i18n
+
+
+def copia_limpia() -> bool:
+    """¿La copia de trabajo está sin cambios ni ficheros sueltos?"""
+    return correr("git", "status", "--porcelain").strip() == ""
+
+
+def rutas_de_la_publicacion() -> list:
+    """
+    Lo ÚNICO que esta rutina puede subir.
+
+    🚨 Antes hacía `git add -A` en un repositorio PÚBLICO que Cloudflare
+    publica entero: cualquier cosa que sobrara en la carpeta —una exportación,
+    un documento de un cliente, un .env con otro nombre— se subía sin que nadie
+    la viera y quedaba para siempre en el historial (auditoría 02-10-2026,
+    INV-04 y SEG-30). Ya pasó una vez: 344cfa5 metió WEB.docx e imágenes sin
+    relación con el commit.
+
+    Son las salidas de lo que hace la publicación: el artículo y el índice
+    (blog/), el borrador que se mueve (borradores-blog/, incluido su borrado),
+    las portadas (images/blog/), lo que regenera i18n.py (las carpetas de los
+    idiomas, las páginas del castellano a las que refresca los hreflang y la
+    lista de scripts de _headers) y el sitemap.
+    """
+    i18n = _i18n()
+    rutas = ["blog", "borradores-blog", "images/blog", "sitemap.xml", "_headers"]
+    rutas += list(i18n.IDIOMAS_PUBLICADOS)
+    rutas += [p for p in i18n.PAGINAS if not p.startswith("blog/")]
+    return rutas
+
+
 def idiomas_pendientes(ruta_articulo: Path):
     """
     Qué idiomas le faltan a un artículo, con cuántas frases cada uno.
@@ -47,11 +85,7 @@ def idiomas_pendientes(ruta_articulo: Path):
     la lógica: duplicarla significaría que el día que cambie una, la otra
     seguiría diciendo que todo está bien.
     """
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        "i18n", RAIZ / "herramientas" / "i18n.py")
-    i18n = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(i18n)
+    i18n = _i18n()
 
     frases = i18n.cadenas(ruta_articulo)
     pendientes = []
@@ -145,6 +179,15 @@ def main():
         print(f"Tocaría: [{entrada['fecha']}] {entrada['titulo']}")
         return
 
+    # 🚨 ANTES DE TOCAR NADA: la copia tiene que estar limpia. Si hay algo a
+    # medias, no es de esta rutina y no lo va a subir ella (INV-04, SEG-30).
+    if not copia_limpia():
+        raise SystemExit(
+            "NO SE PUBLICA: la copia de trabajo tiene cambios o ficheros sueltos.\n"
+            "  Esta rutina sube a un repositorio PÚBLICO que se publica entero, así\n"
+            "  que no arranca con nada a medias. Revisa `git status` y vuelve a lanzarla."
+        )
+
     borrador = BORRADORES / f"{entrada['slug']}.html"
     if not borrador.exists():
         raise SystemExit(f"Falta el borrador {borrador}. ¿Se ha regenerado la cola sin los ficheros?")
@@ -187,7 +230,18 @@ def main():
     correr("python3", "herramientas/i18n.py", "sitemap")
 
     quedan = sum(1 for e in cola if not e["publicado"])
-    correr("git", "add", "-A")
+    correr("git", "add", "-A", "--", *rutas_de_la_publicacion())
+    # Lo que haya cambiado FUERA de esas rutas no se sube: se para aquí, antes
+    # del commit, y se avisa. Mejor una entrada que sale mañana que un fichero
+    # que no tenía que salir nunca.
+    sueltos = [l for l in correr("git", "status", "--porcelain").splitlines()
+               if l[:2] != "M " and l[:2] != "A " and l[:2] != "D " and l[:2] != "R "]
+    if sueltos:
+        raise SystemExit(
+            "NO SE PUBLICA: hay cambios fuera de lo que genera la publicación:\n  "
+            + "\n  ".join(sueltos[:20])
+            + "\nLo preparado está en el índice de git, sin commit. Revisa y decide a mano."
+        )
     correr("git", "commit", "-m",
            f"Blog: «{entrada['titulo']}»\n\n"
            f"Entrada {entrada['orden']} de {len(cola)} del paquete editorial. "

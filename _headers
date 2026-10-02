@@ -51,6 +51,21 @@
 /robots.txt
   Cache-Control: public, max-age=3600, must-revalidate
 
+# Los borradores del blog: la cola de artículos que publica cada día
+# herramientas/publicar_blog.py. Se publican porque Pages sirve la raíz, y
+# llevan el canonical a /blog/ y ningún noindex, así que Google podía
+# indexarlos antes de tiempo (auditoría 02-10-2026, INV-08, SEG-28 y OBS-21).
+#
+# Por CABECERA y no con <meta>: publicar_blog.py mueve el archivo tal cual a
+# blog/, y una meta noindex dejaría sin indexar el artículo ya publicado.
+# Tampoco con Disallow en robots.txt: impide al buscador leer el noindex y
+# además anuncia la ruta.
+#
+# ⚠️ Comprobar después de desplegar que la cabecera sale de verdad (ver arriba:
+# Cloudflare ignora sin avisar los patrones que no reconoce).
+/borradores-blog/*
+  X-Robots-Tag: noindex, nofollow
+
 # turnstile.js lo importa suscripcion.js (no el HTML), así que su `?v=` va en
 # ese import: al tocar turnstile.js hay que subirlo allí. La caché corta de
 # aquí es la otra red.
