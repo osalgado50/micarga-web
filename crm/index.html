@@ -30,7 +30,7 @@
        los .js y .css sueltos, que nacen con cuatro horas de caché. -->
   <style>
 
-  /* Los colores y las tipografías son los del CRM de verdad (src/estilos/pieles.css):
+  /* Los colores y las tipografías son los del CRM de verdad:
      quien lea esto y luego abra la aplicación tiene que reconocerla. Por eso el
      manual se queda en oscuro, que es el mundo del producto, y pinta cada color
      explícitamente en vez de heredar nada del visor. */
@@ -357,7 +357,7 @@
     <p class="bajada">
       Hay dos papeles y hacen dos trabajos distintos: quien lleva la oficina y quien
       conduce. Cada pantalla exige un permiso, y lo que no aparece aquí tampoco se abre
-      escribiendo la dirección a mano, porque la misma regla la aplica la base de datos.
+      escribiendo la dirección a mano, porque la misma regla la aplica el servidor.
       Elige un papel y pulsa cualquier pantalla del menú.
     </p>
 
@@ -433,7 +433,7 @@
       </div>
       <div class="capacidad">
         <h4>Cada empresa ve lo suyo</h4>
-        <p>El aislamiento entre empresas lo impone la base de datos, no la pantalla. Aunque alguien manipule la dirección, no hay forma de ver los datos de otra.</p>
+        <p>El aislamiento entre empresas lo impone el servidor, no la pantalla. Aunque alguien manipule la dirección, no hay forma de ver los datos de otra.</p>
       </div>
       <div class="capacidad">
         <h4>Nada se borra</h4>
@@ -544,12 +544,11 @@
 (function () {
   'use strict';
 
-  // Los permisos de cada papel, tal como están en la base de datos. El menú de
-  // abajo se filtra con ellos, igual que hace el programa.
-  var PERMISOS = {
-    administrativo: 'albaranes.asignar,albaranes.borrar,albaranes.crear,albaranes.editar,albaranes.ver,albaranes.ver_propios,conductores.crear,conductores.editar,conductores.invitar,conductores.ver,configuracion.editar,contactos.editar,contactos.ver,documentos.subir,documentos.ver,economia.editar,economia.ver,firmas.solicitar,firmas.ver,incidencias.editar,incidencias.ver,informes.exportar,informes.ver,panel.ver,planificacion.editar,planificacion.ver,usuarios.crear,usuarios.desactivar,usuarios.editar,usuarios.permisos,usuarios.ver'.split(','),
-    conductor: 'albaranes.ver_propios,documentos.ver,firmas.ver,incidencias.editar,incidencias.ver,panel.ver'.split(',')
-  };
+  // Qué pantallas ve cada papel. Quien lleva la oficina las ve todas; el
+  // conductor, solo estas. Se nombran por lo que dejan hacer y no por los
+  // identificadores internos del programa (auditoría 02-10-2026, SEG-29): esto es
+  // un manual público, y la matriz real de permisos no pinta nada en él.
+  var VE_EL_CONDUCTOR = ['ver el panel', 'ver los documentos', 'ver las firmas', 'ver las incidencias'];
 
   var NOMBRE_ROL = {
     administrativo: 'Administrativo',
@@ -561,10 +560,10 @@
     conductor: 'Su sitio es la app del móvil. En el CRM apenas ve nada.'
   };
 
-  // El menú, copiado de src/navegacion.ts con el permiso que exige cada hoja.
+  // El menú del CRM, con lo que exige cada pantalla.
   var MENU = [
     { n: 'Panel', hojas: [
-      { r: '/', t: 'Panel', p: 'panel.ver',
+      { r: '/', t: 'Panel', p: 'ver el panel',
         s: 'El mes de un vistazo. Es la pantalla de entrada y la que más se mira.',
         pasos: ['Cada pastilla es un transporte, con su color según el estado.',
                 'Arrastra una pastilla a otro día para reprogramarla.',
@@ -574,20 +573,20 @@
         aviso: 'Se pide solo el mes que estás mirando, así que cambiar de mes trae sus datos aunque sean de hace un año.' }
     ]},
     { n: 'Operaciones', hojas: [
-      { r: '/operaciones/documentos-control', t: 'Documentos de control', p: 'albaranes.ver',
+      { r: '/operaciones/documentos-control', t: 'Documentos de control', p: 'ver los albaranes',
         s: 'Los albaranes uno a uno. Es donde se corrigen los datos de un documento.',
         pasos: ['Busca por número, destinatario, remitente, lugar o matrícula.',
                 'Pulsa una fila para abrir el editor.',
                 'Cada cambio guarda la versión anterior: en <kbd>Historial</kbd> se ve qué cambió y quién.'],
         maqueta: 'albaranes' },
-      { r: '/operaciones/transportes', t: 'Transportes', p: 'albaranes.ver',
+      { r: '/operaciones/transportes', t: 'Transportes', p: 'ver los albaranes',
         s: 'El camión entero, con sus entregas. Desde aquí se gobierna el día.',
         pasos: ['Filtra por estado, conductor y fechas. Las fechas son las de CARGA, no las de cuándo se escribió.',
                 'Cambia el conductor en el desplegable de su fila.',
                 '<kbd>Acciones ▾</kbd> abre: mandar el QR por WhatsApp, descargar el DeCA, duplicar para otro día, reenviar al conductor, ver sus albaranes y cancelar.'],
         maqueta: 'transportes',
         aviso: 'Duplicar copia remitente, transportista y todas las entregas, pero nunca el número de DeCA ni las firmas: nace en borrador, para mañana y sin conductor.' },
-      { r: '/operaciones/nuevo', t: 'Nuevo transporte', p: 'albaranes.crear',
+      { r: '/operaciones/nuevo', t: 'Nuevo transporte', p: 'crear transportes',
         s: 'El alta. Un camión, de una a diez entregas, y el DeCA se emite al guardar.',
         pasos: ['Matrícula, fecha y lugar de carga.',
                 '<kbd>Traer del directorio</kbd> rellena el remitente entero, con su lugar habitual.',
@@ -595,28 +594,28 @@
                 'Añade entregas. Cada una con su destinatario, mercancía, peso y datos ADR.',
                 'Elige conductor y guarda.'],
         aviso: 'La firma del remitente es opcional. Si se deja en blanco, se firma después en el muelle.' },
-      { r: '/operaciones/importar', t: 'Importar CSV', p: 'albaranes.crear',
+      { r: '/operaciones/importar', t: 'Importar CSV', p: 'crear transportes',
         s: 'Muchos transportes de golpe, desde una hoja de cálculo.',
         pasos: ['Pega o sube el CSV.',
                 'Se comprueba antes de crear nada: te dice cuántos transportes y cuántas entregas salen.',
                 'Las líneas con el mismo valor en la columna «transporte» se juntan en un camión.'] },
-      { r: '/operaciones/entregas', t: 'Entregas', p: 'albaranes.ver',
+      { r: '/operaciones/entregas', t: 'Entregas', p: 'ver los albaranes',
         s: 'Las entregas sueltas, sin agrupar por camión. Útil cuando buscas un destinatario concreto.' },
-      { r: '/operaciones/pendientes', t: 'Pendientes', p: 'albaranes.ver',
+      { r: '/operaciones/pendientes', t: 'Pendientes', p: 'ver los albaranes',
         s: 'Lo que todavía tiene trabajo por delante: ni entregado ni anulado.' },
-      { r: '/operaciones/incidencias', t: 'Incidencias', p: 'incidencias.ver',
+      { r: '/operaciones/incidencias', t: 'Incidencias', p: 'ver las incidencias',
         s: 'Lo que se tuerce: un retraso, una avería, una mercancía dañada.',
         pasos: ['Abre una incidencia sobre el albarán al que afecta.',
                 'Adjunta fotos desde el móvil o desde la oficina.',
                 'Cuando se resuelve, queda escrito quién la cerró y cuándo.'] }
     ]},
     { n: 'Planificación', hojas: [
-      { r: '/planificacion/calendario', t: 'Calendario', p: 'planificacion.ver',
+      { r: '/planificacion/calendario', t: 'Calendario', p: 'ver la planificación',
         s: 'Como el panel, pero por semana y por conductor: quién lleva qué cada día.',
         pasos: ['Cambia entre día, semana y mes.',
                 'La vista por conductor pone una fila por persona.',
                 'Arrastra para reprogramar o para pasarle el porte a otro.'] },
-      { r: '/planificacion/flota', t: 'Mi flota', p: 'conductores.ver',
+      { r: '/planificacion/flota', t: 'Mi flota', p: 'ver la flota',
         s: 'Quién trabaja para ti. Aquí se decide QUIÉN está, no qué papeles tiene.',
         pasos: ['Busca en tu flota por nombre, correo, móvil o NIF.',
                 'Para fichar a alguien de fuera, pon su correo o su móvil COMPLETOS y pulsa <kbd>Buscar</kbd>.',
@@ -624,47 +623,47 @@
                 'Si no tiene cuenta, créale la ficha e <kbd>Invitar</kbd>: le llega un código por WhatsApp.'],
         maqueta: 'flota',
         aviso: 'Hace falta el correo o el móvil exactos a propósito. Si se pudiera buscar por trozos, cualquiera rastrearía los conductores de la competencia escribiendo «gmail».' },
-      { r: '/planificacion/conductores', t: 'Documentación', p: 'conductores.ver',
+      { r: '/planificacion/conductores', t: 'Documentación', p: 'ver la flota',
         s: 'Los papeles de cada conductor, con semáforo: carnet, ADR, CAP y tarjeta de tacógrafo.',
         pasos: ['Verde vigente, amarillo si caduca pronto, rojo si ya caducó.',
                 'La lista de avisos enseña lo que vence en los próximos 60 días.'],
         maqueta: 'caducidades' },
-      { r: '/planificacion/vehiculos', t: 'Vehículos', p: 'conductores.ver',
+      { r: '/planificacion/vehiculos', t: 'Vehículos', p: 'ver la flota',
         s: 'Las matrículas. Se llena sola: cada matrícula nueva que se teclea en un albarán queda apuntada.' },
-      { r: '/planificacion/asignaciones', t: 'Rutas y asignaciones', p: 'planificacion.ver',
+      { r: '/planificacion/asignaciones', t: 'Rutas y asignaciones', p: 'ver la planificación',
         s: 'Repartir la carga del día entre los camiones disponibles.' }
     ]},
     { n: 'Firmas', hojas: [
-      { r: '/firmas/pendientes', t: 'Pendientes', p: 'firmas.ver',
+      { r: '/firmas/pendientes', t: 'Pendientes', p: 'ver las firmas',
         s: 'Lo cargado y en tránsito que todavía nadie ha firmado. La lista de lo que hay que perseguir.',
         pasos: ['Busca por número de albarán, destinatario, lugar de descarga o conductor.',
                 '<kbd>Pedir firma remota</kbd> genera un enlace de un solo uso.'],
         maqueta: 'firmas' },
-      { r: '/firmas/completadas', t: 'Completadas', p: 'firmas.ver',
+      { r: '/firmas/completadas', t: 'Completadas', p: 'ver las firmas',
         s: 'Lo entregado y firmado. Con quién firmó, cuándo y por qué vía.' },
-      { r: '/firmas/solicitudes', t: 'Solicitudes externas', p: 'firmas.solicitar',
+      { r: '/firmas/solicitudes', t: 'Solicitudes externas', p: 'pedir firmas',
         s: 'Los enlaces de firma que has mandado y en qué estado están.',
         pasos: ['Enviada, abierta, firmada, caducada o anulada.',
                 'Un enlace nuevo anula el anterior.',
                 'El destinatario firma desde su móvil sin registrarse en nada.'] },
-      { r: '/firmas/historico', t: 'Histórico', p: 'firmas.ver',
+      { r: '/firmas/historico', t: 'Histórico', p: 'ver las firmas',
         s: 'Todas las entregas, firmadas o no, para buscar una de hace meses.' }
     ]},
     { n: 'Documentos', hojas: [
-      { r: '/documentos/deca', t: 'DeCA', p: 'documentos.ver',
+      { r: '/documentos/deca', t: 'DeCA', p: 'ver los documentos',
         s: 'El repositorio de documentos de control. Es lo que exige la ley: no basta con poder regenerar el PDF, el fichero tiene que existir.',
         pasos: ['Cada fila enseña si su fichero está guardado.',
                 'Descarga uno, o varios en un ZIP.'],
         maqueta: 'deca' },
-      { r: '/documentos/pdf', t: 'PDFs', p: 'documentos.ver',
+      { r: '/documentos/pdf', t: 'PDFs', p: 'ver los documentos',
         s: 'Los PDF generados, para descargarlos sueltos o en bloque.' },
-      { r: '/documentos/adjuntos', t: 'Adjuntos', p: 'documentos.ver',
+      { r: '/documentos/adjuntos', t: 'Adjuntos', p: 'ver los documentos',
         s: 'Fotos y papeles colgados de un albarán o de una incidencia. Se ven con un enlace que caduca en un minuto.' },
-      { r: '/documentos/archivo', t: 'Archivo legal', p: 'documentos.ver',
+      { r: '/documentos/archivo', t: 'Archivo legal', p: 'ver los documentos',
         s: 'Los doce meses de custodia obligatoria, en un sitio, listos para descargar si los piden.' }
     ]},
     { n: 'Empresas y contactos', hojas: [
-      { r: '/contactos/clientes', t: 'Clientes', p: 'contactos.ver',
+      { r: '/contactos/clientes', t: 'Clientes', p: 'ver el directorio',
         s: 'Quién te encarga los portes. Elegir uno en el alta ahorra teclear el remitente entero.',
         pasos: ['<kbd>+ Nueva ficha</kbd> crea un cliente a mano: nombre, CIF, dirección, población, teléfono, correo y su lugar habitual de carga.',
                 'Marca si además es proveedor o destinatario. Una empresa puede ser las tres cosas.',
@@ -674,7 +673,7 @@
                 '<kbd>Editar</kbd> y <kbd>Borrar</kbd> en cada fila.'],
         maqueta: 'contactos',
         aviso: 'Una empresa puede ser cliente y destinatario a la vez: en el transporte es lo normal, no la excepción.' },
-      { r: '/contactos/proveedores', t: 'Proveedores', p: 'contactos.ver',
+      { r: '/contactos/proveedores', t: 'Proveedores', p: 'ver el directorio',
         s: 'Los transportistas a los que subcontratas. Elegir uno en el alta rellena su nombre, NIF y dirección en el albarán.',
         pasos: ['<kbd>+ Nueva ficha</kbd> y rellena nombre, CIF, dirección, población, teléfono y correo.',
                 'Marca la casilla <kbd>Proveedor</kbd>. Si además te compra portes, marca también <kbd>Cliente</kbd>.',
@@ -682,7 +681,7 @@
                 '<kbd>Importar de documentos de control</kbd> los saca de los albaranes que ya tienes: el transportista de cada uno entra como proveedor.',
                 '<kbd>Editar</kbd> y <kbd>Borrar</kbd> en cada fila.'],
         maqueta: 'proveedores' },
-      { r: '/contactos/destinatarios', t: 'Destinatarios', p: 'contactos.ver',
+      { r: '/contactos/destinatarios', t: 'Destinatarios', p: 'ver el directorio',
         s: 'Dónde se descarga. Es la lista que más tiempo ahorra: elegir uno en el alta rellena la entrega entera.',
         pasos: ['<kbd>+ Nueva ficha</kbd> con nombre, CIF y dirección.',
                 'Pon su <kbd>Lugar habitual de carga o descarga</kbd>: es el campo que más se repite a mano, y así viene puesto.',
@@ -691,7 +690,7 @@
                 '<kbd>Importar de documentos de control</kbd> los saca de tus albaranes con su lugar de descarga más frecuente ya relleno.'],
         maqueta: 'destinatarios',
         aviso: 'La misma empresa puede estar marcada como cliente, proveedor y destinatario. En el transporte es lo normal: hoy te cargan y mañana te descargan.' },
-      { r: '/contactos/personas', t: 'Contactos', p: 'contactos.ver',
+      { r: '/contactos/personas', t: 'Contactos', p: 'ver el directorio',
         s: 'Las personas, no las empresas: a quién llamas cuando el camión está en la puerta y nadie abre.',
         pasos: ['<kbd>+ Nuevo contacto</kbd> con nombre, cargo, teléfono y correo.',
                 'Cuélgalo de una empresa del directorio, o déjalo suelto si no pertenece a ninguna.',
@@ -700,41 +699,41 @@
         maqueta: 'personas' }
     ]},
     { n: 'Economía', hojas: [
-      { r: '/economia/resumen', t: 'Precio, coste y beneficio', p: 'economia.ver',
+      { r: '/economia/resumen', t: 'Precio, coste y beneficio', p: 'ver la economía',
         s: 'Qué cobras, qué te cuesta y qué queda, transporte a transporte.',
         pasos: ['Elige el mes.',
                 'Escribe precio y coste en la fila de cada transporte.',
                 'El beneficio sale solo.'] },
-      { r: '/economia/informes', t: 'Informes económicos', p: 'economia.ver',
+      { r: '/economia/informes', t: 'Informes económicos', p: 'ver la economía',
         s: 'Los mismos números agrupados por cliente, por mes o por conductor.' }
     ]},
     { n: 'Informes', hojas: [
-      { r: '/informes/todos', t: 'Informes', p: 'informes.ver',
+      { r: '/informes/todos', t: 'Informes', p: 'ver los informes',
         s: 'Cuántos portes, cuánto peso, cuántas incidencias. Con exportación a CSV.' }
     ]},
     { n: 'Usuarios', hojas: [
-      { r: '/usuarios/personas', t: 'Usuarios', p: 'usuarios.ver',
+      { r: '/usuarios/personas', t: 'Usuarios', p: 'ver los usuarios',
         s: 'Quién entra en tu CRM y con qué papel.',
         pasos: ['Invita por correo: le llega un enlace para poner su contraseña.',
                 'Cambia el papel de alguien en el desplegable de su fila.',
                 'Desactivar le cierra la puerta sin borrar nada de lo que hizo.'],
         maqueta: 'usuarios' },
-      { r: '/usuarios/roles', t: 'Roles', p: 'usuarios.permisos',
+      { r: '/usuarios/roles', t: 'Roles', p: 'gestionar los permisos',
         s: 'Los dos papeles —administrativo y conductor— y los que quieras crear tú.',
         pasos: ['<kbd>Administrativo</kbd> lleva la oficina entera: todo lo de la empresa.',
                 '<kbd>Conductor</kbd> solo ve sus portes, sus documentos y sus incidencias.',
                 'Puedes crear papeles propios y darles justo los permisos que quieras.'] },
-      { r: '/usuarios/permisos', t: 'Permisos', p: 'usuarios.permisos',
+      { r: '/usuarios/permisos', t: 'Permisos', p: 'gestionar los permisos',
         s: 'La matriz. Qué puede hacer cada papel, y excepciones para una persona concreta.' },
-      { r: '/usuarios/invitaciones', t: 'Invitaciones', p: 'usuarios.crear',
+      { r: '/usuarios/invitaciones', t: 'Invitaciones', p: 'dar de alta usuarios',
         s: 'Las que están en el aire. Por correo, o por código de WhatsApp para los conductores.',
         aviso: 'El código solo se ve UNA vez, al generarlo. Si se pierde, se invita otra vez.' }
     ]},
     { n: 'Configuración', hojas: [
-      { r: '/configuracion/ajustes', t: 'Ajustes', p: 'panel.ver',
+      { r: '/configuracion/ajustes', t: 'Ajustes', p: 'ver el panel',
         s: 'Lo tuyo: el aspecto del programa, día o noche, dónde se guardan las descargas y el canal de soporte.',
         aviso: 'No pide ningún permiso especial: son las preferencias de uno mismo, así que las tienen los cuatro papeles.' },
-      { r: '/configuracion/empresa', t: 'Empresa', p: 'configuracion.editar',
+      { r: '/configuracion/empresa', t: 'Empresa', p: 'cambiar la configuración',
         s: 'Los datos de tu empresa y los valores por defecto del formulario de alta.' }
     ]},
   ];
@@ -766,23 +765,23 @@
         + '<div class="menu-demo__opcion menu-demo__opcion--peligro">Cancelar el transporte</div>'
         + '</div>';
       return tabla(['Código', 'Estado', 'Entregas', 'Carga', 'Ruta', 'Conductor', 'Acciones'], [
-        ['<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('Asignada', 'azul'), '<span class="dato">0 / 1</span>', '<span class="dato">22/09/26</span>', 'Barcelona → El Prat', 'Óscar Salgado', boton],
-        ['<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('Cargada', 'amarillo'), '<span class="dato">0 / 1</span>', '<span class="dato">10/09/26</span>', 'San Sebastián → Salou', 'Óscar Salgado', boton],
-        ['<span class="dato">EXP-2026-JZ44TU</span>', pastilla('Completada', 'verde'), '<span class="dato">1 / 1</span>', '<span class="dato">27/08/26</span>', 'Salou → Valls', 'Ana Pérez', boton],
-        ['<span class="dato">EXP-2026-UGDQFT</span>', pastilla('Cancelada', 'rojo'), '<span class="dato">0 / 0</span>', '<span class="dato">27/08/26</span>', '—', 'Ana Pérez', boton]
+        ['<span class="dato">EXP-2026-EJEMPLO1</span>', pastilla('Asignada', 'azul'), '<span class="dato">0 / 1</span>', '<span class="dato">22/09/26</span>', 'Barcelona → El Prat', 'Javier Ortega', boton],
+        ['<span class="dato">EXP-2026-EJEMPLO2</span>', pastilla('Cargada', 'amarillo'), '<span class="dato">0 / 1</span>', '<span class="dato">10/09/26</span>', 'San Sebastián → Salou', 'Javier Ortega', boton],
+        ['<span class="dato">EXP-2026-EJEMPLO3</span>', pastilla('Completada', 'verde'), '<span class="dato">1 / 1</span>', '<span class="dato">27/08/26</span>', 'Salou → Valls', 'Ana Pérez', boton],
+        ['<span class="dato">EXP-2026-EJEMPLO4</span>', pastilla('Cancelada', 'rojo'), '<span class="dato">0 / 0</span>', '<span class="dato">27/08/26</span>', '—', 'Ana Pérez', boton]
       ]) + menu;
     },
     albaranes: function () {
       return tabla(['Nº de albarán', 'Estado', 'Carga', 'Destinatario', 'Descarga'], [
-        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', pastilla('Cargado', 'amarillo'), '<span class="dato">22/09/26</span>', 'Ikea Málaga', 'Muelle 7'],
-        ['<span class="dato">DEC-2026-TDPHUE</span>', pastilla('En tránsito', 'amarillo'), '<span class="dato">10/09/26</span>', 'Leroy Sevilla', 'Polígono Sur'],
-        ['<span class="dato">DEC-2026-WJ42BA</span>', pastilla('Entregado', 'verde'), '<span class="dato">27/08/26</span>', 'Bodegas Puig SL', 'Carrer Major 3']
+        ['<span class="dato">DEC-2026-EJEMPLO1</span>', pastilla('Cargado', 'amarillo'), '<span class="dato">22/09/26</span>', 'Muebles Costa Málaga', 'Muelle 7'],
+        ['<span class="dato">DEC-2026-EJEMPLO2</span>', pastilla('En tránsito', 'amarillo'), '<span class="dato">10/09/26</span>', 'Bricolaje Sur Sevilla', 'Polígono Sur'],
+        ['<span class="dato">DEC-2026-EJEMPLO3</span>', pastilla('Entregado', 'verde'), '<span class="dato">27/08/26</span>', 'Bodegas Puig SL', 'Carrer Major 3']
       ]);
     },
     firmas: function () {
       return tabla(['Nº de albarán', 'Estado', 'Destinatario', 'Conductor', ''], [
-        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', pastilla('Cargado', 'amarillo'), 'Ikea Málaga', 'Óscar Salgado', '<span class="etiqueta">Pedir firma remota</span>'],
-        ['<span class="dato">DEC-2026-TDPHUE</span>', pastilla('En tránsito', 'amarillo'), 'Leroy Sevilla', 'Ana Pérez', '<span class="etiqueta">Pedir firma remota</span>']
+        ['<span class="dato">DEC-2026-EJEMPLO1</span>', pastilla('Cargado', 'amarillo'), 'Muebles Costa Málaga', 'Javier Ortega', '<span class="etiqueta">Pedir firma remota</span>'],
+        ['<span class="dato">DEC-2026-EJEMPLO2</span>', pastilla('En tránsito', 'amarillo'), 'Bricolaje Sur Sevilla', 'Ana Pérez', '<span class="etiqueta">Pedir firma remota</span>']
       ]);
     },
     flota: function () {
@@ -801,15 +800,15 @@
     },
     deca: function () {
       return tabla(['Nº de DeCA', 'Transporte', 'Fichero guardado', 'Carga'], [
-        ['<span class="dato">DEC-2026-Y5SEJM5K</span>', '<span class="dato">EXP-2026-KMRCPYT3</span>', pastilla('sí', 'verde'), '<span class="dato">22/09/26</span>'],
-        ['<span class="dato">DEC-2026-TDPHUE</span>', '<span class="dato">EXP-2026-EBY2GQ</span>', pastilla('sí', 'verde'), '<span class="dato">10/09/26</span>'],
-        ['<span class="dato">DEC-2026-9KYH9V</span>', '<span class="dato">EXP-2026-FCJW86</span>', pastilla('pendiente', 'amarillo'), '<span class="dato">27/08/26</span>']
+        ['<span class="dato">DEC-2026-EJEMPLO1</span>', '<span class="dato">EXP-2026-EJEMPLO1</span>', pastilla('sí', 'verde'), '<span class="dato">22/09/26</span>'],
+        ['<span class="dato">DEC-2026-EJEMPLO2</span>', '<span class="dato">EXP-2026-EJEMPLO2</span>', pastilla('sí', 'verde'), '<span class="dato">10/09/26</span>'],
+        ['<span class="dato">DEC-2026-EJEMPLO5</span>', '<span class="dato">EXP-2026-EJEMPLO5</span>', pastilla('pendiente', 'amarillo'), '<span class="dato">27/08/26</span>']
       ]);
     },
     contactos: function () {
       return tabla(['Empresa', 'CIF', 'Papel', 'Lugar habitual'], [
         ['Bodegas Puig SL', '<span class="dato">B12345678</span>', pastilla('Cliente · Destinatario', 'violeta'), 'Carrer Major 3, Reus'],
-        ['Ikea Málaga', '<span class="dato">A11111111</span>', pastilla('Destinatario', 'azul'), 'Muelle 7'],
+        ['Muebles Costa Málaga', '<span class="dato">A11111111</span>', pastilla('Destinatario', 'azul'), 'Muelle 7'],
         ['Transportes Díaz', '<span class="dato">B99999999</span>', pastilla('Proveedor', 'gris'), '—']
       ]);
     },
@@ -822,21 +821,21 @@
     },
     destinatarios: function () {
       return tabla(['Empresa', 'CIF', 'Lugar habitual', 'Papel'], [
-        ['Ikea Málaga', '<span class="dato">A11111111</span>', 'Parque Comercial Bahía Azul 1, Málaga', pastilla('Destinatario', 'azul')],
-        ['Leroy Sevilla', '<span class="dato">A22222222</span>', 'Polígono Sur, muelle 12', pastilla('Destinatario', 'azul')],
+        ['Muebles Costa Málaga', '<span class="dato">A11111111</span>', 'Parque Comercial Bahía Azul 1, Málaga', pastilla('Destinatario', 'azul')],
+        ['Bricolaje Sur Sevilla', '<span class="dato">A22222222</span>', 'Polígono Sur, muelle 12', pastilla('Destinatario', 'azul')],
         ['Bodegas Puig SL', '<span class="dato">B12345678</span>', 'Carrer Major 3, Reus', pastilla('Cliente · Destinatario', 'violeta')]
       ]);
     },
     personas: function () {
       return tabla(['Nombre', 'Cargo', 'Empresa', 'Teléfono'], [
-        ['Rosa Betrán', 'Jefa de muelle', 'Ikea Málaga', '<span class="dato">600 445 221</span>'],
+        ['Rosa Betrán', 'Jefa de muelle', 'Muebles Costa Málaga', '<span class="dato">600 445 221</span>'],
         ['Tomás Vidal', 'Administración', 'Bodegas Puig SL', '<span class="dato">977 000 342</span>'],
         ['Nacho Prats', 'Tráfico', 'Transportes Díaz', '<span class="dato">610 887 004</span>']
       ]);
     },
     usuarios: function () {
       return tabla(['Usuario', 'Papel', 'Estado', 'Último acceso'], [
-        ['Óscar Salgado<br><span class="dato" style="color:var(--tenue);font-size:11px">(oscar@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">hoy, 09:12</span>'],
+        ['Javier Ortega<br><span class="dato" style="color:var(--tenue);font-size:11px">(javier@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">hoy, 09:12</span>'],
         ['Marta Ruiz<br><span class="dato" style="color:var(--tenue);font-size:11px">(marta@transportes.es)</span>', 'Administrativo', 'Activa', '<span class="dato">ayer, 17:40</span>'],
         ['Ana Pérez<br><span class="dato" style="color:var(--tenue);font-size:11px">(ana@transportes.es)</span>', 'Conductor', 'Activa', '<span class="dato">hoy, 06:55</span>']
       ]);
@@ -863,7 +862,7 @@
   var hojaActual = '/';
 
   function puede(hoja) {
-    return PERMISOS[rolActual].indexOf(hoja.p) !== -1;
+    return rolActual === 'administrativo' || VE_EL_CONDUCTOR.indexOf(hoja.p) !== -1;
   }
 
   function contarVisibles() {
@@ -908,7 +907,7 @@
     var h = encontrado.hoja, s = encontrado.seccion;
     var ok = puede(h);
 
-    var html = '<div class="detalle__ruta">' + s.n + ' &nbsp;·&nbsp; <span>' + h.r + '</span></div>';
+    var html = '<div class="detalle__ruta">' + s.n + '</div>';
     html += '<h3>' + h.t + '</h3>';
     html += '<p class="detalle__resumen">' + (h.s || '') + '</p>';
 
@@ -919,8 +918,8 @@
 
     if (!ok) {
       html += '<div class="aviso"><b>Un ' + NOMBRE_ROL[rolActual].toLowerCase() + ' no ve esta pantalla.</b> '
-        + 'Le falta el permiso <span class="dato">' + h.p + '</span>.'
-        + ' No sale en su menú y tampoco se abre escribiendo la dirección: la misma regla la aplica la base de datos.</div>';
+        + 'Le falta el permiso de ' + h.p + '.'
+        + ' No sale en su menú y tampoco se abre escribiendo la dirección: la misma regla la aplica el servidor.</div>';
     }
 
     if (h.pasos && h.pasos.length) {

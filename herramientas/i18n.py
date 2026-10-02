@@ -778,6 +778,20 @@ def traducir_js(crudo: str, dicc: dict) -> str:
     return "\n".join(salida)
 
 
+# El pie de página, escrito UNA vez (auditoría 02-10-2026, DUP-11). Eran 68
+# líneas copiadas a mano en 56 páginas del castellano —y de ahí, en las de los
+# ocho idiomas—: un teléfono o una dirección nueva había que cambiarlos en
+# todas, y la que se olvidara se quedaba con el dato viejo. Ahora `generar` lo
+# pone entre las marcas PIE de cada página desde herramientas/parciales/pie.html,
+# que es lo único que se edita. (Los borradores del blog lo reciben al
+# publicarse, cuando pasan a blog/ y entran en PAGINAS.)
+PIE = RAIZ / "herramientas" / "parciales" / "pie.html"
+
+
+def bloque_pie() -> str:
+    return PIE.read_text(encoding="utf-8").rstrip("\n")
+
+
 def cmd_generar():
     faltan_por_idioma = {}
 
@@ -793,10 +807,12 @@ def cmd_generar():
             listos = [i for i in IDIOMAS_PUBLICADOS if articulo_listo(pagina, diccionario(i))]
             s = _entre_marcas(s, "ALTERNATIVAS", bloque_alternativas(pagina, ["es"] + listos))
             s = _entre_marcas(s, "IDIOMAS", bloque_idiomas("index.html", "es"))
+            s = _entre_marcas(s, "PIE", bloque_pie())
             ruta.write_text(s, encoding="utf-8")
             continue
         s = _entre_marcas(s, "ALTERNATIVAS", bloque_alternativas(pagina))
         s = _entre_marcas(s, "IDIOMAS", bloque_idiomas(pagina, "es"))
+        s = _entre_marcas(s, "PIE", bloque_pie())
         ruta.write_text(s, encoding="utf-8")
 
     # Solo los PUBLICADOS. Un idioma a medias no se escribe en disco siquiera:
