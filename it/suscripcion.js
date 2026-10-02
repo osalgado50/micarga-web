@@ -49,7 +49,7 @@ import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002b';
+import { montarTurnstile } from './turnstile.js?v=20261002c';
 
 // Portal de cliente de Stripe, en MODO REAL (activado el 27-08-2026). Es donde
 // se manda a quien ya tiene suscripción: cambiar de plan, actualizar la tarjeta,

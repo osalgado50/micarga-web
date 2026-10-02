@@ -43,7 +43,7 @@
  * en el HTML de la página. La privada NO se escribe aquí ni en ningún archivo
  * del repositorio — esa va solo en Supabase.
  */
-export const CLAVE_SITIO = '';
+export const CLAVE_SITIO = '0x4AAAAAAFMOKOm43QsoNMXE';
 
 const SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
