@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f19">
+  <!-- noindex: solo se llega aquí desde el enlace de baja de un correo de
+       campaña. La baja la hace la función `campana-baja` ANTES de traer aquí;
+       esta página solo cuenta el resultado (?r=ok|prueba|no).
+       Solo en castellano a propósito: las campañas salen en castellano, y no
+       está en PAGINAS de herramientas/i18n.py. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Baja de ofertas - Mi Carga</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261001a">
+  <link rel="stylesheet" href="suscripcion.css?v=20260911h">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="images/camion-tema-oscuro.png" alt="" class="logo-camion">
+        <span>Mi <mark class="accent-text">Carga</mark></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="sus-page">
+    <div class="sus-card">
+      <section class="sus-paso" id="r-ok" hidden>
+        <h1 class="sus-title">Hecho: no te mandaremos más ofertas</h1>
+        <p class="sus-lead">
+          Te hemos dado de baja de los correos de campañas y promociones.
+        </p>
+        <p class="sus-ayuda">
+          Seguirás recibiendo solo lo que forma parte del servicio, como tus
+          facturas o los avisos de tu cuenta. Tu cuenta y tus documentos siguen
+          igual.
+        </p>
+      </section>
+
+      <section class="sus-paso" id="r-prueba" hidden>
+        <h1 class="sus-title">Esto era un correo de prueba</h1>
+        <p class="sus-lead">
+          En el correo real, este enlace da de baja a quien lo pulsa. En la
+          prueba no hace nada: no se ha cambiado ninguna cuenta.
+        </p>
+      </section>
+
+      <section class="sus-paso" id="r-no" hidden>
+        <h1 class="sus-title">No hemos podido darte de baja</h1>
+        <p class="sus-lead">
+          El enlace no es válido o está incompleto.
+        </p>
+        <p class="sus-ayuda">
+          Escríbenos a <a href="mailto:soporte@micarga.es?subject=Baja%20de%20ofertas">soporte@micarga.es</a>
+          o por WhatsApp al <a href="https://wa.me/34744716449">744 716 449</a> y te damos de baja nosotros.
+        </p>
+      </section>
+
+      <p class="sus-pie">Mi Carga es un servicio de RESITECH 2021, S.L.U.</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var r = new URLSearchParams(location.search).get('r');
+      var id = r === 'ok' || r === 'prueba' ? r : 'no';
+      document.getElementById('r-' + id).hidden = false;
+    })();
+  </script>
+</body>
+</html>
