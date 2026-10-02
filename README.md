@@ -22,3 +22,11 @@ micarga.es**, y el repositorio es público. Las carpetas de trabajo
 limpio sería un comando de compilación que copie solo lo público a `dist/`
 (cambio en el panel de Cloudflare). No subas nada que no deba verse.
 El dominio `micarga.es` se asigna como *custom domain* del proyecto (DNS ya en Cloudflare).
+
+## Antes de subir
+`python3 herramientas/comprobar.py`: traducciones (HTML y JavaScript), iconos,
+el script del `<head>` que redirige los QR de julio (`?token=`, **no se quita**)
+y que los precios de la portada, la compra y la página de gracias cuadren.
+Las traducciones se meten con `herramientas/poner.py` (empareja por frase y
+avisa si el número no cuadra).
+
