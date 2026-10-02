@@ -499,3 +499,16 @@
   opacity: 0.55;
   cursor: progress;
 }
+
+/* Elegir empresa cuando se pertenece a varias (auditoría 02-10-2026, COB-06). */
+.sus-empresas-lista {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 18px;
+}
+.sus-empresas-lista .sus-btn-plano {
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+}

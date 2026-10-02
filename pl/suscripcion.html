@@ -40,7 +40,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
-  <link rel="stylesheet" href="/suscripcion.css?v=20260923a">
+  <link rel="stylesheet" href="/suscripcion.css?v=20261002a">
 </head>
 <body>
 
@@ -258,6 +258,29 @@
       <section class="sus-paso" id="paso-planes" hidden>
         <h2 class="sus-subtitulo">Wybierz swój plan</h2>
 
+        <!-- Quien ya paga su licencia personal y contrata para su empresa
+             (auditoría 02-10-2026, COB-16: decisión del propietario,
+             «convivir»). Se le dice claro que su suscripción no se toca: si
+             no, lo razonable es temer que se le cobre dos veces lo mismo. -->
+        <p class="sus-aviso" data-tono="info" id="nota-empresa" hidden>
+          To, co tu wykupisz, jest dla Twojej firmy. Twoja osobista subskrypcja pozostaje bez zmian i jest rozliczana osobno.
+        </p>
+
+        <!-- Quien pertenece a varias empresas elige para cuál contrata
+             (COB-06). La lista la manda crear-sesion-pago y la pinta
+             suscripcion.js: los nombres son de las empresas, no se traducen. -->
+        <div class="sus-empresas" id="bloque-elegir-empresa" hidden>
+          <p class="sus-alerta">
+            <i class="fa-solid fa-building"></i>
+            Należysz do kilku firm. Wybierz, dla której kupujesz:
+          </p>
+          <div class="sus-empresas-lista" id="lista-empresas"></div>
+        </div>
+        <p class="sus-ayuda" id="empresa-elegida" hidden>
+          <span>Firma:</span> <strong id="empresa-elegida-nombre"></strong>
+          <button class="sus-btn-plano" type="button" id="btn-cambiar-empresa">Zmień firmę</button>
+        </p>
+
         <!-- Este aviso no es cortesía: cada enlace de pago de Stripe contrata
              una suscripción INDEPENDIENTE. Quien pulse los dos «por ver qué es
              cada uno» acaba pagando 10 € y 90 € a la vez. -->
@@ -367,6 +390,21 @@
           Twój abonament został aktywowany bezpośrednio przez nas, więc nie ma
           żadnej płatności do obsłużenia. Jeśli chcesz coś zmienić, napisz do nas.
         </p>
+
+        <!-- Ya paga su licencia, pero puede contratar para su empresa (CRM o
+             licencias para sus conductores). Antes esta página se lo impedía:
+             miraba solo el estado de la PERSONA y no dejaba llegar nunca a la
+             compra de la empresa (auditoría 02-10-2026, COB-16). Se esconde
+             cuando quien está «ya suscrita» es la propia empresa. -->
+        <div id="bloque-contratar-empresa" hidden>
+          <h2 class="sus-subtitulo">Chcesz kupić dla swojej firmy?</h2>
+          <p class="sus-ayuda">
+            Możesz wykupić licencje dla swoich kierowców lub CRM floty. Twoja osobista subskrypcja pozostaje, a zakup firmy jest rozliczany osobno.
+          </p>
+          <button class="sus-btn-plano" type="button" id="btn-contratar-empresa">
+            Kup dla mojej firmy
+          </button>
+        </div>
       </section>
 
       <!-- Turnstile ------------------------------------------------------
@@ -457,7 +495,7 @@
     </div>
   </footer>
 
-  <script type="module" src="/pl/suscripcion.js?v=20261002a"></script>
+  <script type="module" src="/pl/suscripcion.js?v=20261002b"></script>
   <script src="/consentimiento.js?v=20261002a" defer></script>
 </body>
 </html>

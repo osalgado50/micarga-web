@@ -29,10 +29,15 @@
 // y ya tiene sus pruebas. Esta página pregunta y obedece:
 //
 //   200 → enlaces personalizados listos, se pintan los dos planes
-//   409 → ya tiene suscripción vigente. NO se le ofrece contratar otra: cada
-//         enlace de Stripe crea una suscripción NUEVA, así que acabaría pagando
-//         10 € y 90 € a la vez y la primera quedaría huérfana facturando para
-//         siempre. Se le manda al portal de cliente.
+//   409 → ya tiene suscripción vigente. NO se le ofrece contratar otra para
+//         él: cada enlace de Stripe crea una suscripción NUEVA, así que
+//         acabaría pagando 10 € y 90 € a la vez y la primera quedaría huérfana
+//         facturando para siempre. Se le manda al portal de cliente.
+//         Lo que SÍ se le ofrece es contratar para su EMPRESA (licencias o el
+//         CRM): su suscripción personal se mantiene y la empresa contrata
+//         aparte (auditoría 02-10-2026, COB-16, decisión «convivir»). Quien
+//         decide si esa empresa puede contratar es `crear-sesion-pago`, que
+//         mira la organización y no a la persona.
 //   412 → le faltan datos fiscales. Sin ellos se cobrarían 10 € con IVA español
 //         sin poder emitir una factura válida. Se piden aquí mismo.
 
@@ -117,6 +122,33 @@ const nifValido = (nif) => {
   }
 
   return false;
+};
+
+/**
+ * Qué le falta a la ficha de facturación para poder cobrar.
+ *
+ * Copia FIEL de problemasFacturacion() de la Edge Function `enviar-enlace-pago`
+ * (logic.ts): mismos campos, código postal de 5 dígitos y país ES, con la
+ * misma forma `{ campo, motivo }` que devuelve su 412. Hace falta aquí solo
+ * para quien ya paga su licencia y contrata para su empresa (COB-16): a esa
+ * persona `enviar-enlace-pago` le responde 409 ANTES de mirar sus datos
+ * fiscales, así que sin esta comprobación llegaría a pagar sin poder recibir
+ * una factura válida. ⚠️ Si cambia allí, cambiar aquí.
+ */
+const problemasFacturacion = (fila) => {
+  const problemas = [];
+  for (const campo of CAMPOS_FACTURACION) {
+    const v = fila?.[campo];
+    if (typeof v !== 'string' || v.trim() === '') problemas.push({ campo, motivo: 'falta' });
+  }
+  const vacio = (campo) => problemas.some((p) => p.campo === campo);
+  if (!vacio('codigo_postal') && !/^\d{5}$/.test(String(fila.codigo_postal).trim())) {
+    problemas.push({ campo: 'codigo_postal', motivo: 'formato' });
+  }
+  if (!vacio('pais') && String(fila.pais).trim().toUpperCase() !== 'ES') {
+    problemas.push({ campo: 'pais', motivo: 'formato' });
+  }
+  return problemas;
 };
 
 // ---------------------------------------------------------------------------
@@ -208,6 +240,16 @@ const cuerpoDe = async (error) => {
 // de verificar el código (antes no hay sesión con la que llamar a updateUser).
 let correoEnCurso = '';
 let datosAlta = null;
+
+// Ya paga su licencia y ha pedido contratar para su empresa (COB-16). Hace
+// falta recordarlo porque, al volver de rellenar la facturación, la página
+// vuelve a preguntar a `enviar-enlace-pago`, que le seguirá diciendo 409.
+let paraEmpresa = false;
+
+// La empresa elegida cuando la persona pertenece a varias (COB-06). Solo se
+// rellena si `crear-sesion-pago` ha pedido elegir; el servidor vuelve a
+// comprobar que es una de las suyas.
+let empresaElegida = null;
 
 // ---------------------------------------------------------------------------
 // Paso 1: el correo. ¿Existe la cuenta?
@@ -624,7 +666,10 @@ const enlaceUsable = (url) => {
  * Ante la duda —un fallo al leer el perfil— NO se enseña el portal: es mejor
  * quedarse corto que mandar a alguien a una puerta que no abre.
  */
-const prepararYaSuscrito = async () => {
+const prepararYaSuscrito = async ({ ofrecerEmpresa = false } = {}) => {
+  // Contratar para la empresa solo tiene sentido si quien ya paga es la
+  // PERSONA; si la «ya suscrita» es la empresa, no hay nada más que contratar.
+  $('bloque-contratar-empresa').hidden = !ofrecerEmpresa;
   let clienteStripe = null;
   try {
     const { data: { user } } = await supabase.auth.getUser();
@@ -661,9 +706,14 @@ const pedirEnlaces = async () => {
     const status = estadoDe(error);
 
     if (status === 409) {
-      // Ya paga: esto es el final del recorrido, no una escala. Lo único que
-      // queda por decidir es si tiene sentido ofrecerle el portal de Stripe.
-      await prepararYaSuscrito();
+      // Ya paga su licencia. Si ha pedido contratar para su empresa, se sigue
+      // por ahí (COB-16); si no, esto es el final del recorrido: se le dice
+      // que está todo bien, el portal si tiene sentido y la opción de empresa.
+      if (paraEmpresa) {
+        await irAPlanesDeEmpresa();
+        return;
+      }
+      await prepararYaSuscrito({ ofrecerEmpresa: true });
       mostrarPaso('paso-ya-suscrito');
       return;
     }
@@ -698,9 +748,92 @@ const pedirEnlaces = async () => {
   // licencia— pero se siguen pidiendo porque es esta llamada la que dice si
   // la persona ya paga (409) o le faltan datos fiscales (412). Lo que se
   // pinta viene de `crear-sesion-pago`.
+  $('nota-empresa').hidden = !paraEmpresa;
   prepararCantidad();
   mostrarPaso('paso-planes');
 };
+
+/**
+ * Quien ya paga su licencia pasa a contratar para su empresa (COB-16).
+ *
+ * `enviar-enlace-pago` no sirve de puerta aquí: responde 409 por el estado de
+ * la persona antes de mirar sus datos fiscales. Así que la ficha se comprueba
+ * en esta página con la misma regla, y lo que decide si la EMPRESA puede
+ * contratar lo dice después `crear-sesion-pago`, que es quien cobra.
+ */
+const irAPlanesDeEmpresa = async () => {
+  paraEmpresa = true;
+  limpiarAviso();
+  const { data: { session } } = await supabase.auth.getSession();
+  const user = session?.user;
+  if (!user) {
+    avisar('You\'ve been signed out. Sign in again with your email address.');
+    mostrarPaso('paso-correo');
+    return;
+  }
+  const { data: fac, error } = await supabase
+    .from('datos_facturacion')
+    .select(CAMPOS_FACTURACION.join(', '))
+    .eq('user_id', user.id)
+    .maybeSingle();
+  // Un fallo al leer no bloquea: la última palabra la tiene el servidor, y
+  // `crear-sesion-pago` puede contestar 412 igual que la puerta.
+  const problemas = error ? [] : problemasFacturacion(fac);
+  if (problemas.length > 0) {
+    mostrarPaso('paso-facturacion');
+    await precargarFacturacion(user.id);
+    marcarProblemas(problemas);
+    return;
+  }
+  $('nota-empresa').hidden = false;
+  prepararCantidad();
+  mostrarPaso('paso-planes');
+};
+
+$('btn-contratar-empresa')?.addEventListener('click', () => irAPlanesDeEmpresa());
+
+/**
+ * Pinta la lista de empresas entre las que elegir (COB-06).
+ *
+ * Los nombres los escriben los clientes: van con `textContent`, nunca como
+ * HTML. Pulsar una sigue con el pago que ya se había pedido.
+ */
+const pedirEmpresa = (organizaciones, periodo, boton) => {
+  const lista = $('lista-empresas');
+  lista.replaceChildren();
+  for (const o of organizaciones) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sus-btn-plano';
+    b.textContent = o.nombre;
+    b.addEventListener('click', () => {
+      empresaElegida = { id: o.id, nombre: o.nombre };
+      $('bloque-elegir-empresa').hidden = true;
+      $('empresa-elegida-nombre').textContent = o.nombre;
+      $('empresa-elegida').hidden = false;
+      contratar(periodo, boton);
+    });
+    lista.appendChild(b);
+  }
+  $('empresa-elegida').hidden = true;
+  $('bloque-elegir-empresa').hidden = false;
+  $('bloque-elegir-empresa').scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+/** Lo que manda el servidor cuando hay que elegir, comprobado antes de pintarlo. */
+const empresasCandidatas = (cuerpo) => {
+  if (cuerpo?.codigo !== 'elegir-organizacion' || !Array.isArray(cuerpo.organizaciones)) return null;
+  const validas = cuerpo.organizaciones.filter(
+    (o) => o && typeof o.id === 'string' && o.id !== '' && typeof o.nombre === 'string',
+  );
+  return validas.length > 0 ? validas : null;
+};
+
+$('btn-cambiar-empresa')?.addEventListener('click', () => {
+  empresaElegida = null;
+  $('empresa-elegida').hidden = true;
+  limpiarAviso();
+});
 
 // ---------------------------------------------------------------------------
 // Cuántas licencias, cuánto cuesta y a pagar
@@ -797,7 +930,14 @@ const contratar = async (periodo, boton) => {
   boton.disabled = true;
 
   const { data, error } = await supabase.functions.invoke('crear-sesion-pago', {
-    body: { periodo, licencias: leerCantidad(), crm: $('sus-crm').checked },
+    body: {
+      periodo,
+      licencias: leerCantidad(),
+      crm: $('sus-crm').checked,
+      // Solo si el servidor pidió elegir (COB-06). Él vuelve a comprobar que
+      // la persona puede contratar para esa empresa.
+      ...(empresaElegida ? { organizacion_id: empresaElegida.id } : {}),
+    },
   });
 
   if (error) {
@@ -806,8 +946,27 @@ const contratar = async (periodo, boton) => {
     const cuerpo = await cuerpoDe(error);
 
     if (status === 409 && cuerpo?.codigo === 'ya-suscrita') {
-      await prepararYaSuscrito();
+      // La que ya está suscrita es la EMPRESA: no se le ofrece contratar otra
+      // vez para ella, solo el portal para cambiar licencias.
+      await prepararYaSuscrito({ ofrecerEmpresa: false });
       mostrarPaso('paso-ya-suscrito');
+      if (cuerpo?.error) avisar(cuerpo.error, 'info');
+      return;
+    }
+    // Pertenece a varias empresas: que elija (COB-06).
+    const candidatas = (status === 409 || status === 422) ? empresasCandidatas(cuerpo) : null;
+    if (candidatas) {
+      empresaElegida = null;
+      pedirEmpresa(candidatas, periodo, boton);
+      return;
+    }
+    // Faltan datos fiscales: hoy lo dice `enviar-enlace-pago`, pero la puerta
+    // de verdad debe ser la función que cobra (COB-30). Se atiende igual.
+    if (status === 412) {
+      const { data: { session } } = await supabase.auth.getSession();
+      mostrarPaso('paso-facturacion');
+      if (session?.user) await precargarFacturacion(session.user.id);
+      marcarProblemas(cuerpo?.problemas);
       return;
     }
     if (status === 401) {
