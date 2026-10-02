@@ -42,7 +42,10 @@
 //         sin poder emitir una factura válida. Se piden aquí mismo.
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
-import { montarTurnstile } from './turnstile.js';
+// Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
+// sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
+// _headers. Al cambiar turnstile.js, subir este número.
+import { montarTurnstile } from './turnstile.js?v=20261002a';
 
 // La clave publicable es pública por diseño: va ya dentro del paquete de la app
 // y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
@@ -152,6 +155,50 @@ const problemasFacturacion = (fila) => {
 };
 
 // ---------------------------------------------------------------------------
+// El idioma de la página y la vuelta desde el enlace del correo
+// ---------------------------------------------------------------------------
+
+/** El idioma de esta copia de la página: lo pone el generador en <html lang>. */
+const IDIOMA = (document.documentElement.lang || 'es').slice(0, 2);
+
+/**
+ * La vuelta al idioma de la persona cuando entra por el ENLACE del correo.
+ *
+ * El enlace de Supabase lleva a https://micarga.es/suscripcion, en castellano,
+ * venga de la página que venga: es la única dirección que hoy está en la lista
+ * de redirecciones permitidas, y una que no esté manda a la persona a la URL
+ * del sitio (la app), que es peor. Así que quien pide el código desde /de/ o
+ * /pl/ volvía en castellano (auditoría 02-10-2026, REL-22).
+ *
+ * Arreglo sin tocar el panel: antes de pedir el correo se apunta el idioma, y
+ * si la página castellana recibe la sesión por el enlace en este mismo
+ * navegador, devuelve a la persona a su idioma. El arreglo completo (mandar el
+ * enlace directamente a /<idioma>/suscripcion) exige añadir antes
+ * https://micarga.es/** a Authentication → URL Configuration.
+ */
+const CLAVE_RETORNO = 'micarga-idioma-retorno';
+const UNA_HORA = 60 * 60 * 1000;
+
+const apuntarIdiomaDeVuelta = () => {
+  try {
+    if (IDIOMA === 'es') localStorage.removeItem(CLAVE_RETORNO);
+    else localStorage.setItem(CLAVE_RETORNO, JSON.stringify({ idioma: IDIOMA, cuando: Date.now() }));
+  } catch { /* sin almacenamiento, vuelve en castellano como antes */ }
+};
+
+/** El idioma al que hay que devolver a quien llega por el enlace, o null. */
+const idiomaDeVuelta = () => {
+  try {
+    const r = JSON.parse(localStorage.getItem(CLAVE_RETORNO) || 'null');
+    localStorage.removeItem(CLAVE_RETORNO);
+    if (!r || Date.now() - r.cuando > UNA_HORA) return null;
+    return /^[a-z]{2}$/.test(r.idioma) && r.idioma !== 'es' ? r.idioma : null;
+  } catch { return null; }
+};
+
+// Se mira ANTES de crear el cliente: supabase-js consume y borra el fragmento
+// con la sesión en cuanto arranca.
+const LLEGA_POR_ENLACE = /[#&?](access_token|code|token_hash)=/.test(location.href);
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -268,8 +315,9 @@ let empresaElegida = null;
  * las dos vías. ⚠️ Esta URL tiene que estar en la lista de redirecciones
  * permitidas de Supabase (Authentication → URL Configuration).
  */
-const pedirCodigo = async (email, crear, metadatos) =>
-  supabase.auth.signInWithOtp({
+const pedirCodigo = async (email, crear, metadatos) => {
+  apuntarIdiomaDeVuelta();
+  return supabase.auth.signInWithOtp({
     email,
     options: {
       shouldCreateUser: crear,
@@ -278,6 +326,7 @@ const pedirCodigo = async (email, crear, metadatos) =>
       ...(metadatos ? { data: metadatos } : {}),
     },
   });
+};
 
 /**
  * ¿El error de Supabase significa «ese correo no tiene cuenta»?
@@ -371,8 +420,12 @@ $('form-alta').addEventListener('submit', async (e) => {
     avisar('Per crear el compte cal acceptar els termes i la política de privacitat.');
     return;
   }
-  if (val('password').length < 6) {
-    avisar('La contrasenya necessita com a mínim 6 caràcters.');
+  // 8 y no 6 (auditoría 02-10-2026, SEG-31): con 6 caracteres y sin captcha,
+  // las cuentas que pagan quedan al alcance de la fuerza bruta. El mínimo del
+  // servidor se sube DESPUÉS, cuando también lo pidan las apps publicadas: si
+  // se subiera antes, sus altas fallarían con un error genérico.
+  if (val('password').length < 8) {
+    avisar('La contrasenya necessita almenys 8 caràcters.');
     return;
   }
   if (!nifValido(val('nif_cif'))) {
@@ -400,6 +453,11 @@ $('form-alta').addEventListener('submit', async (e) => {
       nif_cif: val('nif_cif').toUpperCase(),
       company_name: val('company_name'),
       phone: telefono,
+      // El idioma de la página, como lo manda la app (App.tsx). Sin él,
+      // handle_new_user pone «es» y la bienvenida y los avisos salen en
+      // castellano a quien se ha dado de alta en /de/ o /pl/ (auditoría
+      // 02-10-2026, REL-15 y SOL-13).
+      idioma: IDIOMA,
     };
 
     // `signUp` y no `signInWithOtp`: crea la cuenta CON la contraseña de una
@@ -414,6 +472,7 @@ $('form-alta').addEventListener('submit', async (e) => {
     // código como antes. Así el cambio no depende de que el ajuste del panel se
     // toque a la vez que se despliega esto. Es el mismo patrón que ya usa la
     // app en src/App.tsx.
+    apuntarIdiomaDeVuelta();
     const { data, error } = await supabase.auth.signUp({
       email: correoEnCurso,
       password: val('password'),
@@ -1061,5 +1120,14 @@ if (cantidad) {
   }
 
   const { data: { session } } = await supabase.auth.getSession();
+  if (session && LLEGA_POR_ENLACE && IDIOMA === 'es') {
+    const vuelta = idiomaDeVuelta();
+    if (vuelta) {
+      // La sesión ya está guardada en este origen: la página del idioma la
+      // encuentra y sigue desde ahí.
+      location.replace(`/${vuelta}/suscripcion`);
+      return;
+    }
+  }
   if (session) await pedirEnlaces();
 })();
