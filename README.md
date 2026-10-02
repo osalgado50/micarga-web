@@ -9,6 +9,8 @@ Sitio estático (HTML/CSS/JS, sin build) de la landing de **Mi Carga**.
 ## Estructura
 - `index.html` · `styles.css` · `script.js`
 - `images/` — imágenes de la landing
+- `vendor/` — supabase-js y los iconos de Font Awesome, servidos desde aquí y
+  no desde un CDN. Al añadir un icono: `python3 herramientas/iconos.py comprobar`.
 
 ## Despliegue (Cloudflare Pages)
 Proyecto sin framework: **Build command** vacío, **Output directory** = `/` (raíz).

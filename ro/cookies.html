@@ -33,10 +33,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="robots" content="noindex, follow">
   <title>Politica de cookie-uri - Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/ro/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
 </head>
 <body>
@@ -120,11 +119,11 @@
         </table>
         <p>Dacă se acceptă și publicitatea, Google Analytics activează semnalele de măsurare a campaniilor Google Ads, care permit să se știe dacă o reclamă s-a transformat într-o vizită sau într-o înregistrare. Dacă se refuză, aceste semnale rămân dezactivate.</p>
         <p>Pentru a reține alegerea, se salvează în browserul însuși, în stocarea locală și nu într-un cookie, informația <code>micarga-cookies</code>, cu ce s-a acceptat și cu data. Expiră după <strong>12 luni</strong>, iar la expirare se întreabă din nou. Este stocare tehnică necesară pentru a respecta alegerea însăși și nu se trimite nimănui.</p>
-        <p>Site-ul încarcă în plus două resurse externe, necesare pentru afișarea corectă a paginii, care nu instalează cookie-uri de urmărire:</p>
-        <ul>
-          <li><strong>Google Fonts</strong> (fonturile Outfit și Space Grotesk), servit de la fonts.googleapis.com.</li>
-          <li><strong>Font Awesome</strong> (pictograme), servit de la cdnjs.cloudflare.com.</li>
-        </ul>
+        <!-- Hasta el 02-10-2026 aquí se declaraban Google Fonts y Font Awesome
+             como recursos externos. Desde entonces se sirven desde la propia
+             web (auditoría 02-10-2026, REN-58, REN-12 y SEG-53), y esta
+             página tiene que decir lo que hay. -->
+        <p>Fonturile (Outfit și Space Grotesk) și pictogramele (Font Awesome) sunt servite chiar de pe micarga.es: pentru afișarea paginilor nu se solicită resurse de la servere terțe.</p>
         <p>Aplicația <strong>https://app.micarga.es/</strong> folosește stocare tehnică necesară pentru menținerea sesiunii deschise a utilizatorului (autentificare) și pentru funcționarea offline a aplicației web progresive. Aceste tehnologii sunt strict necesare pentru prestarea serviciului solicitat și nu necesită consimțământ.</p>
       </section>
 

@@ -33,10 +33,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="robots" content="noindex, follow">
   <title>Cookie-Richtlinie – Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/de/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
 </head>
 <body>
@@ -120,11 +119,11 @@
         </table>
         <p>Wird zusätzlich die Werbung akzeptiert, aktiviert Google Analytics die Messsignale für Google-Ads-Kampagnen, mit denen sich erkennen lässt, ob eine Anzeige zu einem Besuch oder einer Anmeldung geführt hat. Bei Ablehnung bleiben diese Signale deaktiviert.</p>
         <p>Um die Auswahl zu speichern, wird im Browser selbst, im lokalen Speicher und nicht in einem Cookie, der Eintrag <code>micarga-cookies</code>abgelegt, mit dem Akzeptierten und dem Datum. Er läuft nach <strong>12 Monaten</strong>ab, und nach Ablauf wird erneut gefragt. Es handelt sich um technisch notwendigen Speicher, um die Auswahl selbst umzusetzen, und er wird an niemanden übermittelt.</p>
-        <p>Die Website lädt außerdem zwei externe Ressourcen, die für die korrekte Darstellung der Seite erforderlich sind und keine Tracking-Cookies setzen:</p>
-        <ul>
-          <li><strong>Google Fonts</strong> (Schriften Outfit und Space Grotesk), ausgeliefert von fonts.googleapis.com.</li>
-          <li><strong>Font Awesome</strong> (Symbole), ausgeliefert von cdnjs.cloudflare.com.</li>
-        </ul>
+        <!-- Hasta el 02-10-2026 aquí se declaraban Google Fonts y Font Awesome
+             como recursos externos. Desde entonces se sirven desde la propia
+             web (auditoría 02-10-2026, REN-58, REN-12 y SEG-53), y esta
+             página tiene que decir lo que hay. -->
+        <p>Die Schriften (Outfit und Space Grotesk) und die Symbole (Font Awesome) werden von micarga.es selbst ausgeliefert: Für die Anzeige der Seiten werden keine Ressourcen von Servern Dritter angefordert.</p>
         <p>Die Anwendung <strong>https://app.micarga.es/</strong> verwendet technisch notwendigen Speicher, um die angemeldete Sitzung der nutzenden Person aufrechtzuerhalten (Authentifizierung) und um den Offline-Betrieb der progressiven Web-Anwendung zu ermöglichen. Diese Technologien sind für die Erbringung des angeforderten Dienstes unbedingt erforderlich und bedürfen keiner Einwilligung.</p>
       </section>
 

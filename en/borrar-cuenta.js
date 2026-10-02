@@ -20,7 +20,9 @@
 // perfil no cancelaba nada en Stripe: seguiría cobrando sin que el cliente
 // tenga dónde entrar a pararlo.)
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
+// supabase-js servido desde la propia web, no desde esm.sh (auditoría
+// 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
+import { createClient } from '/vendor/supabase-js-2.39.8.js';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.

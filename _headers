@@ -72,6 +72,27 @@
 /turnstile.js
   Cache-Control: public, max-age=60, must-revalidate
 
+# supabase-js, servido desde aquí y no desde esm.sh (auditoría 02-10-2026,
+# SEG-07). Lleva la versión en el NOMBRE, así que se puede cachear un año: una
+# versión nueva es otro fichero.
+/vendor/supabase-js-2.39.8.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Los iconos de Font Awesome, recortados a los que usa la web y servidos desde
+# aquí (auditoría 02-10-2026, REN-12 y SEG-53). Las fuentes llevan una huella
+# en el nombre y no necesitan regla; la hoja, sí, porque se llama siempre igual.
+# Se regenera con herramientas/iconos.py.
+/vendor/fontawesome/iconos.css
+  Cache-Control: public, max-age=60, must-revalidate
+
+# Las tipografías, servidas desde aquí y no desde Google Fonts (auditoría
+# 02-10-2026, REN-58). Mismo trato que los iconos: las fuentes llevan huella en
+# el nombre; las hojas, no.
+/vendor/fuentes/tipografias.css
+  Cache-Control: public, max-age=60, must-revalidate
+/vendor/fuentes/tipografias-mono.css
+  Cache-Control: public, max-age=60, must-revalidate
+
 # contacto.js: lo cargan las páginas de contacto. Faltaba, y nacía con cuatro
 # horas de caché (auditoría 02-10-2026, INV-10).
 /contacto.js

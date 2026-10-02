@@ -18,7 +18,9 @@
 // Si no la hay —pagó en otro navegador, o borró los datos del sitio— se le
 // dice lo que sabemos con certeza (el pago está hecho) y nada más.
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
+// supabase-js servido desde la propia web, no desde esm.sh (auditoría
+// 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
+import { createClient } from '/vendor/supabase-js-2.39.8.js';
 
 const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
