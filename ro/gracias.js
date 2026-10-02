@@ -18,10 +18,11 @@
 // Si no la hay —pagó en otro navegador, o borró los datos del sitio— se le
 // dice lo que sabemos con certeza (el pago está hecho) y nada más.
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
-
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+// supabase-js servido desde la propia web, no desde esm.sh (auditoría
+// 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
+import { createClient } from '/vendor/supabase-js-2.39.8.js';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -129,18 +130,61 @@ const estaVigente = async (userId) => {
  * ⚠️ Y solo si la persona aceptó las cookies de publicidad. Lo decide
  * `consentimiento.js`, que es quien carga —o no— el identificador de Ads.
  */
-const medirLaVenta = (userId, venceEn) => {
+/** Dónde se apunta que esta compra ya se ha medido. */
+const CLAVE_COMPRA_MEDIDA = 'micarga-compra-medida';
+
+/**
+ * El identificador de la compra que se le da a Google, o null si ya se midió.
+ *
+ * 🚨 ANTES ERA EL ID DEL USUARIO (auditoría 02-10-2026, SEG-08). Un
+ * identificador interno y estable de la persona, vinculado para siempre en
+ * Google Ads a todo lo que Google sepa de ella. `transaction_id` solo sirve
+ * para que Google no cuente dos veces la misma venta, y para eso basta un
+ * identificador DE LA COMPRA que no diga quién es nadie:
+ *
+ *   · si Stripe nos devuelve aquí con `?session_id=cs_…` (hace falta que la
+ *     URL de vuelta lleve `{CHECKOUT_SESSION_ID}`), ese: es la compra misma;
+ *   · si no, uno al azar, apuntado en este navegador junto con el vencimiento
+ *     para no volver a mandarlo si la persona recarga la página.
+ *
+ * Un «hash con sal» del id de usuario NO sirve: la sal estaría en este fichero,
+ * a la vista de cualquiera, y seguiría siendo un identificador estable.
+ */
+const idDeLaCompra = (venceEn) => {
+  let sesionStripe = null;
+  try {
+    const s = new URL(location.href).searchParams.get('session_id');
+    if (/^cs_(live|test)_[A-Za-z0-9]{8,}$/.test(s || '')) sesionStripe = s;
+  } catch { /* dirección rara: se sigue sin ella */ }
+
+  const marca = sesionStripe || String(venceEn || '');
+  try {
+    const ya = JSON.parse(localStorage.getItem(CLAVE_COMPRA_MEDIDA) || 'null');
+    if (ya && ya.marca === marca) return null;
+  } catch { /* sin almacenamiento: se mide, a lo sumo dos veces */ }
+
+  const id = sesionStripe
+    || (crypto.randomUUID ? crypto.randomUUID() : `c${Date.now()}${Math.random().toString(36).slice(2)}`);
+  try {
+    localStorage.setItem(CLAVE_COMPRA_MEDIDA, JSON.stringify({ marca, id }));
+  } catch { /* ídem */ }
+  return id;
+};
+
+const medirLaVenta = (venceEn) => {
   const valor = valorDeLaConversion(venceEn);
+  const compra = idDeLaCompra(venceEn);
+  if (!compra) return; // ya contada en una visita anterior a esta página
   try {
     window.gtag?.('event', 'purchase', {
-      transaction_id: userId,
+      transaction_id: compra,
       value: valor,
       currency: 'EUR',
     });
     if (window.micargaPuedeMedirAnuncios?.()) {
       window.gtag('event', 'conversion', {
         send_to: CONVERSION_ADS,
-        transaction_id: userId,
+        transaction_id: compra,
         value: valor,
         currency: 'EUR',
       });
@@ -152,7 +196,7 @@ const medirLaVenta = (userId, venceEn) => {
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session?.user) {
-    ponerCabecera('ok', 'Pago recibido');
+    ponerCabecera('ok', 'Plată primită');
     mostrarPaso('paso-sin-sesion');
     return;
   }
@@ -164,9 +208,9 @@ const medirLaVenta = (userId, venceEn) => {
   for (let intento = 0; intento < INTENTOS; intento++) {
     const suscripcion = await estaVigente(session.user.id);
     if (suscripcion) {
-      ponerCabecera('ok', '¡Ya eres premium!');
+      ponerCabecera('ok', 'Acum sunteți premium!');
       mostrarPaso('paso-activa');
-      medirLaVenta(session.user.id, suscripcion.venceEn);
+      medirLaVenta(suscripcion.venceEn);
       return;
     }
     await dormir(ESPERA_MS);
@@ -174,6 +218,6 @@ const medirLaVenta = (userId, venceEn) => {
 
   // Se agotó la espera. El pago está hecho: eso no se pone en duda en ningún
   // texto de este estado.
-  ponerCabecera('espera', 'Pago recibido');
+  ponerCabecera('espera', 'Plată primită');
   mostrarPaso('paso-tarda');
 })();

@@ -29,20 +29,27 @@
 // y ya tiene sus pruebas. Esta página pregunta y obedece:
 //
 //   200 → enlaces personalizados listos, se pintan los dos planes
-//   409 → ya tiene suscripción vigente. NO se le ofrece contratar otra: cada
-//         enlace de Stripe crea una suscripción NUEVA, así que acabaría pagando
-//         10 € y 90 € a la vez y la primera quedaría huérfana facturando para
-//         siempre. Se le manda al portal de cliente.
+//   409 → ya tiene suscripción vigente. NO se le ofrece contratar otra para
+//         él: cada enlace de Stripe crea una suscripción NUEVA, así que
+//         acabaría pagando 10 € y 90 € a la vez y la primera quedaría huérfana
+//         facturando para siempre. Se le manda al portal de cliente.
+//         Lo que SÍ se le ofrece es contratar para su EMPRESA (licencias o el
+//         CRM): su suscripción personal se mantiene y la empresa contrata
+//         aparte (auditoría 02-10-2026, COB-16, decisión «convivir»). Quien
+//         decide si esa empresa puede contratar es `crear-sesion-pago`, que
+//         mira la organización y no a la persona.
 //   412 → le faltan datos fiscales. Sin ellos se cobrarían 10 € con IVA español
 //         sin poder emitir una factura válida. Se piden aquí mismo.
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
-import { montarTurnstile } from './turnstile.js';
-
-// La clave publicable es pública por diseño: va ya dentro del paquete de la app
-// y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+// supabase-js servido desde la propia web, no desde esm.sh (auditoría
+// 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
+import { createClient } from '/vendor/supabase-js-2.39.8.js';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
+// Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
+// sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
+// _headers. Al cambiar turnstile.js, subir este número.
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // Portal de cliente de Stripe, en MODO REAL (activado el 27-08-2026). Es donde
 // se manda a quien ya tiene suscripción: cambiar de plan, actualizar la tarjeta,
@@ -64,7 +71,7 @@ const ROTULOS = {
   codigo_postal: 'the postcode',
   poblacion: 'the town or city',
   provincia: 'the province',
-  pais: 'el país',
+  pais: 'the country',
 };
 
 // ---------------------------------------------------------------------------
@@ -119,7 +126,78 @@ const nifValido = (nif) => {
   return false;
 };
 
+/**
+ * Qué le falta a la ficha de facturación para poder cobrar.
+ *
+ * Copia FIEL de problemasFacturacion() de la Edge Function `enviar-enlace-pago`
+ * (logic.ts): mismos campos, código postal de 5 dígitos y país ES, con la
+ * misma forma `{ campo, motivo }` que devuelve su 412. Hace falta aquí solo
+ * para quien ya paga su licencia y contrata para su empresa (COB-16): a esa
+ * persona `enviar-enlace-pago` le responde 409 ANTES de mirar sus datos
+ * fiscales, así que sin esta comprobación llegaría a pagar sin poder recibir
+ * una factura válida. ⚠️ Si cambia allí, cambiar aquí.
+ */
+const problemasFacturacion = (fila) => {
+  const problemas = [];
+  for (const campo of CAMPOS_FACTURACION) {
+    const v = fila?.[campo];
+    if (typeof v !== 'string' || v.trim() === '') problemas.push({ campo, motivo: 'falta' });
+  }
+  const vacio = (campo) => problemas.some((p) => p.campo === campo);
+  if (!vacio('codigo_postal') && !/^\d{5}$/.test(String(fila.codigo_postal).trim())) {
+    problemas.push({ campo: 'codigo_postal', motivo: 'formato' });
+  }
+  if (!vacio('pais') && String(fila.pais).trim().toUpperCase() !== 'ES') {
+    problemas.push({ campo: 'pais', motivo: 'formato' });
+  }
+  return problemas;
+};
+
 // ---------------------------------------------------------------------------
+// El idioma de la página y la vuelta desde el enlace del correo
+// ---------------------------------------------------------------------------
+
+/** El idioma de esta copia de la página: lo pone el generador en <html lang>. */
+const IDIOMA = (document.documentElement.lang || 'es').slice(0, 2);
+
+/**
+ * La vuelta al idioma de la persona cuando entra por el ENLACE del correo.
+ *
+ * El enlace de Supabase lleva a https://micarga.es/suscripcion, en castellano,
+ * venga de la página que venga: es la única dirección que hoy está en la lista
+ * de redirecciones permitidas, y una que no esté manda a la persona a la URL
+ * del sitio (la app), que es peor. Así que quien pide el código desde /de/ o
+ * /pl/ volvía en castellano (auditoría 02-10-2026, REL-22).
+ *
+ * Arreglo sin tocar el panel: antes de pedir el correo se apunta el idioma, y
+ * si la página castellana recibe la sesión por el enlace en este mismo
+ * navegador, devuelve a la persona a su idioma. El arreglo completo (mandar el
+ * enlace directamente a /<idioma>/suscripcion) exige añadir antes
+ * https://micarga.es/** a Authentication → URL Configuration.
+ */
+const CLAVE_RETORNO = 'micarga-idioma-retorno';
+const UNA_HORA = 60 * 60 * 1000;
+
+const apuntarIdiomaDeVuelta = () => {
+  try {
+    if (IDIOMA === 'es') localStorage.removeItem(CLAVE_RETORNO);
+    else localStorage.setItem(CLAVE_RETORNO, JSON.stringify({ idioma: IDIOMA, cuando: Date.now() }));
+  } catch { /* sin almacenamiento, vuelve en castellano como antes */ }
+};
+
+/** El idioma al que hay que devolver a quien llega por el enlace, o null. */
+const idiomaDeVuelta = () => {
+  try {
+    const r = JSON.parse(localStorage.getItem(CLAVE_RETORNO) || 'null');
+    localStorage.removeItem(CLAVE_RETORNO);
+    if (!r || Date.now() - r.cuando > UNA_HORA) return null;
+    return /^[a-z]{2}$/.test(r.idioma) && r.idioma !== 'es' ? r.idioma : null;
+  } catch { return null; }
+};
+
+// Se mira ANTES de crear el cliente: supabase-js consume y borra el fragmento
+// con la sesión en cuanto arranca.
+const LLEGA_POR_ENLACE = /[#&?](access_token|code|token_hash)=/.test(location.href);
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -203,11 +281,23 @@ const cuerpoDe = async (error) => {
   try { return await error.context.json(); } catch { return null; }
 };
 
-// Estado del recorrido. `datosAlta` solo se rellena cuando hay que crear la
-// cuenta; la contraseña se guarda aquí porque no se puede poner hasta DESPUÉS
-// de verificar el código (antes no hay sesión con la que llamar a updateUser).
+// Estado del recorrido: el correo con el que se está entrando.
+//
+// (Aquí vivía `datosAlta`, que guardaba la contraseña del alta para ponerla
+// después del código. Desde que el alta se hace con signUp, que la pone de una
+// vez, nadie lo rellenaba y la rama que lo usaba era código muerto: fuera,
+// auditoría 02-10-2026, SEG-60.)
 let correoEnCurso = '';
-let datosAlta = null;
+
+// Ya paga su licencia y ha pedido contratar para su empresa (COB-16). Hace
+// falta recordarlo porque, al volver de rellenar la facturación, la página
+// vuelve a preguntar a `enviar-enlace-pago`, que le seguirá diciendo 409.
+let paraEmpresa = false;
+
+// La empresa elegida cuando la persona pertenece a varias (COB-06). Solo se
+// rellena si `crear-sesion-pago` ha pedido elegir; el servidor vuelve a
+// comprobar que es una de las suyas.
+let empresaElegida = null;
 
 // ---------------------------------------------------------------------------
 // Paso 1: el correo. ¿Existe la cuenta?
@@ -226,8 +316,9 @@ let datosAlta = null;
  * las dos vías. ⚠️ Esta URL tiene que estar en la lista de redirecciones
  * permitidas de Supabase (Authentication → URL Configuration).
  */
-const pedirCodigo = async (email, crear, metadatos) =>
-  supabase.auth.signInWithOtp({
+const pedirCodigo = async (email, crear, metadatos) => {
+  apuntarIdiomaDeVuelta();
+  return supabase.auth.signInWithOtp({
     email,
     options: {
       shouldCreateUser: crear,
@@ -236,6 +327,7 @@ const pedirCodigo = async (email, crear, metadatos) =>
       ...(metadatos ? { data: metadatos } : {}),
     },
   });
+};
 
 /**
  * ¿El error de Supabase significa «ese correo no tiene cuenta»?
@@ -284,14 +376,13 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Comprobando…', async () => {
+  await ocupado($('btn-correo'), 'Checking…', async () => {
     const { error } = await pedirCodigo(correo, false);
     correoEnCurso = correo;
 
     if (error) {
       if (esCuentaInexistente(error)) {
         // No hay cuenta: se crea aquí, sin mandar a nadie a la app.
-        datosAlta = null;
         $('alta-correo').textContent = correo;
         mostrarPaso('paso-alta');
         return;
@@ -300,7 +391,6 @@ $('form-correo').addEventListener('submit', async (e) => {
       return;
     }
 
-    datosAlta = null;
     irAPasoCodigo(correo);
   });
 });
@@ -329,8 +419,12 @@ $('form-alta').addEventListener('submit', async (e) => {
     avisar('To create the account you need to accept the terms and the privacy policy.');
     return;
   }
-  if (val('password').length < 6) {
-    avisar('The password needs at least 6 characters.');
+  // 8 y no 6 (auditoría 02-10-2026, SEG-31): con 6 caracteres y sin captcha,
+  // las cuentas que pagan quedan al alcance de la fuerza bruta. El mínimo del
+  // servidor se sube DESPUÉS, cuando también lo pidan las apps publicadas: si
+  // se subiera antes, sus altas fallarían con un error genérico.
+  if (val('password').length < 8) {
+    avisar('The password needs at least 8 characters.');
     return;
   }
   if (!nifValido(val('nif_cif'))) {
@@ -348,7 +442,7 @@ $('form-alta').addEventListener('submit', async (e) => {
   }
   delete f.elements['phone'].dataset.mal;
 
-  await ocupado($('btn-alta'), 'Creando…', async () => {
+  await ocupado($('btn-alta'), 'Creating…', async () => {
     // Los mismos metadatos que manda la app: el trigger handle_new_user los
     // convierte en la fila de `profiles`. Si esta lista se queda corta, el
     // usuario acaba con un perfil a medias.
@@ -358,6 +452,11 @@ $('form-alta').addEventListener('submit', async (e) => {
       nif_cif: val('nif_cif').toUpperCase(),
       company_name: val('company_name'),
       phone: telefono,
+      // El idioma de la página, como lo manda la app (App.tsx). Sin él,
+      // handle_new_user pone «es» y la bienvenida y los avisos salen en
+      // castellano a quien se ha dado de alta en /de/ o /pl/ (auditoría
+      // 02-10-2026, REL-15 y SOL-13).
+      idioma: IDIOMA,
     };
 
     // `signUp` y no `signInWithOtp`: crea la cuenta CON la contraseña de una
@@ -372,6 +471,7 @@ $('form-alta').addEventListener('submit', async (e) => {
     // código como antes. Así el cambio no depende de que el ajuste del panel se
     // toque a la vez que se despliega esto. Es el mismo patrón que ya usa la
     // app en src/App.tsx.
+    apuntarIdiomaDeVuelta();
     const { data, error } = await supabase.auth.signUp({
       email: correoEnCurso,
       password: val('password'),
@@ -392,7 +492,6 @@ $('form-alta').addEventListener('submit', async (e) => {
       return;
     }
 
-    datosAlta = null;
     if (data?.session) {
       // Cuenta creada y dentro: directo a facturación o a los planes.
       await pedirEnlaces();
@@ -410,7 +509,6 @@ $('form-alta').addEventListener('submit', async (e) => {
 $('btn-otro-correo').addEventListener('click', () => {
   limpiarAviso();
   $('codigo').value = '';
-  datosAlta = null;
   mostrarPaso('paso-correo');
   $('correo').focus();
 });
@@ -434,7 +532,7 @@ $('form-contrasena').addEventListener('submit', async (e) => {
   const password = $('contrasena').value;
   if (!password) return;
 
-  await ocupado($('btn-contrasena'), 'Entrando…', async () => {
+  await ocupado($('btn-contrasena'), 'Signing in…', async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: correoEnCurso, password,
       // Entrar con contraseña no manda ningún correo, pero Turnstile en
@@ -446,7 +544,6 @@ $('form-contrasena').addEventListener('submit', async (e) => {
       avisar('That password isn\'t right. Try again or use the code we\'ve emailed you.');
       return;
     }
-    datosAlta = null;
     await pedirEnlaces();
   });
 });
@@ -467,7 +564,7 @@ $('form-codigo').addEventListener('submit', async (e) => {
     return;
   }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'Checking…', async () => {
     const { error } = await supabase.auth.verifyOtp({
       email: correoEnCurso, token, type: 'email',
     });
@@ -476,17 +573,6 @@ $('form-codigo').addEventListener('submit', async (e) => {
       return;
     }
 
-    // Cuenta recién creada: se le pone la contraseña que eligió. Sin esto
-    // entraría aquí pero NO podría entrar en la app, que pide correo y
-    // contraseña. Si falla, no se corta el proceso —ya está dentro y puede
-    // pagar—; se le dice que use «he olvidado mi contraseña» en la app.
-    if (datosAlta?.password) {
-      const { error: errPass } = await supabase.auth.updateUser({ password: datosAlta.password });
-      if (errPass) {
-        avisar('Your account has been created, but we couldn\'t save the password. You can set it from the app using “Forgotten your password?”. Let\'s carry on with the payment.', 'info');
-      }
-      datosAlta = null;
-    }
 
     await pedirEnlaces();
   });
@@ -544,8 +630,12 @@ const marcarProblemas = (problemas) => {
     if (control && !control.value.trim()) control.dataset.mal = 'si';
     if (ROTULOS[p.campo] && !(control && control.value.trim())) nombres.push(ROTULOS[p.campo]);
   }
+  // La lista se monta APARTE y no dentro de la plantilla: con las comillas de
+  // `join(', ')` dentro, el generador de idiomas no reconocía la frase y salía
+  // en castellano en los ocho (auditoría 02-10-2026, DUP-04).
+  const lista = nombres.join(', ');
   avisar(nombres.length > 0
-    ? `Para poder emitirte la factura falta ${nombres.join(', ')}.`
+    ? `To issue your invoice we still need ${lista}.`
     : 'Check the billing details: something doesn\'t add up.', 'info');
 };
 
@@ -553,7 +643,11 @@ $('form-facturacion').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  // getSession y no getUser: getUser pregunta al servidor en cada llamada, y
+  // aquí solo hace falta el id; lo que protege los datos es RLS (auditoría
+  // 02-10-2026, REN-52).
+  const { data: { session } } = await supabase.auth.getSession();
+  const user = session?.user;
   if (!user) {
     avisar('You\'ve been signed out. Sign in again with your email address.');
     mostrarPaso('paso-correo');
@@ -577,7 +671,7 @@ $('form-facturacion').addEventListener('submit', async (e) => {
   // una cadena vacía haría creer que hay un correo de facturación puesto.
   fila.email_facturacion = emailFactura === '' ? null : emailFactura;
 
-  await ocupado($('btn-facturacion'), 'Guardando…', async () => {
+  await ocupado($('btn-facturacion'), 'Saving…', async () => {
     const { error } = await supabase
       .from('datos_facturacion')
       .upsert(fila, { onConflict: 'user_id' });
@@ -624,10 +718,14 @@ const enlaceUsable = (url) => {
  * Ante la duda —un fallo al leer el perfil— NO se enseña el portal: es mejor
  * quedarse corto que mandar a alguien a una puerta que no abre.
  */
-const prepararYaSuscrito = async () => {
+const prepararYaSuscrito = async ({ ofrecerEmpresa = false } = {}) => {
+  // Contratar para la empresa solo tiene sentido si quien ya paga es la
+  // PERSONA; si la «ya suscrita» es la empresa, no hay nada más que contratar.
+  $('bloque-contratar-empresa').hidden = !ofrecerEmpresa;
   let clienteStripe = null;
   try {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { session } } = await supabase.auth.getSession();
+    const user = session?.user;
     if (user) {
       const { data } = await supabase
         .from('profiles')
@@ -661,18 +759,23 @@ const pedirEnlaces = async () => {
     const status = estadoDe(error);
 
     if (status === 409) {
-      // Ya paga: esto es el final del recorrido, no una escala. Lo único que
-      // queda por decidir es si tiene sentido ofrecerle el portal de Stripe.
-      await prepararYaSuscrito();
+      // Ya paga su licencia. Si ha pedido contratar para su empresa, se sigue
+      // por ahí (COB-16); si no, esto es el final del recorrido: se le dice
+      // que está todo bien, el portal si tiene sentido y la opción de empresa.
+      if (paraEmpresa) {
+        await irAPlanesDeEmpresa();
+        return;
+      }
+      await prepararYaSuscrito({ ofrecerEmpresa: true });
       mostrarPaso('paso-ya-suscrito');
       return;
     }
 
     if (status === 412) {
       const cuerpo = await cuerpoDe(error);
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { session } } = await supabase.auth.getSession();
       mostrarPaso('paso-facturacion');
-      if (user) await precargarFacturacion(user.id);
+      if (session?.user) await precargarFacturacion(session.user.id);
       marcarProblemas(cuerpo?.problemas);
       return;
     }
@@ -698,9 +801,92 @@ const pedirEnlaces = async () => {
   // licencia— pero se siguen pidiendo porque es esta llamada la que dice si
   // la persona ya paga (409) o le faltan datos fiscales (412). Lo que se
   // pinta viene de `crear-sesion-pago`.
+  $('nota-empresa').hidden = !paraEmpresa;
   prepararCantidad();
   mostrarPaso('paso-planes');
 };
+
+/**
+ * Quien ya paga su licencia pasa a contratar para su empresa (COB-16).
+ *
+ * `enviar-enlace-pago` no sirve de puerta aquí: responde 409 por el estado de
+ * la persona antes de mirar sus datos fiscales. Así que la ficha se comprueba
+ * en esta página con la misma regla, y lo que decide si la EMPRESA puede
+ * contratar lo dice después `crear-sesion-pago`, que es quien cobra.
+ */
+const irAPlanesDeEmpresa = async () => {
+  paraEmpresa = true;
+  limpiarAviso();
+  const { data: { session } } = await supabase.auth.getSession();
+  const user = session?.user;
+  if (!user) {
+    avisar('You\'ve been signed out. Sign in again with your email address.');
+    mostrarPaso('paso-correo');
+    return;
+  }
+  const { data: fac, error } = await supabase
+    .from('datos_facturacion')
+    .select(CAMPOS_FACTURACION.join(', '))
+    .eq('user_id', user.id)
+    .maybeSingle();
+  // Un fallo al leer no bloquea: la última palabra la tiene el servidor, y
+  // `crear-sesion-pago` puede contestar 412 igual que la puerta.
+  const problemas = error ? [] : problemasFacturacion(fac);
+  if (problemas.length > 0) {
+    mostrarPaso('paso-facturacion');
+    await precargarFacturacion(user.id);
+    marcarProblemas(problemas);
+    return;
+  }
+  $('nota-empresa').hidden = false;
+  prepararCantidad();
+  mostrarPaso('paso-planes');
+};
+
+$('btn-contratar-empresa')?.addEventListener('click', () => irAPlanesDeEmpresa());
+
+/**
+ * Pinta la lista de empresas entre las que elegir (COB-06).
+ *
+ * Los nombres los escriben los clientes: van con `textContent`, nunca como
+ * HTML. Pulsar una sigue con el pago que ya se había pedido.
+ */
+const pedirEmpresa = (organizaciones, periodo, boton) => {
+  const lista = $('lista-empresas');
+  lista.replaceChildren();
+  for (const o of organizaciones) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sus-btn-plano';
+    b.textContent = o.nombre;
+    b.addEventListener('click', () => {
+      empresaElegida = { id: o.id, nombre: o.nombre };
+      $('bloque-elegir-empresa').hidden = true;
+      $('empresa-elegida-nombre').textContent = o.nombre;
+      $('empresa-elegida').hidden = false;
+      contratar(periodo, boton);
+    });
+    lista.appendChild(b);
+  }
+  $('empresa-elegida').hidden = true;
+  $('bloque-elegir-empresa').hidden = false;
+  $('bloque-elegir-empresa').scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+/** Lo que manda el servidor cuando hay que elegir, comprobado antes de pintarlo. */
+const empresasCandidatas = (cuerpo) => {
+  if (cuerpo?.codigo !== 'elegir-organizacion' || !Array.isArray(cuerpo.organizaciones)) return null;
+  const validas = cuerpo.organizaciones.filter(
+    (o) => o && typeof o.id === 'string' && o.id !== '' && typeof o.nombre === 'string',
+  );
+  return validas.length > 0 ? validas : null;
+};
+
+$('btn-cambiar-empresa')?.addEventListener('click', () => {
+  empresaElegida = null;
+  $('empresa-elegida').hidden = true;
+  limpiarAviso();
+});
 
 // ---------------------------------------------------------------------------
 // Cuántas licencias, cuánto cuesta y a pagar
@@ -797,7 +983,14 @@ const contratar = async (periodo, boton) => {
   boton.disabled = true;
 
   const { data, error } = await supabase.functions.invoke('crear-sesion-pago', {
-    body: { periodo, licencias: leerCantidad(), crm: $('sus-crm').checked },
+    body: {
+      periodo,
+      licencias: leerCantidad(),
+      crm: $('sus-crm').checked,
+      // Solo si el servidor pidió elegir (COB-06). Él vuelve a comprobar que
+      // la persona puede contratar para esa empresa.
+      ...(empresaElegida ? { organizacion_id: empresaElegida.id } : {}),
+    },
   });
 
   if (error) {
@@ -806,8 +999,27 @@ const contratar = async (periodo, boton) => {
     const cuerpo = await cuerpoDe(error);
 
     if (status === 409 && cuerpo?.codigo === 'ya-suscrita') {
-      await prepararYaSuscrito();
+      // La que ya está suscrita es la EMPRESA: no se le ofrece contratar otra
+      // vez para ella, solo el portal para cambiar licencias.
+      await prepararYaSuscrito({ ofrecerEmpresa: false });
       mostrarPaso('paso-ya-suscrito');
+      if (cuerpo?.error) avisar(cuerpo.error, 'info');
+      return;
+    }
+    // Pertenece a varias empresas: que elija (COB-06).
+    const candidatas = (status === 409 || status === 422) ? empresasCandidatas(cuerpo) : null;
+    if (candidatas) {
+      empresaElegida = null;
+      pedirEmpresa(candidatas, periodo, boton);
+      return;
+    }
+    // Faltan datos fiscales: hoy lo dice `enviar-enlace-pago`, pero la puerta
+    // de verdad debe ser la función que cobra (COB-30). Se atiende igual.
+    if (status === 412) {
+      const { data: { session } } = await supabase.auth.getSession();
+      mostrarPaso('paso-facturacion');
+      if (session?.user) await precargarFacturacion(session.user.id);
+      marcarProblemas(cuerpo?.problemas);
       return;
     }
     if (status === 401) {
@@ -872,13 +1084,44 @@ if (cantidad) {
   // móvil dentro de una cabina. Solo se RELLENA, nunca se envía solo: enviarlo
   // al cargar la página dispararía un correo con un código a cualquiera que
   // abriese el enlace, incluido un buscador siguiéndolo.
+  //
+  // 🚨 Y SE BORRA DE LA BARRA EN CUANTO SE LEE (auditoría 02-10-2026, SEG-08).
+  // Con el correo en la dirección, Google Analytics lo recibía como parte de
+  // `page_location`: un dato personal directo enviado a un tercero, justo lo
+  // que prohíben sus condiciones. Esto corre antes que consentimiento.js
+  // (módulo antes que `defer`, en el orden del HTML), que además lo filtra por
+  // su cuenta.
+  //
+  // Se acepta también `#correo=…`: el fragmento no viaja al servidor ni a los
+  // registros de nadie, y es como lo mandarán la app y el bot en cuanto se
+  // publiquen sus versiones nuevas. Hasta entonces llega por los dos sitios.
   try {
-    const correoEnLaUrl = new URL(location.href).searchParams.get('correo');
+    const url = new URL(location.href);
+    const enElFragmento = /^#correo=/.test(url.hash)
+      ? decodeURIComponent(url.hash.slice('#correo='.length))
+      : null;
+    const correoEnLaUrl = enElFragmento || url.searchParams.get('correo');
     if (correoEnLaUrl) $('correo').value = correoEnLaUrl.trim();
+    if (url.searchParams.has('correo') || enElFragmento !== null) {
+      url.searchParams.delete('correo');
+      // Solo se toca un fragmento que sea el del correo: el del enlace de
+      // acceso de Supabase (`#access_token=…`) lo consume supabase-js.
+      if (enElFragmento !== null) url.hash = '';
+      history.replaceState(history.state, '', url.toString());
+    }
   } catch {
     // Dirección rara: se ignora y se pide el correo como siempre.
   }
 
   const { data: { session } } = await supabase.auth.getSession();
+  if (session && LLEGA_POR_ENLACE && IDIOMA === 'es') {
+    const vuelta = idiomaDeVuelta();
+    if (vuelta) {
+      // La sesión ya está guardada en este origen: la página del idioma la
+      // encuentra y sigue desde ahí.
+      location.replace(`/${vuelta}/suscripcion`);
+      return;
+    }
+  }
   if (session) await pedirEnlaces();
 })();

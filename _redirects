@@ -1,0 +1,27 @@
+# Redirecciones de Cloudflare Pages.
+#
+# POR QUÉ EXISTE
+# Pages publica la RAÍZ del repositorio (README.md: «Output directory = /»), así
+# que todo lo que hay en él se sirve en micarga.es, también lo que es solo para
+# trabajar: los scripts de Python que generan los idiomas y publican el blog,
+# las plantillas de correo que se copian a mano en Supabase y los diccionarios
+# de traducción (auditoría 02-10-2026, INV-08 y SEG-28).
+#
+# Lo limpio sería que Pages publicara solo una lista blanca (un comando de
+# compilación que copie lo público a dist/), pero eso se cambia en el panel de
+# Cloudflare y moverlos dentro del repositorio rompería las rutas de las
+# herramientas. Mientras tanto, estas rutas se mandan a la página de «no
+# encontrado». En Pages una redirección se aplica aunque exista un fichero en
+# esa ruta.
+#
+# ⚠️ El repositorio es público: esto evita que micarga.es los sirva y que se
+# indexen, no que se puedan leer en GitHub. No pongas nada secreto en ellos.
+#
+# ⚠️ borradores-blog/ NO va aquí: se trata en _headers (noindex), porque la
+# cola de artículos se usa y puede que se revise desde la web.
+
+/herramientas/*        /404  302
+/plantillas-correo/*   /404  302
+/traducciones/*        /404  302
+/README.md             /404  302
+/.gitignore            /404  302

@@ -33,10 +33,9 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="robots" content="noindex, follow">
   <title>Política de Cookies - Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="styles.css?v=20261001a">
 </head>
 <body>
@@ -119,11 +118,11 @@
         </table>
         <p>Si además se acepta la publicidad, Google Analytics activa las señales de medición de campañas de Google Ads, que permiten saber si un anuncio ha acabado en una visita o en un alta. Si se rechaza, esas señales quedan desactivadas.</p>
         <p>Para recordar la elección se guarda en el propio navegador, en el almacenamiento local y no en una cookie, el dato <code>micarga-cookies</code>, con lo aceptado y la fecha. Caduca a los <strong>12 meses</strong>, y al caducar se vuelve a preguntar. Es almacenamiento técnico necesario para cumplir con la propia elección, y no se envía a nadie.</p>
-        <p>El sitio carga además dos recursos externos, necesarios para mostrar correctamente la página, que no instalan cookies de seguimiento:</p>
-        <ul>
-          <li><strong>Google Fonts</strong> (tipografías Outfit y Space Grotesk), servido desde fonts.googleapis.com.</li>
-          <li><strong>Font Awesome</strong> (iconos), servido desde cdnjs.cloudflare.com.</li>
-        </ul>
+        <!-- Hasta el 02-10-2026 aquí se declaraban Google Fonts y Font Awesome
+             como recursos externos. Desde entonces se sirven desde la propia
+             web (auditoría 02-10-2026, REN-58, REN-12 y SEG-53), y esta
+             página tiene que decir lo que hay. -->
+        <p>Las tipografías (Outfit y Space Grotesk) y los iconos (Font Awesome) se sirven desde el propio micarga.es: para mostrar las páginas no se piden recursos a servidores de terceros.</p>
         <p>La aplicación <strong>https://app.micarga.es/</strong> utiliza almacenamiento técnico necesario para mantener la sesión iniciada del usuario (autenticación) y para el funcionamiento sin conexión de la aplicación web progresiva. Estas tecnologías son estrictamente necesarias para prestar el servicio solicitado y no requieren consentimiento.</p>
       </section>
 
@@ -176,6 +175,7 @@
     </div>
   </main>
 
+  <!-- PIE:inicio -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
@@ -244,7 +244,8 @@
       </div>
     </div>
   </footer>
+  <!-- PIE:fin -->
 
-  <script src="consentimiento.js?v=20260928a" defer></script>
+  <script src="consentimiento.js?v=20261002f" defer></script>
 </body>
 </html>

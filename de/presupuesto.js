@@ -11,12 +11,13 @@
 // comprueba lo mínimo para no hacer viajar una petición que va a volver con un
 // error: quién manda es el servidor.
 
-const FUNCION = 'https://yrwletmszkfvnpbkngek.supabase.co/functions/v1/solicitar-presupuesto';
+// La dirección y la clave publicable salen de /config.js, el único sitio donde
+// están escritas (auditoría 02-10-2026, REL-18). La función está desplegada sin
+// verificación de JWT, pero la pasarela de Supabase sigue exigiendo la cabecera
+// `apikey`.
+import { SUPABASE_KEY, urlDeFuncion } from '/config.js?v=20261002a';
 
-// La clave publicable es pública por diseño: va dentro del paquete de la app y
-// del bundle de app.micarga.es. La función está desplegada sin verificación de
-// JWT, pero la pasarela de Supabase sigue exigiendo la cabecera `apikey`.
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+const FUNCION = urlDeFuncion('solicitar-presupuesto');
 
 const $ = (id) => document.getElementById(id);
 
@@ -135,7 +136,7 @@ form.addEventListener('submit', async (e) => {
   // acaban discrepando y el cliente se queda sin saber cuál le está frenando.
   const faltan = ['empresa', 'contacto', 'email', 'cuentas'].filter((c) => !datos[c]);
   if (faltan.length > 0) {
-    avisar('Rellena la empresa, tu nombre, el correo y cuántas cuentas necesitáis.');
+    avisar('Füllen Sie Unternehmen, Ihren Namen, die E-Mail-Adresse und die Anzahl der benötigten Konten aus.');
     form.elements[faltan[0]].focus();
     return;
   }
@@ -144,14 +145,14 @@ form.addEventListener('submit', async (e) => {
   // servidor conteste «esa no era»: no ha fallado, es que no ha contestado.
   if (ficha && respuesta === null) {
     $('reto').dataset.mal = 'si';
-    avisar('Falta la comprobación de abajo: toca la respuesta correcta.');
+    avisar('Die Prüfung unten fehlt noch: Tippen Sie auf die richtige Antwort.');
     $('reto').scrollIntoView({ block: 'center', behavior: 'smooth' });
     return;
   }
 
   const textoOriginal = boton.textContent;
   boton.disabled = true;
-  boton.textContent = 'Enviando…';
+  boton.textContent = 'Wird gesendet…';
 
   try {
     const respuestaHttp = await fetch(FUNCION, {
@@ -167,7 +168,7 @@ form.addEventListener('submit', async (e) => {
       // El mensaje del servidor es más concreto que cualquiera que pueda
       // inventarse aquí («ese correo no parece válido», «faltan datos»), así
       // que se enseña el suyo si lo hay.
-      avisar(cuerpo?.error || 'No hemos podido enviar tu petición. Inténtalo de nuevo o escríbenos a soporte@micarga.es.');
+      avisar(cuerpo?.error || 'Wir konnten Ihre Anfrage nicht senden. Versuchen Sie es erneut oder schreiben Sie uns an soporte@micarga.es.');
       // Una ficha caducada ya no sirve para nada: se pide un reto nuevo para
       // que el siguiente intento no vuelva a chocar con lo mismo. Si solo se
       // ha fallado, se deja el mismo reto y se marca en rojo — cambiárselo
@@ -192,7 +193,7 @@ form.addEventListener('submit', async (e) => {
     } catch { /* sin efecto si no hay analítica */ }
   } catch {
     // Sin conexión, o la función caída.
-    avisar('No hemos podido conectar. Comprueba la conexión, o escríbenos a soporte@micarga.es y te lo preparamos igual.');
+    avisar('Wir konnten keine Verbindung herstellen. Prüfen Sie Ihre Verbindung, oder schreiben Sie uns an soporte@micarga.es, und wir bereiten es trotzdem vor.');
   } finally {
     boton.disabled = false;
     boton.textContent = textoOriginal;

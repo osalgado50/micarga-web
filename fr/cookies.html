@@ -33,10 +33,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="robots" content="noindex, follow">
   <title>Politique de cookies - Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
 </head>
 <body>
@@ -120,11 +119,11 @@
         </table>
         <p>Si la publicité est également acceptée, Google Analytics active les signaux de mesure des campagnes Google Ads, qui permettent de savoir si une annonce a abouti à une visite ou à une inscription. En cas de refus, ces signaux restent désactivés.</p>
         <p>Pour mémoriser ce choix, la donnée suivante est enregistrée dans le navigateur lui-même, dans le stockage local et non dans un cookie : <code>micarga-cookies</code>, avec ce qui a été accepté et la date. Elle expire au bout de <strong>12 mois</strong>, et à l'expiration la question est reposée. Il s'agit d'un stockage technique nécessaire pour respecter le choix lui-même, et il n'est transmis à personne.</p>
-        <p>Le site charge par ailleurs deux ressources externes, nécessaires à l'affichage correct de la page, qui n'installent pas de cookies de suivi :</p>
-        <ul>
-          <li><strong>Google Fonts</strong> (polices Outfit et Space Grotesk), servi depuis fonts.googleapis.com.</li>
-          <li><strong>Font Awesome</strong> (icônes), servi depuis cdnjs.cloudflare.com.</li>
-        </ul>
+        <!-- Hasta el 02-10-2026 aquí se declaraban Google Fonts y Font Awesome
+             como recursos externos. Desde entonces se sirven desde la propia
+             web (auditoría 02-10-2026, REN-58, REN-12 y SEG-53), y esta
+             página tiene que decir lo que hay. -->
+        <p>Les polices (Outfit et Space Grotesk) et les icônes (Font Awesome) sont servies depuis micarga.es même : aucune ressource n'est demandée à des serveurs tiers pour afficher les pages.</p>
         <p>L'application <strong>https://app.micarga.es/</strong> utilise un stockage technique nécessaire au maintien de la session de l'utilisateur (authentification) et au fonctionnement hors connexion de l'application web progressive. Ces technologies sont strictement nécessaires à la fourniture du service demandé et ne requièrent pas de consentement.</p>
       </section>
 
@@ -177,6 +176,7 @@
     </div>
   </main>
 
+  <!-- PIE:inicio -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
@@ -245,7 +245,8 @@
       </div>
     </div>
   </footer>
+  <!-- PIE:fin -->
 
-  <script src="/consentimiento.js?v=20260928a" defer></script>
+  <script src="/consentimiento.js?v=20261002f" defer></script>
 </body>
 </html>

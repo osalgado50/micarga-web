@@ -19,6 +19,24 @@
 // nada y los formularios funcionan como hasta ahora. Turnstile solo cuenta
 // cuando está puesto EN LOS DOS SITIOS: la clave pública aquí y la privada en
 // Supabase. Si se pusiera solo en Supabase, ninguna alta funcionaría.
+//
+// EL ORDEN PARA ACTIVARLO (auditoría 02-10-2026, SEG-01, SOL-10 y REL-09):
+//   1. Poner aquí la clave del sitio y desplegar. Con la clave puesta y el
+//      captcha AÚN APAGADO en Supabase todo sigue funcionando: Auth ignora un
+//      `captchaToken` que no ha pedido.
+//   2. 🚨 El ajuste de Supabase es GLOBAL: vale para TODO Auth, también para
+//      la app (iOS, Android y app.micarga.es) y el CRM, y también para
+//      signInWithPassword y resetPasswordForEmail. Antes de encenderlo, sus
+//      versiones con `captchaToken` tienen que estar publicadas (las de las
+//      tiendas incluidas). Si no, nadie podrá entrar ni darse de alta allí.
+//   3. Encenderlo en Authentication → Attack Protection con la clave secreta.
+//      Se revierte apagando el mismo ajuste; las sesiones abiertas no se
+//      enteran, porque renovar el token no lleva captcha.
+//
+// En esta web llevan `captchaToken` las cuatro llamadas que lo exigen:
+// signInWithOtp y signUp y signInWithPassword (suscripcion.js) y signInWithOtp
+// (borrar-cuenta.js). verifyOtp, updateUser y getSession NO lo necesitan: Auth
+// no comprueba el captcha en /verify ni en /user.
 
 /**
  * Clave pública del sitio (Cloudflare → Turnstile). Es pública por diseño: va
@@ -38,7 +56,7 @@ const cargarScript = () => {
     s.src = SCRIPT;
     s.async = true;
     s.onload = resolver;
-    s.onerror = () => rechazar(new Error('No se ha podido cargar Turnstile.'));
+    s.onerror = () => rechazar(new Error('Turnstile konnte nicht geladen werden.'));
     document.head.appendChild(s);
   });
   return cargando;
@@ -82,7 +100,7 @@ export const montarTurnstile = async (contenedor) => {
     await new Promise((r) => setTimeout(r, 100));
   }
   if (typeof window.turnstile?.render !== 'function') {
-    console.warn('Turnstile no ha llegado a cargar; el formulario va sin escudo.');
+    console.warn('Turnstile wurde nicht geladen; das Formular läuft ohne Schutz.');
     return null;
   }
 

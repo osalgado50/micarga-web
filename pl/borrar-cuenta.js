@@ -20,13 +20,39 @@
 // perfil no cancelaba nada en Stripe: seguiría cobrando sin que el cliente
 // tenga dónde entrar a pararlo.)
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
-import { montarTurnstile } from './turnstile.js';
+// supabase-js servido desde la propia web, no desde esm.sh (auditoría
+// 02-10-2026, SEG-07 y SEG-53): ver la cabecera de vendor/.
+import { createClient } from '/vendor/supabase-js-2.39.8.js';
+// La dirección y la clave, del único sitio donde están escritas (REL-18).
+import { SUPABASE_URL, SUPABASE_KEY } from '/config.js?v=20261002a';
+// Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
+// sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
+// _headers. Al cambiar turnstile.js, subir este número.
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
-// Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
-// que protege los datos es RLS, no esconderla.
-const SUPABASE_URL = 'https://yrwletmszkfvnpbkngek.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+
+// La vuelta al idioma cuando se entra por el enlace del correo: la misma
+// solución que suscripcion.js (auditoría 02-10-2026, REL-22). El enlace lleva
+// siempre a /borrar-cuenta en castellano, la única dirección permitida hoy.
+const IDIOMA = (document.documentElement.lang || 'es').slice(0, 2);
+const CLAVE_RETORNO = 'micarga-idioma-retorno-borrado';
+const LLEGA_POR_ENLACE = /[#&?](access_token|code|token_hash)=/.test(location.href);
+
+const apuntarIdiomaDeVuelta = () => {
+  try {
+    if (IDIOMA === 'es') localStorage.removeItem(CLAVE_RETORNO);
+    else localStorage.setItem(CLAVE_RETORNO, JSON.stringify({ idioma: IDIOMA, cuando: Date.now() }));
+  } catch { /* vuelve en castellano, como antes */ }
+};
+
+const idiomaDeVuelta = () => {
+  try {
+    const r = JSON.parse(localStorage.getItem(CLAVE_RETORNO) || 'null');
+    localStorage.removeItem(CLAVE_RETORNO);
+    if (!r || Date.now() - r.cuando > 60 * 60 * 1000) return null;
+    return /^[a-z]{2}$/.test(r.idioma) && r.idioma !== 'es' ? r.idioma : null;
+  } catch { return null; }
+};
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -85,7 +111,7 @@ const motivoDelError = async (error) => {
     const cuerpo = await error?.context?.json?.();
     if (cuerpo?.error) return cuerpo.error;
   } catch { /* nos quedamos con el genérico */ }
-  return 'No hemos podido borrar la cuenta. Escríbenos a soporte@micarga.es y lo hacemos nosotros.';
+  return 'Nie udało się usunąć konta. Napisz do nas na soporte@micarga.es, a zrobimy to za ciebie.';
 };
 
 let correoEnCurso = '';
@@ -98,9 +124,10 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Enviando…', async () => {
+  await ocupado($('btn-correo'), 'Wysyłanie…', async () => {
     // shouldCreateUser: false — sería absurdo crear una cuenta para borrarla, y
     // peor: cualquiera podría comprobar correos ajenos creando cuentas sueltas.
+    apuntarIdiomaDeVuelta();
     const { error } = await supabase.auth.signInWithOtp({
       email: correo,
       options: {
@@ -109,17 +136,24 @@ $('form-correo').addEventListener('submit', async (e) => {
         captchaToken: await vale(),
       },
     });
-    if (error) {
-      const noExiste = /signups? not allowed|user not found/i.test(error.message || '');
-      avisar(noExiste
-        ? 'No hay ninguna cuenta de Mi Carga con ese correo. Comprueba que es el que usabas, o escríbenos a soporte@micarga.es.'
-        : 'No hemos podido enviarte el código. Inténtalo de nuevo en un minuto.');
+    // 🚨 «No existe» y «enviado» se contestan IGUAL (auditoría 02-10-2026,
+    // SEG-24 y REL-23). Decir «no hay ninguna cuenta con ese correo» convertía
+    // esta página en un buscador de clientes de Mi Carga para quien quisiera
+    // preparar un fraude dirigido. No cierra del todo la puerta —la API de
+    // Auth también lo delata; eso lo cierra el captcha (SEG-01)—, pero deja
+    // de ofrecerla en bandeja.
+    const noExiste = error && (
+      error.code === 'otp_disabled' || error.error_code === 'otp_disabled' || error.status === 422
+      || /signups? not allowed|user not found/i.test(error.message || '')
+    );
+    if (error && !noExiste) {
+      avisar('Nie udało się wysłać kodu. Spróbuj ponownie za minutę.');
       return;
     }
     correoEnCurso = correo;
     $('ayuda-codigo').textContent =
-      `Te hemos escrito a ${correo}. Copia aquí el código de 6 dígitos; si el ` +
-      `correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.`;
+      `Jeśli istnieje konto Mi Carga z adresem ${correo}, napisaliśmy do ciebie. Skopiuj tutaj kod; jeśli w ` +
+      `wiadomości jest link, kliknięcie go też zadziała. Jeśli jej nie widzisz, zajrzyj do spamu.`;
     mostrarPaso('paso-codigo');
     $('codigo').focus();
   });
@@ -140,11 +174,11 @@ $('form-codigo').addEventListener('submit', async (e) => {
   const token = $('codigo').value.replace(/\D/g, '');
   // Supabase manda códigos de 6 a 10 dígitos (hoy 8): el mismo arreglo que
   // suscripcion.js del 07-09-2026. Quien decide si vale es verifyOtp().
-  if (token.length < 6 || token.length > 10) { avisar('Copia el código entero, tal y como viene en el correo.'); return; }
+  if (token.length < 6 || token.length > 10) { avisar('Skopiuj cały kod, dokładnie tak, jak jest w wiadomości.'); return; }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'Sprawdzanie…', async () => {
     const { error } = await supabase.auth.verifyOtp({ email: correoEnCurso, token, type: 'email' });
-    if (error) { avisar('El código no es correcto o ha caducado. Pide uno nuevo.'); return; }
+    if (error) { avisar('Kod jest nieprawidłowy lub wygasł. Poproś o nowy i sprawdź, czy to adres e-mail twojego konta.'); return; }
     $('correo-confirmado').textContent = correoEnCurso;
     mostrarPaso('paso-confirmar');
     $('confirmacion').focus();
@@ -174,7 +208,7 @@ $('form-confirmar').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
 
-  await ocupado($('btn-borrar'), 'Borrando…', async () => {
+  await ocupado($('btn-borrar'), 'Usuwanie…', async () => {
     const { error } = await supabase.functions.invoke('borrar-cuenta', {
       body: { confirmacion: $('confirmacion').value },
     });
@@ -188,3 +222,36 @@ $('form-confirmar').addEventListener('submit', async (e) => {
     mostrarPaso('paso-hecho');
   });
 });
+
+// --- Arranque: quien entra por el ENLACE del correo ------------------------
+//
+// El correo trae un código y también un enlace. Quien pulsaba el enlace
+// llegaba aquí con la sesión ya abierta… y la página le volvía a pedir el
+// correo desde el principio. Ahora va directo a confirmar, y si pidió el
+// código desde otro idioma, vuelve a su idioma (auditoría 02-10-2026,
+// REL-22). La marca de `sessionStorage` es la que lleva ese «viene del
+// enlace» a la página del idioma, que ya no tiene el fragmento en la URL.
+(async () => {
+  const MARCA_ENLACE = 'micarga-borrado-por-enlace';
+  let porEnlace = LLEGA_POR_ENLACE;
+  try {
+    if (sessionStorage.getItem(MARCA_ENLACE)) { porEnlace = true; sessionStorage.removeItem(MARCA_ENLACE); }
+  } catch { /* sin almacenamiento: solo cuenta el fragmento */ }
+  if (!porEnlace) return;
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.user?.email) return;
+
+  if (IDIOMA === 'es') {
+    const vuelta = idiomaDeVuelta();
+    if (vuelta) {
+      try { sessionStorage.setItem(MARCA_ENLACE, '1'); } catch { /* ídem */ }
+      location.replace(`/${vuelta}/borrar-cuenta`);
+      return;
+    }
+  }
+  correoEnCurso = session.user.email;
+  $('correo-confirmado').textContent = correoEnCurso;
+  mostrarPaso('paso-confirmar');
+  $('confirmacion').focus();
+})();

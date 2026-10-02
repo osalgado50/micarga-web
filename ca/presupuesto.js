@@ -11,12 +11,13 @@
 // comprueba lo mínimo para no hacer viajar una petición que va a volver con un
 // error: quién manda es el servidor.
 
-const FUNCION = 'https://yrwletmszkfvnpbkngek.supabase.co/functions/v1/solicitar-presupuesto';
+// La dirección y la clave publicable salen de /config.js, el único sitio donde
+// están escritas (auditoría 02-10-2026, REL-18). La función está desplegada sin
+// verificación de JWT, pero la pasarela de Supabase sigue exigiendo la cabecera
+// `apikey`.
+import { SUPABASE_KEY, urlDeFuncion } from '/config.js?v=20261002a';
 
-// La clave publicable es pública por diseño: va dentro del paquete de la app y
-// del bundle de app.micarga.es. La función está desplegada sin verificación de
-// JWT, pero la pasarela de Supabase sigue exigiendo la cabecera `apikey`.
-const SUPABASE_KEY = 'sb_publishable_sOknpnTQXY0CqOMyv-UZSw_cYjp2YzO';
+const FUNCION = urlDeFuncion('solicitar-presupuesto');
 
 const $ = (id) => document.getElementById(id);
 
@@ -76,7 +77,7 @@ const pedirReto = async () => {
     b.setAttribute('aria-pressed', 'false');
     // El emoji no lo lee un lector de pantalla de forma útil, así que la
     // opción se nombra por su posición, que es lo que sí se puede decir.
-    b.setAttribute('aria-label', `Opció ${i + 1}`);
+    b.setAttribute('aria-label', `Opción ${i + 1}`);
     b.addEventListener('click', () => {
       respuesta = i;
       delete caja.dataset.mal;
@@ -151,7 +152,7 @@ form.addEventListener('submit', async (e) => {
 
   const textoOriginal = boton.textContent;
   boton.disabled = true;
-  boton.textContent = 'Enviando…';
+  boton.textContent = 'Enviant…';
 
   try {
     const respuestaHttp = await fetch(FUNCION, {

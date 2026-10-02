@@ -16,3 +16,18 @@ __pycache__/
 # del blog. No se versiona: se vuelve a bajar sola si hace falta.
 herramientas/Outfit-Bold.ttf
 .claude/
+
+# Lo que NUNCA debe acabar en este repositorio, que es PÚBLICO y se publica
+# entero en micarga.es (auditoría 02-10-2026, SEG-30 e INV-04): credenciales y
+# documentos de trabajo. WEB.docx entró así en 344cfa5, barrido por un
+# `git add -A`.
+.env
+.env.*
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.keystore
+*.docx
+*.xlsx

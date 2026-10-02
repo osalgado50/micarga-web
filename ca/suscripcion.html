@@ -35,12 +35,14 @@
        llevaría a gente sin cuenta a una pantalla que no puede usar. -->
   <meta name="robots" content="noindex, follow">
   <title>Activar la subscripció - Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
-  <link rel="stylesheet" href="/suscripcion.css?v=20260923a">
+  <link rel="stylesheet" href="/suscripcion.css?v=20261002a">
+  <!-- supabase-js se pide ya, en paralelo al HTML: lo necesita el script de
+       la página antes de hacer nada (auditoría 02-10-2026, REN-51). -->
+  <link rel="modulepreload" href="/vendor/supabase-js-2.39.8.js">
 </head>
 <body>
 
@@ -143,9 +145,9 @@
             <label class="sus-campo sus-campo-ancho">
               <span class="sus-label">Contrasenya per a l'app</span>
               <input class="sus-input" name="password" type="password"
-                     autocomplete="new-password" minlength="6" required>
+                     autocomplete="new-password" minlength="8" required>
               <span class="sus-ayuda">
-                Mínim 6 caràcters. La necessitaràs per entrar a l'app des del mòbil.
+                Mínim 8 caràcters. La necessitaràs per entrar a l'app des del mòbil.
               </span>
             </label>
           </div>
@@ -258,6 +260,29 @@
       <section class="sus-paso" id="paso-planes" hidden>
         <h2 class="sus-subtitulo">Tria el teu pla</h2>
 
+        <!-- Quien ya paga su licencia personal y contrata para su empresa
+             (auditoría 02-10-2026, COB-16: decisión del propietario,
+             «convivir»). Se le dice claro que su suscripción no se toca: si
+             no, lo razonable es temer que se le cobre dos veces lo mismo. -->
+        <p class="sus-aviso" data-tono="info" id="nota-empresa" hidden>
+          El que contractis aquí és per a la teva empresa. La teva subscripció personal continua igual i es factura a part.
+        </p>
+
+        <!-- Quien pertenece a varias empresas elige para cuál contrata
+             (COB-06). La lista la manda crear-sesion-pago y la pinta
+             suscripcion.js: los nombres son de las empresas, no se traducen. -->
+        <div class="sus-empresas" id="bloque-elegir-empresa" hidden>
+          <p class="sus-alerta">
+            <i class="fa-solid fa-building"></i>
+            Pertanys a diverses empreses. Tria per a quina contractes:
+          </p>
+          <div class="sus-empresas-lista" id="lista-empresas"></div>
+        </div>
+        <p class="sus-ayuda" id="empresa-elegida" hidden>
+          <span>Empresa:</span> <strong id="empresa-elegida-nombre"></strong>
+          <button class="sus-btn-plano" type="button" id="btn-cambiar-empresa">Canviar d'empresa</button>
+        </p>
+
         <!-- Este aviso no es cortesía: cada enlace de pago de Stripe contrata
              una suscripción INDEPENDIENTE. Quien pulse los dos «por ver qué es
              cada uno» acaba pagando 10 € y 90 € a la vez. -->
@@ -367,6 +392,21 @@
           La teva subscripció està activada directament per nosaltres, així que no hi ha
           cap pagament a gestionar. Si necessites canviar alguna cosa, escriu-nos.
         </p>
+
+        <!-- Ya paga su licencia, pero puede contratar para su empresa (CRM o
+             licencias para sus conductores). Antes esta página se lo impedía:
+             miraba solo el estado de la PERSONA y no dejaba llegar nunca a la
+             compra de la empresa (auditoría 02-10-2026, COB-16). Se esconde
+             cuando quien está «ya suscrita» es la propia empresa. -->
+        <div id="bloque-contratar-empresa" hidden>
+          <h2 class="sus-subtitulo">Vols contractar per a la teva empresa?</h2>
+          <p class="sus-ayuda">
+            Pots contractar llicències per als teus conductors o el CRM de flota. La teva subscripció personal es manté i el de l'empresa es factura a part.
+          </p>
+          <button class="sus-btn-plano" type="button" id="btn-contratar-empresa">
+            Contractar per a la meva empresa
+          </button>
+        </div>
       </section>
 
       <!-- Turnstile ------------------------------------------------------
@@ -388,6 +428,7 @@
     </div>
   </main>
 
+  <!-- PIE:inicio -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
@@ -456,8 +497,9 @@
       </div>
     </div>
   </footer>
+  <!-- PIE:fin -->
 
-  <script type="module" src="/ca/suscripcion.js?v=20260927b"></script>
-  <script src="/consentimiento.js?v=20260928a" defer></script>
+  <script type="module" src="/ca/suscripcion.js?v=20261002f"></script>
+  <script src="/consentimiento.js?v=20261002f" defer></script>
 </body>
 </html>

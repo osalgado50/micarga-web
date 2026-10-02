@@ -24,12 +24,14 @@
   <!-- noindex: solo se llega aquí desde Stripe, después de pagar. -->
   <meta name="robots" content="noindex, follow">
   <title>Subscripció activada - Mi Carga</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
+  <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   <link rel="stylesheet" href="/styles.css?v=20261001a">
-  <link rel="stylesheet" href="/suscripcion.css?v=20260911h">
+  <link rel="stylesheet" href="/suscripcion.css?v=20261002a">
+  <!-- supabase-js se pide ya, en paralelo al HTML: lo necesita el script de
+       la página antes de hacer nada (auditoría 02-10-2026, REN-51). -->
+  <link rel="modulepreload" href="/vendor/supabase-js-2.39.8.js">
 </head>
 <body>
 
@@ -161,6 +163,7 @@
     </div>
   </main>
 
+  <!-- PIE:inicio -->
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
@@ -229,8 +232,9 @@
       </div>
     </div>
   </footer>
+  <!-- PIE:fin -->
 
-  <script type="module" src="/ca/gracias.js?v=20260925a"></script>
-  <script src="/consentimiento.js?v=20260928a" defer></script>
+  <script type="module" src="/ca/gracias.js?v=20261002f"></script>
+  <script src="/consentimiento.js?v=20261002f" defer></script>
 </body>
 </html>
