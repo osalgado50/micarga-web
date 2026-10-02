@@ -45,7 +45,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002a';
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // La clave publicable es pública por diseño: va ya dentro del paquete de la app
 // y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
@@ -645,8 +645,12 @@ const marcarProblemas = (problemas) => {
     if (control && !control.value.trim()) control.dataset.mal = 'si';
     if (ROTULOS[p.campo] && !(control && control.value.trim())) nombres.push(ROTULOS[p.campo]);
   }
+  // La lista se monta APARTE y no dentro de la plantilla: con las comillas de
+  // `join(', ')` dentro, el generador de idiomas no reconocía la frase y salía
+  // en castellano en los ocho (auditoría 02-10-2026, DUP-04).
+  const lista = nombres.join(', ');
   avisar(nombres.length > 0
-    ? `Para poder emitirte la factura falta ${nombres.join(', ')}.`
+    ? `Para poder emitirte la factura falta ${lista}.`
     : 'Revisa los datos de facturación: hay algo que no cuadra.', 'info');
 };
 

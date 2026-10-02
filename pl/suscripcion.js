@@ -45,7 +45,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002a';
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // La clave publicable es pública por diseño: va ya dentro del paquete de la app
 // y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
@@ -66,13 +66,13 @@ const CAMPOS_FACTURACION = [
 // Cómo se llama cada columna en pantalla. El servidor devuelve claves de
 // columna a propósito (no sabe de rotulación); la traducción vive aquí.
 const ROTULOS = {
-  razon_social: 'la razón social',
-  nif: 'el NIF / CIF',
-  direccion: 'la dirección',
-  codigo_postal: 'el código postal',
-  poblacion: 'la población',
-  provincia: 'la provincia',
-  pais: 'el país',
+  razon_social: 'nazwę firmy',
+  nif: 'numer podatkowy (NIF / CIF)',
+  direccion: 'adres',
+  codigo_postal: 'kod pocztowy',
+  poblacion: 'miejscowość',
+  provincia: 'prowincję',
+  pais: 'kraj',
 };
 
 // ---------------------------------------------------------------------------
@@ -363,8 +363,8 @@ const irAPasoCodigo = (email) => {
   $('btn-usar-contrasena').hidden = false;
   $('contrasena').value = '';
   $('ayuda-codigo').textContent =
-    `Te hemos escrito a ${email}. Copia aquí el código; si el ` +
-    `correo trae un enlace, pulsándolo también entras. Si no lo ves, mira en spam.`;
+    `Napisaliśmy na ${email}. Skopiuj tutaj kod; jeśli w ` +
+    `wiadomości jest link, możesz też wejść, klikając go. Jeśli jej nie widzisz, zajrzyj do spamu.`;
   mostrarPaso('paso-codigo');
   $('codigo').focus();
 };
@@ -375,7 +375,7 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Comprobando…', async () => {
+  await ocupado($('btn-correo'), 'Sprawdzanie…', async () => {
     const { error } = await pedirCodigo(correo, false);
     correoEnCurso = correo;
 
@@ -387,7 +387,7 @@ $('form-correo').addEventListener('submit', async (e) => {
         mostrarPaso('paso-alta');
         return;
       }
-      avisar('No hemos podido enviarte el código. Inténtalo de nuevo en un minuto.');
+      avisar('Nie udało się wysłać kodu. Spróbuj ponownie za minutę.');
       return;
     }
 
@@ -417,7 +417,7 @@ $('form-alta').addEventListener('submit', async (e) => {
     if (val(campo) === '') { avisar('Rellena todos los campos para crear la cuenta.'); return; }
   }
   if (!f.elements['acepto'].checked) {
-    avisar('Para crear la cuenta hay que aceptar los términos y la política de privacidad.');
+    avisar('Aby założyć konto, musisz zaakceptować warunki i politykę prywatności.');
     return;
   }
   // 8 y no 6 (auditoría 02-10-2026, SEG-31): con 6 caracteres y sin captcha,
@@ -425,11 +425,11 @@ $('form-alta').addEventListener('submit', async (e) => {
   // servidor se sube DESPUÉS, cuando también lo pidan las apps publicadas: si
   // se subiera antes, sus altas fallarían con un error genérico.
   if (val('password').length < 8) {
-    avisar('La contraseña necesita al menos 8 caracteres.');
+    avisar('Hasło musi mieć co najmniej 8 znaków.');
     return;
   }
   if (!nifValido(val('nif_cif'))) {
-    avisar('Ese NIF/CIF no es válido. Comprueba que la letra coincide con los números.');
+    avisar('Ten NIF/CIF jest nieprawidłowy. Sprawdź, czy litera pasuje do cyfr.');
     f.elements['nif_cif'].dataset.mal = 'si';
     return;
   }
@@ -437,13 +437,13 @@ $('form-alta').addEventListener('submit', async (e) => {
 
   const telefono = normalizarTelefono(val('phone'));
   if (!telefono) {
-    avisar('El teléfono no es válido. Escribe un móvil español de 9 dígitos que empiece por 6 o 7.');
+    avisar('Numer telefonu jest nieprawidłowy. Wpisz hiszpański numer komórkowy z 9 cyfr zaczynający się od 6 lub 7.');
     f.elements['phone'].dataset.mal = 'si';
     return;
   }
   delete f.elements['phone'].dataset.mal;
 
-  await ocupado($('btn-alta'), 'Creando…', async () => {
+  await ocupado($('btn-alta'), 'Tworzenie…', async () => {
     // Los mismos metadatos que manda la app: el trigger handle_new_user los
     // convierte en la fila de `profiles`. Si esta lista se queda corta, el
     // usuario acaba con un perfil a medias.
@@ -488,8 +488,8 @@ $('form-alta').addEventListener('submit', async (e) => {
       // motivo de fallo más probable aquí con diferencia, así que se nombra.
       const duplicado = /database error|duplicate|unique/i.test(error.message || '');
       avisar(duplicado
-        ? 'No hemos podido crear la cuenta. Lo más probable es que ese teléfono ya esté registrado con otro correo. Prueba con otro número o escríbenos a soporte@micarga.es.'
-        : 'No hemos podido crear la cuenta. Inténtalo de nuevo en un minuto.');
+        ? 'Nie udało się założyć konta. Najpewniej ten numer telefonu jest już zarejestrowany z innym adresem e-mail. Spróbuj innego numeru albo napisz do nas na soporte@micarga.es.'
+        : 'Nie udało się założyć konta. Spróbuj ponownie za minutę.');
       return;
     }
 
@@ -535,7 +535,7 @@ $('form-contrasena').addEventListener('submit', async (e) => {
   const password = $('contrasena').value;
   if (!password) return;
 
-  await ocupado($('btn-contrasena'), 'Entrando…', async () => {
+  await ocupado($('btn-contrasena'), 'Logowanie…', async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: correoEnCurso, password,
       // Entrar con contraseña no manda ningún correo, pero Turnstile en
@@ -544,7 +544,7 @@ $('form-contrasena').addEventListener('submit', async (e) => {
       options: { captchaToken: await vale() },
     });
     if (error) {
-      avisar('Esa contraseña no es correcta. Prueba otra vez o usa el código que te hemos enviado por correo.');
+      avisar('To hasło jest nieprawidłowe. Spróbuj jeszcze raz albo użyj kodu, który wysłaliśmy e-mailem.');
       return;
     }
     datosAlta = null;
@@ -564,16 +564,16 @@ $('form-codigo').addEventListener('submit', async (e) => {
   // real el 07-09-2026. Quien decide de verdad si el código vale es
   // verifyOtp(); esto solo evita mandar al servidor algo obviamente corto.
   if (token.length < 6 || token.length > 10) {
-    avisar('Copia el código entero, tal y como viene en el correo.');
+    avisar('Skopiuj cały kod, dokładnie tak, jak jest w wiadomości.');
     return;
   }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'Sprawdzanie…', async () => {
     const { error } = await supabase.auth.verifyOtp({
       email: correoEnCurso, token, type: 'email',
     });
     if (error) {
-      avisar('El código no es correcto o ha caducado. Pide uno nuevo.');
+      avisar('Kod jest nieprawidłowy lub wygasł. Poproś o nowy.');
       return;
     }
 
@@ -584,7 +584,7 @@ $('form-codigo').addEventListener('submit', async (e) => {
     if (datosAlta?.password) {
       const { error: errPass } = await supabase.auth.updateUser({ password: datosAlta.password });
       if (errPass) {
-        avisar('Tu cuenta está creada, pero no hemos podido guardar la contraseña. Podrás ponerla desde la app con «¿Has olvidado tu contraseña?». Seguimos con el pago.', 'info');
+        avisar('Konto zostało założone, ale nie udało się zapisać hasła. Ustawisz je w aplikacji przez „Nie pamiętasz hasła?”. Przechodzimy do płatności.', 'info');
       }
       datosAlta = null;
     }
@@ -645,9 +645,13 @@ const marcarProblemas = (problemas) => {
     if (control && !control.value.trim()) control.dataset.mal = 'si';
     if (ROTULOS[p.campo] && !(control && control.value.trim())) nombres.push(ROTULOS[p.campo]);
   }
+  // La lista se monta APARTE y no dentro de la plantilla: con las comillas de
+  // `join(', ')` dentro, el generador de idiomas no reconocía la frase y salía
+  // en castellano en los ocho (auditoría 02-10-2026, DUP-04).
+  const lista = nombres.join(', ');
   avisar(nombres.length > 0
-    ? `Para poder emitirte la factura falta ${nombres.join(', ')}.`
-    : 'Revisa los datos de facturación: hay algo que no cuadra.', 'info');
+    ? `Aby wystawić ci fakturę, brakuje: ${lista}.`
+    : 'Sprawdź dane do faktury: coś się nie zgadza.', 'info');
 };
 
 $('form-facturacion').addEventListener('submit', async (e) => {
@@ -656,7 +660,7 @@ $('form-facturacion').addEventListener('submit', async (e) => {
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    avisar('Se ha cerrado la sesión. Vuelve a entrar con tu correo.');
+    avisar('Sesja została zamknięta. Zaloguj się ponownie swoim adresem e-mail.');
     mostrarPaso('paso-correo');
     return;
   }
@@ -667,7 +671,7 @@ $('form-facturacion').addEventListener('submit', async (e) => {
     fila[campo] = (form.elements[campo].value || '').trim();
   }
   if (!nifValido(fila.nif)) {
-    avisar('Ese NIF/CIF no es válido. Comprueba que la letra coincide con los números.');
+    avisar('Ten NIF/CIF jest nieprawidłowy. Sprawdź, czy litera pasuje do cyfr.');
     form.elements['nif'].dataset.mal = 'si';
     return;
   }
@@ -678,12 +682,12 @@ $('form-facturacion').addEventListener('submit', async (e) => {
   // una cadena vacía haría creer que hay un correo de facturación puesto.
   fila.email_facturacion = emailFactura === '' ? null : emailFactura;
 
-  await ocupado($('btn-facturacion'), 'Guardando…', async () => {
+  await ocupado($('btn-facturacion'), 'Zapisywanie…', async () => {
     const { error } = await supabase
       .from('datos_facturacion')
       .upsert(fila, { onConflict: 'user_id' });
     if (error) {
-      avisar('No hemos podido guardar tus datos. Inténtalo de nuevo.');
+      avisar('Nie udało się zapisać twoich danych. Spróbuj ponownie.');
       return;
     }
     // Se vuelve a preguntar al servidor en vez de dar por bueno el guardado:
@@ -787,18 +791,18 @@ const pedirEnlaces = async () => {
     }
 
     if (status === 401) {
-      avisar('Se ha cerrado la sesión. Vuelve a entrar con tu correo.');
+      avisar('Sesja została zamknięta. Zaloguj się ponownie swoim adresem e-mail.');
       mostrarPaso('paso-correo');
       return;
     }
 
-    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es o por WhatsApp al +34 744 716 449 y lo activamos nosotros.');
+    avisar('W tej chwili nie możemy dokończyć zakupu. Napisz do nas na soporte@micarga.es lub na WhatsAppie pod +34 744 716 449, a aktywujemy to za ciebie.');
     mostrarPaso('paso-correo');
     return;
   }
 
   if (!enlaceUsable(data?.enlaceMensual) || !enlaceUsable(data?.enlaceAnual)) {
-    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es y lo activamos nosotros.');
+    avisar('W tej chwili nie możemy dokończyć zakupu. Napisz do nas na soporte@micarga.es, a aktywujemy to za ciebie.');
     mostrarPaso('paso-correo');
     return;
   }
@@ -826,7 +830,7 @@ const irAPlanesDeEmpresa = async () => {
   const { data: { session } } = await supabase.auth.getSession();
   const user = session?.user;
   if (!user) {
-    avisar('Se ha cerrado la sesión. Vuelve a entrar con tu correo.');
+    avisar('Sesja została zamknięta. Zaloguj się ponownie swoim adresem e-mail.');
     mostrarPaso('paso-correo');
     return;
   }
@@ -1029,20 +1033,20 @@ const contratar = async (periodo, boton) => {
       return;
     }
     if (status === 401) {
-      avisar('Se ha cerrado la sesión. Vuelve a entrar con tu correo.');
+      avisar('Sesja została zamknięta. Zaloguj się ponownie swoim adresem e-mail.');
       mostrarPaso('paso-correo');
       return;
     }
     // El resto —demasiadas licencias, varias empresas, precios mal
     // configurados— trae un mensaje pensado para leerse, así que se enseña
     // tal cual en vez de taparlo con uno genérico.
-    avisar(cuerpo?.error || 'Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es o por WhatsApp al +34 744 716 449 y lo activamos nosotros.');
+    avisar(cuerpo?.error || 'W tej chwili nie możemy dokończyć zakupu. Napisz do nas na soporte@micarga.es lub na WhatsAppie pod +34 744 716 449, a aktywujemy to za ciebie.');
     return;
   }
 
   if (!enlaceUsable(data?.url)) {
     boton.disabled = false;
-    avisar('Ahora mismo no podemos completar la contratación. Escríbenos a soporte@micarga.es y lo activamos nosotros.');
+    avisar('W tej chwili nie możemy dokończyć zakupu. Napisz do nas na soporte@micarga.es, a aktywujemy to za ciebie.');
     return;
   }
 

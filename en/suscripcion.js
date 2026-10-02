@@ -45,7 +45,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002a';
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // La clave publicable es pública por diseño: va ya dentro del paquete de la app
 // y del bundle de app.micarga.es. Lo que protege los datos es RLS, no ocultarla.
@@ -72,7 +72,7 @@ const ROTULOS = {
   codigo_postal: 'the postcode',
   poblacion: 'the town or city',
   provincia: 'the province',
-  pais: 'el país',
+  pais: 'the country',
 };
 
 // ---------------------------------------------------------------------------
@@ -375,7 +375,7 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Comprobando…', async () => {
+  await ocupado($('btn-correo'), 'Checking…', async () => {
     const { error } = await pedirCodigo(correo, false);
     correoEnCurso = correo;
 
@@ -443,7 +443,7 @@ $('form-alta').addEventListener('submit', async (e) => {
   }
   delete f.elements['phone'].dataset.mal;
 
-  await ocupado($('btn-alta'), 'Creando…', async () => {
+  await ocupado($('btn-alta'), 'Creating…', async () => {
     // Los mismos metadatos que manda la app: el trigger handle_new_user los
     // convierte en la fila de `profiles`. Si esta lista se queda corta, el
     // usuario acaba con un perfil a medias.
@@ -535,7 +535,7 @@ $('form-contrasena').addEventListener('submit', async (e) => {
   const password = $('contrasena').value;
   if (!password) return;
 
-  await ocupado($('btn-contrasena'), 'Entrando…', async () => {
+  await ocupado($('btn-contrasena'), 'Signing in…', async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: correoEnCurso, password,
       // Entrar con contraseña no manda ningún correo, pero Turnstile en
@@ -568,7 +568,7 @@ $('form-codigo').addEventListener('submit', async (e) => {
     return;
   }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'Checking…', async () => {
     const { error } = await supabase.auth.verifyOtp({
       email: correoEnCurso, token, type: 'email',
     });
@@ -645,8 +645,12 @@ const marcarProblemas = (problemas) => {
     if (control && !control.value.trim()) control.dataset.mal = 'si';
     if (ROTULOS[p.campo] && !(control && control.value.trim())) nombres.push(ROTULOS[p.campo]);
   }
+  // La lista se monta APARTE y no dentro de la plantilla: con las comillas de
+  // `join(', ')` dentro, el generador de idiomas no reconocía la frase y salía
+  // en castellano en los ocho (auditoría 02-10-2026, DUP-04).
+  const lista = nombres.join(', ');
   avisar(nombres.length > 0
-    ? `Para poder emitirte la factura falta ${nombres.join(', ')}.`
+    ? `To issue your invoice we still need ${lista}.`
     : 'Check the billing details: something doesn\'t add up.', 'info');
 };
 
@@ -678,7 +682,7 @@ $('form-facturacion').addEventListener('submit', async (e) => {
   // una cadena vacía haría creer que hay un correo de facturación puesto.
   fila.email_facturacion = emailFactura === '' ? null : emailFactura;
 
-  await ocupado($('btn-facturacion'), 'Guardando…', async () => {
+  await ocupado($('btn-facturacion'), 'Saving…', async () => {
     const { error } = await supabase
       .from('datos_facturacion')
       .upsert(fila, { onConflict: 'user_id' });

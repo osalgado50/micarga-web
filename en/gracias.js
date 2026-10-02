@@ -195,7 +195,7 @@ const medirLaVenta = (venceEn) => {
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session?.user) {
-    ponerCabecera('ok', 'Pago recibido');
+    ponerCabecera('ok', 'Payment received');
     mostrarPaso('paso-sin-sesion');
     return;
   }
@@ -217,6 +217,6 @@ const medirLaVenta = (venceEn) => {
 
   // Se agotó la espera. El pago está hecho: eso no se pone en duda en ningún
   // texto de este estado.
-  ponerCabecera('espera', 'Pago recibido');
+  ponerCabecera('espera', 'Payment received');
   mostrarPaso('paso-tarda');
 })();

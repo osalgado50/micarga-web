@@ -24,7 +24,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002a';
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
 // que protege los datos es RLS, no esconderla.
@@ -124,7 +124,7 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Enviando…', async () => {
+  await ocupado($('btn-correo'), 'Sending…', async () => {
     // shouldCreateUser: false — sería absurdo crear una cuenta para borrarla, y
     // peor: cualquiera podría comprobar correos ajenos creando cuentas sueltas.
     apuntarIdiomaDeVuelta();
@@ -176,7 +176,7 @@ $('form-codigo').addEventListener('submit', async (e) => {
   // suscripcion.js del 07-09-2026. Quien decide si vale es verifyOtp().
   if (token.length < 6 || token.length > 10) { avisar('Copy the whole code, exactly as it appears in the email.'); return; }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'Checking…', async () => {
     const { error } = await supabase.auth.verifyOtp({ email: correoEnCurso, token, type: 'email' });
     if (error) { avisar('That code isn\'t right or has expired. Ask for a new one, and check that the email is the one on your account.'); return; }
     $('correo-confirmado').textContent = correoEnCurso;
@@ -208,7 +208,7 @@ $('form-confirmar').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
 
-  await ocupado($('btn-borrar'), 'Borrando…', async () => {
+  await ocupado($('btn-borrar'), 'Deleting…', async () => {
     const { error } = await supabase.functions.invoke('borrar-cuenta', {
       body: { confirmacion: $('confirmacion').value },
     });

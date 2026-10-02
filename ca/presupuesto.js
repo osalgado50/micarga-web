@@ -76,7 +76,7 @@ const pedirReto = async () => {
     b.setAttribute('aria-pressed', 'false');
     // El emoji no lo lee un lector de pantalla de forma útil, así que la
     // opción se nombra por su posición, que es lo que sí se puede decir.
-    b.setAttribute('aria-label', `Opció ${i + 1}`);
+    b.setAttribute('aria-label', `Opción ${i + 1}`);
     b.addEventListener('click', () => {
       respuesta = i;
       delete caja.dataset.mal;
@@ -151,7 +151,7 @@ form.addEventListener('submit', async (e) => {
 
   const textoOriginal = boton.textContent;
   boton.disabled = true;
-  boton.textContent = 'Enviando…';
+  boton.textContent = 'Enviant…';
 
   try {
     const respuestaHttp = await fetch(FUNCION, {

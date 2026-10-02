@@ -24,7 +24,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.8';
 // Con ?v= como cualquier otro script (auditoría 02-10-2026, INV-10 y REN-13):
 // sin él, un arreglo de turnstile.js dependía SOLO de la caché corta de
 // _headers. Al cambiar turnstile.js, subir este número.
-import { montarTurnstile } from './turnstile.js?v=20261002a';
+import { montarTurnstile } from './turnstile.js?v=20261002b';
 
 // Clave publicable: es pública por diseño, va ya en el paquete de la app. Lo
 // que protege los datos es RLS, no esconderla.
@@ -111,7 +111,7 @@ const motivoDelError = async (error) => {
     const cuerpo = await error?.context?.json?.();
     if (cuerpo?.error) return cuerpo.error;
   } catch { /* nos quedamos con el genérico */ }
-  return 'No hemos podido borrar la cuenta. Escríbenos a soporte@micarga.es y lo hacemos nosotros.';
+  return 'Não conseguimos apagar a conta. Escreve-nos para soporte@micarga.es e fazemo-lo nós.';
 };
 
 let correoEnCurso = '';
@@ -124,7 +124,7 @@ $('form-correo').addEventListener('submit', async (e) => {
   const correo = $('correo').value.trim();
   if (!correo) return;
 
-  await ocupado($('btn-correo'), 'Enviando…', async () => {
+  await ocupado($('btn-correo'), 'A enviar…', async () => {
     // shouldCreateUser: false — sería absurdo crear una cuenta para borrarla, y
     // peor: cualquiera podría comprobar correos ajenos creando cuentas sueltas.
     apuntarIdiomaDeVuelta();
@@ -147,13 +147,13 @@ $('form-correo').addEventListener('submit', async (e) => {
       || /signups? not allowed|user not found/i.test(error.message || '')
     );
     if (error && !noExiste) {
-      avisar('No hemos podido enviarte el código. Inténtalo de nuevo en un minuto.');
+      avisar('Não conseguimos enviar-te o código. Tenta de novo dentro de um minuto.');
       return;
     }
     correoEnCurso = correo;
     $('ayuda-codigo').textContent =
-      `Si hay una cuenta de Mi Carga con ${correo}, te hemos escrito. Copia aquí el código; si el ` +
-      `correo trae un enlace, pulsándolo también sirve. Si no lo ves, mira en spam.`;
+      `Se houver uma conta Mi Carga com ${correo}, escrevemos-te. Copia aqui o código; se o ` +
+      `correio trouxer uma ligação, tocar nela também serve. Se não o vires, procura no spam.`;
     mostrarPaso('paso-codigo');
     $('codigo').focus();
   });
@@ -174,11 +174,11 @@ $('form-codigo').addEventListener('submit', async (e) => {
   const token = $('codigo').value.replace(/\D/g, '');
   // Supabase manda códigos de 6 a 10 dígitos (hoy 8): el mismo arreglo que
   // suscripcion.js del 07-09-2026. Quien decide si vale es verifyOtp().
-  if (token.length < 6 || token.length > 10) { avisar('Copia el código entero, tal y como viene en el correo.'); return; }
+  if (token.length < 6 || token.length > 10) { avisar('Copia o código inteiro, tal como vem no correio.'); return; }
 
-  await ocupado($('btn-codigo'), 'Comprobando…', async () => {
+  await ocupado($('btn-codigo'), 'A verificar…', async () => {
     const { error } = await supabase.auth.verifyOtp({ email: correoEnCurso, token, type: 'email' });
-    if (error) { avisar('El código no es correcto o ha caducado. Pide uno nuevo, y comprueba que el correo es el de tu cuenta.'); return; }
+    if (error) { avisar('O código não está correto ou expirou. Pede um novo e verifica se o correio é o da tua conta.'); return; }
     $('correo-confirmado').textContent = correoEnCurso;
     mostrarPaso('paso-confirmar');
     $('confirmacion').focus();
@@ -208,7 +208,7 @@ $('form-confirmar').addEventListener('submit', async (e) => {
   e.preventDefault();
   limpiarAviso();
 
-  await ocupado($('btn-borrar'), 'Borrando…', async () => {
+  await ocupado($('btn-borrar'), 'A apagar…', async () => {
     const { error } = await supabase.functions.invoke('borrar-cuenta', {
       body: { confirmacion: $('confirmacion').value },
     });

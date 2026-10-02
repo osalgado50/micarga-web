@@ -195,7 +195,7 @@ const medirLaVenta = (venceEn) => {
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session?.user) {
-    ponerCabecera('ok', 'Pago recibido');
+    ponerCabecera('ok', 'Pagamento ricevuto');
     mostrarPaso('paso-sin-sesion');
     return;
   }
@@ -207,7 +207,7 @@ const medirLaVenta = (venceEn) => {
   for (let intento = 0; intento < INTENTOS; intento++) {
     const suscripcion = await estaVigente(session.user.id);
     if (suscripcion) {
-      ponerCabecera('ok', '¡Ya eres premium!');
+      ponerCabecera('ok', 'Ora è premium!');
       mostrarPaso('paso-activa');
       medirLaVenta(suscripcion.venceEn);
       return;
@@ -217,6 +217,6 @@ const medirLaVenta = (venceEn) => {
 
   // Se agotó la espera. El pago está hecho: eso no se pone en duda en ningún
   // texto de este estado.
-  ponerCabecera('espera', 'Pago recibido');
+  ponerCabecera('espera', 'Pagamento ricevuto');
   mostrarPaso('paso-tarda');
 })();

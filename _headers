@@ -51,31 +51,39 @@
 /robots.txt
   Cache-Control: public, max-age=3600, must-revalidate
 
-# turnstile.js no lleva `?v=` en su referencia: no lo carga el HTML, lo importa
-# suscripcion.js con una ruta relativa. Aquí la caché corta es la ÚNICA red.
+# turnstile.js lo importa suscripcion.js (no el HTML), así que su `?v=` va en
+# ese import: al tocar turnstile.js hay que subirlo allí. La caché corta de
+# aquí es la otra red.
 /turnstile.js
   Cache-Control: public, max-age=60, must-revalidate
 
-# El vídeo del hero: no cambia, así que caché larga. Si algún día se sustituye,
+# contacto.js: lo cargan las páginas de contacto. Faltaba, y nacía con cuatro
+# horas de caché (auditoría 02-10-2026, INV-10).
+/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+# Los vídeos: no cambian, así que caché larga. Si algún día se sustituye uno,
 # se sube con OTRO NOMBRE de archivo, que es la única forma fiable de que un
 # fichero con un año de caché deje de servirse.
+#
+# Aquí había reglas para cuatro vídeos de «cómo funciona» que ya no existen, y
+# el que sí se usa —micarga-completo.mp4, 7 MB— no tenía ninguna (auditoría
+# 02-10-2026, INV-10 y REN-59).
 /videos/micarga-hero.mp4
   Cache-Control: public, max-age=31536000, immutable
-
-# Los cuatro vídeos de «cómo funciona». Misma regla: no cambian, caché de un
-# año, y si algún día se regraba uno se sube con OTRO NOMBRE.
-/videos/micarga-envio-completo.mp4
-  Cache-Control: public, max-age=31536000, immutable
-/videos/micarga-albaran.mp4
-  Cache-Control: public, max-age=31536000, immutable
-/videos/micarga-tareas.mp4
-  Cache-Control: public, max-age=31536000, immutable
-/videos/micarga-ruta.mp4
+/videos/micarga-completo.mp4
   Cache-Control: public, max-age=31536000, immutable
 
 # Las versiones traducidas de los scripts. Mismo motivo que los originales: caché
 # corta para que un arreglo llegue el mismo día, y rutas una a una porque
 # Cloudflare ignora los comodines sin avisar.
+#
+# 🚨 ESTE BLOQUE LO ESCRIBE `python3 herramientas/i18n.py generar`, con todos
+# los scripts que genera en todos los idiomas publicados. A mano se olvidaban:
+# solo estaban /ca/ y /en/, y los 30 de de, fr, it, pl, pt y ro nacían con
+# cuatro horas de caché (auditoría 02-10-2026, INV-10, CQX-04 y REN-13).
+# SCRIPTS-TRADUCIDOS:inicio
+# (bloque generado por herramientas/i18n.py generar: no editar a mano)
 /ca/suscripcion.js
   Cache-Control: public, max-age=60, must-revalidate
 /ca/presupuesto.js
@@ -85,6 +93,8 @@
 /ca/gracias.js
   Cache-Control: public, max-age=60, must-revalidate
 /ca/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ca/contacto.js
   Cache-Control: public, max-age=60, must-revalidate
 /en/suscripcion.js
   Cache-Control: public, max-age=60, must-revalidate
@@ -96,3 +106,78 @@
   Cache-Control: public, max-age=60, must-revalidate
 /en/turnstile.js
   Cache-Control: public, max-age=60, must-revalidate
+/en/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pt/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/fr/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/de/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/it/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/pl/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/suscripcion.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/presupuesto.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/borrar-cuenta.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/gracias.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/turnstile.js
+  Cache-Control: public, max-age=60, must-revalidate
+/ro/contacto.js
+  Cache-Control: public, max-age=60, must-revalidate
+# SCRIPTS-TRADUCIDOS:fin

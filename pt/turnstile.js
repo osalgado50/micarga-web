@@ -56,7 +56,7 @@ const cargarScript = () => {
     s.src = SCRIPT;
     s.async = true;
     s.onload = resolver;
-    s.onerror = () => rechazar(new Error('No se ha podido cargar Turnstile.'));
+    s.onerror = () => rechazar(new Error('Não foi possível carregar o Turnstile.'));
     document.head.appendChild(s);
   });
   return cargando;
@@ -100,7 +100,7 @@ export const montarTurnstile = async (contenedor) => {
     await new Promise((r) => setTimeout(r, 100));
   }
   if (typeof window.turnstile?.render !== 'function') {
-    console.warn('Turnstile no ha llegado a cargar; el formulario va sin escudo.');
+    console.warn('O Turnstile não chegou a carregar; o formulário segue sem proteção.');
     return null;
   }
 

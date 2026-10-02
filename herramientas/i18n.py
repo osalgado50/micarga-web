@@ -356,6 +356,28 @@ def cmd_comprobar():
         for t in faltan[:10]:
             print(f"    · {t[:90]}")
         fallos += len(faltan)
+    # El JavaScript, idioma a idioma. Sin esto, un idioma podía publicarse con
+    # la página traducida y los avisos de los scripts en castellano, que es
+    # justo lo que pasó con seis (auditoría 02-10-2026, DUP-04).
+    del_js = []
+    for nombre in SCRIPTS:
+        for t in cadenas_js(nombre):
+            if t not in del_js:
+                del_js.append(t)
+    for idioma in IDIOMAS_PUBLICADOS:
+        d = diccionario_js(idioma)
+        faltan = [t for t in del_js if not d.get(t)]
+        if faltan:
+            print(f"{idioma} (JavaScript): faltan {len(faltan)} de {len(del_js)}")
+            for t in faltan[:10]:
+                print(f"    · {t[:90]}")
+        fallos += len(faltan)
+        sobran = [t for t in d if t not in del_js]
+        if sobran:
+            print(f"{idioma} (JavaScript): {len(sobran)} traducciones que ya no se usan")
+            for t in sobran[:5]:
+                print(f"    · {t[:90]}")
+
     # Frases en el diccionario que ya no están en el original: sobran y hay que
     # quitarlas, o son una frase que se editó y se quedó la traducción vieja.
     juego = set(todas)
@@ -653,7 +675,10 @@ def _aviso_de_traduccion(texto: str, idioma: str) -> str:
 # error de Supabase— se queda intacto, que es justo lo que tiene que pasar: un
 # `id` traducido rompería la página en silencio.
 
-SCRIPTS = ("suscripcion.js", "presupuesto.js", "borrar-cuenta.js", "gracias.js", "turnstile.js")
+# contacto.js entra el 02-10-2026 (auditoría, DUP-04): lo cargan las páginas de
+# los nueve idiomas y sus avisos salían en castellano en todas.
+SCRIPTS = ("suscripcion.js", "presupuesto.js", "borrar-cuenta.js", "gracias.js", "turnstile.js",
+           "contacto.js")
 
 # Una cadena entre comillas simples, dobles o invertidas, sin escapes dentro.
 # Los escapes se dejan fuera a propósito: una cadena con \' o \n partida a
@@ -667,20 +692,38 @@ def diccionario_js(idioma: str) -> dict:
 
 
 def cadenas_js(nombre: str) -> list:
-    """Las cadenas candidatas de un script, sin comentarios."""
-    s = (RAIZ / nombre).read_text(encoding="utf-8")
-    s = re.sub(r"/\*.*?\*/", "", s, flags=re.S)
-    s = re.sub(r"^\s*//.*$", "", s, flags=re.M)
+    """Las cadenas de un script que lee una persona, sin comentarios.
+
+    Antes exigía 12 caracteres y alguna palabra de una lista, y se le escapaban
+    justo las cortas que más se ven —«Comprobando…», «Pago recibido», «el
+    país»—, que salían en castellano en todos los idiomas. Y no la llamaba
+    nadie, así que `comprobar` no miraba el JavaScript y seis idiomas se
+    publicaron con los scripts sin traducir (auditoría 02-10-2026, DUP-04).
+
+    Ahora cuenta como frase lo que tiene un espacio, una tilde o termina en
+    «…», y descarta lo que tiene pinta de código: paréntesis, igualdades,
+    guiones bajos (columnas, claves), rutas y direcciones. Un `${variable}`
+    suelto sí vale: es un hueco dentro de la frase.
+    """
+    crudo = (RAIZ / nombre).read_text(encoding="utf-8")
     vistas, salida = set(), []
-    for _, texto in LITERAL_JS.findall(s):
-        t = texto.strip()
-        if len(t) < 12 or t in vistas:
+    for linea, es_codigo in _lineas_de_codigo(crudo):
+        if not es_codigo:
             continue
-        # Solo lo que parece una frase para una persona.
-        if not re.search(r"[áéíóúñ¿¡]|\b(el|la|los|las|tu|te|no|se|que|con|para|sin|una|hemos)\b", t, re.I):
-            continue
-        vistas.add(t)
-        salida.append(t)
+        for _, texto in LITERAL_JS.findall(linea):
+            t = texto.strip()
+            if len(t) < 4 or t in vistas:
+                continue
+            if not re.search(r"[a-záéíóúñ]", t):
+                continue
+            if re.search(r"[()=_{}\[\]]|&&|\$\(", re.sub(r"\$\{\w+\}", "", t)):
+                continue
+            if re.match(r"(https?:|/|\.|#|\[)", t):
+                continue
+            if not (" " in t or re.search(r"[áéíóúñ¿¡]", t, re.I) or t.endswith("…")):
+                continue
+            vistas.add(t)
+            salida.append(t)
     return salida
 
 
@@ -823,7 +866,33 @@ def cmd_generar():
         listos = sum(1 for p in arts if articulo_listo(p, dicc))
         print(f"{idioma}: {escritas} páginas escritas, {len(faltan)} frases sin traducir"
               + (f", {listos}/{len(arts)} artículos del blog" if arts else ""))
+    _cabeceras_de_los_scripts()
     return faltan_por_idioma
+
+
+# Los scripts traducidos, en _headers. Cada .js que escribe este generador
+# necesita su regla de caché corta, RUTA A RUTA porque Cloudflare ignora los
+# comodines sin avisar (ver _headers). A mano se olvidaban: solo estaban /ca/ y
+# /en/, y los 30 de los otros seis idiomas nacían con cuatro horas de caché
+# (auditoría 02-10-2026, INV-10, CQX-04 y REN-13). Ahora el bloque lo escribe
+# `generar` entre dos marcas, y no se toca a mano.
+MARCA_CABECERAS = ("# SCRIPTS-TRADUCIDOS:inicio", "# SCRIPTS-TRADUCIDOS:fin")
+
+
+def _cabeceras_de_los_scripts():
+    ruta = RAIZ / "_headers"
+    s = ruta.read_text(encoding="utf-8")
+    ini, fin = MARCA_CABECERAS
+    assert ini in s and fin in s, "faltan las marcas SCRIPTS-TRADUCIDOS en _headers"
+    lineas = [ini, "# (bloque generado por herramientas/i18n.py generar: no editar a mano)"]
+    for idioma in IDIOMAS_PUBLICADOS:
+        for nombre in SCRIPTS:
+            lineas.append(f"/{idioma}/{nombre}")
+            lineas.append("  Cache-Control: public, max-age=60, must-revalidate")
+    lineas.append(fin)
+    antes, resto = s.split(ini, 1)
+    _, despues = resto.split(fin, 1)
+    ruta.write_text(antes + "\n".join(lineas) + despues, encoding="utf-8")
 
 
 # Páginas que NO van al sitemap porque llevan `noindex`: pedirle a Google que

@@ -135,7 +135,7 @@ form.addEventListener('submit', async (e) => {
   // acaban discrepando y el cliente se queda sin saber cuál le está frenando.
   const faltan = ['empresa', 'contacto', 'email', 'cuentas'].filter((c) => !datos[c]);
   if (faltan.length > 0) {
-    avisar('Rellena la empresa, tu nombre, el correo y cuántas cuentas necesitáis.');
+    avisar('Indiquez l\'entreprise, votre nom, l\'adresse e-mail et le nombre de comptes nécessaires.');
     form.elements[faltan[0]].focus();
     return;
   }
@@ -144,14 +144,14 @@ form.addEventListener('submit', async (e) => {
   // servidor conteste «esa no era»: no ha fallado, es que no ha contestado.
   if (ficha && respuesta === null) {
     $('reto').dataset.mal = 'si';
-    avisar('Falta la comprobación de abajo: toca la respuesta correcta.');
+    avisar('Il manque la vérification ci-dessous : touchez la bonne réponse.');
     $('reto').scrollIntoView({ block: 'center', behavior: 'smooth' });
     return;
   }
 
   const textoOriginal = boton.textContent;
   boton.disabled = true;
-  boton.textContent = 'Enviando…';
+  boton.textContent = 'Envoi…';
 
   try {
     const respuestaHttp = await fetch(FUNCION, {
@@ -167,7 +167,7 @@ form.addEventListener('submit', async (e) => {
       // El mensaje del servidor es más concreto que cualquiera que pueda
       // inventarse aquí («ese correo no parece válido», «faltan datos»), así
       // que se enseña el suyo si lo hay.
-      avisar(cuerpo?.error || 'No hemos podido enviar tu petición. Inténtalo de nuevo o escríbenos a soporte@micarga.es.');
+      avisar(cuerpo?.error || 'Nous n\'avons pas pu envoyer votre demande. Réessayez ou écrivez-nous à soporte@micarga.es.');
       // Una ficha caducada ya no sirve para nada: se pide un reto nuevo para
       // que el siguiente intento no vuelva a chocar con lo mismo. Si solo se
       // ha fallado, se deja el mismo reto y se marca en rojo — cambiárselo
@@ -192,7 +192,7 @@ form.addEventListener('submit', async (e) => {
     } catch { /* sin efecto si no hay analítica */ }
   } catch {
     // Sin conexión, o la función caída.
-    avisar('No hemos podido conectar. Comprueba la conexión, o escríbenos a soporte@micarga.es y te lo preparamos igual.');
+    avisar('Nous n\'avons pas pu nous connecter. Vérifiez votre connexion, ou écrivez-nous à soporte@micarga.es et nous vous le préparerons quand même.');
   } finally {
     boton.disabled = false;
     boton.textContent = textoOriginal;
