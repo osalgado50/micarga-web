@@ -157,6 +157,69 @@ const guardar = (analitica, publicidad) => {
 
 let cargado = false;
 
+// ---------------------------------------------------------------------------
+// Lo que NO puede llegar a Google desde la dirección de la página
+// ---------------------------------------------------------------------------
+//
+// 🚨 GA4 manda como `page_location` la dirección entera, y las etiquetas de Tag
+// Manager leen `location` por su cuenta. En esta web hay dos cosas que viajan
+// en la dirección y que Google no debe ver nunca (auditoría 02-10-2026, SEG-08
+// y REL-05):
+//
+//   · el CORREO del cliente: la app y el bot de WhatsApp mandan a /suscripcion
+//     con `?correo=…` (y desde ahora con `#correo=…`). Es un dato personal
+//     directo, y las condiciones de GA prohíben enviarlo;
+//   · las CREDENCIALES de Supabase: el enlace del correo de acceso aterriza en
+//     /suscripcion y /borrar-cuenta con `#access_token=…&refresh_token=…`. Con
+//     eso cualquiera entra en la cuenta.
+//
+// suscripcion.js borra el correo de la barra en cuanto lo lee, y supabase-js
+// consume y borra el fragmento con la sesión. Pero de un orden de ejecución no
+// se fía uno: aquí se comprueba igualmente. La misma guarda que la app
+// (descargo-app/src/lib/medicion.ts, `hayCredencialesEnLaUrl`).
+
+/** Parámetros que se quitan SIEMPRE de lo que se le cuenta a Google. */
+const PARAMETROS_PRIVADOS = [
+  'correo', 'email', 'access_token', 'refresh_token', 'provider_token',
+  'code', 'token', 'token_hash', 'session_id',
+];
+
+/** ¿La dirección lleva una sesión o un correo dentro? */
+const hayDatosPrivadosEnLaUrl = (href) =>
+  /[#&?](access_token|refresh_token|provider_token|code|token_hash|correo|email)=/.test(href);
+
+/**
+ * La dirección que sí se le puede dar a Google: sin fragmento (nunca lleva
+ * nada que medir y es donde viajan las sesiones) y sin los parámetros privados.
+ */
+const direccionParaMedir = () => {
+  try {
+    const u = new URL(location.href);
+    u.hash = '';
+    for (const p of PARAMETROS_PRIVADOS) u.searchParams.delete(p);
+    return u.toString();
+  } catch {
+    return `${location.origin}${location.pathname}`;
+  }
+};
+
+/**
+ * Espera a que la dirección esté limpia antes de cargar nada de Google.
+ *
+ * Lo normal es que lo esté ya, o que lo esté en unos cientos de milisegundos
+ * (lo que tarda supabase-js en consumir el enlace). Si a los diez segundos
+ * sigue sucia, en esta visita NO se mide: se pierde una página vista, que es
+ * muchísimo mejor que regalarle a Google una sesión que funciona. Las
+ * etiquetas de Tag Manager leen la dirección por su cuenta y a ellas no se les
+ * puede pasar una versión limpia.
+ */
+const cuandoLaUrlEsteLimpia = async () => {
+  for (let i = 0; i < 40 && hayDatosPrivadosEnLaUrl(location.href); i++) {
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  return !hayDatosPrivadosEnLaUrl(location.href);
+};
+
 /**
  * Carga Google Analytics. Solo se llama con un sí por delante.
  *
@@ -165,9 +228,15 @@ let cargado = false;
  * nada. La diferencia con lo que recomienda Google es CUÁNDO: aquí, después
  * del sí, nunca antes.
  */
-const cargarAnalytics = (analitica, publicidad) => {
+const cargarAnalytics = async (analitica, publicidad) => {
   if (cargado || !MEDICION || !analitica) return;
+  // Se marca ANTES de esperar: dos llamadas seguidas (arranque y panel) no
+  // deben acabar cargando dos veces.
   cargado = true;
+  if (!(await cuandoLaUrlEsteLimpia())) {
+    cargado = false;
+    return;
+  }
 
   window.dataLayer = window.dataLayer || [];
   // `arguments` a propósito, no un array: es lo que espera gtag.
@@ -189,12 +258,16 @@ const cargarAnalytics = (analitica, publicidad) => {
   gtag('js', new Date());
   // `anonymize_ip` ya no hace falta en GA4 (siempre anonimiza), pero
   // `allow_google_signals` sí: sin publicidad consentida, fuera.
-  gtag('config', MEDICION, { allow_google_signals: !!publicidad });
+  // `page_location` explícito: sin él GA4 toma `location.href` entero.
+  gtag('config', MEDICION, {
+    allow_google_signals: !!publicidad,
+    page_location: direccionParaMedir(),
+  });
 
   // Google Ads solo si ha aceptado publicidad. Un `config` de AW- ya empieza a
   // poner cookies de conversión, así que no basta con no mandar el evento
   // después: es esta línea la que no se debe ejecutar.
-  if (ANUNCIOS && publicidad) gtag('config', ANUNCIOS);
+  if (ANUNCIOS && publicidad) gtag('config', ANUNCIOS, { page_location: direccionParaMedir() });
 
   // Tag Manager, al final y con el consentimiento ya puesto en `dataLayer`.
   //
@@ -233,9 +306,65 @@ const cerrarPanel = () => {
   if (el) el.remove();
 };
 
+/**
+ * Borra las cookies de Google de este sitio.
+ *
+ * Se prueban las dos formas en que pueden estar puestas —con el dominio con
+ * punto delante, que es como las pone gtag, y sin dominio—, porque una cookie
+ * solo se borra repitiendo exactamente el dominio y la ruta con que se creó.
+ */
+const borrarCookies = (prefijos) => {
+  const nombres = document.cookie.split(';')
+    .map((c) => c.split('=')[0].trim())
+    .filter((n) => prefijos.some((p) => n === p || n.startsWith(p)));
+  const dominio = location.hostname.replace(/^www\./, '');
+  for (const n of nombres) {
+    for (const d of ['', `; domain=.${dominio}`, `; domain=${dominio}`]) {
+      document.cookie = `${n}=; Max-Age=0; path=/${d}`;
+    }
+  }
+};
+
+const COOKIES_ANALITICA = ['_ga', '_gid', '_gat'];
+const COOKIES_PUBLICIDAD = ['_gcl', '_gac'];
+
+/**
+ * Retirar el consentimiento tiene que surtir efecto YA, no en la próxima
+ * visita (auditoría 02-10-2026, SEG-32). Con GA y Tag Manager cargados en la
+ * página, guardar el «no» no los para: seguirían midiendo hasta cerrar la
+ * pestaña. Así que se le dice a Google que todo queda denegado, se borran sus
+ * cookies y se recarga la página, que es la única forma de descargar de verdad
+ * los scripts que ya están en marcha.
+ */
+const retirar = (analitica, publicidad) => {
+  try {
+    window.gtag?.('consent', 'update', {
+      analytics_storage: analitica ? 'granted' : 'denied',
+      ad_storage: publicidad ? 'granted' : 'denied',
+      ad_user_data: publicidad ? 'granted' : 'denied',
+      ad_personalization: publicidad ? 'granted' : 'denied',
+    });
+  } catch { /* sin gtag no hay nada que avisar */ }
+  if (!analitica) borrarCookies([...COOKIES_ANALITICA, ...COOKIES_PUBLICIDAD]);
+  else if (!publicidad) borrarCookies(COOKIES_PUBLICIDAD);
+  location.reload();
+};
+
 const aplicar = (analitica, publicidad) => {
+  const antes = leer();
   guardar(analitica, publicidad);
   cerrarPanel();
+  // ¿Se está quitando algo que ya estaba dado? Entonces no basta con no cargar.
+  const quitaAnalitica = !analitica && (cargado || antes?.analitica);
+  const quitaPublicidad = !publicidad && antes?.publicidad;
+  if (quitaAnalitica || quitaPublicidad) {
+    retirar(analitica, publicidad);
+    return;
+  }
+  // Las cookies que pudieran quedar de una visita anterior, aunque esta vez no
+  // se haya cargado nada: un «no» no puede dejar un `_ga` vivo.
+  if (!analitica) borrarCookies([...COOKIES_ANALITICA, ...COOKIES_PUBLICIDAD]);
+  else if (!publicidad) borrarCookies(COOKIES_PUBLICIDAD);
   cargarAnalytics(analitica, publicidad);
 };
 

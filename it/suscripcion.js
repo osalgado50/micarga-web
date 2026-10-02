@@ -872,9 +872,31 @@ if (cantidad) {
   // móvil dentro de una cabina. Solo se RELLENA, nunca se envía solo: enviarlo
   // al cargar la página dispararía un correo con un código a cualquiera que
   // abriese el enlace, incluido un buscador siguiéndolo.
+  //
+  // 🚨 Y SE BORRA DE LA BARRA EN CUANTO SE LEE (auditoría 02-10-2026, SEG-08).
+  // Con el correo en la dirección, Google Analytics lo recibía como parte de
+  // `page_location`: un dato personal directo enviado a un tercero, justo lo
+  // que prohíben sus condiciones. Esto corre antes que consentimiento.js
+  // (módulo antes que `defer`, en el orden del HTML), que además lo filtra por
+  // su cuenta.
+  //
+  // Se acepta también `#correo=…`: el fragmento no viaja al servidor ni a los
+  // registros de nadie, y es como lo mandarán la app y el bot en cuanto se
+  // publiquen sus versiones nuevas. Hasta entonces llega por los dos sitios.
   try {
-    const correoEnLaUrl = new URL(location.href).searchParams.get('correo');
+    const url = new URL(location.href);
+    const enElFragmento = /^#correo=/.test(url.hash)
+      ? decodeURIComponent(url.hash.slice('#correo='.length))
+      : null;
+    const correoEnLaUrl = enElFragmento || url.searchParams.get('correo');
     if (correoEnLaUrl) $('correo').value = correoEnLaUrl.trim();
+    if (url.searchParams.has('correo') || enElFragmento !== null) {
+      url.searchParams.delete('correo');
+      // Solo se toca un fragmento que sea el del correo: el del enlace de
+      // acceso de Supabase (`#access_token=…`) lo consume supabase-js.
+      if (enElFragmento !== null) url.hash = '';
+      history.replaceState(history.state, '', url.toString());
+    }
   } catch {
     // Dirección rara: se ignora y se pide el correo como siempre.
   }
