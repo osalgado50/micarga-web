@@ -59,6 +59,9 @@
 /gracias.js
   Cache-Control: public, max-age=60, must-revalidate
 
+/baja.js
+  Cache-Control: public, max-age=60, must-revalidate
+
 /borrar-cuenta.js
   Cache-Control: public, max-age=60, must-revalidate
 

@@ -30,6 +30,8 @@
 
   <main class="sus-page">
     <div class="sus-card">
+      <section class="sus-paso" id="r-espera" hidden><p class="sus-lead">Un momento…</p></section>
+
       <section class="sus-paso" id="r-ok" hidden>
         <h1 class="sus-title">Hecho: no te mandaremos más ofertas</h1>
         <p class="sus-lead">
@@ -65,12 +67,6 @@
     </div>
   </main>
 
-  <script>
-    (function () {
-      var r = new URLSearchParams(location.search).get('r');
-      var id = r === 'ok' || r === 'prueba' ? r : 'no';
-      document.getElementById('r-' + id).hidden = false;
-    })();
-  </script>
+  <script src="baja.js?v=20261003a"></script>
 </body>
 </html>
