@@ -1125,3 +1125,63 @@ if (cantidad) {
   }
   if (session) await pedirEnlaces();
 })();
+
+// ── EL OJO DE LAS CONTRASEÑAS ──────────────────────────────────────────────
+//
+// 🚨 Todas las casillas de contraseña de la web llevan ojo. Escribir una
+// contraseña a ciegas, en un móvil y con una mano, y descubrir el fallo cuando
+// ya no te deja entrar es de las cosas que más llamadas generan.
+//
+// Se hace desde aquí y no en el HTML a propósito: la web son NUEVE idiomas
+// generados desde el castellano, y así no hay que tocar nueve ficheros ni
+// esperar a regenerarlos. El rótulo se traduce con el `lang` de la página,
+// porque un texto inyectado por JavaScript no pasa por el diccionario.
+const VER = {
+  es: ['Ver la contraseña', 'Ocultar la contraseña'],
+  ca: ['Veure la contrasenya', 'Amagar la contrasenya'],
+  en: ['Show password', 'Hide password'],
+  pt: ['Ver a palavra-passe', 'Ocultar a palavra-passe'],
+  fr: ['Voir le mot de passe', 'Masquer le mot de passe'],
+  de: ['Passwort anzeigen', 'Passwort verbergen'],
+  it: ['Mostrare la password', 'Nascondere la password'],
+  pl: ['Pokaż hasło', 'Ukryj hasło'],
+  ro: ['Vezi parola', 'Ascunde parola'],
+};
+
+const ponerOjos = () => {
+  const [ver, ocultar] = VER[(document.documentElement.lang || 'es').slice(0, 2)] || VER.es;
+  document.querySelectorAll('input[type="password"]').forEach((campo) => {
+    if (campo.dataset.conOjo) return;            // no se pone dos veces
+    campo.dataset.conOjo = '1';
+
+    const caja = document.createElement('span');
+    caja.style.cssText = 'position:relative;display:block';
+    campo.parentNode.insertBefore(caja, campo);
+    caja.appendChild(campo);
+    campo.style.paddingRight = '44px';
+
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    // tabIndex -1: al tabular desde la contraseña se va al siguiente campo, no
+    // al ojo. Si no, se enseña la contraseña sin querer.
+    boton.tabIndex = -1;
+    boton.textContent = '👁️';
+    boton.setAttribute('aria-label', ver);
+    boton.title = ver;
+    boton.style.cssText = 'position:absolute;right:10px;top:50%;transform:translateY(-50%);'
+      + 'background:none;border:none;cursor:pointer;font-size:16px;line-height:1;padding:6px';
+    boton.addEventListener('click', () => {
+      const visible = campo.type === 'text';
+      campo.type = visible ? 'password' : 'text';
+      boton.textContent = visible ? '👁️' : '🙈';
+      boton.setAttribute('aria-label', visible ? ver : ocultar);
+      boton.title = visible ? ver : ocultar;
+    });
+    caja.appendChild(boton);
+  });
+};
+
+ponerOjos();
+// La segunda casilla vive en un bloque que aparece después, así que se vuelve a
+// pasar cuando el documento cambia.
+new MutationObserver(ponerOjos).observe(document.body, { childList: true, subtree: true });
