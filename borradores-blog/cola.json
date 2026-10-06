@@ -36,7 +36,8 @@
     "grupo": "Internacional y multimodal",
     "resumen": "Si realizas transporte internacional por carretera, necesitas controlar un documento esencial: la carta de porte CMR.",
     "fecha": "2026-10-05",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-06"
   },
   {
     "orden": 5,
