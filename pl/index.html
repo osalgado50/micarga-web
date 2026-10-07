@@ -169,7 +169,7 @@
         "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+          "text": "Mi Carga genera la carta de porte de mercancías peligrosas con número ONU, clase y grupo de embalaje, que se autocompletan para las 60 mercancías más habituales. El cálculo de puntos de la exención 1.1.3.6 no está incluido: lo hace el expedidor o su consejero de seguridad."
         }
       },
       {
@@ -577,7 +577,7 @@
         <details class="carac">
           <summary><span class="carac-icono" aria-hidden="true">☢️</span> Towary niebezpieczne (ADR)</summary>
           <ul>
-            <li><strong>Urzędowa tabela towarów niebezpiecznych</strong> wbudowana: wybierasz substancję, a numer ONZ, klasa i grupa pakowania uzupełniają się same.</li>
+            <li><strong>60 najczęściej przewożonych towarów niebezpiecznych</strong>, wbudowanych: wpisujesz numer UN, a klasa, grupa pakowania i nazwa uzupełniają się same. Pozostałe ręcznie.</li>
             <li>Dokument jest oznaczony jako <strong>TOWAR NIEBEZPIECZNY (ADR)</strong>, z klasą, numerem ONZ, grupą pakowania i nazwą techniczną.</li>
             <li>🚨 <strong>Trasa omija drogi zakazane dla towarów niebezpiecznych.</strong> To nie ta sama trasa co dla zwykłej ciężarówki: liczona jest z zastosowanymi ograniczeniami ADR.</li>
             <li>Parkingi <strong>przystosowane do ADR</strong> są oznaczone osobno na liście postojów.</li>
@@ -589,7 +589,7 @@
           <summary><span class="carac-icono" aria-hidden="true">✍️</span> Podpisy</summary>
           <ul>
             <li>Podpis na ekranie nadawcy, kierowcy i odbiorcy.</li>
-            <li><strong>Opcjonalne.</strong> Przepisy ich nie wymagają, a decyduje twoje biuro: kto ich nie chce, wystawia bez nich.</li>
+            <li><strong>Domyślnie włączone.</strong> Przepisy ich nie wymagają: jeśli twoja firma ich nie chce, biuro wyłącza je w CRM i dokument wystawia się bez nich.</li>
             <li><strong>Podpis zdalny przez link</strong>, jednorazowy i bez konta dla podpisującego. Działa przy dostawie i przy załadunku, gdy nadawcy nie ma na rampie.</li>
             <li>Podpis odbiorcy przy dostawie, z zastrzeżeniami, jeśli coś jest nie tak.</li>
           </ul>
@@ -599,7 +599,7 @@
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Działa bez zasięgu</summary>
           <ul>
             <li>Pełne wystawienie dokumentu <strong>offline</strong>.</li>
-            <li>To, co wystawisz bez zasięgu <strong>wyśle się samo</strong> gdy tylko wróci sygnał, bez trzymania aplikacji otwartej.</li>
+            <li>To, co wystawisz bez zasięgu <strong>wyśle się samo</strong> gdy tylko wróci zasięg, przy otwartej aplikacji. Do tego czasu podczas kontroli pokazujesz PDF z «Kontrola drogowa».</li>
             <li>Dokument jest ważny na drodze od chwili podpisania, jeszcze zanim się wyśle.</li>
             <li>Szkice zapisane w samym telefonie.</li>
           </ul>
@@ -619,9 +619,9 @@
         </details>
 
         <details class="carac">
-          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Dziewięć języków</summary>
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Dziesięć języków</summary>
           <ul>
-            <li>Hiszpański, kataloński, angielski, portugalski, francuski, niemiecki, włoski, polski i rumuński.</li>
+            <li>Hiszpański, kataloński, angielski, portugalski, francuski, niemiecki, włoski, polski, rumuński i bułgarski.</li>
             <li>Przetłumaczone ręcznie, nie tłumaczem maszynowym.</li>
             <li>Dokument prawny jest zawsze po hiszpańsku, bo to czyta Guardia Civil.</li>
           </ul>

@@ -169,7 +169,7 @@
         "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+          "text": "Mi Carga genera la carta de porte de mercancías peligrosas con número ONU, clase y grupo de embalaje, que se autocompletan para las 60 mercancías más habituales. El cálculo de puntos de la exención 1.1.3.6 no está incluido: lo hace el expedidor o su consejero de seguridad."
         }
       },
       {
@@ -577,7 +577,7 @@
         <details class="carac">
           <summary><span class="carac-icono" aria-hidden="true">☢️</span> Mărfuri periculoase (ADR)</summary>
           <ul>
-            <li><strong>Tabelul oficial al mărfurilor periculoase</strong> încorporat: alegi substanța, iar numărul ONU, clasa și grupa de ambalare se completează singure.</li>
+            <li><strong>Cele 60 de mărfuri periculoase cele mai obișnuite</strong>, incluse: scrii numărul ONU și clasa, grupa de ambalare și denumirea se completează singure. Restul, de mână.</li>
             <li>Documentul apare marcat drept <strong>MARFĂ PERICULOASĂ (ADR)</strong>, cu clasă, număr ONU, grupă de ambalare și denumire tehnică.</li>
             <li>🚨 <strong>Traseul evită drumurile interzise mărfurilor periculoase.</strong> Nu este același traseu ca pentru un camion obișnuit: se calculează cu restricțiile ADR aplicate.</li>
             <li>Parcările <strong>potrivite pentru ADR</strong> sunt semnalate separat în lista opririlor.</li>
@@ -589,7 +589,7 @@
           <summary><span class="carac-icono" aria-hidden="true">✍️</span> Semnăturile</summary>
           <ul>
             <li>Semnătură pe ecran a încărcătorului, a șoferului și a destinatarului.</li>
-            <li><strong>Opționale.</strong> Normele nu le cer, iar biroul tău decide: cine nu le vrea emite fără ele.</li>
+            <li><strong>Activate implicit.</strong> Normativa nu le cere: dacă firma ta nu le vrea, biroul le dezactivează din CRM și documentul se emite fără ele.</li>
             <li><strong>Semnătură la distanță prin link</strong>, de unică folosință și fără ca semnatarul să aibă cont. Este valabilă pentru livrare și pentru încărcare, când încărcătorul nu e la rampă.</li>
             <li>Semnătura destinatarului la destinație, cu rezerve dacă apare un incident.</li>
           </ul>
@@ -599,7 +599,7 @@
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Funcționează fără semnal</summary>
           <ul>
             <li>Emiterea completă a documentului <strong>offline</strong>.</li>
-            <li>Ce emiți fără semnal <strong>se încarcă singur</strong> imediat ce revine semnalul, fără să lași aplicația deschisă.</li>
+            <li>Ce emiți fără semnal <strong>se încarcă singur</strong> imediat ce revine semnalul, cu aplicația deschisă. Până atunci, la un control arăți PDF-ul din «Control rutier».</li>
             <li>Documentul este valabil pe șosea din momentul semnării, chiar înainte de a se încărca.</li>
             <li>Ciorne salvate chiar pe telefon.</li>
           </ul>
@@ -619,9 +619,9 @@
         </details>
 
         <details class="carac">
-          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nouă limbi</summary>
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Zece limbi</summary>
           <ul>
-            <li>Spaniolă, catalană, engleză, portugheză, franceză, germană, italiană, polonă și română.</li>
+            <li>Spaniolă, catalană, engleză, portugheză, franceză, germană, italiană, polonă, română și bulgară.</li>
             <li>Traduse de mână, nu cu traducător automat.</li>
             <li>Documentul legal este întotdeauna în spaniolă, pentru că asta citește Guardia Civil.</li>
           </ul>

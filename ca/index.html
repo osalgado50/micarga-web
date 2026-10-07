@@ -169,7 +169,7 @@
         "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+          "text": "Mi Carga genera la carta de porte de mercancías peligrosas con número ONU, clase y grupo de embalaje, que se autocompletan para las 60 mercancías más habituales. El cálculo de puntos de la exención 1.1.3.6 no está incluido: lo hace el expedidor o su consejero de seguridad."
         }
       },
       {
@@ -577,7 +577,7 @@
         <details class="carac">
           <summary><span class="carac-icono" aria-hidden="true">☢️</span> Mercaderies perilloses (ADR)</summary>
           <ul>
-            <li><strong>Taula oficial de mercaderies perilloses</strong> incorporada: tries la substància i s'omplen sols el número ONU, la classe i el grup d'embalatge.</li>
+            <li><strong>Les 60 mercaderies perilloses més habituals</strong>, incorporades: escrius el número ONU i s'omplen sols la classe, el grup d'embalatge i el nom. Les altres, a mà.</li>
             <li>El document surt marcat com a <strong>MERCADERIA PERILLOSA (ADR)</strong>, amb classe, número ONU, grup d'embalatge i nom tècnic.</li>
             <li>🚨 <strong>La ruta evita les carreteres prohibides per a mercaderies perilloses.</strong> No és la mateixa ruta que la d'un camió normal: es calcula amb les restriccions d'ADR aplicades.</li>
             <li>Els pàrquings <strong>aptes per a ADR</strong> van assenyalats a part a la llista de parades.</li>
@@ -589,7 +589,7 @@
           <summary><span class="carac-icono" aria-hidden="true">✍️</span> Les signatures</summary>
           <ul>
             <li>Signatura en pantalla del carregador, el conductor i el destinatari.</li>
-            <li><strong>Opcionals.</strong> La normativa no les exigeix, i ho decideix la teva oficina: qui no les vulgui, emet sense elles.</li>
+            <li><strong>Activades de sèrie.</strong> La normativa no les exigeix: si la teva empresa no les vol, l'oficina les desactiva des del CRM i s'emet sense elles.</li>
             <li><strong>Signatura a distància per enllaç</strong>, d'un sol ús i sense que el signant tingui compte. Serveix per al lliurament i també per a la càrrega, quan el carregador no és al moll.</li>
             <li>Signatura del destinatari a destinació, amb reserves si hi ha incidència.</li>
           </ul>
@@ -599,7 +599,7 @@
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Funciona sense cobertura</summary>
           <ul>
             <li>Emissió completa del document <strong>sense connexió</strong>.</li>
-            <li>El que s'emet sense senyal <strong>es puja sol</strong> en recuperar-la, sense deixar l'app oberta.</li>
+            <li>El que s'emet sense senyal <strong>es puja sol</strong> tan bon punt torna la cobertura, amb l'app oberta. Mentrestant, en un control ensenyes el PDF des de «Control de carretera».</li>
             <li>El document és vàlid a la carretera des que se signa, encara que encara no s'hagi pujat.</li>
             <li>Esborranys desats al mateix mòbil.</li>
           </ul>
@@ -619,9 +619,9 @@
         </details>
 
         <details class="carac">
-          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nou idiomes</summary>
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Deu idiomes</summary>
           <ul>
-            <li>Castellà, català, anglès, portuguès, francès, alemany, italià, polonès i romanès.</li>
+            <li>Castellà, català, anglès, portuguès, francès, alemany, italià, polonès, romanès i búlgar.</li>
             <li>Traduïts a mà, no amb un traductor automàtic.</li>
             <li>El document legal va sempre en castellà, que és el que llegeix la Guàrdia Civil.</li>
           </ul>

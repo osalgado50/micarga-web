@@ -169,7 +169,7 @@
         "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+          "text": "Mi Carga genera la carta de porte de mercancías peligrosas con número ONU, clase y grupo de embalaje, que se autocompletan para las 60 mercancías más habituales. El cálculo de puntos de la exención 1.1.3.6 no está incluido: lo hace el expedidor o su consejero de seguridad."
         }
       },
       {
@@ -577,7 +577,7 @@
         <details class="carac">
           <summary><span class="carac-icono" aria-hidden="true">☢️</span> Dangerous goods (ADR)</summary>
           <ul>
-            <li><strong>Official dangerous goods table</strong> built in: pick the substance and the UN number, class and packing group fill themselves in.</li>
+            <li><strong>The 60 most common dangerous goods</strong>, built in: type the UN number and the class, packing group and name fill in by themselves. Anything else, by hand.</li>
             <li>The document is marked as <strong>DANGEROUS GOODS (ADR)</strong>, with class, UN number, packing group and technical name.</li>
             <li>🚨 <strong>The route avoids roads where dangerous goods are banned.</strong> It is not the same route as for an ordinary lorry: it is calculated with ADR restrictions applied.</li>
             <li>Truck parks <strong>suitable for ADR</strong> are flagged separately in the list of stops.</li>
@@ -589,7 +589,7 @@
           <summary><span class="carac-icono" aria-hidden="true">✍️</span> Signatures</summary>
           <ul>
             <li>On-screen signature from the shipper, the driver and the consignee.</li>
-            <li><strong>Optional.</strong> The rules do not require them, and your office decides: whoever does not want them issues without them.</li>
+            <li><strong>On by default.</strong> The law doesn't require them: if your company doesn't want them, the office switches them off from the CRM and documents are issued without them.</li>
             <li><strong>Remote signature by link</strong>, single use and with no account needed. It works for delivery and also for loading, when the shipper is not at the dock.</li>
             <li>Consignee's signature on delivery, with reservations if something is wrong.</li>
           </ul>
@@ -599,7 +599,7 @@
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Works with no signal</summary>
           <ul>
             <li>Full issuing of the document <strong>offline</strong>.</li>
-            <li>What you issue with no signal <strong>uploads itself</strong> once signal returns, without leaving the app open.</li>
+            <li>What you issue with no signal <strong>uploads itself</strong> as soon as signal returns, with the app open. Until then, at a roadside check you show the PDF from «Roadside check».</li>
             <li>The document is valid on the road from the moment it is signed, even before it has uploaded.</li>
             <li>Drafts saved on the phone itself.</li>
           </ul>
@@ -619,9 +619,9 @@
         </details>
 
         <details class="carac">
-          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Nine languages</summary>
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Ten languages</summary>
           <ul>
-            <li>Spanish, Catalan, English, Portuguese, French, German, Italian, Polish and Romanian.</li>
+            <li>Spanish, Catalan, English, Portuguese, French, German, Italian, Polish, Romanian and Bulgarian.</li>
             <li>Translated by hand, not with machine translation.</li>
             <li>The legal document is always in Spanish, which is what the Guardia Civil reads.</li>
           </ul>

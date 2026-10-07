@@ -169,7 +169,7 @@
         "name": "¿Incluye Mi Carga el cálculo de exenciones ADR 1.1.3.6 y cartas de porte de mercancías peligrosas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Mi Carga incluye un módulo ADR integrado que calcula automáticamente los puntos conforme al apartado 1.1.3.6 del ADR a partir del número ONU, determinando si el transporte viaja en régimen de exención o requiere señalización con paneles naranja."
+          "text": "Mi Carga genera la carta de porte de mercancías peligrosas con número ONU, clase y grupo de embalaje, que se autocompletan para las 60 mercancías más habituales. El cálculo de puntos de la exención 1.1.3.6 no está incluido: lo hace el expedidor o su consejero de seguridad."
         }
       },
       {
@@ -577,7 +577,7 @@
         <details class="carac">
           <summary><span class="carac-icono" aria-hidden="true">☢️</span> Marchandises dangereuses (ADR)</summary>
           <ul>
-            <li><strong>Tableau officiel des marchandises dangereuses</strong> intégré : vous choisissez la substance et le numéro ONU, la classe et le groupe d'emballage se remplissent seuls.</li>
+            <li><strong>Les 60 marchandises dangereuses les plus courantes</strong>, intégrées : tu saisis le numéro ONU et la classe, le groupe d'emballage et le nom se remplissent tout seuls. Les autres, à la main.</li>
             <li>Le document porte la mention <strong>MARCHANDISE DANGEREUSE (ADR)</strong>, avec classe, numéro ONU, groupe d'emballage et nom technique.</li>
             <li>🚨 <strong>L'itinéraire évite les routes interdites aux marchandises dangereuses.</strong> Ce n'est pas le même itinéraire que pour un camion ordinaire : il est calculé avec les restrictions ADR appliquées.</li>
             <li>Les parkings <strong>aptes à l'ADR</strong> sont signalés à part dans la liste des arrêts.</li>
@@ -589,7 +589,7 @@
           <summary><span class="carac-icono" aria-hidden="true">✍️</span> Les signatures</summary>
           <ul>
             <li>Signature à l'écran du chargeur, du chauffeur et du destinataire.</li>
-            <li><strong>Facultatives.</strong> La réglementation ne les exige pas, et c'est votre bureau qui décide : qui n'en veut pas émet sans elles.</li>
+            <li><strong>Activées par défaut.</strong> La réglementation ne les exige pas : si ton entreprise n'en veut pas, le bureau les désactive depuis le CRM et le document est émis sans elles.</li>
             <li><strong>Signature à distance par lien</strong>, à usage unique et sans compte pour le signataire. Valable pour la livraison et aussi pour le chargement, quand le chargeur n'est pas au quai.</li>
             <li>Signature du destinataire à l'arrivée, avec réserves en cas d'incident.</li>
           </ul>
@@ -599,7 +599,7 @@
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Fonctionne sans réseau</summary>
           <ul>
             <li>Émission complète du document <strong>hors ligne</strong>.</li>
-            <li>Ce qui est émis sans réseau <strong>se téléverse tout seul</strong> dès le retour du signal, sans laisser l'application ouverte.</li>
+            <li>Ce qui est émis sans réseau <strong>se téléverse tout seul</strong> dès que le réseau revient, avec l'app ouverte. En attendant, lors d'un contrôle tu montres le PDF depuis « Contrôle routier ».</li>
             <li>Le document est valable sur la route dès qu'il est signé, même avant d'être téléversé.</li>
             <li>Brouillons enregistrés sur le téléphone lui-même.</li>
           </ul>
@@ -619,9 +619,9 @@
         </details>
 
         <details class="carac">
-          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Neuf langues</summary>
+          <summary><span class="carac-icono" aria-hidden="true">🌍</span> Dix langues</summary>
           <ul>
-            <li>Espagnol, catalan, anglais, portugais, français, allemand, italien, polonais et roumain.</li>
+            <li>Espagnol, catalan, anglais, portugais, français, allemand, italien, polonais, roumain et bulgare.</li>
             <li>Traduites à la main, pas avec un traducteur automatique.</li>
             <li>Le document légal est toujours en espagnol, puisque c'est ce que lit la Guardia Civil.</li>
           </ul>
