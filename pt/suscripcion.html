@@ -38,7 +38,7 @@
   <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
   <link rel="stylesheet" href="/suscripcion.css?v=20261002a">
   <!-- supabase-js se pide ya, en paralelo al HTML: lo necesita el script de
        la página antes de hacer nada (auditoría 02-10-2026, REN-51). -->
@@ -349,8 +349,16 @@
           ROTT nos dois planos.
         </p>
         <p class="sus-ayuda">
-          O pagamento é processado pela <strong>Stripe</strong>. A Mi Carga não vê nem guarda
-          os dados do teu cartão.
+          O pagamento é processado pela <strong>Stripe</strong>: cartão, Apple Pay, Google Pay,
+          PayPal ou Revolut Pay. A Mi Carga não vê nem guarda os teus dados de pagamento.
+          <span class="pagos-iconos" aria-label="Métodos de pagamento">
+          <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+          </span>
         </p>
       </section>
 
@@ -378,7 +386,7 @@
              consta un cliente de Stripe en la ficha. -->
         <div id="bloque-portal" hidden>
           <p class="sus-ayuda">
-            Queres mudar de plano, atualizar o cartão ou cancelar?
+            Queres mudar de plano, atualizar o método de pagamento ou cancelar?
             Fá-lo na tua área de cliente. A Stripe enviar-te-á um correio com uma
             ligação para entrares.
           </p>

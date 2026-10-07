@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css?v=20261001a">
+  <link rel="stylesheet" href="styles.css?v=20261007a">
 
   <script type="application/ld+json">
   {
@@ -644,7 +644,20 @@
           <summary><span class="carac-icono" aria-hidden="true">💳</span> Cobro y facturación</summary>
           <ul>
             <li>Se paga <strong>por conductor</strong>, con el CRM aparte.</li>
-            <li>Pago con tarjeta en la web y en Android, y compra integrada en iPhone.</li>
+            <!-- Métodos de pago: los habilitados en Stripe que admiten suscripción en euros (comprobado
+                 el 07-10-2026 con la documentación de Stripe). EPS, BLIK, iDEAL y Bancontact están
+                 habilitados pero no salen a un cliente español en una suscripción en euros; Bizum, sin
+                 confirmar que admita cobros recurrentes. Si se cambia en Stripe, cambiar aquí. -->
+            <li>Pago en la web con tarjeta, Apple Pay, Google Pay, PayPal o Revolut Pay, también desde el iPhone.
+              <span class="pagos-iconos" aria-label="Métodos de pago">
+              <img src="images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+              <img src="images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+              <img src="images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+              <img src="images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+              <img src="images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+              <img src="images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+            </span>
+            </li>
             <li>Factura con tus datos fiscales, por correo en 7 días.</li>
             <li><strong>10 portes de prueba gratis</strong>, sin tarjeta.</li>
             <li>Cambiar de plan o cancelar, tú mismo y cuando quieras.</li>
@@ -974,7 +987,7 @@
             <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Gestiona tu suscripción
             </a>
-            — cambia de plan, actualiza la tarjeta o descarga tus facturas.
+            — cambia de plan, actualiza el método de pago o descarga tus facturas.
           </p>
 
           <!-- Offer Hook Badge -->

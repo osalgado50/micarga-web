@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
 
   <script type="application/ld+json">
   {
@@ -644,7 +644,20 @@
           <summary><span class="carac-icono" aria-hidden="true">💳</span> Abrechnung und Zahlung</summary>
           <ul>
             <li>Bezahlt wird <strong>pro Fahrer</strong>, das CRM gesondert.</li>
-            <li>Kartenzahlung im Web und auf Android, In-App-Kauf auf dem iPhone.</li>
+            <!-- Métodos de pago: los habilitados en Stripe que admiten suscripción en euros (comprobado
+                 el 07-10-2026 con la documentación de Stripe). EPS, BLIK, iDEAL y Bancontact están
+                 habilitados pero no salen a un cliente español en una suscripción en euros; Bizum, sin
+                 confirmar que admita cobros recurrentes. Si se cambia en Stripe, cambiar aquí. -->
+            <li>Zahlung im Web per Karte, Apple Pay, Google Pay, PayPal oder Revolut Pay, auch vom iPhone aus.
+              <span class="pagos-iconos" aria-label="Zahlungsmethoden">
+              <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+            </span>
+            </li>
             <li>Rechnung mit Ihren Steuerdaten, per E-Mail innerhalb von 7 Tagen.</li>
             <li><strong>10 kostenlose Testaufträge</strong>, ohne Karte.</li>
             <li>Tarif wechseln oder kündigen, selbst und jederzeit.</li>
@@ -974,7 +987,7 @@
             <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Verwalten Sie Ihr Abo
             </a>
-            — Tarif wechseln, Karte aktualisieren oder Rechnungen herunterladen.
+            — Tarif wechseln, Zahlungsmethode aktualisieren oder Rechnungen herunterladen.
           </p>
 
           <!-- Offer Hook Badge -->

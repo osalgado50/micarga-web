@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
 
   <script type="application/ld+json">
   {
@@ -644,7 +644,20 @@
           <summary><span class="carac-icono" aria-hidden="true">💳</span> Encaissement et facturation</summary>
           <ul>
             <li>On paie <strong>par chauffeur</strong>, le CRM à part.</li>
-            <li>Paiement par carte sur le web et sur Android, et achat intégré sur iPhone.</li>
+            <!-- Métodos de pago: los habilitados en Stripe que admiten suscripción en euros (comprobado
+                 el 07-10-2026 con la documentación de Stripe). EPS, BLIK, iDEAL y Bancontact están
+                 habilitados pero no salen a un cliente español en una suscripción en euros; Bizum, sin
+                 confirmar que admita cobros recurrentes. Si se cambia en Stripe, cambiar aquí. -->
+            <li>Paiement sur le web par carte, Apple Pay, Google Pay, PayPal ou Revolut Pay, aussi depuis l'iPhone.
+              <span class="pagos-iconos" aria-label="Moyens de paiement">
+              <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+            </span>
+            </li>
             <li>Facture à vos coordonnées fiscales, envoyée par e-mail sous 7 jours.</li>
             <li><strong>10 transports d'essai gratuits</strong>, sans carte.</li>
             <li>Changer de formule ou résilier, vous-même et quand vous voulez.</li>
@@ -974,7 +987,7 @@
             <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Gérez votre abonnement
             </a>
-            — changez de formule, mettez à jour votre carte ou téléchargez vos factures.
+            — changez de formule, mettez à jour votre moyen de paiement ou téléchargez vos factures.
           </p>
 
           <!-- Offer Hook Badge -->

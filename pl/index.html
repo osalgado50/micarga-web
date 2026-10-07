@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
 
   <script type="application/ld+json">
   {
@@ -644,7 +644,20 @@
           <summary><span class="carac-icono" aria-hidden="true">💳</span> Rozliczenia i płatności</summary>
           <ul>
             <li>Płaci się <strong>za kierowcę</strong>, CRM osobno.</li>
-            <li>Płatność kartą w sieci i na Androidzie oraz zakup w aplikacji na iPhonie.</li>
+            <!-- Métodos de pago: los habilitados en Stripe que admiten suscripción en euros (comprobado
+                 el 07-10-2026 con la documentación de Stripe). EPS, BLIK, iDEAL y Bancontact están
+                 habilitados pero no salen a un cliente español en una suscripción en euros; Bizum, sin
+                 confirmar que admita cobros recurrentes. Si se cambia en Stripe, cambiar aquí. -->
+            <li>Płatność w sieci kartą, Apple Pay, Google Pay, PayPal lub Revolut Pay, także z iPhone'a.
+              <span class="pagos-iconos" aria-label="Metody płatności">
+              <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+            </span>
+            </li>
             <li>Faktura z Twoimi danymi podatkowymi, e-mailem w ciągu 7 dni.</li>
             <li><strong>10 darmowych zleceń próbnych</strong>, bez karty.</li>
             <li>Zmiana planu lub rezygnacja, samodzielnie i kiedy chcesz.</li>
@@ -974,7 +987,7 @@
             <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Zarządzaj swoim abonamentem
             </a>
-            — zmień plan, zaktualizuj kartę albo pobierz faktury.
+            — zmień plan, zaktualizuj metodę płatności albo pobierz faktury.
           </p>
 
           <!-- Offer Hook Badge -->

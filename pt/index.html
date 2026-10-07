@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
 
   <script type="application/ld+json">
   {
@@ -644,7 +644,20 @@
           <summary><span class="carac-icono" aria-hidden="true">💳</span> Cobrança e faturação</summary>
           <ul>
             <li>Paga-se <strong>por condutor</strong>, com o CRM à parte.</li>
-            <li>Pagamento com cartão na web e no Android, e compra integrada no iPhone.</li>
+            <!-- Métodos de pago: los habilitados en Stripe que admiten suscripción en euros (comprobado
+                 el 07-10-2026 con la documentación de Stripe). EPS, BLIK, iDEAL y Bancontact están
+                 habilitados pero no salen a un cliente español en una suscripción en euros; Bizum, sin
+                 confirmar que admita cobros recurrentes. Si se cambia en Stripe, cambiar aquí. -->
+            <li>Pagamento na web com cartão, Apple Pay, Google Pay, PayPal ou Revolut Pay, também a partir do iPhone.
+              <span class="pagos-iconos" aria-label="Métodos de pagamento">
+              <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+              <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+            </span>
+            </li>
             <li>Fatura com os teus dados fiscais, por e-mail em 7 dias.</li>
             <li><strong>10 transportes de teste grátis</strong>, sem cartão.</li>
             <li>Mudar de plano ou cancelar, você mesmo e quando quiser.</li>
@@ -974,7 +987,7 @@
             <a href="https://billing.stripe.com/p/login/aFa9AT6nqetc4L7a6teME00" target="_blank" rel="noopener" class="text-link">
               Gere a tua subscrição
             </a>
-            — muda de plano, atualiza o cartão ou descarrega as tuas faturas.
+            — muda de plano, atualiza o método de pagamento ou descarrega as tuas faturas.
           </p>
 
           <!-- Offer Hook Badge -->

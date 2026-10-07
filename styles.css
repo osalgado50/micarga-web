@@ -1728,6 +1728,24 @@ body > section:not(.hero-section) > .container > h2 {
 }
 .carac li strong { color: var(--text-heading); }
 
+/* Métodos de pago: fichas blancas con el logo de cada marca en su color */
+.pagos-iconos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.55rem;
+}
+.pagos-iconos img {
+  width: 44px;
+  height: 28px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carac > summary::after { transition: none; }
 }

@@ -38,7 +38,7 @@
   <link rel="preload" href="/vendor/fuentes/outfit-latin-836b5877.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/vendor/fuentes/tipografias.css?v=20261002a">
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
-  <link rel="stylesheet" href="/styles.css?v=20261001a">
+  <link rel="stylesheet" href="/styles.css?v=20261007a">
   <link rel="stylesheet" href="/suscripcion.css?v=20261002a">
   <!-- supabase-js se pide ya, en paralelo al HTML: lo necesita el script de
        la página antes de hacer nada (auditoría 02-10-2026, REN-51). -->
@@ -349,8 +349,16 @@
           in beiden Tarifen.
         </p>
         <p class="sus-ayuda">
-          Die Zahlung wird abgewickelt von <strong>Stripe</strong>. Mi Carga sieht und speichert
-          Ihre Kartendaten nicht.
+          Die Zahlung wird abgewickelt von <strong>Stripe</strong>: Karte, Apple Pay, Google Pay,
+          PayPal oder Revolut Pay. Mi Carga sieht und speichert Ihre Zahlungsdaten nicht.
+          <span class="pagos-iconos" aria-label="Zahlungsmethoden">
+          <img src="/images/pagos/visa.svg" alt="Visa" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/mastercard.svg" alt="Mastercard" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/applepay.svg" alt="Apple Pay" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/googlepay.svg" alt="Google Pay" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/paypal.svg" alt="PayPal" width="44" height="28" loading="lazy">
+          <img src="/images/pagos/revolut.svg" alt="Revolut Pay" width="44" height="28" loading="lazy">
+          </span>
         </p>
       </section>
 
@@ -378,9 +386,9 @@
              consta un cliente de Stripe en la ficha. -->
         <div id="bloque-portal" hidden>
           <p class="sus-ayuda">
-            Möchten Sie den Tarif wechseln, die Karte aktualisieren oder kündigen?
+            Möchten Sie den Tarif wechseln, die Zahlungsmethode aktualisieren oder kündigen?
             Das geht in Ihrem Kundenbereich. Stripe schickt Ihnen eine E-Mail mit einem
-            Link zum Anmelden.
+            Link zum Einloggen.
           </p>
           <a class="sus-btn-plano" id="btn-portal" href="#" target="_blank" rel="noopener">
             Die Zahlung meines Abos verwalten
