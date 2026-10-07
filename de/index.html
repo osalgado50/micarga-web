@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261007b">
+  <link rel="stylesheet" href="/styles.css?v=20261007c">
 
   <script type="application/ld+json">
   {
@@ -237,6 +237,14 @@
         <span class="badge">NEUE PFLICHTVORSCHRIFT 2026</span>
         <h1>Papier fährt nicht mehr mit.<br>Wechseln Sie zum <mark class="glow-text">digitalen Transport</mark>.</h1>
         <p class="hero-lead">Erstellen Sie Ihre Transportkontrolldokumente (DeCA) und Frachtbriefe direkt vom Handy. Schnell, rechtssicher und ohne Komplikationen unterwegs.</p>
+
+        <!-- SIN COBERTURA, a la vista desde el primer segundo (07-10-2026,
+             petición del propietario): es lo que más distingue a la app y no
+             salía en ninguna parte visible. Lleva a la franja de abajo. -->
+        <a href="#sin-cobertura" class="sc-pill">
+          <span class="sc-pill-icono" aria-hidden="true">📴</span>
+          <span><strong>Funktioniert ohne Netz.</strong> Ihre Lieferscheine und ihr QR-Code, immer auf dem Handy.</span>
+        </a>
       
         <!-- Offer Hook Card -->
         <div class="offer-hook-card">
@@ -318,6 +326,45 @@
           </button>
         </div>
         <p class="video-pie">13 Sekunden: So läuft eine Kontrolle mit dem DeCA auf dem Handy ab.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIN COBERTURA -------------------------------------------------------
+       Franja propia justo después de la portada (07-10-2026). Lo que se
+       promete aquí es lo que hace la app de verdad:
+         · consultar y enseñar los albaranes, su PDF y su QR sin señal: siempre;
+         · emitir y entregar sin señal: sí, y se sube solo al volver la
+           cobertura con la app abierta, PERO pensado para momentos puntuales
+           (uno o dos portes). Esa matiz es del propietario (d44d7d2): no
+           prometer más. -->
+  <section id="sin-cobertura" class="sc-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="sc-card">
+        <div class="sc-cabeza">
+          <span class="sc-icono-grande" aria-hidden="true">📴</span>
+          <div>
+            <span class="badge">FUNKTIONIERT OHNE NETZ</span>
+            <h2>Kein Netz an der Rampe oder im Hafen? <mark class="glow-text">Ihr Lieferschein ist trotzdem da.</mark></h2>
+          </div>
+        </div>
+        <div class="sc-puntos">
+          <div class="sc-punto">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <h3>Die Kontrolle trotzdem bestehen</h3>
+            <p>Zeigen Sie PDF und QR-Code des Dokuments im Vollbild unter „Straßenkontrolle“, auch ohne einen einzigen Balken Empfang.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            <h3>Alle Ihre Aufträge auf dem Handy</h3>
+            <p>Lieferscheine, Daten und Unterschriften offline ansehen. Sie werden verschlüsselt auf Ihrem eigenen Handy gespeichert.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-truck" aria-hidden="true"></i>
+            <h3>Ohne Netz ausstellen und zustellen</h3>
+            <p>An einer Rampe ohne Netz unterschreiben: Es bleibt auf dem Handy und wird bei Empfang automatisch hochgeladen, bei geöffneter App. Gedacht für Ausnahmefälle.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -595,7 +642,7 @@
           </ul>
         </details>
 
-        <details class="carac">
+        <details class="carac carac-destacada" open>
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Funktioniert ohne Empfang</summary>
           <ul>
             <li>Vollständiges Ausstellen des Dokuments <strong>offline</strong>.</li>
@@ -924,6 +971,8 @@
           <h2>Erstellen Sie so viele Dokumente, wie Sie brauchen, ohne versteckte Kosten</h2>
           <p>Ein professionelles Werkzeug zum wettbewerbsfähigsten Preis auf dem spanischen Markt. Wählen Sie das Abo, das am besten zu Ihrem Arbeitsrhythmus passt:</p>
           
+          <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Alle Tarife funktionieren ohne Netz</strong>: Lieferscheine ansehen und vorzeigen, auch ohne Empfang.</p>
+
           <!-- Pricing grid -->
           <div class="pricing-grid">
             <div class="price-card">
@@ -1314,6 +1363,7 @@
       <div class="download-card">
         <span class="badge badge-accent">SOFORT VERFÜGBAR</span>
         <h2>Installieren Sie Mi Carga noch heute</h2>
+        <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Funktioniert ohne Empfang</strong>: Ihre Lieferscheine und ihr QR-Code sind immer dabei, auch ohne Empfang.</p>
         <p>Auf Android laden Sie sie bei Google Play herunter. Die Version für iPhone und iPad ist unterwegs; in der Zwischenzeit können Sie sie auf dem iPhone im Browser nutzen.</p>
 
         <div class="store-buttons-grid">

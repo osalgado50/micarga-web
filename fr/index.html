@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261007b">
+  <link rel="stylesheet" href="/styles.css?v=20261007c">
 
   <script type="application/ld+json">
   {
@@ -237,6 +237,14 @@
         <span class="badge">NOUVELLE RÉGLEMENTATION OBLIGATOIRE 2026</span>
         <h1>Le papier ne voyage plus.<br>Passez au <mark class="glow-text">transport numérique</mark>.</h1>
         <p class="hero-lead">Générez vos documents de contrôle de transport (DeCA) et vos lettres de voiture depuis votre téléphone. Rapide, légal et sans complications sur la route.</p>
+
+        <!-- SIN COBERTURA, a la vista desde el primer segundo (07-10-2026,
+             petición del propietario): es lo que más distingue a la app y no
+             salía en ninguna parte visible. Lleva a la franja de abajo. -->
+        <a href="#sin-cobertura" class="sc-pill">
+          <span class="sc-pill-icono" aria-hidden="true">📴</span>
+          <span><strong>Fonctionne sans réseau.</strong> Vos bons de livraison et leur QR, toujours sur le téléphone.</span>
+        </a>
       
         <!-- Offer Hook Card -->
         <div class="offer-hook-card">
@@ -318,6 +326,45 @@
           </button>
         </div>
         <p class="video-pie">13 secondes : voilà comment passer un contrôle avec le DeCA sur le téléphone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIN COBERTURA -------------------------------------------------------
+       Franja propia justo después de la portada (07-10-2026). Lo que se
+       promete aquí es lo que hace la app de verdad:
+         · consultar y enseñar los albaranes, su PDF y su QR sin señal: siempre;
+         · emitir y entregar sin señal: sí, y se sube solo al volver la
+           cobertura con la app abierta, PERO pensado para momentos puntuales
+           (uno o dos portes). Esa matiz es del propietario (d44d7d2): no
+           prometer más. -->
+  <section id="sin-cobertura" class="sc-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="sc-card">
+        <div class="sc-cabeza">
+          <span class="sc-icono-grande" aria-hidden="true">📴</span>
+          <div>
+            <span class="badge">FONCTIONNE SANS RÉSEAU</span>
+            <h2>Pas de réseau au quai ou au port ? <mark class="glow-text">Votre bon est toujours là.</mark></h2>
+          </div>
+        </div>
+        <div class="sc-puntos">
+          <div class="sc-punto">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <h3>Passez le contrôle quand même</h3>
+            <p>Montrez le PDF et le QR du document en plein écran depuis « Contrôle routier », même sans aucune barre de réseau.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            <h3>Tous vos transports, sur le téléphone</h3>
+            <p>Consultez vos bons, leurs données et leurs signatures hors connexion. Ils sont stockés chiffrés sur votre propre téléphone.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-truck" aria-hidden="true"></i>
+            <h3>Émettez et livrez sans réseau</h3>
+            <p>Signez sur un quai sans réseau : c'est gardé sur le téléphone et envoyé tout seul au retour de la couverture, l'app ouverte. Prévu pour des moments ponctuels.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -595,7 +642,7 @@
           </ul>
         </details>
 
-        <details class="carac">
+        <details class="carac carac-destacada" open>
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Fonctionne sans réseau</summary>
           <ul>
             <li>Émission complète du document <strong>hors ligne</strong>.</li>
@@ -924,6 +971,8 @@
           <h2>Générez autant de documents que nécessaire, sans frais cachés</h2>
           <p>Un outil professionnel au prix le plus compétitif du marché en Espagne. Choisissez l'abonnement qui correspond le mieux à votre rythme de travail :</p>
           
+          <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Toutes les formules fonctionnent sans réseau</strong> : consultez et montrez vos bons même sans réseau.</p>
+
           <!-- Pricing grid -->
           <div class="pricing-grid">
             <div class="price-card">
@@ -1314,6 +1363,7 @@
       <div class="download-card">
         <span class="badge badge-accent">DISPONIBILITÉ IMMÉDIATE</span>
         <h2>Installez Mi Carga dès aujourd'hui</h2>
+        <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Fonctionne sans réseau</strong> : vos bons et leur QR vous suivent toujours, même sans réseau.</p>
         <p>Sur Android, téléchargez-la depuis Google Play. La version pour iPhone et iPad arrive bientôt ; en attendant, depuis un iPhone vous pouvez l'utiliser dans le navigateur.</p>
 
         <div class="store-buttons-grid">

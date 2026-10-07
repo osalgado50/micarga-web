@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261007b">
+  <link rel="stylesheet" href="/styles.css?v=20261007c">
 
   <script type="application/ld+json">
   {
@@ -237,6 +237,14 @@
         <span class="badge">NOUĂ REGLEMENTARE OBLIGATORIE 2026</span>
         <h1>Hârtia nu mai călătorește.<br>Treceți la <mark class="glow-text">transportul digital</mark>.</h1>
         <p class="hero-lead">Generați documentele de control al transportului (DeCA) și scrisorile de trăsură direct de pe telefon. Rapid, legal și fără complicații pe drum.</p>
+
+        <!-- SIN COBERTURA, a la vista desde el primer segundo (07-10-2026,
+             petición del propietario): es lo que más distingue a la app y no
+             salía en ninguna parte visible. Lleva a la franja de abajo. -->
+        <a href="#sin-cobertura" class="sc-pill">
+          <span class="sc-pill-icono" aria-hidden="true">📴</span>
+          <span><strong>Funcționează fără semnal.</strong> Avizele tale și codul lor QR, mereu pe telefon.</span>
+        </a>
       
         <!-- Offer Hook Card -->
         <div class="offer-hook-card">
@@ -318,6 +326,45 @@
           </button>
         </div>
         <p class="video-pie">13 secunde: așa treceți un control cu DeCA pe telefon.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIN COBERTURA -------------------------------------------------------
+       Franja propia justo después de la portada (07-10-2026). Lo que se
+       promete aquí es lo que hace la app de verdad:
+         · consultar y enseñar los albaranes, su PDF y su QR sin señal: siempre;
+         · emitir y entregar sin señal: sí, y se sube solo al volver la
+           cobertura con la app abierta, PERO pensado para momentos puntuales
+           (uno o dos portes). Esa matiz es del propietario (d44d7d2): no
+           prometer más. -->
+  <section id="sin-cobertura" class="sc-section scroll-padding">
+    <div class="container reveal-on-scroll">
+      <div class="sc-card">
+        <div class="sc-cabeza">
+          <span class="sc-icono-grande" aria-hidden="true">📴</span>
+          <div>
+            <span class="badge">FUNCȚIONEAZĂ FĂRĂ SEMNAL</span>
+            <h2>Fără semnal la rampă sau în port? <mark class="glow-text">Avizul tău e tot acolo.</mark></h2>
+          </div>
+        </div>
+        <div class="sc-puntos">
+          <div class="sc-punto">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <h3>Treci controlul oricum</h3>
+            <p>Arată PDF-ul și codul QR al documentului pe tot ecranul din „Control rutier”, chiar și fără nicio liniuță de semnal.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            <h3>Toate transporturile tale, pe telefon</h3>
+            <p>Consultă avizele, datele și semnăturile lor fără conexiune. Sunt salvate criptat pe propriul telefon.</p>
+          </div>
+          <div class="sc-punto">
+            <i class="fa-solid fa-truck" aria-hidden="true"></i>
+            <h3>Emite și livrează fără rețea</h3>
+            <p>Semnează la o rampă fără semnal: rămâne pe telefon și se încarcă singur când revine acoperirea, cu aplicația deschisă. Gândit pentru momente punctuale.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -595,7 +642,7 @@
           </ul>
         </details>
 
-        <details class="carac">
+        <details class="carac carac-destacada" open>
           <summary><span class="carac-icono" aria-hidden="true">📴</span> Funcționează fără semnal</summary>
           <ul>
             <li>Emiterea completă a documentului <strong>offline</strong>.</li>
@@ -924,6 +971,8 @@
           <h2>Generați câte documente aveți nevoie, fără costuri ascunse</h2>
           <p>Un instrument profesional la cel mai competitiv preț de pe piața din Spania. Alegeți abonamentul care se potrivește cel mai bine ritmului dumneavoastră de lucru:</p>
           
+          <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Toate planurile funcționează fără semnal</strong>: consultă și arată-ți avizele chiar și fără semnal.</p>
+
           <!-- Pricing grid -->
           <div class="pricing-grid">
             <div class="price-card">
@@ -1314,6 +1363,7 @@
       <div class="download-card">
         <span class="badge badge-accent">DISPONIBILITATE IMEDIATĂ</span>
         <h2>Instalați Mi Carga chiar azi</h2>
+        <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Funcționează fără semnal</strong>: avizele tale și codul lor QR te însoțesc mereu, chiar și fără semnal.</p>
         <p>Pe Android, descărcați-o din Google Play. Versiunea pentru iPhone și iPad este pe drum; între timp, de pe iPhone o puteți folosi în browser.</p>
 
         <div class="store-buttons-grid">
