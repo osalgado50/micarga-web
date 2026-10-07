@@ -396,7 +396,7 @@ body > section:not(.hero-section) > .container > h2 {
   height: 100%;
   object-fit: cover;
   transform: scale(1.05);
-  opacity: 0.25;
+  opacity: 0.14; /* el camión rotulado es más vivo que el anterior: a 0.25 se comía el texto */
 }
 
 .hero-overlay {
