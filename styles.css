@@ -1076,11 +1076,13 @@ body > section:not(.hero-section) > .container > h2 {
 .footer-empresa a:hover { color: var(--primary); }
 .footer-bottom .footer-empresa + p:not(.footer-empresa) { margin-top: 0.9rem; }
 
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button
+   A la IZQUIERDA (09-10-2026), igual que el «volver arriba»: el lado derecho
+   es para el botón de CargIA, el asistente (asistente.js). */
 .whatsapp-floating {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  left: 30px;
   width: 60px;
   height: 60px;
   background: #25d366;
@@ -1104,7 +1106,7 @@ body > section:not(.hero-section) > .container > h2 {
 
 .whatsapp-floating-tooltip {
   position: absolute;
-  right: 75px;
+  left: 75px;
   background: #111827;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1114,7 +1116,7 @@ body > section:not(.hero-section) > .container > h2 {
   font-weight: 600;
   white-space: nowrap;
   opacity: 0;
-  transform: translateX(10px);
+  transform: translateX(-10px);
   pointer-events: none;
   transition: all 0.3s ease;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -1263,7 +1265,7 @@ body > section:not(.hero-section) > .container > h2 {
 .back-to-top {
   position: fixed;
   bottom: 105px;
-  right: 30px;
+  left: 30px;
   width: 60px;
   height: 60px;
   background: rgba(17, 24, 39, 0.85);
@@ -1306,7 +1308,7 @@ body > section:not(.hero-section) > .container > h2 {
 @media (max-width: 768px) {
   .back-to-top {
     bottom: 95px;
-    right: 20px;
+    left: 20px;
     width: 50px;
     height: 50px;
     font-size: 1.1rem;

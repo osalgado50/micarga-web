@@ -50,8 +50,8 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000
   X-Frame-Options: SAMEORIGIN
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-ixkPO9wtb3AZUEfxe19/n9i+ZgIeeEQ0LV5Ul/Expn0=' 'sha256-f/+SVuPppV4Itet0xitv9d9rNXp1LRlJI2fguU11/H4=' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://www.google.es; font-src 'self'; connect-src 'self' https://yrwletmszkfvnpbkngek.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com; frame-src https://challenges.cloudflare.com https://www.googletagmanager.com https://td.doubleclick.net; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+  Permissions-Policy: camera=(), microphone=(self "https://asistente.micarga.es"), geolocation=(), payment=(), usb=()
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'sha256-ixkPO9wtb3AZUEfxe19/n9i+ZgIeeEQ0LV5Ul/Expn0=' 'sha256-f/+SVuPppV4Itet0xitv9d9rNXp1LRlJI2fguU11/H4=' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://www.google.es; font-src 'self'; connect-src 'self' https://yrwletmszkfvnpbkngek.supabase.co https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com; frame-src https://challenges.cloudflare.com https://asistente.micarga.es https://www.googletagmanager.com https://td.doubleclick.net; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
 
 /suscripcion.js
   Cache-Control: public, max-age=60, must-revalidate
@@ -78,6 +78,13 @@
   Cache-Control: public, max-age=60, must-revalidate
 
 /consentimiento.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+# asistente.js: el botón de CargIA (el asistente IA) y su ventana. El chat va
+# en un iframe de asistente.micarga.es: por eso el frame-src de la CSP y el
+# microphone=(self "https://asistente.micarga.es") de Permissions-Policy, que
+# deja dictar la pregunta dentro del iframe (y en ningún otro).
+/asistente.js
   Cache-Control: public, max-age=60, must-revalidate
 
 /robots.txt
