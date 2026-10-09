@@ -46,7 +46,8 @@
     "grupo": "Internacional y multimodal",
     "resumen": "El transporte multimodal combina varios medios de transporte para llevar una mercancía desde el origen hasta el destino: carretera, ferrocarril,…",
     "fecha": "2026-10-09",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-09"
   },
   {
     "orden": 6,
