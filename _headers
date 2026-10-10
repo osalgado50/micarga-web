@@ -262,3 +262,11 @@
 /ro/contacto.js
   Cache-Control: public, max-age=60, must-revalidate
 # SCRIPTS-TRADUCIDOS:fin
+
+# Service worker «de baja» (sw.js y service-worker.js): sin caché, para que el
+# navegador que aún tiene el de la app vieja lo cambie por este en cuanto mire.
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/service-worker.js
+  Cache-Control: no-cache, no-store, must-revalidate
