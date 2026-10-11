@@ -561,7 +561,7 @@ def _enlaces_con_idioma(texto: str, idioma: str) -> str:
     def arreglar(m):
         resto = m.group(1)
         primero = resto.split("#")[0].split("?")[0]
-        if primero.startswith(("images/", "videos/", "vendor/")) or EXTENSIONES.search(primero):
+        if primero.startswith(("images/", "videos/", "vendor/", "crm/")) or EXTENSIONES.search(primero):
             return m.group(0)
         return f'href="/{idioma}/{resto}"'
     return ENLACES_RAIZ.sub(arreglar, texto)
@@ -923,7 +923,9 @@ def _cabeceras_de_los_scripts():
 # Páginas que NO van al sitemap porque llevan `noindex`: pedirle a Google que
 # las rastree y a la vez decirle que no las indexe es darle instrucciones
 # contradictorias, y de esos avisos se queja en Search Console.
-FUERA_DEL_SITEMAP = {"gracias.html", "404.html"}
+# Auditoría 11-10-2026: las páginas legales llevan noindex y el sitemap las
+# anunciaba (avisos en Search Console). /suscripcion queda pendiente de decidir.
+FUERA_DEL_SITEMAP = {"gracias.html", "404.html", "aviso-legal.html", "privacidad.html", "terminos.html", "cookies.html"}
 
 # Cuánto vale cada página para quien busca. La portada lo primero; el blog es
 # lo que trae visitas nuevas; los textos legales están porque tienen que estar.
