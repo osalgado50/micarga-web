@@ -733,6 +733,18 @@ const prepararYaSuscrito = async ({ ofrecerEmpresa = false } = {}) => {
         .eq('id', user.id)
         .maybeSingle();
       clienteStripe = data?.stripe_customer_id ?? null;
+      // Una empresa que paga (p. ej. solo el CRM) tiene el cliente de Stripe en
+      // la EMPRESA, no en el perfil de quien pagó (11-10-2026). Solo para quien
+      // la creó: un conductor de esa flota no gestiona el pago de su empresa.
+      if (!clienteStripe) {
+        const { data: orgs } = await supabase
+          .from('organizaciones')
+          .select('stripe_customer_id')
+          .eq('creada_por', user.id)
+          .not('stripe_customer_id', 'is', null)
+          .limit(1);
+        clienteStripe = orgs?.[0]?.stripe_customer_id ?? null;
+      }
     }
   } catch {
     clienteStripe = null;
