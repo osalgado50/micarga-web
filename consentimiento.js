@@ -476,3 +476,20 @@ if (document.readyState === 'loading') {
     localStorage.setItem(HECHO, '1');
   } catch { /* almacenamiento bloqueado: no hay nada que limpiar */ }
 })();
+
+// Conversión «Llamada» de Google Ads: un toque en cualquier enlace `tel:` de
+// la web (el 930 485 133 está en las 264 páginas). Antes no se enviaba nada y
+// Ads la marcaba como «configuración errónea» (12-10-2026). Mismo permiso que
+// la de alta: solo con la publicidad aceptada (`micargaPuedeMedirAnuncios`).
+// El evento sale con `transport_type: beacon` para que llegue aunque el móvil
+// salte enseguida a la app del teléfono.
+const CONVERSION_LLAMADA = 'AW-18461463262/nPQICKrUmYkdEN6ljuNE';
+document.addEventListener('click', (ev) => {
+  const a = ev.target instanceof Element ? ev.target.closest('a[href^="tel:"]') : null;
+  if (!a) return;
+  try {
+    if (window.micargaPuedeMedirAnuncios && window.micargaPuedeMedirAnuncios()) {
+      window.gtag('event', 'conversion', { send_to: CONVERSION_LLAMADA, transport_type: 'beacon' });
+    }
+  } catch { /* sin medición no se rompe la llamada */ }
+}, { capture: true });
