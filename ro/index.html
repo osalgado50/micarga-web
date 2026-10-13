@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261007c">
+  <link rel="stylesheet" href="/styles.css?v=20261013a">
 
   <script type="application/ld+json">
   {
@@ -288,10 +288,7 @@
           <span>Disponibil pe:</span>
           <div class="badges-row">
             <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
-            <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
-                 al bloque de descarga, lleva a un botón que tampoco se puede
-                 pulsar, y eso es peor que no ofrecerlo. -->
-            <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · în curând</span>
+            <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-apple"></i> iPhone</a>
           </div>
         </div>
       </div>
@@ -1364,7 +1361,7 @@
         <span class="badge badge-accent">DISPONIBILITATE IMEDIATĂ</span>
         <h2>Instalați Mi Carga chiar azi</h2>
         <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Funcționează fără semnal</strong>: avizele tale și codul lor QR te însoțesc mereu, chiar și fără semnal.</p>
-        <p>Pe Android, descărcați-o din Google Play. Versiunea pentru iPhone și iPad este pe drum; între timp, de pe iPhone o puteți folosi în browser.</p>
+        <p>Descarc-o gratuit din Google Play pentru Android sau din App Store pentru iPhone și iPad.</p>
 
         <div class="store-buttons-grid">
           <!-- Android: YA HAY FICHA EN GOOGLE PLAY (publicada el 27-08-2026).
@@ -1380,60 +1377,21 @@
             </div>
           </a>
 
-          <!-- iPhone / iPad: EN PRÓXIMAMENTE desde el 07-09-2026, por decisión
-               del propietario. Apple rechazó la 1.3 (guidelines 3.1.1 y 3.1.3(c),
-               compra integrada obligatoria) y el trabajo para resolverlo está
-               aparcado, así que anunciar una instalación en iPhone sería
-               prometer algo que no se puede cumplir.
-
-               NO es un enlace: un botón que parece pulsable y no lleva a ningún
-               sitio molesta más que un rótulo honesto. El iPhone no se queda sin
-               salida — abajo sigue estando la app en el navegador, que funciona.
-
-               Para reactivarlo: volver a poner un <a> con la ficha de la App
-               Store (apps.apple.com/es/app/id6795932951) y el rótulo
-               «DESCARGAR EN / App Store». -->
-          <div class="store-btn store-btn-pronto" aria-disabled="true">
+          <!-- iPhone / iPad: EN LA APP STORE desde el 13-10-2026 (versión 1.4.0,
+               cuenta de RESITECH 2021 S.L.). Antes era un rótulo de «próximamente». -->
+          <a href="https://apps.apple.com/es/app/mi-carga-deca-digital/id6821010017" target="_blank" rel="noopener" class="store-btn">
             <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="store-text">
-              <span>ÎN CURÂND PE</span>
-              <strong>iPhone / iPad</strong>
+              <span>DESCĂRCAȚI DIN</span>
+              <strong>App Store</strong>
             </div>
-          </div>
-        </div>
-
-        <!-- LA SALIDA DEL IPHONE, 01-10-2026.
-             Antes esto era una línea de texto gris debajo de los botones, y se
-             leía como una nota al pie: el usuario de iPhone veía «PRÓXIMAMENTE»
-             y se iba. Pero la app EN EL NAVEGADOR no es un sucedáneo —es el
-             mismo programa, con firma, QR y funcionamiento sin cobertura—, así
-             que merece el mismo peso visual que los botones de las tiendas.
-
-             ⚠️ Lo que de verdad convierte es el paso de «Añadir a pantalla de
-             inicio»: con eso queda un icono en el móvil y se abre a pantalla
-             completa, sin barra del navegador. Sin contar ese paso, la gente
-             entiende «una web» y no «una app», que es justo lo que no es. -->
-        <div class="iphone-ya">
-          <span class="iphone-ya-etiqueta">Ai un iPhone?</span>
-          <h3>Folosește-o acum, fără să aștepți App Store</h3>
-          <!-- ⚠️ CADA FRASE, ENTERA Y SIN ETIQUETAS DENTRO. El extractor de
-               traducciones parte por cada <strong>, y «Ábrela en» + «Safari» +
-               «con el botón de arriba» no se recompone en alemán ni en polaco,
-               donde el orden de la frase es otro. En los pasos de abajo el
-               <strong> envuelve un rótulo suelto —el nombre del botón— y el
-               resto va aparte: así cada idioma los coloca como le toca. -->
-          <p>Este aceeași aplicație, completă: emitere, semnare, codul QR pentru control și lucrul fără semnal.</p>
-          <p class="iphone-ya-clave"><strong>Se instalează pe ecranul principal ca orice altă aplicație.</strong></p>
-          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large iphone-ya-boton">
-            <i class="fa-solid fa-mobile-screen-button"></i> Deschide Mi Carga pe iPhone-ul meu
           </a>
-          <ol class="iphone-ya-pasos">
-            <li><strong>Safari</strong> — deschide-o cu butonul de mai sus.</li>
-            <li><strong>Partajează</strong> — pătrățelul cu săgeata, jos de tot.</li>
-            <li><strong>Adaugă la ecranul principal</strong> — alege-l din listă.</li>
-          </ol>
-          <p class="iphone-ya-nota">Îți rămâne pictograma Mi Carga pe telefon și se deschide pe tot ecranul. Când aplicația ajunge în App Store, transporturile și contul tău rămân unde sunt.</p>
         </div>
+
+        <!-- Desde el 13-10-2026 hay app en las dos tiendas: el bloque grande
+             «¿Tienes un iPhone? Úsala ya en el navegador» ya no hace falta. Se
+             deja una línea para quien no quiera instalar nada. -->
+        <p class="descarga-navegador">Preferi să nu instalezi nimic? Funcționează și în browser: <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener">app.micarga.es</a></p>
       </div>
     </div>
   </section>

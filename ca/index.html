@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/vendor/fontawesome/iconos.css?v=20261002b">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="/styles.css?v=20261007c">
+  <link rel="stylesheet" href="/styles.css?v=20261013a">
 
   <script type="application/ld+json">
   {
@@ -288,10 +288,7 @@
           <span>Disponible a:</span>
           <div class="badges-row">
             <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-google-play"></i> Android</a>
-            <!-- iPhone no es un enlace mientras esté en «próximamente»: si lleva
-                 al bloque de descarga, lleva a un botón que tampoco se puede
-                 pulsar, y eso es peor que no ofrecerlo. -->
-            <span class="store-badge-mini store-badge-pronto"><i class="fa-brands fa-apple"></i> iPhone · properament</span>
+            <a href="#descarga" class="store-badge-mini"><i class="fa-brands fa-apple"></i> iPhone</a>
           </div>
         </div>
       </div>
@@ -1364,7 +1361,7 @@
         <span class="badge badge-accent">DISPONIBILITAT IMMEDIATA</span>
         <h2>Instal·la Mi Carga avui mateix</h2>
         <p class="sc-recordatorio"><span aria-hidden="true">📴</span> <strong>Funciona sense cobertura</strong>: els teus albarans i el seu QR van sempre amb tu, encara que no hi hagi senyal.</p>
-        <p>A Android, descarrega-la des de Google Play. La versió per a iPhone i iPad està en camí; mentrestant, des d'un iPhone la pots fer servir al navegador.</p>
+        <p>Descarrega-la gratis a Google Play per a Android o a l'App Store per a iPhone i iPad.</p>
 
         <div class="store-buttons-grid">
           <!-- Android: YA HAY FICHA EN GOOGLE PLAY (publicada el 27-08-2026).
@@ -1380,60 +1377,21 @@
             </div>
           </a>
 
-          <!-- iPhone / iPad: EN PRÓXIMAMENTE desde el 07-09-2026, por decisión
-               del propietario. Apple rechazó la 1.3 (guidelines 3.1.1 y 3.1.3(c),
-               compra integrada obligatoria) y el trabajo para resolverlo está
-               aparcado, así que anunciar una instalación en iPhone sería
-               prometer algo que no se puede cumplir.
-
-               NO es un enlace: un botón que parece pulsable y no lleva a ningún
-               sitio molesta más que un rótulo honesto. El iPhone no se queda sin
-               salida — abajo sigue estando la app en el navegador, que funciona.
-
-               Para reactivarlo: volver a poner un <a> con la ficha de la App
-               Store (apps.apple.com/es/app/id6795932951) y el rótulo
-               «DESCARGAR EN / App Store». -->
-          <div class="store-btn store-btn-pronto" aria-disabled="true">
+          <!-- iPhone / iPad: EN LA APP STORE desde el 13-10-2026 (versión 1.4.0,
+               cuenta de RESITECH 2021 S.L.). Antes era un rótulo de «próximamente». -->
+          <a href="https://apps.apple.com/es/app/mi-carga-deca-digital/id6821010017" target="_blank" rel="noopener" class="store-btn">
             <div class="store-icon"><i class="fa-brands fa-apple"></i></div>
             <div class="store-text">
-              <span>PROPERAMENT A</span>
-              <strong>iPhone / iPad</strong>
+              <span>DESCARREGAR A</span>
+              <strong>App Store</strong>
             </div>
-          </div>
-        </div>
-
-        <!-- LA SALIDA DEL IPHONE, 01-10-2026.
-             Antes esto era una línea de texto gris debajo de los botones, y se
-             leía como una nota al pie: el usuario de iPhone veía «PRÓXIMAMENTE»
-             y se iba. Pero la app EN EL NAVEGADOR no es un sucedáneo —es el
-             mismo programa, con firma, QR y funcionamiento sin cobertura—, así
-             que merece el mismo peso visual que los botones de las tiendas.
-
-             ⚠️ Lo que de verdad convierte es el paso de «Añadir a pantalla de
-             inicio»: con eso queda un icono en el móvil y se abre a pantalla
-             completa, sin barra del navegador. Sin contar ese paso, la gente
-             entiende «una web» y no «una app», que es justo lo que no es. -->
-        <div class="iphone-ya">
-          <span class="iphone-ya-etiqueta">Tens un iPhone?</span>
-          <h3>Fes-la servir ja, sense esperar l'App Store</h3>
-          <!-- ⚠️ CADA FRASE, ENTERA Y SIN ETIQUETAS DENTRO. El extractor de
-               traducciones parte por cada <strong>, y «Ábrela en» + «Safari» +
-               «con el botón de arriba» no se recompone en alemán ni en polaco,
-               donde el orden de la frase es otro. En los pasos de abajo el
-               <strong> envuelve un rótulo suelto —el nombre del botón— y el
-               resto va aparte: así cada idioma los coloca como le toca. -->
-          <p>És la mateixa aplicació, completa: emetre, signar, el QR per a la Guàrdia Civil i la feina sense cobertura.</p>
-          <p class="iphone-ya-clave"><strong>S'instal·la a la pantalla d'inici com una app més.</strong></p>
-          <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener" class="btn btn-primary btn-large iphone-ya-boton">
-            <i class="fa-solid fa-mobile-screen-button"></i> Obrir Mi Carga al meu iPhone
           </a>
-          <ol class="iphone-ya-pasos">
-            <li><strong>Safari</strong> — obre-la amb el botó d'aquí dalt.</li>
-            <li><strong>Compartir</strong> — el quadradet amb la fletxa, a baix de tot.</li>
-            <li><strong>Afegir a la pantalla d'inici</strong> — tria-ho a la llista.</li>
-          </ol>
-          <p class="iphone-ya-nota">Et queda la icona de Mi Carga al mòbil i s'obre a pantalla completa. Quan l'app sigui a l'App Store, els teus ports i el teu compte segueixen on són.</p>
         </div>
+
+        <!-- Desde el 13-10-2026 hay app en las dos tiendas: el bloque grande
+             «¿Tienes un iPhone? Úsala ya en el navegador» ya no hace falta. Se
+             deja una línea para quien no quiera instalar nada. -->
+        <p class="descarga-navegador">Prefereixes no instal·lar res? També funciona al navegador: <a href="https://app.micarga.es/?registro" target="_blank" rel="noopener">app.micarga.es</a></p>
       </div>
     </div>
   </section>
