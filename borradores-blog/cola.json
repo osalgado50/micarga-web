@@ -56,7 +56,8 @@
     "grupo": "Internacional y multimodal",
     "resumen": "El transporte marítimo de mercancías mueve grandes volúmenes entre continentes, pero también exige precisión documental. Un error en el bill of lading,…",
     "fecha": "2026-10-13",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-13"
   },
   {
     "orden": 7,
