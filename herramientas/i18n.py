@@ -561,7 +561,10 @@ def _enlaces_con_idioma(texto: str, idioma: str) -> str:
     def arreglar(m):
         resto = m.group(1)
         primero = resto.split("#")[0].split("?")[0]
-        if primero.startswith(("images/", "videos/", "vendor/")) or EXTENSIONES.search(primero):
+        # crm/ es el recorrido por el CRM: existe solo en la raíz (no está en
+        # PAGINAS). Con el idioma delante, «Ver el CRM por dentro» daba 404 en
+        # los ocho idiomas desde el 28-09-2026 (auditoría 04-10-2026).
+        if primero.startswith(("images/", "videos/", "vendor/", "crm/")) or EXTENSIONES.search(primero):
             return m.group(0)
         return f'href="/{idioma}/{resto}"'
     return ENLACES_RAIZ.sub(arreglar, texto)
