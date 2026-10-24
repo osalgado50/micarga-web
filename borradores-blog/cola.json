@@ -76,7 +76,8 @@
     "grupo": "El transporte que viene",
     "resumen": "El futuro del transporte terrestre de mercancías ya está en marcha. No llegará de golpe, pero sí cambiará tu forma de trabajar a partir de 2026.",
     "fecha": "2026-10-21",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-24"
   },
   {
     "orden": 9,
