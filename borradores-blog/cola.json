@@ -86,7 +86,8 @@
     "grupo": "El transporte que viene",
     "resumen": "El transporte sostenible de mercancías ya no es una tendencia. Es una exigencia económica, normativa y operativa.",
     "fecha": "2026-10-25",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-10-25"
   },
   {
     "orden": 10,
