@@ -555,13 +555,17 @@ ENLACES_RAIZ = re.compile(r'href="/(?!/)([^"]*)"')
 # vendor/, y el <link rel="preload"> de la tipografía acababa en /de/vendor/…,
 # que no existe.
 EXTENSIONES = re.compile(r'\.(css|js|png|jpg|jpeg|webp|ico|mp4|xml|txt|pdf|woff2|svg)$')
+# Páginas que solo existen en castellano: con el idioma delante daban 404
+# (el botón «Ver el CRM» de la portada, en los 8 idiomas, hasta el 25-10-2026).
+SOLO_EN_CASTELLANO = ("crm/",)
 
 
 def _enlaces_con_idioma(texto: str, idioma: str) -> str:
     def arreglar(m):
         resto = m.group(1)
         primero = resto.split("#")[0].split("?")[0]
-        if primero.startswith(("images/", "videos/", "vendor/")) or EXTENSIONES.search(primero):
+        if (primero.startswith(("images/", "videos/", "vendor/") + SOLO_EN_CASTELLANO)
+                or EXTENSIONES.search(primero)):
             return m.group(0)
         return f'href="/{idioma}/{resto}"'
     return ENLACES_RAIZ.sub(arreglar, texto)
