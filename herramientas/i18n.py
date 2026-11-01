@@ -355,7 +355,10 @@ def cmd_comprobar():
         print(f"{idioma}: faltan {len(faltan)} de {len(del_sitio)}{extra}")
         for t in faltan[:10]:
             print(f"    · {t[:90]}")
-        fallos += len(faltan)
+        # Un idioma en preparación (el búlgaro) informa, pero no pone `comprobar`
+        # en rojo: si no, un fallo real de un idioma publicado pasa sin verse.
+        if idioma in IDIOMAS_PUBLICADOS:
+            fallos += len(faltan)
     # El JavaScript, idioma a idioma. Sin esto, un idioma podía publicarse con
     # la página traducida y los avisos de los scripts en castellano, que es
     # justo lo que pasó con seis (auditoría 02-10-2026, DUP-04).
@@ -691,6 +694,7 @@ SCRIPTS = ("suscripcion.js", "presupuesto.js", "borrar-cuenta.js", "gracias.js",
 # Los escapes se dejan fuera a propósito: una cadena con \' o \n partida a
 # trozos por el regex se reconstruiría mal, y es preferible no tocarla.
 LITERAL_JS = re.compile(r"""(['"`])([^'"`\\\n]{4,})\1""")
+LINEA_CON_IDIOMA = re.compile(r"\s*(es|ca|en|pt|fr|de|it|pl|ro|bg)\s*:\s*\[")
 
 
 def diccionario_js(idioma: str) -> dict:
@@ -716,6 +720,11 @@ def cadenas_js(nombre: str) -> list:
     vistas, salida = set(), []
     for linea, es_codigo in _lineas_de_codigo(crudo):
         if not es_codigo:
+            continue
+        # Una línea con la clave de un idioma —`en: ['Show password', …]`— ya
+        # trae su propia traducción (el `VER` de suscripcion.js). Contarla dejaba
+        # `comprobar` en rojo para siempre (auditoría 01-11-2026).
+        if LINEA_CON_IDIOMA.match(linea):
             continue
         for _, texto in LITERAL_JS.findall(linea):
             t = texto.strip()
