@@ -96,7 +96,8 @@
     "grupo": "El transporte que viene",
     "resumen": "El futuro de la movilidad ya está llegando a la cabina del camión.",
     "fecha": "2026-10-29",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-11-02"
   },
   {
     "orden": 11,
