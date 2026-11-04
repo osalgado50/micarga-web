@@ -106,7 +106,8 @@
     "grupo": "El transporte que viene",
     "resumen": "El camión eléctrico ya no es una promesa lejana. Los fabricantes presentan modelos capaces de cubrir rutas cada vez más largas, las empresas de…",
     "fecha": "2026-11-02",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-11-04"
   },
   {
     "orden": 12,
