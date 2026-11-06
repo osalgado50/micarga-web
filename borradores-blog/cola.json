@@ -116,7 +116,8 @@
     "grupo": "Montar y llevar la empresa",
     "resumen": "Montar una empresa de transporte de mercancías en España exige mucho más que comprar un camión o una furgoneta. Necesitas elegir una forma jurídica,…",
     "fecha": "2026-11-06",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-11-06"
   },
   {
     "orden": 13,
