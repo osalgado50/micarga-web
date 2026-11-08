@@ -5,6 +5,7 @@ publicar, y las deja EN COLA, no publicadas.
 
     python3 herramientas/blog_paquete.py preparar   # genera los borradores
     python3 herramientas/blog_paquete.py cola       # enseña la cola
+    python3 herramientas/blog_paquete.py metadatos  # corrige og:/JSON-LD de lo ya generado
 
 POR QUÉ LOS BORRADORES NO VIVEN EN `blog/`
 `herramientas/i18n.py` recoge `blog/*.html` con un comodín. Un borrador dentro
@@ -391,6 +392,48 @@ def portada(ruta_salida: Path, titulo: str, grupo: str, foto: Path):
     fondo.save(ruta_salida, "WEBP", quality=78, method=6)
 
 
+MOLDE_URL = "https://micarga.es/blog/deca-vs-carta-de-porte"
+
+
+def ajustar_metadatos(cabeza: str, slug: str, titulo: str, resumen: str,
+                      fecha: "str | None" = None) -> str:
+    """
+    Lo que la cabecera del molde dice de SÍ MISMA, cambiado al artículo nuevo:
+    canonical, og:url/title/description/image y el JSON-LD (titular, miga,
+    imagen, fecha y mainEntityOfPage).
+
+    Hasta el 08-11-2026 solo se cambiaba el canonical, y los 12 artículos
+    publicados del paquete (y sus 8 traducciones) se presentaban a Google y al
+    compartirlos como «DeCA vs carta de porte», del 19-08. Idempotente: se
+    puede pasar otra vez sobre una página ya corregida.
+
+    og:title y og:description llevan los mismos textos que el h1 y la meta
+    description, que ya se traducen: no añade frases nuevas para i18n.
+    """
+    url = f"https://micarga.es/blog/{slug}"
+    imagen = f"https://micarga.es/images/blog/{slug}.webp"
+    t_json = json.dumps(titulo, ensure_ascii=False)
+    t_attr = html.escape(titulo, quote=True)
+    r_attr = html.escape(resumen, quote=True)
+
+    cabeza = cabeza.replace(MOLDE_URL, url)
+    cabeza = re.sub(r'<meta property="og:title" content="[^"]*">',
+                    lambda m: f'<meta property="og:title" content="{t_attr}">', cabeza, count=1)
+    cabeza = re.sub(r'<meta property="og:description" content="[^"]*">',
+                    lambda m: f'<meta property="og:description" content="{r_attr}">', cabeza, count=1)
+    cabeza = re.sub(r'<meta property="og:image" content="[^"]*">',
+                    lambda m: f'<meta property="og:image" content="{imagen}">', cabeza, count=1)
+    cabeza = re.sub(r'"headline": "(?:[^"\\]|\\.)*"', lambda m: f'"headline": {t_json}', cabeza, count=1)
+    cabeza = re.sub(r'("position": 3, "name": )"(?:[^"\\]|\\.)*"',
+                    lambda m: m.group(1) + t_json, cabeza, count=1)
+    cabeza = re.sub(r'"image": "https://micarga\.es/images/[^"]*"',
+                    lambda m: f'"image": "{imagen}"', cabeza, count=1)
+    if fecha:
+        cabeza = re.sub(r'"(datePublished|dateModified)": "[0-9-]*"',
+                        lambda m: f'"{m.group(1)}": "{fecha}"', cabeza)
+    return cabeza
+
+
 def plantilla(datos: dict) -> str:
     """La entrada entera, con la misma estructura que las diez que ya existen."""
     molde = (RAIZ / "blog" / "deca-vs-carta-de-porte.html").read_text(encoding="utf-8")
@@ -400,10 +443,8 @@ def plantilla(datos: dict) -> str:
     cabeza = molde[: molde.index("  <main")]
     pie = molde[molde.index("  <footer"):]
 
-    cabeza = cabeza.replace(
-        "<link rel=\"canonical\" href=\"https://micarga.es/blog/deca-vs-carta-de-porte\">",
-        f"<link rel=\"canonical\" href=\"https://micarga.es/blog/{datos['slug']}\">",
-    )
+    cabeza = ajustar_metadatos(cabeza, datos["slug"], datos["titulo"],
+                               datos["resumen_corto"], datos.get("fecha"))
     cabeza = re.sub(
         r'<meta name="description" content="[^"]*">',
         f'<meta name="description" content="{html.escape(datos["resumen_corto"], quote=True)}">',
@@ -492,8 +533,10 @@ def preparar():
 
         datos = dict(slug=slug, titulo=titulo, grupo=grupo, cuerpo=cuerpo,
                      entradilla=resumen, resumen_corto=corto, llamadas=llamadas)
-        pagina = plantilla(datos)
         previo = anterior.get(slug, {})
+        datos["fecha"] = previo.get("publicado_el") or previo.get(
+            "fecha", (hoy + dt.timedelta(days=i * CADA_CUANTOS_DIAS)).isoformat())
+        pagina = plantilla(datos)
 
         if previo.get("publicado"):
             # Ya está en la web: se actualiza ALLÍ, no se devuelve a borradores.
@@ -558,6 +601,29 @@ def recalendar():
         print(f"De {pendientes[0]['fecha']} a {pendientes[-1]['fecha']}.")
 
 
+def metadatos():
+    """Pasa ajustar_metadatos() por los publicados (en castellano) y los borradores."""
+    cola = json.loads(COLA.read_text(encoding="utf-8"))
+    cambiadas = 0
+    for e in cola:
+        ruta = (RAIZ / "blog" if e["publicado"] else BORRADORES) / f"{e['slug']}.html"
+        if not ruta.exists():
+            print(f"  falta {ruta.relative_to(RAIZ)}")
+            continue
+        texto = ruta.read_text(encoding="utf-8")
+        corte = texto.index("  <main")
+        desc = re.search(r'<meta name="description" content="([^"]*)">', texto[:corte])
+        h1 = re.search(r"<h1>(.*?)</h1>", texto, re.S)
+        titulo = html.unescape(h1.group(1).strip()) if h1 else e["titulo"]
+        resumen = html.unescape(desc.group(1)) if desc else e["resumen"]
+        nuevo = ajustar_metadatos(texto[:corte], e["slug"], titulo, resumen,
+                                  e.get("publicado_el") or e["fecha"]) + texto[corte:]
+        if nuevo != texto:
+            ruta.write_text(nuevo, encoding="utf-8")
+            cambiadas += 1
+    print(f"{cambiadas} páginas con los metadatos corregidos.")
+
+
 def ver_cola():
     if not COLA.exists():
         print("No hay cola. Ejecuta primero: python3 herramientas/blog_paquete.py preparar")
@@ -578,5 +644,7 @@ if __name__ == "__main__":
         portadas_traducidas()
     elif orden == "calendario":
         recalendar()
+    elif orden == "metadatos":
+        metadatos()
     else:
         print(__doc__)

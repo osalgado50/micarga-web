@@ -22,6 +22,7 @@ justo lo contrario de lo que le sirve al posicionamiento.
 import datetime as dt
 import html
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -75,6 +76,22 @@ def rutas_de_la_publicacion() -> list:
     rutas += list(i18n.IDIOMAS_PUBLICADOS)
     rutas += [p for p in i18n.PAGINAS if not p.startswith("blog/")]
     return rutas
+
+
+def al_dia(texto: str) -> str:
+    """
+    Lo que el borrador no puede saber el día que se redactó (auditoría 08-11-2026):
+    - los `?v=` de css/js: se heredan de la portada. Sin esto, cada artículo
+      salía con el `styles.css?v=` de cuando se preparó el paquete y el
+      navegador podía servirle la hoja vieja;
+    - la fecha del JSON-LD: la de hoy, que es cuando se publica de verdad.
+    """
+    portada = (RAIZ / "index.html").read_text(encoding="utf-8")
+    for nombre, v in set(re.findall(r'([\w-]+\.(?:css|js))\?v=(\w+)', portada)):
+        texto = re.sub(rf'(?<![\w-]){re.escape(nombre)}\?v=\w+', f"{nombre}?v={v}", texto)
+    hoy = dt.date.today().isoformat()
+    return re.sub(r'"(datePublished|dateModified)": "[0-9-]*"',
+                  lambda m: f'"{m.group(1)}": "{hoy}"', texto)
 
 
 def idiomas_pendientes(ruta_articulo: Path):
@@ -211,7 +228,7 @@ def main():
         )
 
     destino = RAIZ / "blog" / f"{entrada['slug']}.html"
-    destino.write_text(borrador.read_text(encoding="utf-8"), encoding="utf-8")
+    destino.write_text(al_dia(borrador.read_text(encoding="utf-8")), encoding="utf-8")
     borrador.unlink()
     meter_en_indice(entrada)
 
