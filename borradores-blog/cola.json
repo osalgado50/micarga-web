@@ -126,7 +126,8 @@
     "grupo": "Montar y llevar la empresa",
     "resumen": "¿Estás buscando cómo ser autónomo transportista? ¿Quieres saber qué necesitan los autónomos transportistas para trabajar legalmente en España?",
     "fecha": "2026-11-10",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-11-11"
   },
   {
     "orden": 14,
