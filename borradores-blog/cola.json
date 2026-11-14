@@ -136,7 +136,8 @@
     "grupo": "Montar y llevar la empresa",
     "resumen": "Si quieres trabajar legalmente como transportista, necesitas tener claros dos conceptos: el título de transportista y la tarjeta de transporte.",
     "fecha": "2026-11-14",
-    "publicado": false
+    "publicado": true,
+    "publicado_el": "2026-11-14"
   },
   {
     "orden": 15,
